@@ -13,17 +13,13 @@
     <!-- Preface -->
     <preface xml:id="preface">
       <title>Preface</title>
-      <p>
-        <!-- Preface content will go here -->
-      </p>
+      <p>Content will be added here.</p>
     </preface>
 
     <!-- Introduction -->
     <chapter xml:id="introduction">
       <title>Introduction</title>
-      <p>
-        <!-- Introduction content will go here -->
-      </p>
+      <p>Content will be added here.</p>
     </chapter>
 
     <!-- Part 1: R -->
@@ -32,44 +28,32 @@
 
       <chapter xml:id="ch-getting-started">
         <title>Getting started</title>
-        <p>
-          <!-- Chapter 1 content will go here -->
-        </p>
+        <p>Content will be added here.</p>
       </chapter>
 
       <chapter xml:id="ch-r-basics">
         <title>R basics</title>
-        <p>
-          <!-- Chapter 2 content will go here -->
-        </p>
+        <p>Content will be added here.</p>
       </chapter>
 
       <chapter xml:id="ch-programming-basics">
         <title>Programming basics</title>
-        <p>
-          <!-- Chapter 3 content will go here -->
-        </p>
+        <p>Content will be added here.</p>
       </chapter>
 
       <chapter xml:id="ch-tidyverse">
         <title>The tidyverse</title>
-        <p>
-          <!-- Chapter 4 content will go here -->
-        </p>
+        <p>Content will be added here.</p>
       </chapter>
 
       <chapter xml:id="ch-data-table">
         <title>data.table</title>
-        <p>
-          <!-- Chapter 5 content will go here -->
-        </p>
+        <p>Content will be added here.</p>
       </chapter>
 
       <chapter xml:id="ch-importing-data">
         <title>Importing data</title>
-        <p>
-          <!-- Chapter 6 content will go here -->
-        </p>
+        <p>Content will be added here.</p>
       </chapter>
 
     </part>
@@ -80,30 +64,22 @@
 
       <chapter xml:id="ch-visualizing-data-distributions">
         <title>Visualizing data distributions</title>
-        <p>
-          <!-- Chapter 7 content will go here -->
-        </p>
+        <p>Content will be added here.</p>
       </chapter>
 
       <chapter xml:id="ch-ggplot2">
         <title>ggplot2</title>
-        <p>
-          <!-- Chapter 8 content will go here -->
-        </p>
+        <p>Content will be added here.</p>
       </chapter>
 
       <chapter xml:id="ch-data-visualization-principles">
         <title>Data visualization principles</title>
-        <p>
-          <!-- Chapter 9 content will go here -->
-        </p>
+        <p>Content will be added here.</p>
       </chapter>
 
       <chapter xml:id="ch-data-visualization-in-practice">
         <title>Data visualization in practice</title>
-        <p>
-          <!-- Chapter 10 content will go here -->
-        </p>
+        <p>Content will be added here.</p>
       </chapter>
 
     </part>
@@ -114,51 +90,37 @@
 
       <chapter xml:id="ch-reshaping-data">
         <title>Reshaping data</title>
-        <p>
-          <!-- Chapter 11 content will go here -->
-        </p>
+        <p>Content will be added here.</p>
       </chapter>
 
       <chapter xml:id="ch-joining-tables">
         <title>Joining tables</title>
-        <p>
-          <!-- Chapter 12 content will go here -->
-        </p>
+        <p>Content will be added here.</p>
       </chapter>
 
       <chapter xml:id="ch-parsing-dates-and-times">
         <title>Parsing dates and times</title>
-        <p>
-          <!-- Chapter 13 content will go here -->
-        </p>
+        <p>Content will be added here.</p>
       </chapter>
 
       <chapter xml:id="ch-locales">
         <title>Locales</title>
-        <p>
-          <!-- Chapter 14 content will go here -->
-        </p>
+        <p>Content will be added here.</p>
       </chapter>
 
       <chapter xml:id="ch-extracting-data-from-the-web">
         <title>Extracting data from the web</title>
-        <p>
-          <!-- Chapter 15 content will go here -->
-        </p>
+        <p>Content will be added here.</p>
       </chapter>
 
       <chapter xml:id="ch-string-processing">
         <title>String processing</title>
-        <p>
-          <!-- Chapter 16 content will go here -->
-        </p>
+        <p>Content will be added here.</p>
       </chapter>
 
       <chapter xml:id="ch-text-analysis">
         <title>Text analysis</title>
-        <p>
-          <!-- Chapter 17 content will go here -->
-        </p>
+        <p>Content will be added here.</p>
       </chapter>
 
     </part>
@@ -169,23 +131,17 @@
 
       <chapter xml:id="ch-organizing-with-unix">
         <title>Organizing with Unix</title>
-        <p>
-          <!-- Chapter 18 content will go here -->
-        </p>
+        <p>Content will be added here.</p>
       </chapter>
 
       <chapter xml:id="ch-git-and-github">
         <title>Git and GitHub</title>
-        <p>
-          <!-- Chapter 19 content will go here -->
-        </p>
+        <p>Content will be added here.</p>
       </chapter>
 
       <chapter xml:id="ch-reproducible-projects">
         <title>Reproducible projects</title>
-        <p>
-          <!-- Chapter 20 content will go here -->
-        </p>
+        <p>Content will be added here.</p>
       </chapter>
 
     </part>
