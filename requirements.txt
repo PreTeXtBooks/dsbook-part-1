@@ -1,0 +1,9 @@
+# This repository is primarily a Quarto book (R-based) and does not require Python dependencies.
+#
+# Optional: PreTeXt build tools
+# The pretext/ directory contains a conversion of Chapter 7 to PreTeXt format.
+# To build PreTeXt documents (optional), install:
+#   pip install -r pretext/requirements.txt
+#
+# Or uncomment the line below:
+# pretextbook>=2.0.0
