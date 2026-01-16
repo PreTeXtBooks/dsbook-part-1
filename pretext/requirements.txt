@@ -1,4 +1,2 @@
-# Requirements for building PreTeXt documents
-# Install with: pip install -r requirements.txt
-
-pretextbook>=2.0.0
+# This file was automatically generated with PreTeXt 2.3.0.
+pretext == 2.3.0
