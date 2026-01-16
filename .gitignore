@@ -19,3 +19,7 @@ fixsh.R
 ziptex
 crc-stuff/
 irizarrycr9781032116556introductiontodatasciencep/
+# PreTeXt build output
+output/
+generated-assets/
+logs/

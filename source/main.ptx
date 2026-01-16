@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pretext xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en-US">
+  <docinfo>
+    <brandlogo url="http://rafalab.dfci.harvard.edu/dsbook-part-1" source="cover.png"/>
+  </docinfo>
+
+  <book xml:id="dsbook-part-1">
+    <title>Introduction to Data Science</title>
+    <subtitle>Data Wrangling and Visualization with R</subtitle>
+
+    <xi:include href="../pretext/chapter-07-tidyverse.ptx"/>
+
+  </book>
+</pretext>

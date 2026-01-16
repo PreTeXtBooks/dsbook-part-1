@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<publication>
+  <common>
+    <tableofcontents level="2"/>
+    <exercise-divisional hint="yes" answer="no" solution="no"/>
+  </common>
+  <html>
+    <calculator model="none"/>
+    <cross-references text="global"/>
+  </html>
+</publication>
