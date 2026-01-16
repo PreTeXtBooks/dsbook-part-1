@@ -2,12 +2,20 @@
 
 This guide explains how to build and view the PreTeXt version of Chapter 7.
 
+**Note**: Building PreTeXt documents is optional. The converted XML file (`chapter-07-tidyverse.ptx`) can be used directly with any PreTeXt toolchain. The instructions below are for users who want to build HTML or PDF output locally.
+
 ## Prerequisites
 
 Install the PreTeXt CLI tool:
 
 ```bash
 pip install pretextbook
+```
+
+Or install from the requirements file:
+
+```bash
+pip install -r requirements.txt
 ```
 
 ## Quick Start

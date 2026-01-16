@@ -43,13 +43,23 @@ The conversion from Quarto (.qmd) to PreTeXt (.ptx) includes:
 
 ## Using PreTeXt Files
 
-To build PreTeXt documents, you'll need the PreTeXt-CLI tool:
+**The PreTeXt XML files are standalone and can be used directly with any PreTeXt toolchain or integrated into existing PreTeXt projects.**
+
+To build PreTeXt documents locally (optional), you'll need the PreTeXt-CLI tool:
+
+```bash
+pip install -r requirements.txt
+```
+
+Or install directly:
 
 ```bash
 pip install pretextbook
 ```
 
 For more information about PreTeXt, visit: https://pretextbook.org/
+
+See [BUILD.md](BUILD.md) for detailed build instructions.
 
 ## File Structure
 

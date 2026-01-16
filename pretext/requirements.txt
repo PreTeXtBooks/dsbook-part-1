@@ -1,0 +1,4 @@
+# Requirements for building PreTeXt documents
+# Install with: pip install -r requirements.txt
+
+pretextbook>=2.0.0
