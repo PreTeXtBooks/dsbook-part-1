@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+    <targets>
+        <target name="html">
+            <format>html</format>
+            <source>chapter-07-tidyverse.ptx</source>
+            <publication>publication.ptx</publication>
+            <output-dir>output/html</output-dir>
+        </target>
+        <target name="pdf">
+            <format>pdf</format>
+            <source>chapter-07-tidyverse.ptx</source>
+            <publication>publication.ptx</publication>
+            <output-dir>output/pdf</output-dir>
+        </target>
+    </targets>
+</project>
