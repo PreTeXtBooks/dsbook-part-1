@@ -53,6 +53,9 @@ jobs:
       - name: install deps
         run: pip install -r requirements.txt --break-system-packages
 
+      - name: Initialize PreTeXt system resources
+        run: pretext init --system
+
       - name: install local ptx files
         run: pretext --version
 
