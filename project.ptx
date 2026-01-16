@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project ptx-version="2">
   <targets>
     <target name="html">
@@ -8,16 +8,4 @@
       <output-dir>output/html</output-dir>
     </target>
   </targets>
-  <executables>
-    <latex>latex</latex>
-    <pdflatex>pdflatex</pdflatex>
-    <xelatex>xelatex</xelatex>
-    <pdfsvg>pdf2svg</pdfsvg>
-    <asy>asy</asy>
-    <sage>sage</sage>
-    <pdfpng>convert</pdfpng>
-    <pdfeps>pdftops</pdfeps>
-    <node>node</node>
-    <liblouis>file2brl</liblouis>
-  </executables>
 </project>
