@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<project ptx-version="2" source="source/main.ptx">
+<project ptx-version="2">
   <targets>
     <target name="html">
       <format>html</format>
       <source>source/main.ptx</source>
       <publication>publication/publication.ptx</publication>
       <output-dir>output/html</output-dir>
-      <stringparam key="html.css.extra" value=""/>
-      <xsl>custom-html.xsl</xsl>
-    </target>
-    <target name="pdf">
-      <format>pdf</format>
-      <source>source/main.ptx</source>
-      <publication>publication/publication.ptx</publication>
-      <output-dir>output/pdf</output-dir>
     </target>
   </targets>
   <executables>
