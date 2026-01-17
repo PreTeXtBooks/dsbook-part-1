@@ -1873,7 +1873,480 @@ installed.packages()
 
       <chapter xml:id="ch-programming-basics">
         <title>Programming basics</title>
-        <p>Content will be added here.</p>
+        
+        <p>
+          We teach R because it greatly facilitates data analysis, the main topic of this book. By coding in R, we can efficiently perform exploratory data analysis, build data analysis pipelines, and prepare data visualization to communicate results. However, R is not just a data analysis environment but a programming language. Advanced R programmers can develop complex packages and even improve R itself, but we do not cover advanced programming in this book. Nonetheless, in this section, we introduce three key programming concepts: conditional expressions, for-loops, and functions. These are not just key building blocks for advanced programming, but are sometimes useful during data analysis. We also note that there are several functions that are widely used to program in R but that we will not cover in this book. These include <c>split</c>, <c>cut</c>, <c>do.call</c>, and <c>Reduce</c>. These are worth learning if you plan to become an expert R programmer.
+        </p>
+        
+        <section xml:id="sec-conditionals">
+          <title>Conditional expressions</title>
+          
+          <p>
+            Conditional expressions are one of the basic features of programming. They are used for what is called <em>flow control</em>. The most common conditional expression is the if-else statement. In R, we can actually perform quite a bit of data analysis without conditionals. However, they do come up occasionally, and you will need them once you start writing your own functions and packages.
+          </p>
+          
+          <p>
+            Here is a very simple example showing the general structure of an if-else statement. The basic idea is to print the reciprocal of <c>a</c> unless <c>a</c> is 0:
+          </p>
+          
+          <program language="r">
+            <input>
+a &lt;- 0
+
+if (a != 0) {
+  print(1/a)
+} else{
+  print("No reciprocal for 0.")
+}
+            </input>
+          </program>
+          
+          <p>
+            Let's look at one more example using the US murders data frame:
+          </p>
+          
+          <program language="r">
+            <input>
+library(dslabs)
+murder_rate &lt;- murders$total / murders$population*100000
+            </input>
+          </program>
+          
+          <p>
+            Here is a very simple example that tells us the state with the lowest murder rate if it is lower than 0.5 per 100,000. The if-else statement protects us from the case in which no state satisfies the condition.
+          </p>
+          
+          <program language="r">
+            <input>
+ind &lt;- which.min(murder_rate)
+
+if (murder_rate[ind] &lt; 0.5) {
+  print(murders$state[ind]) 
+} else{
+  print("No state has murder rate that low")
+}
+            </input>
+          </program>
+          
+          <p>
+            If we try it again with a rate of 0.25, we get a different answer:
+          </p>
+          
+          <program language="r">
+            <input>
+if (murder_rate[ind] &lt; 0.25) {
+  print(murders$state[ind]) 
+} else{
+  print("No state has a murder rate that low.")
+}
+            </input>
+          </program>
+          
+          <p>
+            A related function that is very useful is <c>ifelse</c>. This function takes three arguments: a logical and two possible answers. If the logical is <c>TRUE</c>, the value in the second argument is returned and if <c>FALSE</c>, the value in the third argument is returned. Here is an example:
+          </p>
+          
+          <program language="r">
+            <input>
+a &lt;- 0
+ifelse(a &gt; 0, 1/a, NA)
+            </input>
+          </program>
+          
+          <p>
+            The function is particularly useful because it works on vectors. It examines each entry of the logical vector and returns elements from the vector provided in the second argument, if the entry is <c>TRUE</c>, or elements from the vector provided in the third argument, if the entry is <c>FALSE</c>.
+          </p>
+          
+          <program language="r">
+            <input>
+a &lt;- c(0, 1, 2, -4, 5)
+result &lt;- ifelse(a &gt; 0, 1/a, NA)
+            </input>
+          </program>
+          
+          <p>
+            Here is an example of how this function can be readily used to replace all the missing values in a vector with zeros:
+          </p>
+          
+          <program language="r">
+            <input>
+no_nas &lt;- ifelse(is.na(na_example), 0, na_example) 
+sum(is.na(no_nas))
+            </input>
+          </program>
+          
+          <p>
+            Two other useful functions are <c>any</c> and <c>all</c>. The <c>any</c> function takes a vector of logicals and returns <c>TRUE</c> if any of the entries is <c>TRUE</c>. The <c>all</c> function takes a vector of logicals and returns <c>TRUE</c> if all of the entries are <c>TRUE</c>. Here is an example:
+          </p>
+          
+          <program language="r">
+            <input>
+z &lt;- c(TRUE, TRUE, FALSE)
+any(z)
+all(z)
+            </input>
+          </program>
+          
+          <note>
+            <p>You are ready to do exercises 1-3.</p>
+          </note>
+          
+        </section>
+        
+        <section xml:id="sec-defining-functions">
+          <title>Defining functions</title>
+          
+          <p>
+            As you become more experienced, you will find yourself needing to perform the same operations over and over. A simple example is computing averages. We can compute the average of a vector <c>x</c> using the <c>sum</c> and <c>length</c> functions: <c>sum(x)/length(x)</c>. Because we do this repeatedly, it is much more efficient to write a function that performs this operation. This particular operation is so common that someone already wrote the <c>mean</c> function and it is included in base R. However, you will encounter situations in which the function does not already exist, so R permits you to write your own. A simple version of a function that computes the average can be defined like this:
+          </p>
+          
+          <program language="r">
+            <input>
+avg &lt;- function(x){
+  s &lt;- sum(x)
+  n &lt;- length(x)
+  s/n
+}
+            </input>
+          </program>
+          
+          <p>
+            Now <c>avg</c> is a function that computes the mean:
+          </p>
+          
+          <program language="r">
+            <input>
+x &lt;- 1:100
+identical(mean(x), avg(x))
+            </input>
+          </program>
+          
+          <p>
+            Notice that variables defined inside a function are not saved in the workspace. So while we use <c>s</c> and <c>n</c> when we call <c>avg</c>, the values are created and changed only during the call. Here is an illustrative example:
+          </p>
+          
+          <program language="r">
+            <input>
+s &lt;- 3
+avg(1:10)
+s
+            </input>
+          </program>
+          
+          <p>
+            Note how <c>s</c> is still 3 after we call <c>avg</c>.
+          </p>
+          
+          <p>
+            In general, functions are objects, so we assign them to variable names with <c>&lt;-</c>. The function <c>function</c> tells R you are about to define a function. The general form of a function definition looks like this:
+          </p>
+          
+          <program language="r">
+            <input>
+my_function &lt;- function(VARIABLE_NAME){
+  perform operations on VARIABLE_NAME and calculate VALUE
+  VALUE
+}
+            </input>
+          </program>
+          
+          <p>
+            The functions you define can have multiple arguments as well as default values. For example, we can define a function that computes either the arithmetic or geometric average depending on a user defined variable like this:
+          </p>
+          
+          <program language="r">
+            <input>
+avg &lt;- function(x, arithmetic = TRUE){
+  n &lt;- length(x)
+  ifelse(arithmetic, sum(x)/n, prod(x)^(1/n))
+}
+            </input>
+          </program>
+          
+          <p>
+            We will learn more about how to create functions through experience as we face more complex tasks.
+          </p>
+          
+          <note>
+            <p>You are ready to do exercises 4-7.</p>
+          </note>
+          
+        </section>
+        
+        <section xml:id="sec-namespaces">
+          <title>Namespaces</title>
+          
+          <p>
+            Once you start becoming more of an R expert user, you will likely need to load several add-on packages for some of your analysis. Once you start doing this, it is likely that two packages use the same name for two different functions. And often these functions do completely different things. In fact, you have already encountered this because both <alert>dplyr</alert> and the R-base <alert>stats</alert> package define a <c>filter</c> function. There are five other examples in <alert>dplyr</alert>. We know this because when we first load <alert>dplyr</alert> we see the following message:
+          </p>
+          
+          <pre>
+The following objects are masked from 'package:stats':
+
+    filter, lag
+
+The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union
+          </pre>
+          
+          <p>
+            Now when we type <c>filter</c> it uses the <alert>dplyr</alert> one. But what if we want to use the <alert>stats</alert> version?
+          </p>
+          
+          <p>
+            These functions live in different <em>namespaces</em>. R will follow a certain order when searching for a function in these <em>namespaces</em>. You can see the order by typing:
+          </p>
+          
+          <program language="r">
+            <input>
+search()
+            </input>
+          </program>
+          
+          <p>
+            The first entry in this list is the global environment which includes all the objects you define.
+          </p>
+          
+          <p>
+            So what if we want to use the <alert>stats</alert> <c>filter</c> instead of the <alert>dplyr</alert> filter but <alert>dplyr</alert> appears first in the search list? You can force the use of a specific namespace by using double colons (<c>::</c>) like this:
+          </p>
+          
+          <program language="r">
+            <input>
+stats::filter
+            </input>
+          </program>
+          
+          <p>
+            If we want to be absolutely sure that we use the <alert>dplyr</alert> <c>filter</c>, we can use
+          </p>
+          
+          <program language="r">
+            <input>
+dplyr::filter
+            </input>
+          </program>
+          
+          <p>
+            Also note that if we want to use a function in a package without loading the entire package, we can use the double colon as well.
+          </p>
+          
+          <note>
+            <title>Tip</title>
+            <p>If you want to see all the packages that have function called, for example <c>filter</c>, you can use double questions marks: <c>??filter</c>.</p>
+          </note>
+          
+          <p>
+            For more on this more advanced topic we recommend the R packages book<fn><url href="http://r-pkgs.had.co.nz/namespace.html"/></fn>.
+          </p>
+          
+        </section>
+        
+        <section xml:id="sec-for-loops">
+          <title>For-loops</title>
+          
+          <p>
+            The formula for the sum of the series <m>1+2+\dots+n</m> is <m>S_n = n(n+1)/2</m>. What if we weren't sure that was the right function? How could we check? Using what we learned about functions we can create one that computes <m>S_n</m>:
+          </p>
+          
+          <program language="r">
+            <input>
+compute_s_n &lt;- function(n) { 
+  sum(1:n)
+}
+            </input>
+          </program>
+          
+          <p>
+            How can we compute <m>S_n</m> for various values of <m>n</m>, say <m>n=1,\dots,25</m>? Do we write 25 lines of code calling <c>compute_s_n</c>? No, that is what for-loops are for in programming. In this case, we are performing exactly the same task over and over, and the only thing that is changing is the value of <m>n</m>. For-loops let us define the range that our variable takes (in our example <m>n=1,\dots,10</m>), then change the value and evaluate expression as you <em>loop</em>.
+          </p>
+          
+          <p>
+            Perhaps the simplest example of a for-loop is this useless piece of code:
+          </p>
+          
+          <program language="r">
+            <input>
+for (i in 1:5) {
+  print(i)
+}
+            </input>
+          </program>
+          
+          <p>
+            Here is the for-loop we would write for our <m>S_n</m> example:
+          </p>
+          
+          <program language="r">
+            <input>
+m &lt;- 25
+s_n &lt;- vector(length = m) # create an empty vector
+for (n in 1:m) {
+  s_n[n] &lt;- compute_s_n(n)
+}
+            </input>
+          </program>
+          
+          <p>
+            In each iteration <m>n=1</m>, <m>n=2</m>, etc..., we compute <m>S_n</m> and store it in the <m>n</m>th entry of <c>s_n</c>.
+          </p>
+          
+          <p>
+            Now we can create a plot to search for a pattern:
+          </p>
+          
+          <program language="r">
+            <input>
+n &lt;- 1:m
+plot(n, s_n)
+            </input>
+          </program>
+          
+          <p>
+            If you noticed that it appears to be a quadratic, you are on the right track because the formula is <m>n(n+1)/2</m>.
+          </p>
+          
+        </section>
+        
+        <section xml:id="sec-vectorization">
+          <title>Vectorization and functionals</title>
+          
+          <p>
+            Although for-loops are an important concept to understand, in R we rarely use them. As you learn more R, you will realize that <em>vectorization</em> is preferred over for-loops since it results in shorter and clearer code. We already saw examples in the Vector Arithmetic section. A <em>vectorized</em> function is a function that will apply the same operation on each of the vectors.
+          </p>
+          
+          <program language="r">
+            <input>
+x &lt;- 1:10
+sqrt(x)
+y &lt;- 1:10
+x*y
+            </input>
+          </program>
+          
+          <p>
+            To make this calculation, there is no need for for-loops. However, not all functions work this way. For instance, the function we just wrote, <c>compute_s_n</c>, does not work element-wise since it is expecting a scalar. This piece of code does not run the function on each entry of <c>n</c>:
+          </p>
+          
+          <program language="r">
+            <input>
+n &lt;- 1:25
+compute_s_n(n)
+            </input>
+          </program>
+          
+          <p>
+            <em>Functionals</em> are functions that help us apply the same function to each entry in a vector, matrix, data frame, or list. Here we cover the functional that operates on numeric, logical, and character vectors: <c>sapply</c>.
+          </p>
+          
+          <p>
+            The function <c>sapply</c> permits us to perform element-wise operations on any function. Here is how it works:
+          </p>
+          
+          <program language="r">
+            <input>
+x &lt;- 1:10
+sapply(x, sqrt)
+            </input>
+          </program>
+          
+          <p>
+            Each element of <c>x</c> is passed on to the function <c>sqrt</c> and the result is returned. These results are concatenated. In this case, the result is a vector of the same length as the original <c>x</c>. This implies that the for-loop above can be written as follows:
+          </p>
+          
+          <program language="r">
+            <input>
+n &lt;- 1:25
+s_n &lt;- sapply(n, compute_s_n)
+            </input>
+          </program>
+          
+          <p>
+            Other functionals are <c>apply</c>, <c>lapply</c>, <c>tapply</c>, <c>mapply</c>, <c>vapply</c>, and <c>replicate</c>. We mostly use <c>sapply</c>, <c>apply</c>, and <c>replicate</c> in this book, but we recommend familiarizing yourselves with the others as they can be very useful.
+          </p>
+          
+          <note>
+            <p>You are ready to do exercises 8-11.</p>
+          </note>
+          
+        </section>
+        
+        <section xml:id="sec-programming-exercises">
+          <title>Exercises</title>
+          
+          <ol>
+            <li>
+              <p>What will this conditional expression return?</p>
+              <program language="r">
+                <input>
+x &lt;- c(1,2,-3,4)
+
+if(all(x&gt;0)){
+  print("All Postives")
+} else{
+  print("Not all positives")
+}
+                </input>
+              </program>
+            </li>
+            
+            <li>
+              <p>Which of the following expressions is always <c>FALSE</c> when at least one entry of a logical vector <c>x</c> is TRUE?</p>
+              <p>a. <c>all(x)</c></p>
+              <p>b. <c>any(x)</c></p>
+              <p>c. <c>any(!x)</c></p>
+              <p>d. <c>all(!x)</c></p>
+            </li>
+            
+            <li>
+              <p>The function <c>nchar</c> tells you how many characters long a character vector is. Write a line of code that assigns to the object <c>new_names</c> the state abbreviation when the state name is longer than 8 characters.</p>
+            </li>
+            
+            <li>
+              <p>Create a function <c>sum_n</c> that for any given value, say <m>n</m>, computes the sum of the integers from 1 to n (inclusive). Use the function to determine the sum of integers from 1 to 5,000.</p>
+            </li>
+            
+            <li>
+              <p>Create a function <c>altman_plot</c> that takes two arguments, <c>x</c> and <c>y</c>, and plots the difference against the sum.</p>
+            </li>
+            
+            <li>
+              <p>After running the code below, what is the value of <c>x</c>?</p>
+              <program language="r">
+                <input>
+x &lt;- 3
+my_func &lt;- function(y){
+  x &lt;- 5
+  y+5
+}
+                </input>
+              </program>
+            </li>
+            
+            <li>
+              <p>Write a function <c>compute_s_n</c> that for any given <m>n</m> computes the sum <m>S_n = 1^2 + 2^2 + 3^2 + \dots n^2</m>. Report the value of the sum when <m>n=10</m>.</p>
+            </li>
+            
+            <li>
+              <p>Define an empty numerical vector <c>s_n</c> of size 25 using <c>s_n &lt;- vector("numeric", 25)</c> and store in the results of <m>S_1, S_2, \dots S_{25}</m> using a for-loop.</p>
+            </li>
+            
+            <li>
+              <p>Repeat exercise 8, but this time use <c>sapply</c>.</p>
+            </li>
+            
+            <li>
+              <p>Plot <m>S_n</m> versus <m>n</m>. Use points defined by <m>n=1,\dots,25</m>.</p>
+            </li>
+            
+            <li>
+              <p>Confirm that the formula for this sum is <m>S_n= n(n+1)(2n+1)/6</m>.</p>
+            </li>
+          </ol>
+          
+        </section>
+        
       </chapter>
 
       <chapter xml:id="ch-tidyverse">
