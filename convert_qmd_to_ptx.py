@@ -232,16 +232,39 @@ def convert_qmd_to_ptx(qmd_content, chapter_id, chapter_title):
                     indent = '          ' + '  ' * subsection_depth
                     result.append(indent + '<note>')
                     i += 1
-                    # Collect callout content
-                    callout_lines = []
+                    # Collect callout content - process it properly
+                    callout_buffer = []
                     while i < len(lines) and not lines[i].strip().startswith(':::'):
-                        if lines[i].strip():
-                            callout_lines.append(lines[i].strip())
+                        callout_buffer.append(lines[i])
                         i += 1
+                    
                     # Process callout content
-                    for cline in callout_lines:
-                        para_text = convert_inline_markdown(cline)
-                        result.append(indent + '  <p>{}</p>'.format(para_text))
+                    j = 0
+                    while j < len(callout_buffer):
+                        line_content = callout_buffer[j]
+                        
+                        # Check for display math
+                        if line_content.strip().startswith('$$'):
+                            if line_content.strip() == '$$':
+                                # Multi-line display math
+                                j += 1
+                                math_lines = []
+                                while j < len(callout_buffer) and not callout_buffer[j].strip().startswith('$$'):
+                                    math_lines.append(callout_buffer[j])
+                                    j += 1
+                                if math_lines:
+                                    result.append(indent + '  <me>')
+                                    result.append('\n'.join(math_lines))
+                                    result.append(indent + '  </me>')
+                                j += 1  # Skip closing $$
+                                continue
+                        
+                        # Regular paragraph in callout
+                        if line_content.strip():
+                            para_text = convert_inline_markdown(line_content.strip())
+                            result.append(indent + '  <p>{}</p>'.format(para_text))
+                        j += 1
+                    
                     result.append(indent + '</note>')
                     result.append('')
                     in_callout = False
@@ -382,27 +405,63 @@ def convert_qmd_to_ptx(qmd_content, chapter_id, chapter_title):
 
 
 if __name__ == '__main__':
-    # Read and convert chapter 9
-    with open('dataviz/dataviz-principles.qmd', 'r') as f:
-        ch9_content = f.read()
+    import sys
+    import os
     
-    ch9_ptx = convert_qmd_to_ptx(ch9_content, 'ch-data-visualization-principles', 
-                                  'Data visualization principles')
-    
-    with open('/tmp/chapter9.ptx', 'w') as f:
-        f.write(ch9_ptx)
-    
-    print("Chapter 9 converted, length:", len(ch9_ptx))
-    
-    # Read and convert chapter 10
-    with open('dataviz/dataviz-in-practice.qmd', 'r') as f:
-        ch10_content = f.read()
-    
-    ch10_ptx = convert_qmd_to_ptx(ch10_content, 'ch-data-visualization-in-practice',
-                                   'Data visualization in practice')
-    
-    with open('/tmp/chapter10.ptx', 'w') as f:
-        f.write(ch10_ptx)
-    
-    print("Chapter 10 converted, length:", len(ch10_ptx))
-    print("\nConversion complete!")
+    try:
+        # Check if source files exist
+        ch9_path = 'dataviz/dataviz-principles.qmd'
+        ch10_path = 'dataviz/dataviz-in-practice.qmd'
+        
+        if not os.path.exists(ch9_path):
+            print(f"Error: Source file not found: {ch9_path}", file=sys.stderr)
+            sys.exit(1)
+        
+        if not os.path.exists(ch10_path):
+            print(f"Error: Source file not found: {ch10_path}", file=sys.stderr)
+            sys.exit(1)
+        
+        # Read and convert chapter 9
+        try:
+            with open(ch9_path, 'r') as f:
+                ch9_content = f.read()
+        except IOError as e:
+            print(f"Error reading {ch9_path}: {e}", file=sys.stderr)
+            sys.exit(1)
+        
+        ch9_ptx = convert_qmd_to_ptx(ch9_content, 'ch-data-visualization-principles', 
+                                      'Data visualization principles')
+        
+        try:
+            with open('/tmp/chapter9.ptx', 'w') as f:
+                f.write(ch9_ptx)
+        except IOError as e:
+            print(f"Error writing /tmp/chapter9.ptx: {e}", file=sys.stderr)
+            sys.exit(1)
+        
+        print("Chapter 9 converted, length:", len(ch9_ptx))
+        
+        # Read and convert chapter 10
+        try:
+            with open(ch10_path, 'r') as f:
+                ch10_content = f.read()
+        except IOError as e:
+            print(f"Error reading {ch10_path}: {e}", file=sys.stderr)
+            sys.exit(1)
+        
+        ch10_ptx = convert_qmd_to_ptx(ch10_content, 'ch-data-visualization-in-practice',
+                                       'Data visualization in practice')
+        
+        try:
+            with open('/tmp/chapter10.ptx', 'w') as f:
+                f.write(ch10_ptx)
+        except IOError as e:
+            print(f"Error writing /tmp/chapter10.ptx: {e}", file=sys.stderr)
+            sys.exit(1)
+        
+        print("Chapter 10 converted, length:", len(ch10_ptx))
+        print("\nConversion complete!")
+        
+    except Exception as e:
+        print(f"Unexpected error: {e}", file=sys.stderr)
+        sys.exit(1)
