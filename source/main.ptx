@@ -1588,7 +1588,7 @@ installed.packages()
       
       <section xml:id="basic-plots"><title>Basic plots</title>
       
-      <p>In <xref ref="sec-ggplot2"/> we describe an add-on package that provides a powerful approach to producing plots in R. We then have an entire part on Data Visualization in which we provide many examples. Here we briefly describe some of the functions that are available in a basic R installation.</p>
+      <p>In a later chapter on ggplot2, we describe an add-on package that provides a powerful approach to producing plots in R. We then have an entire part on Data Visualization in which we provide many examples. Here we briefly describe some of the functions that are available in a basic R installation.</p>
       
       <subsection xml:id="plot"><title>`plot`</title>
       
