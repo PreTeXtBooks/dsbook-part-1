@@ -3147,7 +3147,7 @@ exp(mean(log(murders$population)))
       <chapter xml:id="ch-data-table">
         <title>data.table</title>
         
-        <p>In this book, we use tidyverse packages, primarily because they offer readability that is beneficial for beginners. This readability allows us to emphasize data analysis and statistical concepts. However, while tidyverse is beginner-friendly, there are other methods in R that are more efficient and can handle larger datasets more effectively. One such package is <alert>data.table</alert>, which is widely used in the R community. We'll briefly introduce <alert>data.table</alert> in this chapter. For those interested in diving deeper, there are numerous online resources, including the mentioned introduction<fn><url href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html"/></fn>.</p>
+        <p>In this book, we use tidyverse packages, primarily because they offer readability that is beneficial for beginners. This readability allows us to emphasize data analysis and statistical concepts. However, while tidyverse is beginner-friendly, there are other methods in R that are more efficient and can handle larger datasets more effectively. One such package is <alert>data.table</alert>, which is widely used in the R community. We'll briefly introduce <alert>data.table</alert> in this chapter. For those interested in diving deeper, there are numerous online resources, including an introduction<fn><url href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html"/></fn>.</p>
         
         <section xml:id="sec-refining-data-tables">
           <title>Refining data tables</title>
@@ -3193,7 +3193,7 @@ murders_dt[, c("state", "region")]
               </input>
             </program>
             
-            <p>We can also use the <c>.()</c> <alert>data.table</alert> notation to alert R that variables inside the parenthesis are column names, not objects in the R environment. So the above can also be written like this:</p>
+            <p>We can also use the <c>.()</c> <alert>data.table</alert> notation to alert R that variables inside the parentheses are column names, not objects in the R environment. So the above can also be written like this:</p>
             
             <program language="r">
               <input>
@@ -3246,7 +3246,7 @@ y &lt;- x
               </input>
             </program>
             
-            <p><c>y</c> is actually referencing <c>x</c>, it is not an new object: <c>y</c> just another name for <c>x</c>. Until you change <c>y</c>, a new object will not be made. However, the <c>:=</c> function changes <em>by reference</em> so if you change <c>x</c>, a new object is not made and <c>y</c> continues to be just another name for <c>x</c>:</p>
+            <p><c>y</c> is actually referencing <c>x</c>, it is not a new object: <c>y</c> is just another name for <c>x</c>. Until you change <c>y</c>, a new object will not be made. However, the <c>:=</c> function changes <em>by reference</em> so if you change <c>x</c>, a new object is not made and <c>y</c> continues to be just another name for <c>x</c>:</p>
             
             <program language="r">
               <input>
@@ -3358,7 +3358,7 @@ heights_dt &lt;- as.data.table(heights)
             </input>
           </program>
           
-          <p>In <alert>data.table</alert>, we can call functions inside <c>.()</c> and they will be applied to columns So the equivalent of:</p>
+          <p>In <alert>data.table</alert>, we can call functions inside <c>.()</c> and they will be applied to columns. So the equivalent of:</p>
           
           <program language="r">
             <input>
@@ -3940,7 +3940,7 @@ file.remove(tmp_filename)
         <section xml:id="sec-organizing-data">
           <title>Organizing data with spreadsheets</title>
           
-          <p>Although this book focuses almost exclusively on data analysis, data management is also an important part of data science operations. As explained in the introduction, we do not cover this topic. However, quite often data analysts need to collect data, or work with others collecting data, in a way that is most conveniently stored in a spreadsheet. Although filling out a spreadsheet by hand is a practice we highly discourage, and we instead recommend the process be automatized as much as possible, sometimes you just have to do it. Therefore, in this section, we provide recommendations on how to organize data in a spreadsheet. Although there are R packages designed to read Microsoft Excel spreadsheets, we generally want to avoid this format. Instead, we recommend Google Sheets as a free software tool. Below we summarize the recommendations made in paper by Karl Broman and Kara Woo<fn><url href="https://www.tandfonline.com/doi/abs/10.1080/00031305.2017.1375989"/></fn>. Please read the paper for important details.</p>
+          <p>Although this book focuses almost exclusively on data analysis, data management is also an important part of data science operations. As explained in the introduction, we do not cover this topic. However, quite often data analysts need to collect data, or work with others collecting data, in a way that is most conveniently stored in a spreadsheet. Although filling out a spreadsheet by hand is a practice we highly discourage, and we instead recommend the process be automatized as much as possible, sometimes you just have to do it. Therefore, in this section, we provide recommendations on how to organize data in a spreadsheet. Although there are R packages designed to read Microsoft Excel spreadsheets, we generally want to avoid this format. Instead, we recommend Google Sheets as a free software tool. Below we summarize the recommendations made in a paper by Karl Broman and Kara Woo<fn><url href="https://www.tandfonline.com/doi/abs/10.1080/00031305.2017.1375989"/></fn>. Please read the paper for important details.</p>
           
           <ul>
             <li><p><alert>Be Consistent</alert> - Before you commence entering data, have a plan. Once you have a plan, be consistent and stick to it.</p></li>
