@@ -7495,7 +7495,7 @@ get_dupes(x)
 
         </section>
 
-        <section xml:id="sec-exercises">
+        <section xml:id="sec-reshaping-data-exercises">
           <title>Exercises</title>
 
           <ol>
@@ -7936,7 +7936,7 @@ tab &lt;- merge(murders, results_us_election_2016, by = "state", all.x = TRUE)
 
         </section>
 
-        <section xml:id="sec-exercises">
+        <section xml:id="sec-joining-tables-exercises">
           <title>Exercises</title>
 
           <ol>
