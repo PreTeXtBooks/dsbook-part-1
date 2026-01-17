@@ -4013,11 +4013,13 @@ names(dat)
       <chapter xml:id="ch-visualizing-data-distributions">
         <title>Visualizing data distributions</title>
         
-        <p>Summarizing complex datasets is crucial in data analysis, allowing us to share insights drawn from the data more effectively. One common method is to use the <em>average</em> value to summarize a list of numbers. For instance, a high school's quality might be represented by the average score in a standardized test. Sometimes, an additional value, the <em>standard deviation</em>, is added. So, a report might say the scores were 680 <m>\pm</m> 50, boiling down a full set of scores to just two numbers. But is this enough? Are we overlooking crucial information by relying solely on these summaries instead of the complete data?</p>
-        
-        <p>Our first data visualization building block is learning to summarize lists of numbers or categories. More often than not, the best way to share or explore these summaries is through data visualization. The most basic statistical summary of a list of objects or numbers is its distribution. Once data has been summarized as a distribution, there are several data visualization techniques to effectively relay this information. For this reason, it is important to have a deep understanding of the concept of a distribution.</p>
-        
-        <p>In this chapter, we discuss properties of a variety of distributions and how to visualize distributions using a motivating example of student heights.</p>
+        <introduction>
+          <p>Summarizing complex datasets is crucial in data analysis, allowing us to share insights drawn from the data more effectively. One common method is to use the <em>average</em> value to summarize a list of numbers. For instance, a high school's quality might be represented by the average score in a standardized test. Sometimes, an additional value, the <em>standard deviation</em>, is added. So, a report might say the scores were 680 <m>\pm</m> 50, boiling down a full set of scores to just two numbers. But is this enough? Are we overlooking crucial information by relying solely on these summaries instead of the complete data?</p>
+          
+          <p>Our first data visualization building block is learning to summarize lists of numbers or categories. More often than not, the best way to share or explore these summaries is through data visualization. The most basic statistical summary of a list of objects or numbers is its distribution. Once data has been summarized as a distribution, there are several data visualization techniques to effectively relay this information. For this reason, it is important to have a deep understanding of the concept of a distribution.</p>
+          
+          <p>In this chapter, we discuss properties of a variety of distributions and how to visualize distributions using a motivating example of student heights.</p>
+        </introduction>
         
         <section xml:id="sec-variable-types">
           <title>Variable types</title>
@@ -4044,7 +4046,7 @@ head(heights)
             </input>
           </program>
           
-          <p>One way to convey the heights to ET is to simply send him this list of 1,050 heights. But there are much more effective ways to convey this information, and understanding the concept of a distribution will be key. To simplify the explanation, we first focus on male heights. We examine the female height data in <xref ref="sec-student-height-cont"/>.</p>
+          <p>One way to convey the heights to ET is to simply send him this list of 1,050 heights. But there are much more effective ways to convey this information, and understanding the concept of a distribution will be key. To simplify the explanation, we first focus on male heights. We examine the female height data later in this chapter.</p>
         </section>
         
         <section xml:id="sec-distributions">
@@ -4111,7 +4113,7 @@ heights |>
             
             <p>What information do we lose? Note that all values in each interval are treated the same when computing bin heights. So, for example, the histogram does not distinguish between 64, 64.1, and 64.2 inches. Given that these differences are almost unnoticeable to the eye, the practical implications are negligible and we were able to summarize the data to just 23 numbers.</p>
             
-            <p>We discuss how to code histograms in <xref ref="sec-other-geometries"/>.</p>
+            <p>We discuss how to code histograms later in this chapter.</p>
           </subsection>
           
           <subsection xml:id="subsec-smoothed-density">
@@ -4142,7 +4144,7 @@ heights |>
               </input>
             </program>
             
-            <p>With the right argument, <c>ggplot</c> automatically shades the intersecting region with a different color. We will show examples of <alert>ggplot2</alert> code for densities in <xref ref="sec-dataviz-in-practice"/> as well as <xref ref="sec-other-geometries"/>.</p>
+            <p>With the right argument, <c>ggplot</c> automatically shades the intersecting region with a different color. We will show examples of <alert>ggplot2</alert> code for densities later in this book.</p>
           </subsection>
           
           <subsection xml:id="subsec-normal-distribution">
@@ -4247,7 +4249,7 @@ murders |> ggplot(aes("",rate)) + geom_boxplot() +
           
           <p>From just this simple plot, we know that the median is about 2.5, that the distribution is not symmetric, and that the range is 0 to 5 for the great majority of states with two exceptions.</p>
           
-          <p>We discuss how to make boxplots in <xref ref="sec-other-geometries"/>.</p>
+          <p>We discuss how to make boxplots later in this chapter.</p>
         </section>
         
         <section xml:id="sec-dataviz-stratification">
@@ -4371,26 +4373,28 @@ x &lt;- heights$height[heights$sex=="Male"]
       <chapter xml:id="ch-ggplot2">
         <title>ggplot2</title>
         
-        <p>Exploratory data visualization is perhaps the greatest strength of R. One can quickly go from idea to data to plot with a unique balance of flexibility and ease. For example, Excel may be easier than R for some plots, but it is nowhere near as flexible. D3.js may be more flexible and powerful than R, but it takes much longer to generate a plot.</p>
-        
-        <p>Throughout the book, we will be creating plots using the <alert>ggplot2</alert> package.</p>
-        
-        <program language="r">
-          <input>
+        <introduction>
+          <p>Exploratory data visualization is perhaps the greatest strength of R. One can quickly go from idea to data to plot with a unique balance of flexibility and ease. For example, Excel may be easier than R for some plots, but it is nowhere near as flexible. D3.js may be more flexible and powerful than R, but it takes much longer to generate a plot.</p>
+          
+          <p>Throughout the book, we will be creating plots using the <alert>ggplot2</alert> package.</p>
+          
+          <program language="r">
+            <input>
 library(dplyr)
 library(ggplot2)
-          </input>
-        </program>
-        
-        <p>Many other approaches are available for creating plots in R. In fact, the plotting capabilities that come with a basic installation of R are already quite powerful. There are also other packages for creating graphics such as <alert>grid</alert> and <alert>lattice</alert>. We chose to use <alert>ggplot2</alert> in this book because it breaks plots into components in a way that permits beginners to create relatively complex and aesthetically pleasing plots using syntax that is intuitive and comparatively easy to remember.</p>
-        
-        <p>One reason <alert>ggplot2</alert> is generally more intuitive for beginners is that it uses a grammar of graphics, the <em>gg</em> in <alert>ggplot2</alert>. This is analogous to the way learning grammar can help a beginner construct hundreds of different sentences by learning just a handful of verbs, nouns, and adjectives without having to memorize each specific sentence. Similarly, by learning a handful of <alert>ggplot2</alert> building blocks and its grammar, you will be able to create hundreds of different plots.</p>
-        
-        <p>Another reason <alert>ggplot2</alert> is easy for beginners is that its default behavior is carefully chosen to satisfy the great majority of cases and is visually pleasing. As a result, it is possible to create informative and elegant graphs with relatively simple and readable code.</p>
-        
-        <p>One limitation is that <alert>ggplot2</alert> is designed to work exclusively with data tables in tidy format. However, a substantial percentage of datasets that beginners work with are in, or can be converted into, this format. An advantage of this approach is that, assuming that our data is tidy, <alert>ggplot2</alert> simplifies plotting code and the learning of grammar for a variety of plots.</p>
-        
-        <p>To use <alert>ggplot2</alert> you will have to learn several functions and arguments. These are hard to memorize, so we highly recommend you have the ggplot2 cheat sheet handy. You can get a copy from Posit's website or simply perform an internet search for "ggplot2 cheat sheet".</p>
+            </input>
+          </program>
+          
+          <p>Many other approaches are available for creating plots in R. In fact, the plotting capabilities that come with a basic installation of R are already quite powerful. There are also other packages for creating graphics such as <alert>grid</alert> and <alert>lattice</alert>. We chose to use <alert>ggplot2</alert> in this book because it breaks plots into components in a way that permits beginners to create relatively complex and aesthetically pleasing plots using syntax that is intuitive and comparatively easy to remember.</p>
+          
+          <p>One reason <alert>ggplot2</alert> is generally more intuitive for beginners is that it uses a grammar of graphics, the <em>gg</em> in <alert>ggplot2</alert>. This is analogous to the way learning grammar can help a beginner construct hundreds of different sentences by learning just a handful of verbs, nouns, and adjectives without having to memorize each specific sentence. Similarly, by learning a handful of <alert>ggplot2</alert> building blocks and its grammar, you will be able to create hundreds of different plots.</p>
+          
+          <p>Another reason <alert>ggplot2</alert> is easy for beginners is that its default behavior is carefully chosen to satisfy the great majority of cases and is visually pleasing. As a result, it is possible to create informative and elegant graphs with relatively simple and readable code.</p>
+          
+          <p>One limitation is that <alert>ggplot2</alert> is designed to work exclusively with data tables in tidy format. However, a substantial percentage of datasets that beginners work with are in, or can be converted into, this format. An advantage of this approach is that, assuming that our data is tidy, <alert>ggplot2</alert> simplifies plotting code and the learning of grammar for a variety of plots.</p>
+          
+          <p>To use <alert>ggplot2</alert> you will have to learn several functions and arguments. These are hard to memorize, so we highly recommend you have the ggplot2 cheat sheet handy. You can get a copy from Posit's website or simply perform an internet search for "ggplot2 cheat sheet".</p>
+        </introduction>
         
         <section xml:id="sec-components-of-graph">
           <title>The components of a graph</title>
@@ -4430,7 +4434,7 @@ murders |> ggplot(aes(x = population/10^6, y = total, label = abb)) +
           <ul>
             <li><p><alert>Data</alert>: The US murders data frame is being summarized. We refer to this as the <alert>data</alert> component.</p></li>
             
-            <li><p><alert>Geometry</alert>: The plot above is a scatterplot. This is referred to as the <alert>geometry</alert> component. Other possible geometries include barplot, histogram, smooth densities, qqplot, and boxplot. We will learn more about these in <xref ref="sec-other-geometries"/>.</p></li>
+            <li><p><alert>Geometry</alert>: The plot above is a scatterplot. This is referred to as the <alert>geometry</alert> component. Other possible geometries include barplot, histogram, smooth densities, qqplot, and boxplot. We will learn more about these later in this chapter.</p></li>
             
             <li><p><alert>Aesthetic mapping</alert>: The plot uses several visual cues to represent the information provided by the dataset. The two most important cues in this plot are the point positions on the x-axis and y-axis, which represent population size and the total number of murders, respectively. Each point represents a different observation, and we <em>map</em> data about these observations to visual cues like x- and y-scale. Color is another visual cue that we map to region. We refer to this as the <alert>aesthetic mapping</alert> component. How we define the mapping depends on what <alert>geometry</alert> we are using.</p></li>
           </ul>
@@ -4504,7 +4508,7 @@ p
           
           <p>A common first step is to let <alert>ggplot2</alert> know what geometry to use. We often add multiple geometries, but we at least need one. In our example, we want to make a scatterplot. Geometries are added using functions. Taking a quick look at the cheat sheet, we see that we should use the function <c>geom_point</c>.</p>
           
-          <p>Note that geometry function names follow the pattern: <c>geom_X</c> where X is the name of the geometry. Some examples include <c>geom_histogram</c>, <c>geom_boxplot</c>, and <c>geom_col</c>. We will discuss these further in <xref ref="sec-other-geometries"/>.</p>
+          <p>Note that geometry function names follow the pattern: <c>geom_X</c> where X is the name of the geometry. Some examples include <c>geom_histogram</c>, <c>geom_boxplot</c>, and <c>geom_col</c>. We will discuss these further later in this chapter.</p>
           
           <p>For <c>geom_point</c> to run properly we need to provide data and a mapping. We have already assigned the <c>murders</c> data table to the object <c>p</c>. Next we need to add the layer <c>geom_point</c> to define the geometry. To find out what mappings are expected by this function, we read the <alert>Aesthetics</alert> section of the <c>geom_point</c> help file:</p>
           
@@ -4598,7 +4602,7 @@ murders |> ggplot(aes(population/10^6, total)) +
             </input>
           </program>
           
-          <p>In <xref ref="sec-add-on-packages"/> we learn a better way of assuring we can see the points and the labels.</p>
+          <p>Later in this chapter we learn a better way of assuring we can see the points and the labels.</p>
         </section>
         
         <section xml:id="sec-categories-as-colors">

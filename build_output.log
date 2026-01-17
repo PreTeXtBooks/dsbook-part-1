@@ -1,0 +1,71 @@
+Version 2.36.0 of pretext is available.  You are currently using version 2.32.0.
+
+To upgrade, run `pretext upgrade`.
+PreTeXt project found in `/home/runner/work/dsbook-part-1/dsbook-part-1`.
+Building target web
+XSL conversion of /home/runner/work/dsbook-part-1/dsbook-part-1/source/main.ptx by /home/runner/.ptx/2.32.0/core/xsl/utilities/pretext-enhanced-source.xsl
+successful application of /home/runner/.ptx/2.32.0/core/xsl/utilities/pretext-enhanced-source.xsl
+Generating any needed assets.
+XSL conversion of /home/runner/work/dsbook-part-1/dsbook-part-1/source/main.ptx by /home/runner/.ptx/2.32.0/core/xsl/utilities/pretext-enhanced-source.xsl
+successful application of /home/runner/.ptx/2.32.0/core/xsl/utilities/pretext-enhanced-source.xsl
+XSL conversion of /home/runner/work/dsbook-part-1/dsbook-part-1/source/main.ptx by /home/runner/.ptx/2.32.0/core/xsl/utilities/pretext-enhanced-source.xsl
+successful application of /home/runner/.ptx/2.32.0/core/xsl/utilities/pretext-enhanced-source.xsl
+XSL conversion of /home/runner/work/dsbook-part-1/dsbook-part-1/source/main.ptx by /home/runner/.ptx/2.32.0/core/xsl/utilities/pretext-enhanced-source.xsl
+successful application of /home/runner/.ptx/2.32.0/core/xsl/utilities/pretext-enhanced-source.xsl
+XSL conversion of /home/runner/work/dsbook-part-1/dsbook-part-1/source/main.ptx by /home/runner/.ptx/2.32.0/core/xsl/utilities/pretext-enhanced-source.xsl
+successful application of /home/runner/.ptx/2.32.0/core/xsl/utilities/pretext-enhanced-source.xsl
+XSL conversion of /home/runner/work/dsbook-part-1/dsbook-part-1/source/main.ptx by /home/runner/.ptx/2.32.0/core/xsl/utilities/pretext-enhanced-source.xsl
+successful application of /home/runner/.ptx/2.32.0/core/xsl/utilities/pretext-enhanced-source.xsl
+XSL conversion of /home/runner/work/dsbook-part-1/dsbook-part-1/source/main.ptx by /home/runner/.ptx/2.32.0/core/xsl/utilities/pretext-enhanced-source.xsl
+successful application of /home/runner/.ptx/2.32.0/core/xsl/utilities/pretext-enhanced-source.xsl
+XSL conversion of /home/runner/work/dsbook-part-1/dsbook-part-1/source/main.ptx by /home/runner/.ptx/2.32.0/core/xsl/utilities/pretext-enhanced-source.xsl
+successful application of /home/runner/.ptx/2.32.0/core/xsl/utilities/pretext-enhanced-source.xsl
+XSL conversion of /home/runner/work/dsbook-part-1/dsbook-part-1/source/main.ptx by /home/runner/.ptx/2.32.0/core/xsl/utilities/pretext-enhanced-source.xsl
+successful application of /home/runner/.ptx/2.32.0/core/xsl/utilities/pretext-enhanced-source.xsl
+XSL conversion of /home/runner/work/dsbook-part-1/dsbook-part-1/source/main.ptx by /home/runner/.ptx/2.32.0/core/xsl/utilities/pretext-enhanced-source.xsl
+successful application of /home/runner/.ptx/2.32.0/core/xsl/utilities/pretext-enhanced-source.xsl
+XSL conversion of /home/runner/work/dsbook-part-1/dsbook-part-1/source/main.ptx by /home/runner/.ptx/2.32.0/core/xsl/utilities/pretext-enhanced-source.xsl
+successful application of /home/runner/.ptx/2.32.0/core/xsl/utilities/pretext-enhanced-source.xsl
+XSL conversion of /home/runner/work/dsbook-part-1/dsbook-part-1/source/main.ptx by /home/runner/.ptx/2.32.0/core/xsl/utilities/pretext-enhanced-source.xsl
+successful application of /home/runner/.ptx/2.32.0/core/xsl/utilities/pretext-enhanced-source.xsl
+XSL conversion of /home/runner/work/dsbook-part-1/dsbook-part-1/source/main.ptx by /home/runner/.ptx/2.32.0/core/xsl/utilities/pretext-enhanced-source.xsl
+successful application of /home/runner/.ptx/2.32.0/core/xsl/utilities/pretext-enhanced-source.xsl
+XSL conversion of /home/runner/work/dsbook-part-1/dsbook-part-1/source/main.ptx by /home/runner/.ptx/2.32.0/core/xsl/utilities/pretext-enhanced-source.xsl
+successful application of /home/runner/.ptx/2.32.0/core/xsl/utilities/pretext-enhanced-source.xsl
+XSL conversion of /home/runner/work/dsbook-part-1/dsbook-part-1/source/main.ptx by /home/runner/.ptx/2.32.0/core/xsl/utilities/pretext-enhanced-source.xsl
+successful application of /home/runner/.ptx/2.32.0/core/xsl/utilities/pretext-enhanced-source.xsl
+XSL conversion of /home/runner/work/dsbook-part-1/dsbook-part-1/source/main.ptx by /home/runner/.ptx/2.32.0/core/xsl/utilities/pretext-enhanced-source.xsl
+successful application of /home/runner/.ptx/2.32.0/core/xsl/utilities/pretext-enhanced-source.xsl
+XSL conversion of /home/runner/work/dsbook-part-1/dsbook-part-1/source/main.ptx by /home/runner/.ptx/2.32.0/core/xsl/utilities/pretext-enhanced-source.xsl
+successful application of /home/runner/.ptx/2.32.0/core/xsl/utilities/pretext-enhanced-source.xsl
+XSL conversion of /home/runner/work/dsbook-part-1/dsbook-part-1/source/main.ptx by /home/runner/.ptx/2.32.0/core/xsl/utilities/pretext-enhanced-source.xsl
+successful application of /home/runner/.ptx/2.32.0/core/xsl/utilities/pretext-enhanced-source.xsl
+Finished generating assets.
+
+Preparing to build into /home/runner/work/dsbook-part-1/dsbook-part-1/output/web.
+
+added 51 packages, and audited 52 packages in 3s
+
+11 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+discovering source file's directory name: /home/runner/work/dsbook-part-1/dsbook-part-1/source
+verifying and expanding input directory: /home/runner/work/dsbook-part-1/dsbook-part-1/source/../generated-assets
+input directory expanded to absolute path: /home/runner/work/dsbook-part-1/dsbook-part-1/generated-assets
+verifying and expanding input directory: /home/runner/work/dsbook-part-1/dsbook-part-1/source/../assets
+input directory expanded to absolute path: /home/runner/work/dsbook-part-1/dsbook-part-1/assets
+discovering source file's directory name: /home/runner/work/dsbook-part-1/dsbook-part-1/source
+XSL conversion of /home/runner/work/dsbook-part-1/dsbook-part-1/source/main.ptx by /home/runner/.ptx/2.32.0/core/xsl/utilities/report-publisher-variables.xsl
+successful application of /home/runner/.ptx/2.32.0/core/xsl/utilities/report-publisher-variables.xsl
+Downloading rs services file from https://runestone.academy/cdn/runestone/latest/webpack_static_imports.xml.
+[33mwarning: [0mCould not download rs services file from https://runestone.academy/cdn/runestone/latest/webpack_static_imports.xml.  Using cached version instead.
+[31mcritical: [0mcannot access local variable 'services_xml' where it is not associated with a value
+------------------------
+[31mcritical: [0mFailed to build without errors.  Exiting...
+
+----------------------------------------------------
+While running pretext, the following errors occurred:
+
+(see log messages above or in the 'logs' folder for more information)
+----------------------------------------------------
