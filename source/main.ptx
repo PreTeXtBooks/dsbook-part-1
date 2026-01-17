@@ -3193,7 +3193,7 @@ murders_dt[, c("state", "region")]
               </input>
             </program>
             
-            <p>We can also use the <c>.()</c> <alert>data.table</alert> notation to alert R that variables inside the parentheses are column names, not objects in the R environment. So the above can also be written like this:</p>
+            <p>We can also use the <c>.()</c> <alert>data.table</alert> notation to tell R that variables inside the parentheses are column names, not objects in the R environment. So the above can also be written like this:</p>
             
             <program language="r">
               <input>
@@ -3218,7 +3218,7 @@ murders &lt;- mutate(murders, rate = total / population * 100000)
             
             <program language="r">
               <input>
-murders_dt[, rate := total / population * 100000]
+murders_dt[, rate := total / population * 100000] # rate per 100,000
               </input>
             </program>
             
@@ -3275,7 +3275,7 @@ y
               </input>
             </program>
             
-            <p>Note that the function <c>as.data.table</c> creates a copy of the data frame being converted. However, if working with a large data frames it is helpful to avoid this by using <c>setDT</c>:</p>
+            <p>Note that the function <c>as.data.table</c> creates a copy of the data frame being converted. However, if working with large data frames it is helpful to avoid this by using <c>setDT</c>:</p>
             
             <program language="r">
               <input>
@@ -3663,7 +3663,7 @@ file.copy(file_path, "murders.csv")
             
             <p>You have already worked with text files. All your R scripts and Quarto files, for example, are text files and so are the Quarto files used to create this book. The <c>murders.csv</c> file mentioned above is also text files. One big advantage of these files is that we can easily "look" at them without having to purchase any kind of special software or follow complicated instructions. Any text editor can be used to examine a text file, including freely available editors such as RStudio or nano. To see this, try opening a csv file using the "Open file" RStudio tool. You should be able to see the content right on your editor.</p>
             
-            <p>When text files are used to store a spreadsheet, line breaks are used to separate rows and a predefined character, referred to as the <em>delimiter</em>, is used to separate columns within a row. The most common delimiters are comma (<c>,</c>), semicolon (<c>;</c>), space (<c> </c>), and tab (a preset number of spaces or <c>\t</c>). Slightly different approaches are used to read these files into R, so we need to know what delimiter was used. In some cases, the delimiter can be inferred from file suffix. For example, files ending in <c>csv</c> or <c>tsv</c> are expected to be comma and tab delimited, respectively. However, it is harder to infer the delimiter for files ending in <c>txt</c>. As a result we recommend looking at the file rather than inferring from the suffix. You can look at any number of lines from within R using the <c>readLines</c> function:</p>
+            <p>When text files are used to store a spreadsheet, line breaks are used to separate rows and a predefined character, referred to as the <em>delimiter</em>, is used to separate columns within a row. The most common delimiters are comma (<c>,</c>), semicolon (<c>;</c>), space (<c> </c>), and tab (the <c>\t</c> character). Slightly different approaches are used to read these files into R, so we need to know what delimiter was used. In some cases, the delimiter can be inferred from file suffix. For example, files ending in <c>csv</c> or <c>tsv</c> are expected to be comma and tab delimited, respectively. However, it is harder to infer the delimiter for files ending in <c>txt</c>. As a result we recommend looking at the file rather than inferring from the suffix. You can look at any number of lines from within R using the <c>readLines</c> function:</p>
             
             <program language="r">
               <input>
@@ -3972,7 +3972,7 @@ files
             </input>
           </program>
           
-          <p>2. Note that the the <c>olive</c> file, gives us a warning. This is because the first line of the file is missing the header for the first column.</p>
+          <p>2. Note that the <c>olive</c> file gives us a warning. This is because the first line of the file is missing the header for the first column.</p>
           
           <p>Read the help file for <c>read_csv</c> to figure out how to read in the file without reading this header. If you skip the header, you should not get this warning. Save the result to an object called <c>dat</c>.</p>
           
