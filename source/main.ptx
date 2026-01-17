@@ -4554,7 +4554,7 @@ murders |> ggplot() +
             </input>
           </program>
           
-          <p>As an example of the unique behavior of <c>aes</c> related to variable names, note that if the added layer was <c>geom_text(aes(population/10^6, total), label = abb)</c>, we would result in an error since <c>abb</c> is now outside the call to <c>aes</c> and it is not object in out workspace, it is a variable name in the data component of the <c>ggplot</c> object.</p>
+          <p>As an example of the unique behavior of <c>aes</c> related to variable names, note that if the added layer was <c>geom_text(aes(population/10^6, total), label = abb)</c>, we would result in an error since <c>abb</c> is now outside the call to <c>aes</c> and it is not an object in our workspace, it is a variable name in the data component of the <c>ggplot</c> object.</p>
         </section>
         
         <section xml:id="sec-global-aesthetic-mappings">
@@ -4819,7 +4819,7 @@ heights |> filter(sex == "Female") |>
               </input>
             </program>
             
-            <p>Note that we use the optional arguments <c>bandwidth = 1</c> to change the bin size to 1 inch. The default is to create 30 bins. We also use the optional arguments <c>fill = "blue"</c> and <c>col = "black"</c> to fill the bars with colors and use a different color to outline the bars.</p>
+            <p>Note that we use the optional arguments <c>binwidth = 1</c> to change the bin size to 1 inch. The default is to create 30 bins. We also use the optional arguments <c>fill = "blue"</c> and <c>col = "black"</c> to fill the bars with colors and use a different color to outline the bars.</p>
           </subsection>
           
           <subsection xml:id="subsec-density-plots-geom">
