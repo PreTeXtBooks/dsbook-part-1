@@ -3493,7 +3493,7 @@ heights_dt[, .(avg = mean(height), sd = sd(height)), by = sex]
     
   </section>
   
-  <section xml:id="sorting">
+  <section xml:id="data-table-sorting">
     <title>Sorting</title>
     
     <p>
