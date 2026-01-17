@@ -2283,7 +2283,7 @@ s_n &lt;- sapply(n, compute_s_n)
 x &lt;- c(1,2,-3,4)
 
 if(all(x&gt;0)){
-  print("All Postives")
+  print("All Positives")
 } else{
   print("Not all positives")
 }
@@ -2597,10 +2597,8 @@ mutate(murders, across(where(is.character), tolower))
     
     <me>
       \mbox{original data }
-      
-ightarrow \mbox{ select }
-      
-ightarrow \mbox{ filter }
+      \rightarrow \mbox{ select }
+      \rightarrow \mbox{ filter }
     </me>
     
     <p>
@@ -3514,7 +3512,101 @@ my_states &lt;- murders |&gt;
     </program>
     
     <p>
-      13-23. [Remaining exercises continue with NHANES data analysis and other tidyverse operations - content preserved as in original]
+      13. For exercises 13-19, we will be using the data from the survey collected by the United States National Center for Health Statistics (NCHS). This center has conducted a series of health and nutrition surveys since the 1960's. Starting in 1999, about 5,000 individuals of all ages have been interviewed every year and they complete the health examination component of the survey. Part of the data is made available via the <alert>NHANES</alert> package. Once you install the <alert>NHANES</alert> package, you can load the data like this:
+    </p>
+    
+    <program language="r">
+      <input>
+library(NHANES)
+      </input>
+    </program>
+    
+    <p>
+      The <alert>NHANES</alert> data has many missing values. The <c>mean</c> and <c>sd</c> functions in R will return <c>NA</c> if any of the entries of the input vector is an <c>NA</c>. Here is an example:
+    </p>
+    
+    <program language="r">
+      <input>
+library(dslabs)
+mean(na_example)
+sd(na_example)
+      </input>
+    </program>
+    
+    <p>
+      To ignore the <c>NA</c>s we can use the <c>na.rm</c> argument:
+    </p>
+    
+    <program language="r">
+      <input>
+mean(na_example, na.rm = TRUE)
+sd(na_example, na.rm = TRUE)
+      </input>
+    </program>
+    
+    <p>
+      Let's now explore the NHANES data. We will provide some basic facts about blood pressure. First let's select a group to set the standard. We will use 20-to-29-year-old females. <c>AgeDecade</c> is a categorical variable with these ages. Note that the category is coded like <c>" 20-29"</c>, with a space in front! What is the average and standard deviation of systolic blood pressure as saved in the <c>BPSysAve</c> variable? Save it to a variable called <c>ref</c>.
+    </p>
+    
+    <p>
+      Hint: Use <c>filter</c> and <c>summarize</c> and use the <c>na.rm = TRUE</c> argument when computing the average and standard deviation. You can also filter the NA values using <c>filter</c>.
+    </p>
+    
+    <p>
+      14. Using a pipe, assign the average to a numeric variable <c>ref_avg</c>. Hint: Use the code from the previous exercise and then <c>pull</c>.
+    </p>
+    
+    <p>
+      15. Now report the min and max values for the same group.
+    </p>
+    
+    <p>
+      16. Compute the average and standard deviation for females, but for each age group separately rather than a selected decade as in exercise 13. Note that the age groups are defined by <c>AgeDecade</c>. Hint: rather than filtering by age and gender, filter by <c>Gender</c> and then use <c>group_by</c>.
+    </p>
+    
+    <p>
+      17. Repeat exercise 16 for males.
+    </p>
+    
+    <p>
+      18. For males between the ages of 40-49, compare systolic blood pressure across race as reported in the <c>Race1</c> variable. Order the resulting table from lowest to highest average systolic blood pressure.
+    </p>
+    
+    <p>
+      19. Load the <c>murders</c> dataset. Which of the following is true?
+    </p>
+    
+    <ol marker="a.">
+      <li><c>murders</c> is in tidy format and is stored in a tibble.</li>
+      <li><c>murders</c> is in tidy format and is stored in a data frame.</li>
+      <li><c>murders</c> is not in tidy format and is stored in a tibble.</li>
+      <li><c>murders</c> is not in tidy format and is stored in a data frame.</li>
+    </ol>
+    
+    <p>
+      20. Use <c>as_tibble</c> to convert the <c>murders</c> data table into a tibble and save it in an object called <c>murders_tibble</c>.
+    </p>
+    
+    <p>
+      21. Use the <c>group_by</c> function to convert <c>murders</c> into a tibble that is grouped by region.
+    </p>
+    
+    <p>
+      22. Write tidyverse code that is equivalent to this code:
+    </p>
+    
+    <program language="r">
+      <input>
+exp(mean(log(murders$population)))
+      </input>
+    </program>
+    
+    <p>
+      Write it using the pipe so that each function is called without arguments. Use the dot operator to access the population. Hint: The code should start with <c>murders |&gt;</c>.
+    </p>
+    
+    <p>
+      23. Use the <c>map_df</c> to create a data frame with three columns named <c>n</c>, <c>s_n</c>, and <c>s_n_2</c>. The first column should contain the numbers 1 through 100. The second and third columns should each contain the sum of 1 through <m>n</m> with <m>n</m> the row number.
     </p>
     
   </section>
@@ -4621,7 +4713,7 @@ files
     <exercise>
       <statement>
         <p>
-          Note that the the <c>olive</c> file, gives us a warning. This is because the first line of the file is missing the header for the first column.
+          Note that the <c>olive</c> file, gives us a warning. This is because the first line of the file is missing the header for the first column.
         </p>
         <p>
           Read the help file for <c>read_csv</c> to figure out how to read in the file without reading this header. If you skip the header, you should not get this warning. Save the result to an object called <c>dat</c>.
