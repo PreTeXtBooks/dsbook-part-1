@@ -1686,15 +1686,11 @@ installed.packages()
       
       <ol>
       <li><p>What is the sum of the first 100 positive integers? The formula for the sum of integers 1 through n is <m>n(n+1)/2</m>. Define <m>n=100</m> and then use R to compute the sum of 1 through 100 using the formula. What is the sum?</p></li>
-      </ol>
       
-      <ol>
       <li><p>Now use the same formula to compute the sum of the integers from 1 through 1000.</p></li>
-      </ol>
       
-      <ol>
-      <li><p>Look at the result of typing the following code into R:</p></li>
-      </ol>
+      <li>
+      <p>Look at the result of typing the following code into R:</p>
       
       <program language="r"><input>
       n &lt;- 1000
@@ -1705,122 +1701,82 @@ installed.packages()
       <p>Based on the result, what do you think the functions <c>seq</c> and <c>sum</c> do? You can use <c>help</c>.</p>
       
       <p>a.  <c>sum</c> creates a list of numbers and <c>seq</c> adds them up. b.  <c>seq</c> creates a list of numbers and <c>sum</c> adds them up. c.  <c>seq</c> creates a random list and <c>sum</c> computes the sum of 1 through 1,000. d.  <c>sum</c> always returns the same number.</p>
+      </li>
       
-      <ol>
       <li><p>In math and programming, we say that we evaluate a function when we replace the argument with a given value. So if we type <c>sqrt(4)</c>, we evaluate the <c>sqrt</c> function. In R, you can evaluate a function inside another function. The evaluations happen from the inside out. Use one line of code to compute the log, in base 10, of the square root of 100.</p></li>
-      </ol>
       
-      <ol>
-      <li><p>Which of the following will always return the numeric value stored in <c>x</c>? You can try out examples and use the help system if you want.</p></li>
-      </ol>
+      <li>
+      <p>Which of the following will always return the numeric value stored in <c>x</c>? You can try out examples and use the help system if you want.</p>
       
       <p>a.  <c>log(10^x)</c> b.  <c>log10(x^10)</c> c.  <c>log(exp(x))</c> d.  <c>exp(log(x, base = 2))</c></p>
+      </li>
       
-      <ol>
-      <li><p>Make sure the US murders dataset is loaded. Use the function <c>str</c> to examine the structure of the <c>murders</c> object. Which of the following best describes the variables represented in this data frame?</p></li>
-      </ol>
+      <li>
+      <p>Make sure the US murders dataset is loaded. Use the function <c>str</c> to examine the structure of the <c>murders</c> object. Which of the following best describes the variables represented in this data frame?</p>
       
       <p>a.  The 51 states. b.  The murder rates for all 50 states and DC. c.  The state name, the abbreviation of the state name, the state's region, and the state's population and total number of murders for 2010. d.  <c>str</c> shows no relevant information.</p>
+      </li>
       
-      <ol>
       <li><p>What are the column names used by the data frame for these five variables?</p></li>
-      </ol>
       
-      <ol>
       <li><p>Use the accessor <c>$</c> to extract the state abbreviations and assign them to the object <c>a</c>. What is the class of this object?</p></li>
-      </ol>
       
-      <ol>
       <li><p>Now use the square brackets to extract the state abbreviations and assign them to the object <c>b</c>. Use the <c>identical</c> function to determine if <c>a</c> and <c>b</c> are the same.</p></li>
-      </ol>
       
-      <ol>
-      <li><p>We saw that the <c>region</c> column stores a factor. You can corroborate this by typing:</p></li>
-      </ol>
+      <li>
+      <p>We saw that the <c>region</c> column stores a factor. You can corroborate this by typing:</p>
       
       <program language="r"><input>
       class(murders$region)
       </input></program>
       
       <p>With one line of code, use the functions <c>levels</c> and <c>length</c> to determine the number of regions defined by this dataset.</p>
+      </li>
       
-      <ol>
       <li><p>The function <c>table</c> takes a vector and returns the frequency of each element. You can quickly see how many states are in each region by applying this function. Use this function in one line of code to create a table of number of states per region.</p></li>
-      </ol>
       
-      <ol>
       <li><p>Use the function <c>c</c> to create a vector with the average high temperatures in January for Beijing, Lagos, Paris, Rio de Janeiro, San Juan, and Toronto, which are 35, 88, 42, 84, 81, and 30 degrees Fahrenheit. Call the object <c>temp</c>.</p></li>
-      </ol>
       
-      <ol>
       <li><p>Now create a vector with the city names and call the object <c>city</c>.</p></li>
-      </ol>
       
-      <ol>
       <li><p>Use the <c>names</c> function and the objects defined in the previous exercises to associate the temperature data with its corresponding city.</p></li>
-      </ol>
       
-      <ol>
       <li><p>Use the <c>[</c> and <c>:</c> operators to access the temperature of the first three cities on the list.</p></li>
-      </ol>
       
-      <ol>
       <li><p>Use the <c>[</c> operator to access the temperature of Paris and San Juan.</p></li>
-      </ol>
       
-      <ol>
       <li><p>Use the <c>:</c> operator to create a sequence of numbers <m>12,13,14,\dots,73</m>.</p></li>
-      </ol>
       
-      <ol>
       <li><p>Create a vector containing all the positive odd numbers smaller than 100.</p></li>
-      </ol>
       
-      <ol>
       <li><p>Create a vector of numbers that starts at 6, does not pass 55, and adds numbers in increments of 4/7: 6, 6 + 4/7, 6 + 8/7, and so on. How many numbers does the list have? Hint: use <c>seq</c> and <c>length</c>.</p></li>
-      </ol>
       
-      <ol>
       <li><p>What is the class of the following object <c>a &lt;- seq(1, 10, 0.5)</c>?</p></li>
-      </ol>
       
-      <ol>
       <li><p>What is the class of the following object <c>a &lt;- seq(1, 10)</c>?</p></li>
-      </ol>
       
-      <ol>
       <li><p>The class of <c>class(a&lt;-1)</c> is numeric, not integer. R defaults to numeric and to force an integer, you need to add the letter <c>L</c>. Confirm that the class of <c>1L</c> is integer.</p></li>
-      </ol>
       
-      <ol>
-      <li><p>Define the following vector:</p></li>
-      </ol>
+      <li>
+      <p>Define the following vector:</p>
       
       <program language="r"><input>
       x &lt;- c("1", "3", "5")
       </input></program>
       
       <p>and coerce it to get integers.</p>
+      </li>
       
-      <ol>
       <li><p>For exercises 24-31 we will use the US murders dataset. Make sure you load it prior to starting. Use the <c>$</c> operator to access the population size data and store it as the object <c>pop</c>. Then use the <c>sort</c> function to redefine <c>pop</c> so that it is sorted. Finally, use the <c>[</c> operator to report the smallest population size.</p></li>
-      </ol>
       
-      <ol>
       <li><p>Now instead of the smallest population size, find the index of the entry with the smallest population size. Hint: use <c>order</c> instead of <c>sort</c>.</p></li>
-      </ol>
       
-      <ol>
       <li><p>We can actually perform the same operation as in the previous exercise using the function <c>which.min</c>. Write one line of code that does this.</p></li>
-      </ol>
       
-      <ol>
       <li><p>Now we know how small the smallest state is and we know which row represents it. Which state is it? Define a variable <c>states</c> to be the state names from the <c>murders</c> data frame. Report the name of the state with the smallest population.</p></li>
-      </ol>
       
-      <ol>
-      <li><p>You can create a data frame using the <c>data.frame</c> function. Here is a quick example:</p></li>
-      </ol>
+      <li>
+      <p>You can create a data frame using the <c>data.frame</c> function. Here is a quick example:</p>
       
       <program language="r"><input>
       temp &lt;- c(35, 88, 42, 84, 81, 30)
@@ -1830,14 +1786,12 @@ installed.packages()
       </input></program>
       
       <p>Use the <c>rank</c> function to determine the population rank of each state from smallest population size to biggest. Save these ranks in an object called <c>ranks</c>, then create a data frame with the state name and its rank. Call the data frame <c>my_df</c>.</p>
+      </li>
       
-      <ol>
       <li><p>Repeat the previous exercise, but this time order <c>my_df</c> so that the states are ordered from least populous to most populous. Hint: create an object <c>ind</c> that stores the indexes needed to order the population values. Then use the bracket operator <c>[</c> to re-order each column in the data frame.</p></li>
-      </ol>
       
-      <ol>
-      <li><p>The <c>na_example</c> vector represents a series of counts. You can quickly examine the object using:</p></li>
-      </ol>
+      <li>
+      <p>The <c>na_example</c> vector represents a series of counts. You can quickly examine the object using:</p>
       
       <program language="r"><input>
       str(na_example)
@@ -1850,14 +1804,12 @@ installed.packages()
       </input></program>
       
       <p>The <c>is.na</c> function returns a logical vector that tells us which entries are <c>NA</c>. Assign this logical vector to an object called <c>ind</c> and determine how many <c>NA</c>s does <c>na_example</c> have.</p>
+      </li>
       
-      <ol>
       <li><p>Now compute the average again, but only for the entries that are not <c>NA</c>. Hint: remember the <c>!</c> operator, which turns <c>FALSE</c> into <c>TRUE</c> and vice versa.</p></li>
-      </ol>
       
-      <ol>
-      <li><p>In exercises 28 we created the <c>temp</c> data frame:</p></li>
-      </ol>
+      <li>
+      <p>In exercises 28 we created the <c>temp</c> data frame:</p>
       
       <program language="r"><input>
       temp &lt;- c(35, 88, 42, 84, 81, 30)
@@ -1867,54 +1819,38 @@ installed.packages()
       </input></program>
       
       <p>Remake the data frame using the code above, but add a line that converts the temperature from Fahrenheit to Celsius. The conversion is <m>C = \frac{5}{9} \times (F - 32)</m>.</p>
+      </li>
       
-      <ol>
       <li><p>What is the following sum <m>1+1/2^2 + 1/3^2 + \dots 1/100^2</m>? Hint: thanks to Euler, we know it should be close to <m>\pi^2/6</m>.</p></li>
-      </ol>
       
-      <ol>
       <li><p>Compute the per 100,000 murder rate for each state and store it in the object <c>murder_rate</c>. Then compute the average murder rate for the US using the function <c>mean</c>. What is the average?</p></li>
-      </ol>
       
-      <p>35. For remaining exercises 35-42, start by loading the library and data.</p>
+      <li>
+      <p>For remaining exercises 35-42, start by loading the library and data.</p>
       
       <program language="r"><input>
       library(dslabs)
       </input></program>
       
       <p>Compute the per 100,000 murder rate for each state and store it in an object called <c>murder_rate</c>. Then use logical operators to create a logical vector named <c>low</c> that tells us which entries of <c>murder_rate</c> are lower than 1.</p>
+      </li>
       
-      <ol>
       <li><p>Now use the results from the previous exercise and the function <c>which</c> to determine the indices of <c>murder_rate</c> associated with values lower than 1.</p></li>
-      </ol>
       
-      <ol>
       <li><p>Use the results from the previous exercise to report the names of the states with murder rates lower than 1.</p></li>
-      </ol>
       
-      <ol>
       <li><p>Now extend the code from the exercise to report the states in the Northeast with murder rates lower than 1. Hint: use the previously defined logical vector <c>low</c> and the logical operator <c>&amp;</c>.</p></li>
-      </ol>
       
-      <ol>
       <li><p>In a previous exercise we computed the murder rate for each state and the average of these numbers. How many states are below the average?</p></li>
-      </ol>
       
-      <ol>
       <li><p>Use the match function to identify the states with abbreviations AK, MI, and IA. Hint: start by defining an index of the entries of <c>murders$abb</c> that match the three abbreviations, then use the <c>[</c> operator to extract the states.</p></li>
-      </ol>
       
-      <ol>
       <li><p>Use the <c>%in%</c> operator to create a logical vector that answers the question: which of the following are actual abbreviations: MA, ME, MI, MO, MU?</p></li>
-      </ol>
       
-      <ol>
       <li><p>Extend the code you used in exercise 41 to report the one entry that is <alert>not</alert> an actual abbreviation. Hint: use the <c>!</c> operator, which turns <c>FALSE</c> into <c>TRUE</c> and vice versa, then <c>which</c> to obtain an index.</p></li>
-      </ol>
       
-      <ol>
-      <li><p>We made a plot of total murders versus population and noted a strong relationship. Not surprisingly, states with larger populations had more murders.</p></li>
-      </ol>
+      <li>
+      <p>We made a plot of total murders versus population and noted a strong relationship. Not surprisingly, states with larger populations had more murders.</p>
       
       <program language="r"><input>
       population_in_millions &lt;- murders$population/10^6
@@ -1923,13 +1859,12 @@ installed.packages()
       </input></program>
       
       <p>Keep in mind that many states have populations below 5 million and are bunched up. We may gain further insights from making this plot in the log scale. Transform the variables using the <c>log10</c> transformation and then plot them.</p>
+      </li>
       
-      <ol>
       <li><p>Create a histogram of the state populations.</p></li>
-      </ol>
       
-      <ol>
       <li><p>Generate boxplots of the state populations by region.</p></li>
+      
       </ol>
       
       </section>
