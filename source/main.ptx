@@ -435,7 +435,7 @@ installed.packages()
       
       <section xml:id="motivating-example-us-gun-murders"><title>Motivating example: US Gun Murders</title>
       
-      <p>Imagine you live in Europe and are offered a job in a US company with many locations across all states. It is a great job, but news with headlines such as <alert>US Gun Homicide Rate Higher Than Other Developed Countries</alert>[^r-basics-1] have you worried. Charts like this may concern you even more:</p>
+      <p>Imagine you live in Europe and are offered a job in a US company with many locations across all states. It is a great job, but news with headlines such as <alert>US Gun Homicide Rate Higher Than Other Developed Countries</alert><fn><url href="http://abcnews.go.com/blogs/headlines/2012/12/us-gun-ownership-homicide-rate-higher-than-other-developed-countries/"/></fn> have you worried. Charts like this may concern you even more:</p>
       
       <program language="r"><input>
       ## img_path &lt;- "img"
@@ -471,7 +471,7 @@ installed.packages()
               plot.margin = unit(c(1,1,1,1), "cm")) 
       </input></program>
       
-      <p>Or even worse, this version from <url href="https://everytownresearch.org">everytown.org</url>[^r-basics-2]:</p>
+      <p>Or even worse, this version from <url href="https://everytownresearch.org">everytown.org</url><fn><url href="https://everytownresearch.org"/></fn>:</p>
       
       <program language="r"><input>
       # from https://everytownresearch.org/wp-content/uploads/2016/07/GunTrends_murders_per_1000.png
@@ -705,7 +705,7 @@ installed.packages()
       
       <subsection xml:id="variable-names"><title>Variable names</title>
       
-      <p>We used <c>coef_a</c>, <c>coef_b</c>, and <c>coef_c</c> as variable names, but variable names can be almost anything. When writing code in R, it's important to choose variable names that are both meaningful and avoid conflicts with existing functions or reserved words in the language. For example, we did not use <c>a</c>, <c>b</c> and <c>c</c> to avoid a conflict with the <c>c()</c> function in R, described in @sec-creating-vectors. If you were to name a variable <c>c</c>, you would not receive an error or warning, but the conflict can lead to unexpected behavior and bugs that are hard to diagnose.</p>
+      <p>We used <c>coef_a</c>, <c>coef_b</c>, and <c>coef_c</c> as variable names, but variable names can be almost anything. When writing code in R, it's important to choose variable names that are both meaningful and avoid conflicts with existing functions or reserved words in the language. For example, we did not use <c>a</c>, <c>b</c> and <c>c</c> to avoid a conflict with the <c>c()</c> function in R, described in <xref ref="sec-creating-vectors"/>. If you were to name a variable <c>c</c>, you would not receive an error or warning, but the conflict can lead to unexpected behavior and bugs that are hard to diagnose.</p>
       
       <p>Some basic rules in R are that variable names have to start with a letter, can't contain spaces, and should not be variables that are predefined in R, such as <c>c</c>.</p>
       
@@ -716,7 +716,7 @@ installed.packages()
       r_2 &lt;- (-coef_b - sqrt(coef_b^2 - 4*coef_a*coef_c))/(2*coef_a)
       </input></program>
       
-      <p>For more advice, we highly recommend studying Hadley Wickham's style guide[^r-basics-3].</p>
+      <p>For more advice, we highly recommend studying Hadley Wickham's <url href="http://adv-r.had.co.nz/Style.html">style guide</url>.</p>
       
       </subsection>
       
@@ -949,7 +949,7 @@ installed.packages()
                    final_grade = "A")
       </input></program>
       
-      <p>The function <c>c</c> is described in @sec-vectors.</p>
+      <p>The function <c>c</c> is described in <xref ref="sec-vectors"/>.</p>
       
       <p>This list includes a character, a number, a vector with five numbers, and another character.</p>
       
@@ -1004,7 +1004,7 @@ installed.packages()
       mat
       </input></program>
       
-      <p>The shorthand using <c>:</c> is described in @sec-vectors.</p>
+      <p>The shorthand using <c>:</c> is described in <xref ref="sec-vectors"/>.</p>
       
       <p>You can access specific entries in a matrix using square brackets (<c>[</c>). If you want the second row, third column, you use:</p>
       
@@ -1086,7 +1086,7 @@ installed.packages()
       country &lt;- c('italy', 'canada', 'egypt')
       </input></program>
       
-      <p>But be careful not to confuse the single quote ' with the <em>back quote</em> \`.</p>
+      <p>But be careful not to confuse the single quote ' with the <em>back quote</em> &#96;.</p>
       
       <p>By now you should know that if you type:</p>
       
@@ -1588,7 +1588,7 @@ installed.packages()
       
       <section xml:id="basic-plots"><title>Basic plots</title>
       
-      <p>In @sec-ggplot2 we describe an add-on package that provides a powerful approach to producing plots in R. We then have an entire part on Data Visualization in which we provide many examples. Here we briefly describe some of the functions that are available in a basic R installation.</p>
+      <p>In <xref ref="sec-ggplot2"/> we describe an add-on package that provides a powerful approach to producing plots in R. We then have an entire part on Data Visualization in which we provide many examples. Here we briefly describe some of the functions that are available in a basic R installation.</p>
       
       <subsection xml:id="plot"><title>`plot`</title>
       
