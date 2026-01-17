@@ -319,36 +319,36 @@ def convert_qmd_to_ptx(qmd_content, chapter_id, chapter_title):
             continue
         
         # Handle display math blocks
-        if line.strip().startswith('$$') and not line.strip().endswith('$$'):
+        if line.strip().startswith('$$'):
             flush_para()
             close_list()
-            i += 1
-            math_lines = []
-            while i < len(lines) and not lines[i].strip().startswith('$$'):
-                math_lines.append(lines[i])
+            # Check if it's single-line display math
+            if line.strip() == '$$' or (len(line.strip()) > 2 and not line.strip()[2:].strip()):
+                # Multi-line display math
                 i += 1
-            if math_lines:
-                indent = '          ' + '  ' * subsection_depth
-                result.append(indent + '<me>')
-                result.append('\n'.join(math_lines))
-                result.append(indent + '</me>')
-                result.append('')
-            i += 1
-            continue
-        
-        # Handle single-line display math
-        if line.strip().startswith('$$') and line.strip().endswith('$$'):
-            flush_para()
-            close_list()
-            math_content = line.strip()[2:-2]  # Remove $$ from both ends
-            if math_content:
-                indent = '          ' + '  ' * subsection_depth
-                result.append(indent + '<me>')
-                result.append(math_content)
-                result.append(indent + '</me>')
-                result.append('')
-            i += 1
-            continue
+                math_lines = []
+                while i < len(lines) and not lines[i].strip().startswith('$$'):
+                    math_lines.append(lines[i])
+                    i += 1
+                if math_lines:
+                    indent = '          ' + '  ' * subsection_depth
+                    result.append(indent + '<me>')
+                    result.append('\n'.join(math_lines))
+                    result.append(indent + '</me>')
+                    result.append('')
+                i += 1
+                continue
+            else:
+                # Single-line display math
+                math_content = line.strip()[2:-2].strip() if line.strip().endswith('$$') else line.strip()[2:].strip()
+                if math_content:
+                    indent = '          ' + '  ' * subsection_depth
+                    result.append(indent + '<me>')
+                    result.append(math_content)
+                    result.append(indent + '</me>')
+                    result.append('')
+                i += 1
+                continue
         
         # Regular paragraph line
         if line.strip() and not line.startswith('#'):

@@ -5599,7 +5599,9 @@ grid.arrange(p1, p2, ncol = 2)
 
             <p>For this reason, it is common to use a log transformation when displaying ratios. This is because the logarithm of a ratio has a symmetric property:</p>
 
-            <p>\log(A/B) = -\log(B/A)</p>
+            <me>
+\log(A/B) = -\log(B/A)
+            </me>
 
             <p>This means that if <m>A</m> is three times larger than <m>B</m>, the log ratio is equally distant from zero as when <m>B</m> is three times larger than <m>A</m>, but in the opposite direction. This symmetry around zero makes differences easier to interpret visually.</p>
 
