@@ -3146,8 +3146,580 @@ exp(mean(log(murders$population)))
 
       <chapter xml:id="ch-data-table">
         <title>data.table</title>
-        <p>Content will be added here.</p>
-      </chapter>
+  
+  <p>
+    In this book, we use tidyverse packages, primarily because they offer readability that is beneficial for beginners. This readability allows us to emphasize data analysis and statistical concepts. However, while tidyverse is beginner-friendly, there are other methods in R that are more efficient and can handle larger datasets more effectively. One such package is <term>data.table</term>, which is widely used in the R community. We'll briefly introduce <term>data.table</term> in this chapter. For those interested in diving deeper, there are numerous online resources, including the mentioned introduction<fn><url href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html"/></fn>.
+  </p>
+  
+  <section xml:id="refining-data-tables">
+    <title>Refining data tables</title>
+    
+    <p>
+      <c>data.table</c> is a separate package that needs to be installed. Once installed, we then need to load it along with the other packages we will use:
+    </p>
+    
+    <program language="r">
+      <input>
+library(dplyr)
+library(dslabs)
+library(data.table)
+      </input>
+    </program>
+    
+    <p>
+      We will provide example code showing the <term>data.table</term> approaches to <term>dplyr</term>'s <c>mutate</c>, <c>filter</c>, <c>select</c>, <c>group_by</c>, and <c>summarize</c> shown in <xref ref="sec-tidyverse"/>. As in that chapter, we will use the <c>murders</c> dataset:
+    </p>
+    
+    <p>
+      The first step when using <term>data.table</term> is to convert the data frame into a <c>data.table</c> object using the <c>as.data.table</c> function:
+    </p>
+    
+    <program language="r">
+      <input>
+murders_dt &lt;- as.data.table(murders)
+      </input>
+    </program>
+    
+    <p>
+      Without this initial step, most of the approaches shown below will not work.
+    </p>
+    
+    <subsection xml:id="column-wise-subsetting">
+      <title>Column-wise subsetting</title>
+      
+      <p>
+        Selecting with <term>data.table</term> is done in a similar way to subsetting matrices. While with <term>dplyr</term> we write
+      </p>
+      
+      <program language="r">
+        <input>
+select(murders, state, region)
+        </input>
+      </program>
+      
+      <p>
+        in <term>data.table</term> we use
+      </p>
+      
+      <program language="r">
+        <input>
+murders_dt[, c("state", "region")]
+        </input>
+      </program>
+      
+      <p>
+        We can also use the <c>.()</c> <term>data.table</term> notation to alert R that variables inside the parenthesis are column names, not objects in the R environment. So the above can also be written like this:
+      </p>
+      
+      <program language="r">
+        <input>
+murders_dt[, .(state, region)]
+        </input>
+      </program>
+      
+    </subsection>
+    
+    <subsection xml:id="adding-or-transforming-variables">
+      <title>Adding or transforming variables</title>
+      
+      <p>
+        We learned to use the <term>dplyr</term> <c>mutate</c> function with this example:
+      </p>
+      
+      <program language="r">
+        <input>
+murders &lt;- mutate(murders, rate = total / population * 100000)
+        </input>
+      </program>
+      
+      <p>
+        <term>data.table</term> uses an approach that avoids a new assignment (update by reference). This can help with large datasets that take up most of your computer's memory. The <term>data.table</term> <c>:=</c> function permits us to do this:
+      </p>
+      
+      <program language="r">
+        <input>
+murders_dt[, rate := total / population * 100000]
+        </input>
+      </program>
+      
+      <p>
+        This adds a new column, <c>rate</c>, to the table. Notice that, as in <term>dplyr</term>, we used <c>total</c> and <c>population</c> without quotes.
+      </p>
+      
+      <p>
+        To define new multiple columns, we can use the <c>:=</c> function with multiple arguments:
+      </p>
+      
+      <program language="r">
+        <input>
+murders_dt[, ":="(rate = total / population * 100000, rank = rank(population))]
+        </input>
+      </program>
+      
+    </subsection>
+    
+    <subsection xml:id="reference-versus-copy">
+      <title>Reference versus copy</title>
+      
+      <p>
+        The <term>data.table</term> package is designed to avoid wasting memory. So if you make a copy of a table, like this:
+      </p>
+      
+      <program language="r">
+        <input>
+x &lt;- data.table(a = 1)
+y &lt;- x
+        </input>
+      </program>
+      
+      <p>
+        <c>y</c> is actually referencing <c>x</c>, it is not an new object: <c>y</c> just another name for <c>x</c>. Until you change <c>y</c>, a new object will not be made. However, the <c>:=</c> function changes <em>by reference</em> so if you change <c>x</c>, a new object is not made and <c>y</c> continues to be just another name for <c>x</c>:
+      </p>
+      
+      <program language="r">
+        <input>
+x[, a := 2]
+y
+        </input>
+      </program>
+      
+      <p>
+        You can also change <c>x</c> like this:
+      </p>
+      
+      <program language="r">
+        <input>
+y[, a := 1]
+x
+        </input>
+      </program>
+      
+      <p>
+        To avoid this, you can use the <c>copy</c> function which forces the creation of an actual copy:
+      </p>
+      
+      <program language="r">
+        <input>
+x &lt;- data.table(a = 1)
+y &lt;- copy(x)
+x[, a := 2]
+y
+        </input>
+      </program>
+      
+      <p>
+        Note that the function <c>as.data.table</c> creates a copy of the data frame being converted. However, if working with a large data frames it is helpful to avoid this by using <c>setDT</c>:
+      </p>
+      
+      <program language="r">
+        <input>
+x &lt;- data.frame(a = 1)
+setDT(x)
+        </input>
+      </program>
+      
+      <p>
+        Note that because no copy is being made the following code does not create a new object:
+      </p>
+      
+      <program language="r">
+        <input>
+x &lt;- data.frame(a = 1)
+y &lt;- setDT(x)
+        </input>
+      </program>
+      
+      <p>
+        The objects <c>x</c> and <c>y</c> are referencing the same data table:
+      </p>
+      
+      <program language="r">
+        <input>
+x[, a := 2]
+y
+        </input>
+      </program>
+      
+    </subsection>
+    
+    <subsection xml:id="row-wise-subsetting">
+      <title>Row-wise subsetting</title>
+      
+      <p>
+        With <term>dplyr</term>, we filtered like this:
+      </p>
+      
+      <program language="r">
+        <input>
+filter(murders, rate &lt;= 0.7)
+        </input>
+      </program>
+      
+      <p>
+        With <term>data.table</term>, we again use an approach similar to subsetting matrices, except like <term>dplyr</term>, <term>data.table</term> knows that <c>rate</c> refers to a column name and not an object in the R environment:
+      </p>
+      
+      <program language="r">
+        <input>
+murders_dt[rate &lt;= 0.7]
+        </input>
+      </program>
+      
+      <p>
+        Notice that we can combine the filter and select into one succinct command. Here are the state names and rates for those with rates below 0.7.
+      </p>
+      
+      <program language="r">
+        <input>
+murders_dt[rate &lt;= 0.7, .(state, rate)]
+        </input>
+      </program>
+      
+      <p>
+        which is more compact than the <term>dplyr</term> approach:
+      </p>
+      
+      <program language="r">
+        <input>
+murders |&gt; filter(rate &lt;= 0.7) |&gt; select(state, rate)
+        </input>
+      </program>
+      
+      <note>
+        <p>You are ready to do exercises 1-7.</p>
+      </note>
+      
+    </subsection>
+    
+  </section>
+  
+  <section xml:id="summarizing-data">
+    <title>Summarizing data</title>
+    
+    <p>
+      As an example, we will use the <c>heights</c> dataset:
+    </p>
+    
+    <program language="r">
+      <input>
+heights_dt &lt;- as.data.table(heights)
+      </input>
+    </program>
+    
+    <p>
+      In <term>data.table</term>, we can call functions inside <c>.()</c> and they will be applied to columns So the equivalent of:
+    </p>
+    
+    <program language="r">
+      <input>
+s &lt;- heights |&gt; summarize(avg = mean(height), sd = sd(height))
+      </input>
+    </program>
+    
+    <p>
+      in <term>dplyr</term> is the following in <term>data.table</term>:
+    </p>
+    
+    <program language="r">
+      <input>
+s &lt;- heights_dt[, .(avg = mean(height), sd = sd(height))]
+      </input>
+    </program>
+    
+    <p>
+      Note that this permits a compact way of subsetting and then summarizing. Instead of:
+    </p>
+    
+    <program language="r">
+      <input>
+s &lt;- heights |&gt; 
+  filter(sex == "Female") |&gt;
+  summarize(avg = mean(height), sd = sd(height))
+      </input>
+    </program>
+    
+    <p>
+      we can write:
+    </p>
+    
+    <program language="r">
+      <input>
+s &lt;- heights_dt[sex == "Female", .(avg = mean(height), sd = sd(height))]
+      </input>
+    </program>
+    
+    <subsection xml:id="multiple-summaries">
+      <title>Multiple summaries</title>
+      
+      <p>
+        In <xref ref="sec-tidyverse"/>, we defined the following function to permit multiple column summaries in <term>dplyr</term>:
+      </p>
+      
+      <program language="r">
+        <input>
+median_min_max &lt;- function(x){
+  qs &lt;- quantile(x, c(0.5, 0, 1))
+  data.frame(median = qs[1], minimum = qs[2], maximum = qs[3])
+}
+        </input>
+      </program>
+      
+      <p>
+        In <term>data.table</term> we place a function call within <c>.()</c> to obtain the three number summary:
+      </p>
+      
+      <program language="r">
+        <input>
+heights_dt[, .(median_min_max(height))]
+        </input>
+      </program>
+      
+    </subsection>
+    
+    <subsection xml:id="group-then-summarize">
+      <title>Group then summarize</title>
+      
+      <p>
+        The <c>group_by</c> followed by <c>summarize</c> in <term>dplyr</term> is performed in one line in <term>data.table</term>. We simply add the <c>by</c> argument to split the data into groups based on the values in categorical variable:
+      </p>
+      
+      <program language="r">
+        <input>
+heights_dt[, .(avg = mean(height), sd = sd(height)), by = sex]
+        </input>
+      </program>
+      
+    </subsection>
+    
+  </section>
+  
+  <section xml:id="sorting">
+    <title>Sorting</title>
+    
+    <p>
+      We can order rows using the same approach we use for filter. Here are the states ordered by murder rate:
+    </p>
+    
+    <program language="r">
+      <input>
+murders_dt[order(population)]
+      </input>
+    </program>
+    
+    <p>
+      To sort the table in descending order, we can order by the negative of <c>population</c> or use the <c>decreasing</c> argument:
+    </p>
+    
+    <program language="r">
+      <input>
+murders_dt[order(population, decreasing = TRUE)]
+      </input>
+    </program>
+    
+    <p>
+      Similarly, we can perform nested ordering by including more than one variable in order:
+    </p>
+    
+    <program language="r">
+      <input>
+murders_dt[order(region, rate)]
+      </input>
+    </program>
+    
+    <note>
+      <p>You are ready to do exercises 8-12.</p>
+    </note>
+    
+  </section>
+  
+  <section xml:id="data-table-exercises">
+    <title>Exercises</title>
+    
+    <exercise>
+      <statement>
+        <p>
+          Load the <term>data.table</term> package and the <c>murders</c> dataset and convert it to <c>data.table</c> object:
+        </p>
+        
+        <program language="r">
+          <input>
+library(data.table)
+library(dslabs)
+murders_dt &lt;- as.data.table(murders)
+          </input>
+        </program>
+        
+        <p>
+          Remember you can add columns like this:
+        </p>
+        
+        <program language="r">
+          <input>
+murders_dt[, population_in_millions := population / 10^6]
+          </input>
+        </program>
+        
+        <p>
+          Add a <c>murders</c> column named <c>rate</c> with the per 100,000 murder rate as in the example code above.
+        </p>
+      </statement>
+    </exercise>
+    
+    <exercise>
+      <statement>
+        <p>
+          Add a column <c>rank</c> containing the rank, from highest to lowest murder rate.
+        </p>
+      </statement>
+    </exercise>
+    
+    <exercise>
+      <statement>
+        <p>
+          If we want to only show the states and population sizes, we can use:
+        </p>
+        
+        <program language="r">
+          <input>
+murders_dt[, .(state, population)]
+          </input>
+        </program>
+        
+        <p>
+          Show the state names and abbreviations in <c>murders</c>.
+        </p>
+      </statement>
+    </exercise>
+    
+    <exercise>
+      <statement>
+        <p>
+          You can show just the New York row like this:
+        </p>
+        
+        <program language="r">
+          <input>
+murders_dt[state == "New York"]
+          </input>
+        </program>
+        
+        <p>
+          You can use other logical vectors to filter rows.
+        </p>
+        
+        <p>
+          Show the top 5 states with the highest murder rates. From here on, do not change the <c>murders</c> dataset, just show the result. Remember that you can filter based on the <c>rank</c> column.
+        </p>
+      </statement>
+    </exercise>
+    
+    <exercise>
+      <statement>
+        <p>
+          We can remove rows using the <c>!=</c> operator. For example, to remove Florida, we would do this:
+        </p>
+        
+        <program language="r">
+          <input>
+no_florida &lt;- murders_dt[state != "Florida"]
+          </input>
+        </program>
+        
+        <p>
+          Create a new data frame called <c>no_south</c> that removes states from the South region. How many states are in this category? You can use the function <c>nrow</c> for this.
+        </p>
+      </statement>
+    </exercise>
+    
+    <exercise>
+      <statement>
+        <p>
+          We can also use <c>%in%</c> to filter. You can therefore see the data from New York and Texas as follows:
+        </p>
+        
+        <program language="r">
+          <input>
+murders_dt[state %in% c("New York", "Texas")]
+          </input>
+        </program>
+        
+        <p>
+          Create a new data frame called <c>murders_nw</c> with only the states from the Northeast and the West. How many states are in this category?
+        </p>
+      </statement>
+    </exercise>
+    
+    <exercise>
+      <statement>
+        <p>
+          Suppose you want to live in the Northeast or West <alert>and</alert> want the murder rate to be less than 1. We want to see the data for the states satisfying these options. Note that you can use logical operators with <c>filter</c>. Here is an example in which we filter to keep only small states in the Northeast region.
+        </p>
+        
+        <program language="r">
+          <input>
+murders_dt[population &lt; 5000000 &amp; region == "Northeast"]
+          </input>
+        </program>
+        
+        <p>
+          Make sure <c>murders</c> has been defined with <c>rate</c> and <c>rank</c> and still has all states. Create a table called <c>my_states</c> that contains rows for states satisfying both the conditions: they are in the Northeast or West and the murder rate is less than 1. Show only the state name, the rate, and the rank.
+        </p>
+      </statement>
+    </exercise>
+    
+    <p>
+      For exercises 8-12, we will be using the <term>NHANES</term> data.
+    </p>
+    
+    <program language="r">
+      <input>
+library(NHANES)
+      </input>
+    </program>
+    
+    <exercise>
+      <statement>
+        <p>
+          We will provide some basic facts about blood pressure. First let's select a group to set the standard. We will use 20-to-29-year-old females. <c>AgeDecade</c> is a categorical variable with these ages. Note that the category is coded like <c>" 20-29"</c>, with a space in front! Use the <term>data.table</term> package to compute the average and standard deviation of systolic blood pressure as saved in the <c>BPSysAve</c> variable. Save it to a variable called <c>ref</c>.
+        </p>
+      </statement>
+    </exercise>
+    
+    <exercise>
+      <statement>
+        <p>
+          Report the min and max values for the same group.
+        </p>
+      </statement>
+    </exercise>
+    
+    <exercise>
+      <statement>
+        <p>
+          Compute the average and standard deviation for females, but for each age group separately rather than a selected decade as in exercise 8. Note that the age groups are defined by <c>AgeDecade</c>.
+        </p>
+      </statement>
+    </exercise>
+    
+    <exercise>
+      <statement>
+        <p>
+          Repeat exercise 10 for males.
+        </p>
+      </statement>
+    </exercise>
+    
+    <exercise>
+      <statement>
+        <p>
+          For males between the ages of 40-49, compare systolic blood pressure across race as reported in the <c>Race1</c> variable. Order the resulting table from lowest to highest average systolic blood pressure.
+        </p>
+      </statement>
+    </exercise>
+    
+  </section>
+
+</chapter>
 
       <chapter xml:id="ch-importing-data">
         <title>Importing data</title>
