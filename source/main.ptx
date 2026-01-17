@@ -3147,7 +3147,12 @@ exp(mean(log(murders$population)))
       <chapter xml:id="ch-data-table">
         <title>data.table</title>
         
-        <p>In this book, we use tidyverse packages, primarily because they offer readability that is beneficial for beginners. This readability allows us to emphasize data analysis and statistical concepts. However, while tidyverse is beginner-friendly, there are other methods in R that are more efficient and can handle larger datasets more effectively. One such package is <alert>data.table</alert>, which is widely used in the R community. We'll briefly introduce <alert>data.table</alert> in this chapter. For those interested in diving deeper, there are numerous online resources, including an introduction<fn><url href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html"/></fn>.</p>
+        <section xml:id="sec-dt-introduction">
+          <title>Introduction</title>
+          
+          <p>In this book, we use tidyverse packages, primarily because they offer readability that is beneficial for beginners. This readability allows us to emphasize data analysis and statistical concepts. However, while tidyverse is beginner-friendly, there are other methods in R that are more efficient and can handle larger datasets more effectively. One such package is <alert>data.table</alert>, which is widely used in the R community. We'll briefly introduce <alert>data.table</alert> in this chapter. For those interested in diving deeper, there are numerous online resources, including an introduction<fn><url href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html"/></fn>.</p>
+          
+        </section>
         
         <section xml:id="sec-refining-data-tables">
           <title>Refining data tables</title>
@@ -3162,7 +3167,7 @@ library(data.table)
             </input>
           </program>
           
-          <p>We will provide example code showing the <alert>data.table</alert> approaches to <alert>dplyr</alert>'s <c>mutate</c>, <c>filter</c>, <c>select</c>, <c>group_by</c>, and <c>summarize</c> shown in <xref ref="sec-tidyverse"/>. As in that chapter, we will use the <c>murders</c> dataset:</p>
+          <p>We will provide example code showing the <alert>data.table</alert> approaches to <alert>dplyr</alert>'s <c>mutate</c>, <c>filter</c>, <c>select</c>, <c>group_by</c>, and <c>summarize</c>. As in that chapter, we will use the <c>murders</c> dataset:</p>
           
           <p>The first step when using <alert>data.table</alert> is to convert the data frame into a <c>data.table</c> object using the <c>as.data.table</c> function:</p>
           
@@ -3395,7 +3400,7 @@ s &lt;- heights_dt[sex == "Female", .(avg = mean(height), sd = sd(height))]
           <subsection xml:id="subsec-dt-multiple-summaries">
             <title>Multiple summaries</title>
             
-            <p>In <xref ref="sec-tidyverse"/>, we defined the following function to permit multiple column summaries in <alert>dplyr</alert>:</p>
+            <p>In the tidyverse chapter, we defined the following function to permit multiple column summaries in <alert>dplyr</alert>:</p>
             
             <program language="r">
               <input>
@@ -3566,14 +3571,19 @@ library(NHANES)
       <chapter xml:id="ch-importing-data">
         <title>Importing data</title>
         
-        <p>We have been using datasets already stored as R objects. In data analysis work we rarely have such luck and will have to import data into R from either a file, a database, or another source. Currently, one of the most common ways of storing and sharing data for analysis is through electronic spreadsheets. A spreadsheet stores data in rows and columns. It is basically a file version of a data frame. When saving such a table to a computer file, one needs a way to define when a new row or column ends and the other begins. This in turn defines the cells in which single values are stored. Here is an example of what a comma separated file looks like if we open it with a basic text editor:</p>
-        
-        <p>In this chapter, we outline how to load data from a file into R. First, it's crucial to identify the file's location; thus, we touch on file paths and working directories (detailed in <xref ref="sec-unix"/>). Next, we delve into file types (text or binary) and encodings (like ASCII and Unicode), both essential for data import. We then introduce popular functions for data importing, referred to as <em>parsers</em>. Lastly, we offer tips on how to store data in spreadsheets. Advanced topics like extracting data from websites or PDFs will be discussed in the book's Data Wrangling section.</p>
+        <section xml:id="sec-importing-data-introduction">
+          <title>Introduction</title>
+          
+          <p>We have been using datasets already stored as R objects. In data analysis work we rarely have such luck and will have to import data into R from either a file, a database, or another source. Currently, one of the most common ways of storing and sharing data for analysis is through electronic spreadsheets. A spreadsheet stores data in rows and columns. It is basically a file version of a data frame. When saving such a table to a computer file, one needs a way to define when a new row or column ends and the other begins. This in turn defines the cells in which single values are stored. Here is an example of what a comma separated file looks like if we open it with a basic text editor:</p>
+          
+          <p>In this chapter, we outline how to load data from a file into R. First, it's crucial to identify the file's location; thus, we touch on file paths and working directories. Next, we delve into file types (text or binary) and encodings (like ASCII and Unicode), both essential for data import. We then introduce popular functions for data importing, referred to as <em>parsers</em>. Lastly, we offer tips on how to store data in spreadsheets. Advanced topics like extracting data from websites or PDFs will be discussed in the book's Data Wrangling section.</p>
+          
+        </section>
         
         <section xml:id="sec-navigating-filesystem">
           <title>Navigating and managing the filesystem</title>
           
-          <p>The first step when importing data from a spreadsheet is to locate the file containing the data. Although we do not recommend it, you can use an approach similar to what you do to open files in Microsoft Excel by clicking on the RStudio "File" menu, clicking "Import Dataset", then clicking through folders until you find the file. However, we write code rather than use the point-and-click approach. The key concepts we need to learn to do this are described in detail in <xref ref="sec-unix"/>. Here we provide an overview of the very basics.</p>
+          <p>The first step when importing data from a spreadsheet is to locate the file containing the data. Although we do not recommend it, you can use an approach similar to what you do to open files in Microsoft Excel by clicking on the RStudio "File" menu, clicking "Import Dataset", then clicking through folders until you find the file. However, we write code rather than use the point-and-click approach. The key concepts we need to learn to do this are described in detail in the Unix chapter. Here we provide an overview of the very basics.</p>
           
           <subsection xml:id="subsec-the-filesystem">
             <title>The filesystem</title>
@@ -3585,7 +3595,7 @@ library(NHANES)
           <subsection xml:id="subsec-relative-full-paths">
             <title>Relative and full paths</title>
             
-            <p>The <em>path</em> of a file is a list of directory names that can be thought of as instructions on what folders to click on, and in what order, to find the file. If these instructions are for finding the file from the root directory, we refer to it as the <em>full path</em>. If the instructions are for finding the file starting in the working directory, we refer to it as a <em>relative path</em>. <xref ref="sec-filesystem"/> provides more details on this topic.</p>
+            <p>The <em>path</em> of a file is a list of directory names that can be thought of as instructions on what folders to click on, and in what order, to find the file. If these instructions are for finding the file from the root directory, we refer to it as the <em>full path</em>. If the instructions are for finding the file starting in the working directory, we refer to it as a <em>relative path</em>. More details on this topic are provided in a later section on the filesystem.</p>
             
             <p>To see an example of a full path on your system type the following:</p>
             
@@ -3619,7 +3629,7 @@ list.files(dir)
             
             <p>We highly recommend only using relative paths in your code. The reason is that full paths are unique to your computer and you want your code to be portable. If you want to know the full path of your working directory using the <c>getwd</c> function. If you need to change your working directory, you can use the function <c>setwd</c> or you can change it through RStudio by clicking on "Session".</p>
             
-            <p>When starting a project, choose a directory to store all related files and set it as your working directory for analysis. This practice ensures that when you use relative paths in functions that import files, R will automatically search for the files in the working directory. For more details on organizing projects in RStudio, see <xref ref="sec-projects"/>.</p>
+            <p>When starting a project, choose a directory to store all related files and set it as your working directory for analysis. This practice ensures that when you use relative paths in functions that import files, R will automatically search for the files in the working directory. For more details on organizing projects in RStudio, see the chapter on reproducible projects.</p>
             
           </subsection>
           
@@ -3816,7 +3826,7 @@ dat &lt;- read_csv("calificaciones.csv", show_col_types = FALSE,
               </input>
             </program>
             
-            <p>We learn about locales in <xref ref="sec-locales"/>.</p>
+            <p>We learn about locales in a later chapter.</p>
             
             <p>We can now see that the characters in the header were read in correctly:</p>
             
