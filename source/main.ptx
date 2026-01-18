@@ -11264,7 +11264,7 @@ gutenberg_metadata
                     </input>
                   </program>
 
-                  <p>The <c>a</c> stands for all. This argument makes <c>ls</c> show you all files in the directory, including hidden files. In Unix, all files starting with a <c>.</c> are hidden. Many applications create hidden directories to store important information without getting in the way of your work. An example is <c>git</c> (which we cover in depth in <xref ref="sec-git"/>). Once you initialize a directory as a git directory with <c>git init</c>, a hidden directory called <c>.git</c> is created. Another hidden file is the <c>.gitignore</c> file.</p>
+                  <p>The <c>a</c> stands for all. This argument makes <c>ls</c> show you all files in the directory, including hidden files. In Unix, all files starting with a <c>.</c> are hidden. Many applications create hidden directories to store important information without getting in the way of your work. An example is <c>git</c>. Once you initialize a directory as a git directory with <c>git init</c>, a hidden directory called <c>.git</c> is created. Another hidden file is the <c>.gitignore</c> file.</p>
 
                   <p>Another example of using an argument is:</p>
 
@@ -12059,7 +12059,7 @@ gutenberg_metadata
                   <image source="dataviz/img/windows-screenshots/VirtualBox_Windows-7-Enterprise_23_03_2018_14_30_43.png"/>
                 </figure>
 
-                <p>The repository URL is the link you used as <c>origin</c> or to clone. In <xref ref="sec-github-repos"/>, we used <c>https://github.com/username/homework-0.git</c> as an example. In the project directory name, you need to put the name of the folder that was generated, which in our example will be the name of the repo <c>homework-0</c>. This will create a folder called <c>homework-0</c> on your local system. Note you will need to remove the folder if it already exists or chose a different name. Once you do this, the project is created and it is aware of the connection to a GitHub repo. You will see on the top right corner the name and type of project as well as a new tab on the upper right pane titled <em>Git</em>.</p>
+                <p>The repository URL is the link you used as <c>origin</c> or to clone. We used <c>https://github.com/username/homework-0.git</c> as an example. In the project directory name, you need to put the name of the folder that was generated, which in our example will be the name of the repo <c>homework-0</c>. This will create a folder called <c>homework-0</c> on your local system. Note you will need to remove the folder if it already exists or chose a different name. Once you do this, the project is created and it is aware of the connection to a GitHub repo. You will see on the top right corner the name and type of project as well as a new tab on the upper right pane titled <em>Git</em>.</p>
 
                 <figure>
                   <image source="dataviz/img/windows-screenshots/VirtualBox_Windows-7-Enterprise_23_03_2018_14_31_10.png"/>
@@ -12075,7 +12075,7 @@ gutenberg_metadata
                   <image source="dataviz/img//windows-screenshots/VirtualBox_Windows-7-Enterprise_23_03_2018_14_34_06.png"/>
                 </figure>
 
-                <p>We now need to pay attention to the Git pane. It is important to know that <alert>your local files and the GitHub repo will not be synced automatically</alert>.  As described in <xref ref="sec-git-overview"/>, you have to sync using git push when you are ready. We show how you can do this through RStudio rather than the terminal below.</p>
+                <p>We now need to pay attention to the Git pane. It is important to know that <alert>your local files and the GitHub repo will not be synced automatically</alert>. You have to sync using git push when you are ready. We show how you can do this through RStudio rather than the terminal below.</p>
 
                 <p>Before we start working on a collaborative project, usually the first thing we do is <em>pull</em> in the changes from the remote repo, in our case the one on GitHub. However, for the example shown here, since we are starting with an empty repo and we are the only ones making changes, we don't need to start by pulling.</p>
 
@@ -12151,9 +12151,9 @@ gutenberg_metadata
               <section xml:id="sec-rstudio-projects">
                 <title>RStudio projects</title>
 
-                <p>RStudio provides a way to keep all the components of a data analysis project organized into one folder and to keep track of information about this project, such as the Git status of files, in one place. In <xref ref="sec-rstudio-git"/> we demonstrated how RStudio facilitates the use of Git and GitHub through RStudio projects. In this section we quickly demonstrate how to start a new a project and some recommendations on how to keep these organized. RStudio projects also permit you to have several RStudio sessions open and keep track of which is which.</p>
+                <p>RStudio provides a way to keep all the components of a data analysis project organized into one folder and to keep track of information about this project, such as the Git status of files, in one place. RStudio facilitates the use of Git and GitHub through RStudio projects. In this section we quickly demonstrate how to start a new a project and some recommendations on how to keep these organized. RStudio projects also permit you to have several RStudio sessions open and keep track of which is which.</p>
 
-                <p>To start a project, click on <em>File</em> and then <em>New Project</em>. Often we have already created a folder to save the work, as we did in <xref ref="sec-prep-project"/>, and we select <em>Existing Directory</em>. Here we show an example in which we have not yet created a folder and select the <em>New Directory</em> option.</p>
+                <p>To start a project, click on <em>File</em> and then <em>New Project</em>. Often we have already created a folder to save the work, and we select <em>Existing Directory</em>. Here we show an example in which we have not yet created a folder and select the <em>New Directory</em> option.</p>
 
                 <figure>
                   <image source="dataviz/img/windows-screenshots/VirtualBox_Windows-7-Enterprise_23_03_2018_09_20_21.png"/>
@@ -12175,7 +12175,7 @@ gutenberg_metadata
                   <image source="dataviz/img/windows-screenshots/VirtualBox_Windows-7-Enterprise_23_03_2018_09_21_09.png"/>
                 </figure>
 
-                <p>You will be given options on where this folder should be on your filesystem. In this example, we will place it in our home folder, but this is generally not good practice. As we described in <xref ref="sec-prep-project"/> in the Unix chapter, you want to organize your filesystem following a hierarchical approach and with a folder called <em>projects</em> where you keep a folder for each project.</p>
+                <p>You will be given options on where this folder should be on your filesystem. In this example, we will place it in our home folder, but this is generally not good practice. In the Unix chapter, we discussed organizing your filesystem following a hierarchical approach and with a folder called <em>projects</em> where you keep a folder for each project.</p>
 
                 <figure>
                   <image source="dataviz/img/windows-screenshots/VirtualBox_Windows-7-Enterprise_23_03_2018_09_21_56.png"/>
@@ -12356,7 +12356,7 @@ gutenberg_metadata
                 <subsection xml:id="subsec-create-directories-in-unix">
                   <title>Create directories in Unix</title>
 
-                  <p>In <xref ref="sec-prep-project"/> we demonstrated how to use Unix to prepare for a data science project using an example. Here we continue this example and show how to use RStudio. In <xref ref="sec-prep-project"/> we created the following directories using Unix:</p>
+                  <p>We demonstrated how to use Unix to prepare for a data science project using an example. Here we continue this example and show how to use RStudio. We created the following directories using Unix:</p>
 
                   <program language="bash">
                     <input>
