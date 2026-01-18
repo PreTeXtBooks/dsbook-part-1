@@ -2,6 +2,13 @@
 
 This repository contains a PreText version of "Introduction to Data Science".
 
+## File Organization
+
+The book is now organized into multiple files for better maintainability:
+- The `source/main.ptx` file uses XInclude to reference separate content files
+- Each major section (Preface, Acknowledgements, Introduction, and the four Parts) is in its own file
+- This structure makes it easier to navigate, edit, and collaborate on different sections of the book
+
 ## Structure
 
 The PreText textbook follows the same structure as the Quarto files in the main repository:
@@ -41,7 +48,14 @@ The PreText textbook follows the same structure as the Quarto files in the main 
 ## Files
 
 ### Source Files (tracked in git)
-- `source/main.ptx` - Main PreText book file with complete structure
+- `source/main.ptx` - Main PreText book file (uses XInclude to reference separate files)
+- `source/preface.ptx` - Preface content
+- `source/acknowledgements.ptx` - Acknowledgements content
+- `source/introduction.ptx` - Introduction chapter
+- `source/r.ptx` - Part 1: R (includes all R chapters)
+- `source/data-visualization.ptx` - Part 2: Data Visualization (includes all visualization chapters)
+- `source/data-wrangling.ptx` - Part 3: Data Wrangling (includes all wrangling chapters)
+- `source/productivity-tools.ptx` - Part 4: Productivity Tools (includes all productivity chapters)
 - `project.ptx` - Project configuration file
 - `publication/publication.ptx` - Publication settings
 - `executables.ptx` - Executables configuration
