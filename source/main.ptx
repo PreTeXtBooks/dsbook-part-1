@@ -8235,7 +8235,7 @@ object.size(as.IDate(polls_us_election_2016$startdate))
 
         </section>
 
-        <section xml:id="sec-exercises">
+        <section xml:id="sec-parsing-dates-and-times-exercises">
           <title>Exercises</title>
 
           <p>For these exercises we will use the following dataset:</p>
@@ -8483,7 +8483,7 @@ with_tz(dat$estampa, tz =  "EST") &gt;= make_date(2023, 9, 22)
 
         </section>
 
-        <section xml:id="sec-exercises">
+        <section xml:id="sec-locales-exercises">
           <title>Exercises</title>
 
           <ol>
@@ -8821,7 +8821,7 @@ tab &lt;- request(url) |&gt;
 
         </section>
 
-        <section xml:id="sec-exercises">
+        <section xml:id="sec-extracting-data-from-web-exercises">
           <title>Exercises</title>
 
           <ol>
