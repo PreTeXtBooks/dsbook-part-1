@@ -445,6 +445,20 @@ if __name__ == '__main__':
                 'title': 'Extracting data from the web',
                 'output': '/tmp/chapter15.ptx',
                 'number': 15
+            },
+            {
+                'path': 'wrangling/string-processing.qmd',
+                'id': 'ch-string-processing',
+                'title': 'String processing',
+                'output': '/tmp/chapter16.ptx',
+                'number': 16
+            },
+            {
+                'path': 'wrangling/text-analysis.qmd',
+                'id': 'ch-text-analysis',
+                'title': 'Text analysis',
+                'output': '/tmp/chapter17.ptx',
+                'number': 17
             }
         ]
         
