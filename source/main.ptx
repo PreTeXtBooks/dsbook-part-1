@@ -11995,7 +11995,7 @@ gutenberg_metadata
 
                 </subsection>
 
-                <subsection xml:id="subsec-pull">
+                <subsection xml:id="subsec-git-pull">
                   <title>pull</title>
 
                   <figure>
