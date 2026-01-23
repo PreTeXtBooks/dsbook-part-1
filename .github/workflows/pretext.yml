@@ -56,12 +56,12 @@ jobs:
           fi
 
       - name: Build PreTeXt web output
-        run: pretext build web
+        run: cd PreText && pretext build web
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: output/web
+          path: PreText/output/web
 
   deploy:
     needs: build

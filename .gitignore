@@ -21,8 +21,8 @@ crc-stuff/
 irizarrycr9781032116556introductiontodatasciencep/
 
 # PreTeXt build artifacts
-output/
-logs/
-.error_schema.log
-.cache/
-build_output.log
+PreText/output/
+PreText/logs/
+PreText/.error_schema.log
+PreText/.cache/
+PreText/build_output.log
