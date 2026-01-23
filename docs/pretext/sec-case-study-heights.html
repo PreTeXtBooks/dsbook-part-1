@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: default-modern                 *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+<head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Case study: describing student heights</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+<link href="_static/pretext/css/theme.css" rel="stylesheet" type="text/css">
+<link href="_static/pretext/css/ol-markers.css" rel="stylesheet" type="text/css">
+<script>
+var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
+  "tex": {
+    "inlineMath": [
+      [
+        "\\(",
+        "\\)"
+      ]
+    ],
+    "tags": "none",
+    "tagSide": "right",
+    "tagIndent": ".8em",
+    "packages": {
+      "[+]": [
+        "base",
+        "extpfeil",
+        "ams",
+        "amscd",
+        "color",
+        "newcommand",
+        "knowl"
+      ]
+    }
+  },
+  "options": {
+    "ignoreHtmlClass": "tex2jax_ignore|ignore-math",
+    "processHtmlClass": "process-math"
+  },
+  "chtml": {
+    "scale": 0.98,
+    "mtextInheritFont": true
+  },
+  "loader": {
+    "load": [
+      "input/asciimath",
+      "[tex]/extpfeil",
+      "[tex]/amscd",
+      "[tex]/color",
+      "[tex]/newcommand",
+      "[pretext]/mathjaxknowl3.js"
+    ],
+    "paths": {
+      "pretext": "_static/pretext/js/lib"
+    }
+  },
+  "startup": {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+  }
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="book">
+<meta property="book:title" content="Introduction to Data Science">
+<script src="_static/pretext/js/lib/jquery.min.js"></script><script src="_static/pretext/js/lib/jquery.sticky.js"></script><script src="_static/pretext/js/lib/jquery.espy.min.js"></script><script src="_static/pretext/js/pretext.js"></script><script src="_static/pretext/js/pretext_add_on.js?x=1"></script><script src="_static/pretext/js/user_preferences.js"></script><!--** eBookCongig is necessary to configure interactive       **-->
+<!--** Runestone components to run locally in reader's browser **-->
+<!--** No external communication:                              **-->
+<!--**     log level is 0, Runestone Services are disabled     **-->
+<script type="text/javascript">
+eBookConfig = {};
+eBookConfig.useRunestoneServices = false;
+eBookConfig.host = 'http://127.0.0.1:8000';
+eBookConfig.course = 'PTX_Course_Title_Here';
+eBookConfig.basecourse = 'PTX_Base_Course';
+eBookConfig.isLoggedIn = false;
+eBookConfig.email = '';
+eBookConfig.isInstructor = false;
+eBookConfig.logLevel = 0;
+eBookConfig.username = '';
+eBookConfig.readings = null;
+eBookConfig.activities = null;
+eBookConfig.downloadsEnabled = false;
+eBookConfig.allow_pairs = false;
+eBookConfig.enableScratchAC = false;
+eBookConfig.build_info = "";
+eBookConfig.python3 = null;
+eBookConfig.runestone_version = '7.11.10';
+eBookConfig.jobehost = '';
+eBookConfig.proxyuri_runs = '';
+eBookConfig.proxyuri_files = '';
+eBookConfig.enable_chatcodes =  false;
+</script>
+<!--*** Runestone Services ***-->
+<script src="_static/prefix-runtime.3dca4b99808f4053.bundle.js"></script><script src="_static/prefix-723.3e6434f80549315a.bundle.js"></script><script src="_static/prefix-runestone.80892ed1280c2803.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-723.3bccd435914aa0ff.css">
+<link rel="stylesheet" type="text/css" href="_static/prefix-runestone.6ec5960970d8b364.css">
+<script src="_static/pretext/js/lti_iframe_resizer.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-core.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-dubtf8xMHSQlExGRQ5R7toxHLgSDZ0K7AunqPWHXmJQ8XyVIG19S1T95gBxlAeGOK02P4Da2RTnQz0Za0H0ebQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-93uCmm0q+qO5Lb1huDqr7tywS8A2TFA+1/WHvyiWaK6/pvsFl6USnILagntBx8JnVbQH5s3n0vQZY6xNthNfKA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="_static/pretext/js/pretext_search.js"></script><script src="_static/pretext/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script>
+</head>
+<body class="pretext book ignore-math">
+<a class="assistive" href="#ptx-content">Skip to main content</a><header id="ptx-masthead" class="ptx-masthead"><div class="ptx-banner"><div class="title-container">
+<h1 class="heading"><a href="intro-data-science.html"><span class="title">Introduction to Data Science</span></a></h1>
+<p class="byline"></p>
+</div></div></header><nav id="ptx-navbar" class="ptx-navbar navbar"><div class="ptx-navbar-contents">
+<button class="toc-toggle button" title="Contents"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5d2;</span><span class="name">Contents</span></button><div class="searchbox">
+<div class="searchwidget"><button id="searchbutton" class="searchbutton button" type="button" title="Search book"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe8b6;</span><span class="name">Search Book</span></button></div>
+<div id="searchresultsplaceholder" class="searchresultsplaceholder" style="display: none">
+<div class="search-results-controls">
+<input aria-label="Search term" id="ptxsearch" class="ptxsearch" type="text" name="terms" placeholder="Search term"><button title="Close search" id="closesearchresults" class="closesearchresults"><span class="material-symbols-outlined">close</span></button>
+</div>
+<h2 class="search-results-heading">Search Results: </h2>
+<div id="searchempty" class="searchempty"><span>No results.</span></div>
+<ol id="searchresults" class="searchresults"></ol>
+</div>
+</div>
+<span class="nav-other-controls"><button id="light-dark-button" class="light-dark-button button" title="Dark Mode"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe51c;</span><span class="name">Dark Mode</span></button></span><span class="treebuttons"><a class="previous-button button" href="sec-variable-types.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="up-button button" href="ch-visualizing-data-distributions.html" title="Up"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Up</span></a><a class="next-button button" href="sec-distributions.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a></span>
+</div></nav><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\)</span></div>
+<div class="ptx-page">
+<div id="ptx-sidebar" class="ptx-sidebar"><nav id="ptx-toc" class="ptx-toc depth3 parts focused" data-preexpanded-levels="0" data-max-levels="3"><ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-preface"><div class="toc-title-box"><a href="preface.html" class="internal"><span class="title">Preface</span></a></div></li>
+<li class="toc-item toc-acknowledgement"><div class="toc-title-box"><a href="acknowledgments.html" class="internal"><span class="title">Acknowledgments</span></a></div></li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="introduction.html" class="internal"><span class="codenumber">1</span> <span class="title">Introduction</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="case-studies.html" class="internal"><span class="codenumber">1.1</span> <span class="title">Case studies</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="who-will-find-useful.html" class="internal"><span class="codenumber">1.2</span> <span class="title">Who will find this book useful?</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="what-does-cover.html" class="internal"><span class="codenumber">1.3</span> <span class="title">What does this book cover?</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="what-not-covered.html" class="internal"><span class="codenumber">1.4</span> <span class="title">What is not covered by this book?</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-part">
+<div class="toc-title-box"><a href="part-r.html" class="internal"><span class="codenumber">I</span> <span class="title">R</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-getting-started.html" class="internal"><span class="codenumber">2</span> <span class="title">Getting started</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-why-r.html" class="internal"><span class="codenumber">2.1</span> <span class="title">Why R?</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-r-console.html" class="internal"><span class="codenumber">2.2</span> <span class="title">The R console</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-scripts.html" class="internal"><span class="codenumber">2.3</span> <span class="title">Scripts</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-rstudio.html" class="internal"><span class="codenumber">2.4</span> <span class="title">RStudio</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-rstudio.html#subsec-panes" class="internal"><span class="codenumber">2.4.1</span> <span class="title">The panes</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-rstudio.html#subsec-key-bindings" class="internal"><span class="codenumber">2.4.2</span> <span class="title">Key bindings</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-rstudio.html#subsec-running-commands" class="internal"><span class="codenumber">2.4.3</span> <span class="title">Running commands while editing scripts</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-rstudio.html#subsec-global-options" class="internal"><span class="codenumber">2.4.4</span> <span class="title">Changing global options</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-installing-r-packages.html" class="internal"><span class="codenumber">2.5</span> <span class="title">Installing R packages</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-r-basics.html" class="internal"><span class="codenumber">3</span> <span class="title">R basics</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="motivating-example-us-gun-murders.html" class="internal"><span class="codenumber">3.1</span> <span class="title">Motivating example: US Gun Murders</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="the-very-basics.html" class="internal"><span class="codenumber">3.2</span> <span class="title">The very basics</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="the-very-basics.html#objects" class="internal"><span class="codenumber">3.2.1</span> <span class="title">Objects</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="the-very-basics.html#the-workspace" class="internal"><span class="codenumber">3.2.2</span> <span class="title">The workspace</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="the-very-basics.html#prebuilt-functions" class="internal"><span class="codenumber">3.2.3</span> <span class="title">Prebuilt functions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="the-very-basics.html#prebuilt-objects" class="internal"><span class="codenumber">3.2.4</span> <span class="title">Prebuilt objects</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="the-very-basics.html#variable-names" class="internal"><span class="codenumber">3.2.5</span> <span class="title">Variable names</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="the-very-basics.html#saving-your-workspace" class="internal"><span class="codenumber">3.2.6</span> <span class="title">Saving your workspace</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="the-very-basics.html#why-use-scripts" class="internal"><span class="codenumber">3.2.7</span> <span class="title">Why use scripts?</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="the-very-basics.html#commenting-your-code" class="internal"><span class="codenumber">3.2.8</span> <span class="title">Commenting your code</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="data-types.html" class="internal"><span class="codenumber">3.3</span> <span class="title">Data types</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="data-types.html#sec-data-frames" class="internal"><span class="codenumber">3.3.1</span> <span class="title">Data frames</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="data-types.html#examining-objects" class="internal"><span class="codenumber">3.3.2</span> <span class="title">Examining objects</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="data-types.html#the-accessor-" class="internal"><span class="codenumber">3.3.3</span> <span class="title">The accessor: `$`</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="data-types.html#vectors" class="internal"><span class="codenumber">3.3.4</span> <span class="title">Vectors</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="data-types.html#sec-factors" class="internal"><span class="codenumber">3.3.5</span> <span class="title">Factors</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="data-types.html#lists" class="internal"><span class="codenumber">3.3.6</span> <span class="title">Lists</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="data-types.html#sec-matrices" class="internal"><span class="codenumber">3.3.7</span> <span class="title">Matrices</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-vectors.html" class="internal"><span class="codenumber">3.4</span> <span class="title">Vectors</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vectors.html#sec-creating-vectors" class="internal"><span class="codenumber">3.4.1</span> <span class="title">Creating vectors</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vectors.html#names" class="internal"><span class="codenumber">3.4.2</span> <span class="title">Names</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vectors.html#sequences" class="internal"><span class="codenumber">3.4.3</span> <span class="title">Sequences</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vectors.html#subsetting" class="internal"><span class="codenumber">3.4.4</span> <span class="title">Subsetting</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="coercion.html" class="internal"><span class="codenumber">3.5</span> <span class="title">Coercion</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="not-availables-na.html" class="internal"><span class="codenumber">3.6</span> <span class="title">Not availables (NA)</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sorting.html" class="internal"><span class="codenumber">3.7</span> <span class="title">Sorting</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sorting.html#sort" class="internal"><span class="codenumber">3.7.1</span> <span class="title">`sort`</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sorting.html#order" class="internal"><span class="codenumber">3.7.2</span> <span class="title">`order`</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sorting.html#max-and-whichmax" class="internal"><span class="codenumber">3.7.3</span> <span class="title">`max` and `which.max`</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sorting.html#rank" class="internal"><span class="codenumber">3.7.4</span> <span class="title">`rank`</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="vector-arithmetics.html" class="internal"><span class="codenumber">3.8</span> <span class="title">Vector arithmetics</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="vector-arithmetics.html#rescaling-a-vector" class="internal"><span class="codenumber">3.8.1</span> <span class="title">Rescaling a vector</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="vector-arithmetics.html#two-vectors" class="internal"><span class="codenumber">3.8.2</span> <span class="title">Two vectors</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="vector-arithmetics.html#beware-of-recycling" class="internal"><span class="codenumber">3.8.3</span> <span class="title">Beware of recycling</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="indexing.html" class="internal"><span class="codenumber">3.9</span> <span class="title">Indexing</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="indexing.html#subsetting-with-logicals" class="internal"><span class="codenumber">3.9.1</span> <span class="title">Subsetting with logicals</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="indexing.html#logical-operators" class="internal"><span class="codenumber">3.9.2</span> <span class="title">Logical operators</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="indexing.html#which" class="internal"><span class="codenumber">3.9.3</span> <span class="title">`which`</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="indexing.html#match" class="internal"><span class="codenumber">3.9.4</span> <span class="title">`match`</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="indexing.html#in" class="internal"><span class="codenumber">3.9.5</span> <span class="title">`%in%`</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="basic-plots.html" class="internal"><span class="codenumber">3.10</span> <span class="title">Basic plots</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="basic-plots.html#plot" class="internal"><span class="codenumber">3.10.1</span> <span class="title">`plot`</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="basic-plots.html#hist" class="internal"><span class="codenumber">3.10.2</span> <span class="title">`hist`</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="basic-plots.html#boxplot" class="internal"><span class="codenumber">3.10.3</span> <span class="title">`boxplot`</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="basic-plots.html#image" class="internal"><span class="codenumber">3.10.4</span> <span class="title">`image`</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="exercises.html" class="internal"><span class="codenumber">3.11</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-programming-basics.html" class="internal"><span class="codenumber">4</span> <span class="title">Programming basics</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-conditionals.html" class="internal"><span class="codenumber">4.1</span> <span class="title">Conditional expressions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-defining-functions.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Defining functions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-namespaces.html" class="internal"><span class="codenumber">4.3</span> <span class="title">Namespaces</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-for-loops.html" class="internal"><span class="codenumber">4.4</span> <span class="title">For-loops</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-vectorization.html" class="internal"><span class="codenumber">4.5</span> <span class="title">Vectorization and functionals</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-programming-basics-exercises.html" class="internal"><span class="codenumber">4.6</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-tidyverse.html" class="internal"><span class="codenumber">5</span> <span class="title">The tidyverse</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-tidy-data.html" class="internal"><span class="codenumber">5.1</span> <span class="title">Tidy data</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-refining-data-frames.html" class="internal"><span class="codenumber">5.2</span> <span class="title">Refining data frames</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-refining-data-frames.html#subsec-adding-columns" class="internal"><span class="codenumber">5.2.1</span> <span class="title">Adding columns</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-refining-data-frames.html#subsec-row-wise-subsetting" class="internal"><span class="codenumber">5.2.2</span> <span class="title">Row-wise subsetting</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-refining-data-frames.html#sec-tidyverse-col-subset" class="internal"><span class="codenumber">5.2.3</span> <span class="title">Column-wise subsetting</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-refining-data-frames.html#subsec-transforming-variables" class="internal"><span class="codenumber">5.2.4</span> <span class="title">Transforming variables</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-the-pipe.html" class="internal"><span class="codenumber">5.3</span> <span class="title">The pipe</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-summarizing-data.html" class="internal"><span class="codenumber">5.4</span> <span class="title">Summarizing data</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-summarizing-data.html#sec-summarize" class="internal"><span class="codenumber">5.4.1</span> <span class="title">The summarize function</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-summarizing-data.html#subsec-multiple-summaries" class="internal"><span class="codenumber">5.4.2</span> <span class="title">Multiple summaries</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-summarizing-data.html#sec-group-by" class="internal"><span class="codenumber">5.4.3</span> <span class="title">Group then summarize with group_by</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-summarizing-data.html#subsec-pull" class="internal"><span class="codenumber">5.4.4</span> <span class="title">Extracting variables with pull</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-sorting.html" class="internal"><span class="codenumber">5.5</span> <span class="title">Sorting</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-sorting.html#subsec-nested-sorting" class="internal"><span class="codenumber">5.5.1</span> <span class="title">Nested sorting</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-sorting.html#subsec-top-n" class="internal"><span class="codenumber">5.5.2</span> <span class="title">The top n</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-tibbles.html" class="internal"><span class="codenumber">5.6</span> <span class="title">Tibbles</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-tibbles.html#subsec-tibbles-vs-data-frames" class="internal"><span class="codenumber">5.6.1</span> <span class="title">Tibbles versus data frames</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-tibbles.html#subsec-creating-tibbles" class="internal"><span class="codenumber">5.6.2</span> <span class="title">Creating tibbles</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-the-placeholder.html" class="internal"><span class="codenumber">5.7</span> <span class="title">The placeholder</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-purrr-package.html" class="internal"><span class="codenumber">5.8</span> <span class="title">The purrr package</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-tidyverse-conditionals.html" class="internal"><span class="codenumber">5.9</span> <span class="title">Tidyverse conditionals</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-tidyverse-conditionals.html#subsec-case-when" class="internal"><span class="codenumber">5.9.1</span> <span class="title">case_when</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-tidyverse-conditionals.html#subsec-between" class="internal"><span class="codenumber">5.9.2</span> <span class="title">between</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-tidyverse-exercises.html" class="internal"><span class="codenumber">5.10</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-data-table.html" class="internal"><span class="codenumber">6</span> <span class="title">data.table</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-dt-introduction.html" class="internal"><span class="codenumber">6.1</span> <span class="title">Introduction</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-refining-data-tables.html" class="internal"><span class="codenumber">6.2</span> <span class="title">Refining data tables</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-refining-data-tables.html#subsec-dt-column-wise-subsetting" class="internal"><span class="codenumber">6.2.1</span> <span class="title">Column-wise subsetting</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-refining-data-tables.html#subsec-dt-adding-transforming-variables" class="internal"><span class="codenumber">6.2.2</span> <span class="title">Adding or transforming variables</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-refining-data-tables.html#subsec-dt-reference-versus-copy" class="internal"><span class="codenumber">6.2.3</span> <span class="title">Reference versus copy</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-refining-data-tables.html#subsec-dt-row-wise-subsetting" class="internal"><span class="codenumber">6.2.4</span> <span class="title">Row-wise subsetting</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-dt-summarizing-data.html" class="internal"><span class="codenumber">6.3</span> <span class="title">Summarizing data</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-dt-summarizing-data.html#subsec-dt-multiple-summaries" class="internal"><span class="codenumber">6.3.1</span> <span class="title">Multiple summaries</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-dt-summarizing-data.html#subsec-dt-group-then-summarize" class="internal"><span class="codenumber">6.3.2</span> <span class="title">Group then summarize</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-dt-sorting.html" class="internal"><span class="codenumber">6.4</span> <span class="title">Sorting</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-data-table-exercises.html" class="internal"><span class="codenumber">6.5</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-importing-data.html" class="internal"><span class="codenumber">7</span> <span class="title">Importing data</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-importing-data-introduction.html" class="internal"><span class="codenumber">7.1</span> <span class="title">Introduction</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-navigating-filesystem.html" class="internal"><span class="codenumber">7.2</span> <span class="title">Navigating and managing the filesystem</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-navigating-filesystem.html#subsec-the-filesystem" class="internal"><span class="codenumber">7.2.1</span> <span class="title">The filesystem</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-navigating-filesystem.html#subsec-relative-full-paths" class="internal"><span class="codenumber">7.2.2</span> <span class="title">Relative and full paths</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-navigating-filesystem.html#subsec-working-directory" class="internal"><span class="codenumber">7.2.3</span> <span class="title">The working directory</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-navigating-filesystem.html#subsec-generating-path-names" class="internal"><span class="codenumber">7.2.4</span> <span class="title">Generating path names</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-file-types.html" class="internal"><span class="codenumber">7.3</span> <span class="title">File types</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-file-types.html#subsec-text-files" class="internal"><span class="codenumber">7.3.1</span> <span class="title">Text files</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-file-types.html#subsec-binary-files" class="internal"><span class="codenumber">7.3.2</span> <span class="title">Binary files</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-file-types.html#subsec-encoding" class="internal"><span class="codenumber">7.3.3</span> <span class="title">Encoding</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-parsers.html" class="internal"><span class="codenumber">7.4</span> <span class="title">Parsers</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-parsers.html#subsec-base-r" class="internal"><span class="codenumber">7.4.1</span> <span class="title">Base R</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-parsers.html#subsec-readr" class="internal"><span class="codenumber">7.4.2</span> <span class="title">readr</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-parsers.html#subsec-readxl" class="internal"><span class="codenumber">7.4.3</span> <span class="title">readxl</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-parsers.html#subsec-data-table" class="internal"><span class="codenumber">7.4.4</span> <span class="title">data.table</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-parsers.html#subsec-downloading-files" class="internal"><span class="codenumber">7.4.5</span> <span class="title">Downloading files</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-organizing-data.html" class="internal"><span class="codenumber">7.5</span> <span class="title">Organizing data with spreadsheets</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-importing-exercises.html" class="internal"><span class="codenumber">7.6</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-part contains-active">
+<div class="toc-title-box"><a href="part-data-visualization.html" class="internal"><span class="codenumber">II</span> <span class="title">Data Visualization</span></a></div>
+<ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-chapter contains-active">
+<div class="toc-title-box"><a href="ch-visualizing-data-distributions.html" class="internal"><span class="codenumber">8</span> <span class="title">Visualizing data distributions</span></a></div>
+<ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-variable-types.html" class="internal"><span class="codenumber">8.1</span> <span class="title">Variable types</span></a></div></li>
+<li class="toc-item toc-section active"><div class="toc-title-box"><a href="sec-case-study-heights.html" class="internal"><span class="codenumber">8.2</span> <span class="title">Case study: describing student heights</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-distributions.html" class="internal"><span class="codenumber">8.3</span> <span class="title">Distributions</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-distributions.html#subsec-histograms" class="internal"><span class="codenumber">8.3.1</span> <span class="title">Histograms</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-distributions.html#subsec-smoothed-density" class="internal"><span class="codenumber">8.3.2</span> <span class="title">Smoothed density</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-distributions.html#subsec-normal-distribution" class="internal"><span class="codenumber">8.3.3</span> <span class="title">The normal distribution</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-boxplots.html" class="internal"><span class="codenumber">8.4</span> <span class="title">Boxplots</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-dataviz-stratification.html" class="internal"><span class="codenumber">8.5</span> <span class="title">Stratification</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-student-height-cont.html" class="internal"><span class="codenumber">8.6</span> <span class="title">Case study continued</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-distributions-exercises.html" class="internal"><span class="codenumber">8.7</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-ggplot2.html" class="internal"><span class="codenumber">9</span> <span class="title">ggplot2</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-components-of-graph.html" class="internal"><span class="codenumber">9.1</span> <span class="title">The components of a graph</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-initializing-object.html" class="internal"><span class="codenumber">9.2</span> <span class="title">Initializing an object with data</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-adding-geometry.html" class="internal"><span class="codenumber">9.3</span> <span class="title">Adding a geometry</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-aesthetic-mappings.html" class="internal"><span class="codenumber">9.4</span> <span class="title">Aesthetic mappings</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-other-layers.html" class="internal"><span class="codenumber">9.5</span> <span class="title">Other layers</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-global-aesthetic-mappings.html" class="internal"><span class="codenumber">9.6</span> <span class="title">Global aesthetic mappings</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-non-aesthetic-arguments.html" class="internal"><span class="codenumber">9.7</span> <span class="title">Non-aesthetic arguments</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-categories-as-colors.html" class="internal"><span class="codenumber">9.8</span> <span class="title">Categories as colors</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-updating-ggplot-objects.html" class="internal"><span class="codenumber">9.9</span> <span class="title">Updating ggplot objects</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-scales.html" class="internal"><span class="codenumber">9.10</span> <span class="title">Scales</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-annotations.html" class="internal"><span class="codenumber">9.11</span> <span class="title">Annotations</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-add-on-packages.html" class="internal"><span class="codenumber">9.12</span> <span class="title">Add-on packages</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-putting-it-all-together.html" class="internal"><span class="codenumber">9.13</span> <span class="title">Putting it all together</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-other-geometries.html" class="internal"><span class="codenumber">9.14</span> <span class="title">Geometries</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-other-geometries.html#subsec-barplots" class="internal"><span class="codenumber">9.14.1</span> <span class="title">Barplots</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-other-geometries.html#subsec-histograms-geom" class="internal"><span class="codenumber">9.14.2</span> <span class="title">Histograms</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-other-geometries.html#subsec-density-plots-geom" class="internal"><span class="codenumber">9.14.3</span> <span class="title">Density plots</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-other-geometries.html#subsec-boxplots-geom" class="internal"><span class="codenumber">9.14.4</span> <span class="title">Boxplots</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-other-geometries.html#subsec-images" class="internal"><span class="codenumber">9.14.5</span> <span class="title">Images</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-grids-of-plots.html" class="internal"><span class="codenumber">9.15</span> <span class="title">Grids of plots</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-ggplot2-exercises.html" class="internal"><span class="codenumber">9.16</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-data-visualization-principles.html" class="internal"><span class="codenumber">10</span> <span class="title">Data visualization principles</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-encoding-data-using-visual-cues.html" class="internal"><span class="codenumber">10.1</span> <span class="title">Encoding data using visual cues</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-know-when-to-include-0.html" class="internal"><span class="codenumber">10.2</span> <span class="title">Know when to include 0</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-do-not-distort-quantities.html" class="internal"><span class="codenumber">10.3</span> <span class="title">Do not distort quantities</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-order-categories-by-a-meaningful-value.html" class="internal"><span class="codenumber">10.4</span> <span class="title">Order categories by a meaningful value</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-show-the-data.html" class="internal"><span class="codenumber">10.5</span> <span class="title">Show the data</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-ease-comparisons.html" class="internal"><span class="codenumber">10.6</span> <span class="title">Ease comparisons</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-ease-comparisons.html#subsec-use-common-axes" class="internal"><span class="codenumber">10.6.1</span> <span class="title">Use common axes</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-ease-comparisons.html#subsec-aligning-plots-for-comparisons" class="internal"><span class="codenumber">10.6.2</span> <span class="title">Aligning plots for comparisons</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-log-transform.html" class="internal"><span class="codenumber">10.7</span> <span class="title">Log transformations</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-log-transform.html#subsec-right-skewed-distributions" class="internal"><span class="codenumber">10.7.1</span> <span class="title">Right-skewed distributions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-log-transform.html#subsec-ratios" class="internal"><span class="codenumber">10.7.2</span> <span class="title">Ratios</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-visual-cues-to-be-compared-should-be-adjacent.html" class="internal"><span class="codenumber">10.8</span> <span class="title">Visual cues to be compared should be adjacent</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-think-of-the-color-blind.html" class="internal"><span class="codenumber">10.9</span> <span class="title">Think of the color blind</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-plots-for-two-variables.html" class="internal"><span class="codenumber">10.10</span> <span class="title">Plots for two variables</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-plots-for-two-variables.html#subsec-slope-charts" class="internal"><span class="codenumber">10.10.1</span> <span class="title">Slope charts</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-plots-for-two-variables.html#subsec-bland-altman-plot" class="internal"><span class="codenumber">10.10.2</span> <span class="title">Bland-Altman plot</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-encoding-a-third-variable.html" class="internal"><span class="codenumber">10.11</span> <span class="title">Encoding a third variable</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-avoid-pseudo-three-dimensional-plots.html" class="internal"><span class="codenumber">10.12</span> <span class="title">Avoid pseudo-three-dimensional plots</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-avoid-too-many-significant-digits.html" class="internal"><span class="codenumber">10.13</span> <span class="title">Avoid too many significant digits</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-know-your-audience.html" class="internal"><span class="codenumber">10.14</span> <span class="title">Know your audience</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-dataviz-principles-exercises.html" class="internal"><span class="codenumber">10.15</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-data-visualization-in-practice.html" class="internal"><span class="codenumber">11</span> <span class="title">Data visualization in practice</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-case-study-1-new-insights-on-poverty.html" class="internal"><span class="codenumber">11.1</span> <span class="title">Case study 1: new insights on poverty</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-scatterplots.html" class="internal"><span class="codenumber">11.2</span> <span class="title">Scatterplots</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-faceting.html" class="internal"><span class="codenumber">11.3</span> <span class="title">Faceting</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-faceting.html#subsec-facet-wrap" class="internal"><span class="codenumber">11.3.1</span> <span class="title">`facet_wrap`</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-faceting.html#subsec-fixed-scales-for-better-comparisons" class="internal"><span class="codenumber">11.3.2</span> <span class="title">Fixed scales for better comparisons</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-time-series-plots.html" class="internal"><span class="codenumber">11.4</span> <span class="title">Time series plots</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-data-transformations.html" class="internal"><span class="codenumber">11.5</span> <span class="title">Data transformations</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-data-transformations.html#subsec-log-transformation" class="internal"><span class="codenumber">11.5.1</span> <span class="title">Log transformation</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-data-transformations.html#subsec-which-base" class="internal"><span class="codenumber">11.5.2</span> <span class="title">Which base?</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-data-transformations.html#subsec-transform-the-values-or-the-scale" class="internal"><span class="codenumber">11.5.3</span> <span class="title">Transform the values or the scale?</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-multimodal-distributions.html" class="internal"><span class="codenumber">11.6</span> <span class="title">Multimodal distributions</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-comparing-distributions.html" class="internal"><span class="codenumber">11.7</span> <span class="title">Comparing distributions</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-comparing-distributions.html#subsec-boxplots" class="internal"><span class="codenumber">11.7.1</span> <span class="title">Boxplots</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-comparing-distributions.html#subsec-ridge-plots" class="internal"><span class="codenumber">11.7.2</span> <span class="title">Ridge plots</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-comparing-distributions.html#subsec-example-1970-versus-2010-income-distributions" class="internal"><span class="codenumber">11.7.3</span> <span class="title">Example: 1970 versus 2010 income distributions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-comparing-distributions.html#subsec-accessing-computed-variables" class="internal"><span class="codenumber">11.7.4</span> <span class="title">Accessing computed variables</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-comparing-distributions.html#subsec-weighted-densities" class="internal"><span class="codenumber">11.7.5</span> <span class="title">Weighted densities</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-case-study-2-the-ecological-fallacy.html" class="internal"><span class="codenumber">11.8</span> <span class="title">Case study 2: the ecological fallacy</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-case-study-2-the-ecological-fallacy.html#sec-logit" class="internal"><span class="codenumber">11.8.1</span> <span class="title">Logistic transformation</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-case-study-2-the-ecological-fallacy.html#subsec-show-the-data" class="internal"><span class="codenumber">11.8.2</span> <span class="title">Show the data</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-vaccines.html" class="internal"><span class="codenumber">11.9</span> <span class="title">Case study 3: vaccines and infectious diseases</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vaccines.html#subsec-vaccine-data" class="internal"><span class="codenumber">11.9.1</span> <span class="title">Vaccine data</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-vaccines.html#subsec-trend-plots" class="internal"><span class="codenumber">11.9.2</span> <span class="title">Trend plots</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-heatmaps.html" class="internal"><span class="codenumber">11.10</span> <span class="title">Heatmaps</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-dataviz-in-practice-exercises.html" class="internal"><span class="codenumber">11.11</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-part">
+<div class="toc-title-box"><a href="part-data-wrangling.html" class="internal"><span class="codenumber">III</span> <span class="title">Data Wrangling</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-reshaping-data.html" class="internal"><span class="codenumber">12</span> <span class="title">Reshaping data</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-pivot-longer.html" class="internal"><span class="codenumber">12.1</span> <span class="title">`pivot_longer`</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-pivot-wider.html" class="internal"><span class="codenumber">12.2</span> <span class="title">`pivot_wider`</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-separate.html" class="internal"><span class="codenumber">12.3</span> <span class="title">Separating variables</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-reshaping-with-data-table.html" class="internal"><span class="codenumber">12.4</span> <span class="title">Reshaping with data.table</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-reshaping-with-data-table.html#subsec-pivot-longer-is-melt" class="internal"><span class="codenumber">12.4.1</span> <span class="title">`pivot_longer` is `melt`</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-reshaping-with-data-table.html#subsec-pivot-wider-is-dcast" class="internal"><span class="codenumber">12.4.2</span> <span class="title">`pivot_wider` is `dcast`</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-reshaping-with-data-table.html#subsec-separating-variables" class="internal"><span class="codenumber">12.4.3</span> <span class="title">Separating variables</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-the-janitor-package.html" class="internal"><span class="codenumber">12.5</span> <span class="title">The janitor package</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-reshaping-data-exercises.html" class="internal"><span class="codenumber">12.6</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-joining-tables.html" class="internal"><span class="codenumber">13</span> <span class="title">Joining tables</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-joins.html" class="internal"><span class="codenumber">13.1</span> <span class="title">Joins</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-joins.html#subsec-left-join" class="internal"><span class="codenumber">13.1.1</span> <span class="title">Left join</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-joins.html#subsec-right-join" class="internal"><span class="codenumber">13.1.2</span> <span class="title">Right join</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-joins.html#subsec-inner-join" class="internal"><span class="codenumber">13.1.3</span> <span class="title">Inner join</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-joins.html#subsec-full-join" class="internal"><span class="codenumber">13.1.4</span> <span class="title">Full join</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-joins.html#subsec-semi-join" class="internal"><span class="codenumber">13.1.5</span> <span class="title">Semi join</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-joins.html#subsec-anti-join" class="internal"><span class="codenumber">13.1.6</span> <span class="title">Anti join</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-binding.html" class="internal"><span class="codenumber">13.2</span> <span class="title">Binding</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-binding.html#subsec-binding-columns" class="internal"><span class="codenumber">13.2.1</span> <span class="title">Binding columns</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-binding.html#subsec-binding-by-rows" class="internal"><span class="codenumber">13.2.2</span> <span class="title">Binding by rows</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-set-operators.html" class="internal"><span class="codenumber">13.3</span> <span class="title">Set operators</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-set-operators.html#subsec-intersect" class="internal"><span class="codenumber">13.3.1</span> <span class="title">Intersect</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-set-operators.html#subsec-union" class="internal"><span class="codenumber">13.3.2</span> <span class="title">Union</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-set-operators.html#subsec-setdiff" class="internal"><span class="codenumber">13.3.3</span> <span class="title">`setdiff`</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-set-operators.html#subsec-setequal" class="internal"><span class="codenumber">13.3.4</span> <span class="title">`setequal`</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-joining-with-data-table.html" class="internal"><span class="codenumber">13.4</span> <span class="title">Joining with data.table</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-joining-tables-exercises.html" class="internal"><span class="codenumber">13.5</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-parsing-dates-and-times.html" class="internal"><span class="codenumber">14</span> <span class="title">Parsing dates and times</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-the-date-data-type.html" class="internal"><span class="codenumber">14.1</span> <span class="title">The date data type</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-lubridate.html" class="internal"><span class="codenumber">14.2</span> <span class="title">The lubridate package</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-dates-and-times-with-data-table.html" class="internal"><span class="codenumber">14.3</span> <span class="title">Dates and times with data.table</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-parsing-dates-and-times-exercises.html" class="internal"><span class="codenumber">14.4</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-locales.html" class="internal"><span class="codenumber">15</span> <span class="title">Locales</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-locales-in-r.html" class="internal"><span class="codenumber">15.1</span> <span class="title">Locales in R</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-the-locale-function.html" class="internal"><span class="codenumber">15.2</span> <span class="title">The `locale` function</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-example-wrangling-a-spanish-dataset.html" class="internal"><span class="codenumber">15.3</span> <span class="title">Example: wrangling a Spanish dataset</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-locales-exercises.html" class="internal"><span class="codenumber">15.4</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-extracting-data-from-the-web.html" class="internal"><span class="codenumber">16</span> <span class="title">Extracting data from the web</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-scraping-html.html" class="internal"><span class="codenumber">16.1</span> <span class="title">Scraping HTML</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-scraping-html.html#subsec-html" class="internal"><span class="codenumber">16.1.1</span> <span class="title">HTML</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-scraping-html.html#subsec-the-rvest-package" class="internal"><span class="codenumber">16.1.2</span> <span class="title">The rvest package</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-scraping-html.html#sec-css-selectors" class="internal"><span class="codenumber">16.1.3</span> <span class="title">CSS selectors</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-json.html" class="internal"><span class="codenumber">16.2</span> <span class="title">JSON</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-data-apis.html" class="internal"><span class="codenumber">16.3</span> <span class="title">Data APIs</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-data-apis.html#subsec-api-types-and-concepts" class="internal"><span class="codenumber">16.3.1</span> <span class="title">API types and concepts</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-data-apis.html#subsec-the-httr2-package" class="internal"><span class="codenumber">16.3.2</span> <span class="title">The httr2 package</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-extracting-data-from-web-exercises.html" class="internal"><span class="codenumber">16.4</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-string-processing.html" class="internal"><span class="codenumber">17</span> <span class="title">String processing</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-stringr.html" class="internal"><span class="codenumber">17.1</span> <span class="title">The stringr package</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-case-study-1-self-reported-heights.html" class="internal"><span class="codenumber">17.2</span> <span class="title">Case study 1: self-reported heights</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-escaping.html" class="internal"><span class="codenumber">17.3</span> <span class="title">Escaping</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-regex.html" class="internal"><span class="codenumber">17.4</span> <span class="title">Regular expressions</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-regex.html#subsec-strings-are-a-regex" class="internal"><span class="codenumber">17.4.1</span> <span class="title">Strings are a regex</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-regex.html#subsec-special-characters" class="internal"><span class="codenumber">17.4.2</span> <span class="title">Special characters</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-regex.html#subsec-character-classes" class="internal"><span class="codenumber">17.4.3</span> <span class="title">Character classes</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-regex.html#subsec-anchors" class="internal"><span class="codenumber">17.4.4</span> <span class="title">Anchors</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-regex.html#subsec-bounded-quantifiers" class="internal"><span class="codenumber">17.4.5</span> <span class="title">Bounded quantifiers</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-regex.html#subsec-white-space" class="internal"><span class="codenumber">17.4.6</span> <span class="title">White space</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-regex.html#subsec-unbounded-quantifiers" class="internal"><span class="codenumber">17.4.7</span> <span class="title">Unbounded quantifiers: `*`, `?`, `+`</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-regex.html#subsec-not" class="internal"><span class="codenumber">17.4.8</span> <span class="title">Not</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-regex.html#sec-groups" class="internal"><span class="codenumber">17.4.9</span> <span class="title">Groups</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-regex.html#subsec-search-and-replace" class="internal"><span class="codenumber">17.4.10</span> <span class="title">Search and replace</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-regex.html#subsec-search-and-replace-using-groups" class="internal"><span class="codenumber">17.4.11</span> <span class="title">Search and replace using groups</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-regex.html#subsec-lookarounds" class="internal"><span class="codenumber">17.4.12</span> <span class="title">Lookarounds</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-regex.html#sec-separate_regex" class="internal"><span class="codenumber">17.4.13</span> <span class="title">Separating variables</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-trimming.html" class="internal"><span class="codenumber">17.5</span> <span class="title">Trimming</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-case-conversion.html" class="internal"><span class="codenumber">17.6</span> <span class="title">Case conversion</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-case-study-1-continued-putting-it-all-together.html" class="internal"><span class="codenumber">17.7</span> <span class="title">Case study 1 continued: Putting it all together</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-case-study-2-extracting-tables-from-a-pdf.html" class="internal"><span class="codenumber">17.8</span> <span class="title">Case study 2: extracting tables from a PDF</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-recode.html" class="internal"><span class="codenumber">17.9</span> <span class="title">Renaming levels</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-string-processing-exercises.html" class="internal"><span class="codenumber">17.10</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-text-analysis.html" class="internal"><span class="codenumber">18</span> <span class="title">Text analysis</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-case-study-trump-tweets.html" class="internal"><span class="codenumber">18.1</span> <span class="title">Case study: Trump tweets</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-text-as-data.html" class="internal"><span class="codenumber">18.2</span> <span class="title">Text as data</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-sentiment-analysis.html" class="internal"><span class="codenumber">18.3</span> <span class="title">Sentiment analysis</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-text-analysis-exercises.html" class="internal"><span class="codenumber">18.4</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-part">
+<div class="toc-title-box"><a href="part-productivity-tools.html" class="internal"><span class="codenumber">IV</span> <span class="title">Productivity Tools</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-organizing-with-unix.html" class="internal"><span class="codenumber">19</span> <span class="title">Organizing with Unix</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-naming-convention.html" class="internal"><span class="codenumber">19.1</span> <span class="title">Naming convention</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-the-terminal.html" class="internal"><span class="codenumber">19.2</span> <span class="title">The terminal</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-filesystem.html" class="internal"><span class="codenumber">19.3</span> <span class="title">The filesystem</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-filesystem.html#subsec-directories-and-subdirectories" class="internal"><span class="codenumber">19.3.1</span> <span class="title">Directories and subdirectories</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-filesystem.html#subsec-the-home-directory" class="internal"><span class="codenumber">19.3.2</span> <span class="title">The home directory</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-filesystem.html#sec-working-directory" class="internal"><span class="codenumber">19.3.3</span> <span class="title">Working directory</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-filesystem.html#sec-paths" class="internal"><span class="codenumber">19.3.4</span> <span class="title">Paths</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-unix-commands.html" class="internal"><span class="codenumber">19.4</span> <span class="title">Unix commands</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-unix-commands.html#subsec-ls-listing-directory-content" class="internal"><span class="codenumber">19.4.1</span> <span class="title">`ls`: Listing directory content</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-unix-commands.html#subsec-mkdir-and-rmdir-make-and-remove-a-directory" class="internal"><span class="codenumber">19.4.2</span> <span class="title">`mkdir` and `rmdir`: make and remove a directory</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-unix-commands.html#subsec-cd-navigating-the-filesystem-by-changing-directories" class="internal"><span class="codenumber">19.4.3</span> <span class="title">`cd`: navigating the filesystem by changing directories</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-unix-commands.html#subsec-examples" class="internal"><span class="codenumber">19.4.4</span> <span class="title">Examples</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-more-unix-commands.html" class="internal"><span class="codenumber">19.5</span> <span class="title">More Unix commands</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-more-unix-commands.html#subsec-mv-moving-files" class="internal"><span class="codenumber">19.5.1</span> <span class="title">`mv`: moving files</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-more-unix-commands.html#subsec-cp-copying-files" class="internal"><span class="codenumber">19.5.2</span> <span class="title">`cp`: copying files</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-more-unix-commands.html#subsec-rm-removing-files" class="internal"><span class="codenumber">19.5.3</span> <span class="title">`rm`: removing files</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-more-unix-commands.html#subsec-less-looking-at-a-file" class="internal"><span class="codenumber">19.5.4</span> <span class="title">`less`: looking at a file</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-prep-project.html" class="internal"><span class="codenumber">19.6</span> <span class="title">Case study: Preparing for a project</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-advanced-unix.html" class="internal"><span class="codenumber">19.7</span> <span class="title">Advanced Unix</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-advanced-unix.html#subsec-arguments" class="internal"><span class="codenumber">19.7.1</span> <span class="title">Arguments</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-advanced-unix.html#subsec-getting-help" class="internal"><span class="codenumber">19.7.2</span> <span class="title">Getting help</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-advanced-unix.html#subsec-pipes" class="internal"><span class="codenumber">19.7.3</span> <span class="title">Pipes</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-advanced-unix.html#subsec-wild-cards" class="internal"><span class="codenumber">19.7.4</span> <span class="title">Wild cards</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-advanced-unix.html#subsec-environment-variables" class="internal"><span class="codenumber">19.7.5</span> <span class="title">Environment variables</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-advanced-unix.html#subsec-shells" class="internal"><span class="codenumber">19.7.6</span> <span class="title">Shells</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-advanced-unix.html#subsec-executables" class="internal"><span class="codenumber">19.7.7</span> <span class="title">Executables</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-advanced-unix.html#subsec-permissions-and-file-types" class="internal"><span class="codenumber">19.7.8</span> <span class="title">Permissions and file types</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-advanced-unix.html#subsec-commands-you-should-learn" class="internal"><span class="codenumber">19.7.9</span> <span class="title">Commands you should learn</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-advanced-unix.html#subsec-file-manipulation-in-r" class="internal"><span class="codenumber">19.7.10</span> <span class="title">File manipulation in R</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-git-and-github.html" class="internal"><span class="codenumber">20</span> <span class="title">Git and GitHub</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-why-use-git-and-github.html" class="internal"><span class="codenumber">20.1</span> <span class="title">Why use Git and GitHub?</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-git-overview.html" class="internal"><span class="codenumber">20.2</span> <span class="title">Overview of Git</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-github-accounts.html" class="internal"><span class="codenumber">20.3</span> <span class="title">GitHub accounts</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-github-repos.html" class="internal"><span class="codenumber">20.4</span> <span class="title">GitHub repositories</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-connecting-git-github.html" class="internal"><span class="codenumber">20.5</span> <span class="title">Connecting Git and GitHub</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-init.html" class="internal"><span class="codenumber">20.6</span> <span class="title">Initial setup</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-git-basics.html" class="internal"><span class="codenumber">20.7</span> <span class="title">Git basics</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-git-basics.html#subsec-the-working-directory" class="internal"><span class="codenumber">20.7.1</span> <span class="title">The working directory</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-git-basics.html#subsec-add" class="internal"><span class="codenumber">20.7.2</span> <span class="title">add</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-git-basics.html#subsec-commit" class="internal"><span class="codenumber">20.7.3</span> <span class="title">commit</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-git-basics.html#subsec-push" class="internal"><span class="codenumber">20.7.4</span> <span class="title">push</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-git-basics.html#subsec-fetch-and-merge" class="internal"><span class="codenumber">20.7.5</span> <span class="title">fetch and merge</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-git-basics.html#subsec-git-pull" class="internal"><span class="codenumber">20.7.6</span> <span class="title">pull</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-git-basics.html#subsec-clone" class="internal"><span class="codenumber">20.7.7</span> <span class="title">clone</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-gitignore.html" class="internal"><span class="codenumber">20.8</span> <span class="title">.gitignore</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-rstudio-git.html" class="internal"><span class="codenumber">20.9</span> <span class="title">Git in RStudio</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-reproducible-projects.html" class="internal"><span class="codenumber">21</span> <span class="title">Reproducible projects</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-rstudio-projects.html" class="internal"><span class="codenumber">21.1</span> <span class="title">RStudio projects</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-markdown.html" class="internal"><span class="codenumber">21.2</span> <span class="title">Markdown</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-markdown.html#subsec-the-header" class="internal"><span class="codenumber">21.2.1</span> <span class="title">The header</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-markdown.html#subsec-r-code-chunks" class="internal"><span class="codenumber">21.2.2</span> <span class="title">R code chunks</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-markdown.html#subsec-global-execution-options" class="internal"><span class="codenumber">21.2.3</span> <span class="title">Global execution options</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-markdown.html#sec-knitr" class="internal"><span class="codenumber">21.2.4</span> <span class="title">knitR</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-markdown.html#subsec-learning-more" class="internal"><span class="codenumber">21.2.5</span> <span class="title">Learning more</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-organizing.html" class="internal"><span class="codenumber">21.3</span> <span class="title">Organizing a data science project</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-organizing.html#subsec-create-directories-in-unix" class="internal"><span class="codenumber">21.3.1</span> <span class="title">Create directories in Unix</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-organizing.html#subsec-create-an-rstudio-project" class="internal"><span class="codenumber">21.3.2</span> <span class="title">Create an RStudio project</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-organizing.html#subsec-editting-r-scripts" class="internal"><span class="codenumber">21.3.3</span> <span class="title">Editting R scripts</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-organizing.html#subsec-saving-processed-data" class="internal"><span class="codenumber">21.3.4</span> <span class="title">Saving processed data</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-organizing.html#subsec-the-main-analysis-file" class="internal"><span class="codenumber">21.3.5</span> <span class="title">The main analysis file</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-organizing.html#subsec-other-directories" class="internal"><span class="codenumber">21.3.6</span> <span class="title">Other directories</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-organizing.html#subsec-the-readme-file" class="internal"><span class="codenumber">21.3.7</span> <span class="title">The README file</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-organizing.html#subsec-initializing-a-git-directory" class="internal"><span class="codenumber">21.3.8</span> <span class="title">Initializing a Git directory</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-organizing.html#subsec-add-commit-and-push-files-using-rstudio" class="internal"><span class="codenumber">21.3.9</span> <span class="title">Add, commit, and push files using RStudio</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul></nav></div>
+<main class="ptx-main"><div id="ptx-content" class="ptx-content"><section class="section" id="sec-case-study-heights"><h2 class="heading hide-type">
+<span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">8.2</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Case study: describing student heights</span>
+</h2>
+<div class="para" id="sec-case-study-heights-2">We introduce a new motivating problem. It is an artificial one, but it will help us illustrate the concepts needed to understand distributions.<div class="autopermalink" data-description="Paragraph"><a href="#sec-case-study-heights-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="sec-case-study-heights-3">Pretend that we have to describe the heights of our classmates to ET, an extraterrestrial that has never seen humans. As a first step, we need to collect data. To do this, we ask students to report their heights in inches. We ask them to provide sex information because we know there are two different height distributions by sex. We collect the data and save it in the <code class="code-inline tex2jax_ignore">heights</code> data frame:<div class="autopermalink" data-description="Paragraph"><a href="#sec-case-study-heights-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-r">library(tidyverse)
+library(dslabs)
+head(heights)
+</code></pre></div>
+<div class="para" id="sec-case-study-heights-5">One way to convey the heights to ET is to simply send him this list of 1,050 heights. But there are much more effective ways to convey this information, and understanding the concept of a distribution will be key. To simplify the explanation, we first focus on male heights. We examine the female height data later in this chapter.<div class="autopermalink" data-description="Paragraph"><a href="#sec-case-study-heights-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Section 8.2: Case study: describing student heights"><a href="#sec-case-study-heights" title="Copy heading and permalink for Section 8.2: Case study: describing student heights" aria-label="Copy heading and permalink for Section 8.2: Case study: describing student heights">🔗</a></div></section></div>
+<div id="ptx-content-footer" class="ptx-content-footer">
+<a class="previous-button button" href="sec-variable-types.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="sec-distributions.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
+</div></main>
+</div>
+<div id="ptx-page-footer" class="ptx-page-footer">
+<a class="pretext-link" href="https://pretextbook.org" title="PreTeXt"><div class="logo"><svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="338 3000 8772 6866" role="img"><title>PreTeXt logo</title><g style="stroke-width:.025in; stroke:currentColor; fill:none"><polyline points="472,3590 472,9732 " style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round; "></polyline><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,9448 A 4660 4660  0  0  1  8598  9259"></path><path style="stroke-width:174;stroke-linecap:butt;" d="M 4488,9685 A 4228 4228  0  0  0   472  9732"></path><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,3590 A 4241 4241  0  0  1  8598  3496"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,3496  A 4241 4241  0  0  1  4724  3590"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,9259  A 4507 4507  0  0  1  4724  9448"></path><polyline points="5385,4299 4062,8125" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8598,3496 8598,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="850,3496 850,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="4960,9685 4488,9685" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="3070,4582 1889,6141 3070,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="6418,4582 7600,6141 6418,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8976,3590 8976,9732" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><path style="stroke-width:174;stroke-linecap:butt;" d="M 4960,9685 A 4228 4228  0  0  1  8976  9732"></path></g></svg></div></a><a class="runestone-link" href="https://runestone.academy" title="Runestone Academy"><img class="logo" src="https://runestone.academy/runestone/static/images/RAIcon_cropped.png" alt="Runstone Academy logo"></a><a class="mathjax-link" href="https://www.mathjax.org" title="MathJax"><img class="logo" src="https://www.mathjax.org/badge/badge-square-2.png" alt="MathJax logo"></a>
+</div>
+</body>
+</html>
