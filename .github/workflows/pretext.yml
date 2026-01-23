@@ -28,12 +28,10 @@ jobs:
           python-version: '3.11'
 
       - name: Install PreTeXt CLI
-        working-directory: Pretext
-        run: pip install -r ../requirements.txt
+        run: pip install -r requirements.txt
 
       - name: Initialize PreTeXt system resources
-        working-directory: Pretext
-        run: pretext init --system
+        run: cd Pretext && pretext init --system
 
       - name: Create Runestone cache workaround
         run: |
@@ -58,8 +56,7 @@ jobs:
           fi
 
       - name: Build PreTeXt web output
-        working-directory: Pretext
-        run: pretext build web
+        run: cd Pretext && pretext build web
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
