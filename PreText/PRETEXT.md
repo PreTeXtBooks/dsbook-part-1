@@ -1,11 +1,11 @@
 # PreText Textbook Structure
 
-This repository contains a PreText version of "Introduction to Data Science".
+This repository contains a PreText version of "Introduction to Data Science" in the `PreText/` folder.
 
 ## File Organization
 
-The book is now organized into multiple files for better maintainability:
-- The `source/main.ptx` file uses XInclude to reference separate content files
+The book is now organized into multiple files for better maintainability within the `PreText/` directory:
+- The `PreText/source/main.ptx` file uses XInclude to reference separate content files
 - Each major section (Preface, Acknowledgements, Introduction, and the four Parts) is in its own file
 - This structure makes it easier to navigate, edit, and collaborate on different sections of the book
 
@@ -48,24 +48,24 @@ The PreText textbook follows the same structure as the Quarto files in the main 
 ## Files
 
 ### Source Files (tracked in git)
-- `source/main.ptx` - Main PreText book file (uses XInclude to reference separate files)
-- `source/preface.ptx` - Preface content
-- `source/acknowledgements.ptx` - Acknowledgements content
-- `source/introduction.ptx` - Introduction chapter
-- `source/r.ptx` - Part 1: R (includes all R chapters)
-- `source/data-visualization.ptx` - Part 2: Data Visualization (includes all visualization chapters)
-- `source/data-wrangling.ptx` - Part 3: Data Wrangling (includes all wrangling chapters)
-- `source/productivity-tools.ptx` - Part 4: Productivity Tools (includes all productivity chapters)
-- `project.ptx` - Project configuration file
-- `publication/publication.ptx` - Publication settings
-- `executables.ptx` - Executables configuration
+- `PreText/source/main.ptx` - Main PreText book file (uses XInclude to reference separate files)
+- `PreText/source/preface.ptx` - Preface content
+- `PreText/source/acknowledgements.ptx` - Acknowledgements content
+- `PreText/source/introduction.ptx` - Introduction chapter
+- `PreText/source/r.ptx` - Part 1: R (includes all R chapters)
+- `PreText/source/data-visualization.ptx` - Part 2: Data Visualization (includes all visualization chapters)
+- `PreText/source/data-wrangling.ptx` - Part 3: Data Wrangling (includes all wrangling chapters)
+- `PreText/source/productivity-tools.ptx` - Part 4: Productivity Tools (includes all productivity chapters)
+- `PreText/project.ptx` - Project configuration file
+- `PreText/publication/publication.ptx` - Publication settings
+- `PreText/executables.ptx` - Executables configuration
 - `requirements.txt` - Python dependencies (PreTeXt 2.32.0)
 
 ### Build Artifacts (ignored in git)
-- `output/` - Generated HTML/PDF output (not committed)
-- `logs/` - Build logs (not committed)
-- `.cache/` - Build cache (not committed)
-- `.error_schema.log` - Error logs (not committed)
+- `PreText/output/` - Generated HTML/PDF output (not committed)
+- `PreText/logs/` - Build logs (not committed)
+- `PreText/.cache/` - Build cache (not committed)
+- `PreText/.error_schema.log` - Error logs (not committed)
 
 ## Building the Book
 
@@ -75,18 +75,20 @@ To build this PreText book, you need to have PreText CLI installed. Install depe
 pip install -r requirements.txt
 ```
 
-Then build the book:
+Then navigate to the PreText directory and build the book:
 
 ```bash
+cd PreText
 pretext build web
 ```
 
 For PDF output:
 ```bash
+cd PreText
 pretext build print
 ```
 
-The output will be generated in the `output/` directory.
+The output will be generated in the `PreText/output/` directory.
 
 ## Notes
 
