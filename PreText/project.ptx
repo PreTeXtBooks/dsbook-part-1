@@ -5,15 +5,7 @@
 -->
 <project ptx-version="2">
   <targets>
-    <target name="web" format="html" source="main.ptx" publication="publication.ptx" output-dir="web">
-      <assets>
-        <directory>source/images</directory>
-      </assets>
-    </target>
-    <target name="print" format="pdf" source="main.ptx" publication="publication.ptx" output-dir="print" latex-engine="xelatex">
-      <assets>
-        <directory>source/images</directory>
-      </assets>
-    </target>
+    <target name="web" format="html" source="main.ptx" publication="publication.ptx" output-dir="web" />
+    <target name="print" format="pdf" source="main.ptx" publication="publication.ptx" output-dir="print" latex-engine="xelatex" />
   </targets>
 </project>
