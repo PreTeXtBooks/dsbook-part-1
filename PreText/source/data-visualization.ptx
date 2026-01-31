@@ -1220,7 +1220,7 @@ browsers |&gt; ggplot(aes(x = "", y = Percentage, fill = Browser)) +
           <p>When using length as a visual cue, it is misinformative not to start the bars at 0. This is because, by using length as a visual cue, say with a barplot, we are implying the length is proportional to the quantities being displayed. By avoiding 0, relatively small differences can be made to look much bigger than they actually are. This approach is often used by politicians or media organizations trying to exaggerate a difference. Below is an illustrative example:</p>
 
           <figure>
-            <image source="dataviz/img/class2_8.jpg"/>
+            <image source="dataviz/class2_8.jpg"/>
           </figure>
 
           <p>(Source: Fox News, via Media Matters.)</p>
@@ -1240,7 +1240,7 @@ data.frame(Year = as.character(c(2011, 2012, 2013)),Southwest_Border_Apprehensio
           <p><!--http://i2.wp.com/flowingdata.com/wp-content/uploads/2012/08/Bush-cuts.png--></p>
 
           <figure>
-            <image source="dataviz/img/Bush-cuts.png"/>
+            <image source="dataviz/Bush-cuts.png"/>
           </figure>
 
           <p>(Source: Fox News, via Flowing Data.)</p>
@@ -1263,7 +1263,7 @@ data.frame(date = c("Now", "Jan 1, 2013"), tax_rate = c(35, 39.6)) |&gt;
           <p><!-- http://i2.wp.com/flowingdata.com/wp-content/uploads/2012/08/Bush-cuts.png--></p>
 
           <figure>
-            <image source="dataviz/img/venezuela-election.png"/>
+            <image source="dataviz/venezuela-election.png"/>
           </figure>
 
           <p>(Source: Venezolana de Televisión via El Mundo.)</p>
@@ -1304,7 +1304,7 @@ grid.arrange(p2, p1, ncol = 2)
           <p><!--idea from http://paldhous.github.io/ucb/2016/img/class2_30.jpg--> <!--screen shot my own from state of the union--></p>
 
           <figure>
-            <image source="dataviz/img/state-of-the-union.png"/>
+            <image source="dataviz/state-of-the-union.png"/>
           </figure>
 
           <p>(Source: The 2011 State of the Union Address)</p>
@@ -1907,7 +1907,7 @@ display.brewer.all(type = "div")
           <p><!-- https://raw.githubusercontent.com/kbroman/Talk_Graphs/master/Figs/fig8b.png--></p>
 
           <figure>
-            <image source="dataviz/img/fig8b.png"/>
+            <image source="dataviz/fig8b.png"/>
           </figure>
 
           <p>(Image courtesy of Karl Broman)</p>
@@ -1933,11 +1933,11 @@ dat |&gt; gather(drug, survival, -log.dose) |&gt;
           <p>Pseudo-3D is sometimes used completely gratuitously: plots are made to look 3D even when the 3rd dimension does not represent a quantity. This only adds confusion and makes it harder to relay your message.  Here are two examples:</p>
 
           <figure>
-            <image source="dataviz/img/fig1e.png"/>
+            <image source="dataviz/fig1e.png"/>
           </figure>
 
           <figure>
-            <image source="dataviz/img/fig2d.png"/>
+            <image source="dataviz/fig2d.png"/>
           </figure>
 
           <p>(Images courtesy of Karl Broman)</p>

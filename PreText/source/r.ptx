@@ -34,7 +34,7 @@
           
           <figure xml:id="fig-r-console">
             <caption>The R console</caption>
-            <image source="R/img/R_console.png" width="70%"/>
+            <image source="R/R_console.png" width="70%"/>
           </figure>
           
           <p>
@@ -62,7 +62,7 @@
           
           <figure xml:id="fig-rstudio">
             <caption>RStudio interface</caption>
-            <image source="R/img/rstudio.png" width="70%"/>
+            <image source="R/rstudio.png" width="70%"/>
           </figure>
           
           <p>
@@ -91,7 +91,7 @@
             
             <figure xml:id="fig-rstudio-panes">
               <caption>RStudio panes</caption>
-              <image source="productivity/img/windows-screenshots/VirtualBox_Windows-7-Enterprise_22_03_2018_16_21_42.png" width="70%"/>
+              <image source="productivity/windows-screenshots/VirtualBox_Windows-7-Enterprise_22_03_2018_16_21_42.png" width="70%"/>
             </figure>
             
             <p>
@@ -100,7 +100,7 @@
             
             <figure xml:id="fig-rstudio-script">
               <caption>RStudio with script pane</caption>
-              <image source="productivity/img/windows-screenshots/VirtualBox_Windows-7-Enterprise_22_03_2018_16_21_49.png" width="70%"/>
+              <image source="productivity/windows-screenshots/VirtualBox_Windows-7-Enterprise_22_03_2018_16_21_49.png" width="70%"/>
             </figure>
             
           </subsection>
@@ -118,7 +118,7 @@
             
             <figure xml:id="fig-rstudio-cheatsheet">
               <caption>RStudio keyboard shortcuts cheat sheet</caption>
-              <image source="productivity/img/windows-screenshots/VirtualBox_Windows-7-Enterprise_22_03_2018_16_22_20.png" width="70%"/>
+              <image source="productivity/windows-screenshots/VirtualBox_Windows-7-Enterprise_22_03_2018_16_22_20.png" width="70%"/>
             </figure>
             
             <p>
@@ -144,7 +144,7 @@
             
             <figure xml:id="fig-rstudio-save">
               <caption>Saving a script in RStudio</caption>
-              <image source="productivity/img/windows-screenshots/VirtualBox_Windows-7-Enterprise_22_03_2018_16_27_44.png" width="70%"/>
+              <image source="productivity/windows-screenshots/VirtualBox_Windows-7-Enterprise_22_03_2018_16_27_44.png" width="70%"/>
             </figure>
             
             <p>
@@ -153,7 +153,7 @@
             
             <figure xml:id="fig-rstudio-autocomplete">
               <caption>RStudio auto-completion</caption>
-              <image source="productivity/img/windows-screenshots/VirtualBox_Windows-7-Enterprise_22_03_2018_16_29_47.png" width="70%"/>
+              <image source="productivity/windows-screenshots/VirtualBox_Windows-7-Enterprise_22_03_2018_16_29_47.png" width="70%"/>
             </figure>
             
             <p>
@@ -170,7 +170,7 @@
             
             <figure xml:id="fig-rstudio-run">
               <caption>Running code in RStudio</caption>
-              <image source="productivity/img/windows-screenshots/VirtualBox_Windows-7-Enterprise_22_03_2018_16_45_18.png" width="70%"/>
+              <image source="productivity/windows-screenshots/VirtualBox_Windows-7-Enterprise_22_03_2018_16_45_18.png" width="70%"/>
             </figure>
             
             <p>
@@ -196,7 +196,7 @@
             
             <figure xml:id="fig-rstudio-options">
               <caption>RStudio global options</caption>
-              <image source="productivity/img/windows-screenshots/VirtualBox_Windows-7-Enterprise_22_03_2018_16_56_08.png" width="40%"/>
+              <image source="productivity/windows-screenshots/VirtualBox_Windows-7-Enterprise_22_03_2018_16_56_08.png" width="40%"/>
             </figure>
             
           </subsection>
@@ -278,7 +278,7 @@ installed.packages()
       
       <figure xml:id="fig-us-gun-murders-g8">
         <caption>Homicide rates per 100,000 in G-8 countries</caption>
-        <image source="R/img/homocides_g8_countries_640x360_wmain.jpg" width="70%"/>
+        <image source="R/homocides_g8_countries_640x360_wmain.jpg" width="70%"/>
       </figure>
       
       <program language="r"><input>
@@ -414,7 +414,7 @@ installed.packages()
       
       <p>In RStudio, the <em>Environment</em> tab shows the values:</p>
       
-      <figure><image source="R/img/rstudio-environment.png"/></figure>
+      <figure><image source="R/rstudio-environment.png"/></figure>
       
       <p>We should see <c>coef_a</c>, <c>coef_b</c>, and <c>coef_c</c>. If you try to recover the value of a variable that is not in your workspace, you receive an error. For example, if you type <c>x</c> you will receive the following message: <c>Error: object 'x' not found</c>.</p>
       
