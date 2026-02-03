@@ -9,6 +9,10 @@ The book is now organized into multiple files for better maintainability within 
 - Each major section (Preface, Acknowledgements, Introduction, and the four Parts) is in its own file
 - This structure makes it easier to navigate, edit, and collaborate on different sections of the book
 
+### Image Assets
+
+Images for the PreText book are stored in the repository root directories (`dataviz/`, `wrangling/`, `productivity/`, `R/`) and are accessed via symbolic links in the `PreText/assets/` directory. This allows PreTeXt to properly copy images to the output during the build process. The images are referenced in the PTX source files with paths relative to these directories (e.g., `dataviz/img/Bush-cuts.png`, `wrangling/img/joins.png`).
+
 ## Structure
 
 The PreText textbook follows the same structure as the Quarto files in the main repository:
@@ -56,9 +60,10 @@ The PreText textbook follows the same structure as the Quarto files in the main 
 - `PreText/source/data-visualization.ptx` - Part 2: Data Visualization (includes all visualization chapters)
 - `PreText/source/data-wrangling.ptx` - Part 3: Data Wrangling (includes all wrangling chapters)
 - `PreText/source/productivity-tools.ptx` - Part 4: Productivity Tools (includes all productivity chapters)
-- `PreText/project.ptx` - Project configuration file
-- `PreText/publication/publication.ptx` - Publication settings
+- `PreText/project.ptx` - Project configuration file (updated to specify `source="source"` directory)
+- `PreText/publication/publication.ptx` - Publication settings (specifies external assets directory)
 - `PreText/executables.ptx` - Executables configuration
+- `PreText/assets/` - Symbolic links to image directories (dataviz, wrangling, productivity, R)
 - `requirements.txt` - Python dependencies (PreTeXt 2.32.0)
 
 ### Build Artifacts (ignored in git)
@@ -90,6 +95,31 @@ pretext build print
 
 The output will be generated in the `PreText/output/` directory.
 
+## Troubleshooting
+
+### Runestone Services Error
+
+If you encounter an error about "runestone services" or "webpack_static_imports.xml" during the build, this is because the build process attempts to download services from `runestone.academy` which may not be accessible. To work around this:
+
+1. Create a minimal cache file:
+```bash
+mkdir -p ~/.ptx/2.32.0/rs_cache
+cat > ~/.ptx/2.32.0/rs_cache/rs_services.xml << 'EOF'
+<all>
+	<js type="list">
+	</js>
+	<css type="list">
+	</css>
+	<cdn-url type="str">https://runestone.academy/cdn/runestone/</cdn-url>
+	<version type="str">7.10.0</version>
+</all>
+EOF
+```
+
+2. Then retry the build command.
+
 ## Notes
 
 This is a skeleton structure. Content placeholders have been added to each chapter and can be filled in as needed.
+
+Images are properly configured and will render correctly in the HTML output.
