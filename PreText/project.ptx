@@ -3,9 +3,9 @@
     This file provides the overall configuration for the PreText project.
     To edit the content, edit the source/main.ptx file.
 -->
-<project ptx-version="2">
+<project ptx-version="2" source="source" publication="publication" output-dir="output">
   <targets>
-    <target name="web" format="html" source="main.ptx" publication="publication.ptx" output-dir="web" />
-    <target name="print" format="pdf" source="main.ptx" publication="publication.ptx" output-dir="print" latex-engine="xelatex" />
+    <target name="web" format="html" />
+    <target name="print" format="pdf" latex-engine="xelatex" />
   </targets>
 </project>
