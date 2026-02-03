@@ -58,17 +58,6 @@ jobs:
       - name: Build PreTeXt web output
         run: cd PreText && pretext build web
 
-      - name: Copy images to output
-        run: |
-          # Copy source/images assets to external directory
-          if [ -d "PreText/source/images" ]; then
-            mkdir -p PreText/output/web/external
-            cp -r PreText/source/images/* PreText/output/web/external/
-            echo "Source images copied to output/external directory"
-          else
-            echo "Warning: PreText/source/images directory not found, skipping copy"
-          fi
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
