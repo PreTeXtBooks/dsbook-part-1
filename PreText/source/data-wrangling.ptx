@@ -1774,20 +1774,32 @@ library(stringr)
 
           <p>The <alert>dslabs</alert> package includes the raw data from which the heights dataset was obtained. You can load it like this:</p>
 
-          <program language="r">
+          <console>
             <input>
 library(dslabs)
 head(reported_heights)
             </input>
-          </program>
+            <output>
+           time_stamp    sex height
+1 2014-09-02 13:40:36   Male     75
+2 2014-09-02 13:46:59   Male     70
+3 2014-09-02 13:59:20   Male     68
+4 2014-09-02 14:51:53   Male     74
+5 2014-09-02 15:16:15   Male     61
+6 2014-09-02 15:16:16 Female     65
+            </output>
+          </console>
 
           <p>These heights were obtained using a web form in which students were asked to enter their heights. They could enter anything, but the instructions asked for <em>height in inches</em>, a number. We compiled <c>prettyNum(nrow(reported_heights), big.mark=",")</c> submissions, but unfortunately the column vector with the reported heights had several non-numeric entries and as a result became a character vector:</p>
 
-          <program language="r">
+          <console>
             <input>
 class(reported_heights$height)
             </input>
-          </program>
+            <output>
+[1] "character"
+            </output>
+          </console>
 
           <p>If we try to parse it into numbers, we get a warning:</p>
 
@@ -1799,11 +1811,14 @@ x &lt;- as.numeric(reported_heights$height)
 
           <p>Although most values appear to be height in inches as requested we do end up with many <c>NA</c>s:</p>
 
-          <program language="r">
+          <console>
             <input>
 sum(is.na(x))
             </input>
-          </program>
+            <output>
+[1] 81
+            </output>
+          </console>
 
           <p>Here are some of the entries that are not successfully converted:</p>
 

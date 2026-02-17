@@ -653,9 +653,18 @@ installed.packages()
       str &lt;- function(x) utils::str(x, strict.width = 'wrap')
       </input></program>
       
-      <program language="r"><input>
+      <console><input>
       str(murders)
-      </input></program>
+      </input>
+      <output>
+      'data.frame':	51 obs. of  5 variables:
+       $ state     : chr  "Alabama" "Alaska" "Arizona" "Arkansas" ...
+       $ abb       : chr  "AL" "AK" "AZ" "AR" ...
+       $ region    : Factor w/ 4 levels "Northeast","South",..: 2 4 4 2 4 4 1 2 2 2 ...
+       $ population: num  4779736 710231 6392017 2915918 37253956 ...
+       $ total     : num  135 19 232 93 1257 ...
+      </output>
+      </console>
       
       <program language="r"><input>
       # remove str we defined
@@ -664,9 +673,19 @@ installed.packages()
       
       <p>This tells us much more about the object. We see that the table has 51 rows (50 states plus DC) and five variables. We can show the first six lines using the function <c>head</c>:</p>
       
-      <program language="r"><input>
+      <console><input>
       head(murders)
-      </input></program>
+      </input>
+      <output>
+             state abb region population total
+      1    Alabama  AL  South    4779736   135
+      2     Alaska  AK   West     710231    19
+      3    Arizona  AZ   West    6392017   232
+      4   Arkansas  AR  South    2915918    93
+      5 California  CA   West   37253956  1257
+      6   Colorado  CO   West    5029196    65
+      </output>
+      </console>
       
       <p>In this dataset, each state is considered an observation and five variables are reported for each state.</p>
       
@@ -678,15 +697,30 @@ installed.packages()
       
       <p>For our analysis, we will need to access the different variables represented by columns included in this data frame. To do this, we use the accessor operator <c>$</c> in the following way:</p>
       
-      <program language="r"><input>
+      <console><input>
       murders$population
-      </input></program>
+      </input>
+      <output>
+       [1]  4779736   710231  6392017  2915918 37253956  5029196  3574097
+       [8]   897934   601723 19687653  9920000  1360301  1567582 12830632
+      [15]  6483802  3046355  2853118  4339367  4533372  1328361  5773552
+      [22]  6547629  9883640  5303925  2967297  5988927   989415  1826341
+      [29]  2700551  1316470  8791894  2059179 19378102  9535483   672591
+      [36] 11536504  3751351  3831074 12702379  1052567  4625364   814180
+      [43]  6346105 25145561  2763885   625741  8001024  6724540  1852994
+      [50]  5686986   563626
+      </output>
+      </console>
       
       <p>But how did we know to use <c>population</c>? Previously, by applying the function <c>str</c> to the object <c>murders</c>, we revealed the names for each of the five variables stored in this table. We can quickly access the variable names using:</p>
       
-      <program language="r"><input>
+      <console><input>
       names(murders)
-      </input></program>
+      </input>
+      <output>
+      [1] "state"      "abb"        "region"     "population" "total"
+      </output>
+      </console>
       
       <p>It is important to know that the order of the entries in <c>murders$population</c> preserves the order of the rows in our data table. This will later permit us to manipulate one variable based on the results of another. For example, we will be able to order the state names by the number of murders.</p>
       
@@ -700,24 +734,36 @@ installed.packages()
       
       <p>The object <c>murders$population</c> is not one number but several. We call these types of objects <em>vectors</em>. A single number is technically a vector of length 1, but in general we use the term vectors to refer to objects with several entries. The function <c>length</c> tells you how many entries are in the vector:</p>
       
-      <program language="r"><input>
+      <console><input>
       pop &lt;- murders$population
       length(pop)
-      </input></program>
+      </input>
+      <output>
+      [1] 51
+      </output>
+      </console>
       
       <p>This particular vector is <em>numeric</em> since population sizes are numbers:</p>
       
-      <program language="r"><input>
+      <console><input>
       class(pop)
-      </input></program>
+      </input>
+      <output>
+      [1] "numeric"
+      </output>
+      </console>
       
       <p>In a numeric vector, every entry must be a number.</p>
       
       <p>To store character strings, vectors can also be of class <em>character</em>. For example, the state names are characters:</p>
       
-      <program language="r"><input>
+      <console><input>
       class(murders$state)
-      </input></program>
+      </input>
+      <output>
+      [1] "character"
+      </output>
+      </console>
       
       <p>As with numeric vectors, all entries in a character vector need to be a character.</p>
       
