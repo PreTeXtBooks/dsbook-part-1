@@ -1779,6 +1779,15 @@ library(stringr)
 library(dslabs)
 head(reported_heights)
             </input>
+            <output>
+           time_stamp    sex height
+1 2014-09-02 13:40:36   Male     75
+2 2014-09-02 13:46:59   Male     70
+3 2014-09-02 13:59:20   Male     68
+4 2014-09-02 14:51:53   Male     74
+5 2014-09-02 15:16:15   Male     61
+6 2014-09-02 15:16:16 Female     65
+            </output>
           </program>
 
           <p>These heights were obtained using a web form in which students were asked to enter their heights. They could enter anything, but the instructions asked for <em>height in inches</em>, a number. We compiled <c>prettyNum(nrow(reported_heights), big.mark=",")</c> submissions, but unfortunately the column vector with the reported heights had several non-numeric entries and as a result became a character vector:</p>
@@ -1787,6 +1796,9 @@ head(reported_heights)
             <input>
 class(reported_heights$height)
             </input>
+            <output>
+[1] "character"
+            </output>
           </program>
 
           <p>If we try to parse it into numbers, we get a warning:</p>
@@ -1803,6 +1815,9 @@ x &lt;- as.numeric(reported_heights$height)
             <input>
 sum(is.na(x))
             </input>
+            <output>
+[1] 81
+            </output>
           </program>
 
           <p>Here are some of the entries that are not successfully converted:</p>
