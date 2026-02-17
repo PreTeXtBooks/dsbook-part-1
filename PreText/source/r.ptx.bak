@@ -653,7 +653,7 @@ installed.packages()
       str &lt;- function(x) utils::str(x, strict.width = 'wrap')
       </input></program>
       
-      <console><input>
+      <program language="r"><input>
       str(murders)
       </input>
       <output>
@@ -664,7 +664,7 @@ installed.packages()
        $ population: num  4779736 710231 6392017 2915918 37253956 ...
        $ total     : num  135 19 232 93 1257 ...
       </output>
-      </console>
+      </program>
       
       <program language="r"><input>
       # remove str we defined
@@ -673,7 +673,7 @@ installed.packages()
       
       <p>This tells us much more about the object. We see that the table has 51 rows (50 states plus DC) and five variables. We can show the first six lines using the function <c>head</c>:</p>
       
-      <console><input>
+      <program language="r"><input>
       head(murders)
       </input>
       <output>
@@ -685,7 +685,7 @@ installed.packages()
       5 California  CA   West   37253956  1257
       6   Colorado  CO   West    5029196    65
       </output>
-      </console>
+      </program>
       
       <p>In this dataset, each state is considered an observation and five variables are reported for each state.</p>
       
@@ -697,7 +697,7 @@ installed.packages()
       
       <p>For our analysis, we will need to access the different variables represented by columns included in this data frame. To do this, we use the accessor operator <c>$</c> in the following way:</p>
       
-      <console><input>
+      <program language="r"><input>
       murders$population
       </input>
       <output>
@@ -710,17 +710,17 @@ installed.packages()
       [43]  6346105 25145561  2763885   625741  8001024  6724540  1852994
       [50]  5686986   563626
       </output>
-      </console>
+      </program>
       
       <p>But how did we know to use <c>population</c>? Previously, by applying the function <c>str</c> to the object <c>murders</c>, we revealed the names for each of the five variables stored in this table. We can quickly access the variable names using:</p>
       
-      <console><input>
+      <program language="r"><input>
       names(murders)
       </input>
       <output>
       [1] "state"      "abb"        "region"     "population" "total"
       </output>
-      </console>
+      </program>
       
       <p>It is important to know that the order of the entries in <c>murders$population</c> preserves the order of the rows in our data table. This will later permit us to manipulate one variable based on the results of another. For example, we will be able to order the state names by the number of murders.</p>
       
@@ -734,36 +734,36 @@ installed.packages()
       
       <p>The object <c>murders$population</c> is not one number but several. We call these types of objects <em>vectors</em>. A single number is technically a vector of length 1, but in general we use the term vectors to refer to objects with several entries. The function <c>length</c> tells you how many entries are in the vector:</p>
       
-      <console><input>
+      <program language="r"><input>
       pop &lt;- murders$population
       length(pop)
       </input>
       <output>
       [1] 51
       </output>
-      </console>
+      </program>
       
       <p>This particular vector is <em>numeric</em> since population sizes are numbers:</p>
       
-      <console><input>
+      <program language="r"><input>
       class(pop)
       </input>
       <output>
       [1] "numeric"
       </output>
-      </console>
+      </program>
       
       <p>In a numeric vector, every entry must be a number.</p>
       
       <p>To store character strings, vectors can also be of class <em>character</em>. For example, the state names are characters:</p>
       
-      <console><input>
+      <program language="r"><input>
       class(murders$state)
       </input>
       <output>
       [1] "character"
       </output>
-      </console>
+      </program>
       
       <p>As with numeric vectors, all entries in a character vector need to be a character.</p>
       
