@@ -52,11 +52,11 @@
 
           <p>The terminal is integrated into Mac and Linux systems, but Windows users will have to install an <em>emulator</em>. Once you have a terminal open, you can start typing commands. You should see a blinking cursor at the spot where what you type will show up. This position is called the <em>command line</em>. Once you type something and hit enter on Windows or return on the Mac, Unix will try to execute this command. If you want to try out an example, type this command:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 echo "hello world"
             </input>
-          </program>
+          </sage>
 
           <p>The command <c>echo</c> is similar to <c>cat</c> in R. Executing this line should print out <c>hello world</c>, then return back to the command line.</p>
 
@@ -128,11 +128,11 @@ echo "hello world"
 
             <p>Open a terminal and type:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 pwd
               </input>
-            </program>
+            </sage>
 
             <p>We do not show the result of running this command because it will be quite different on your system compared to others. If you open a terminal and type <c>pwd</c> as your first command, you should see something like <c>/Users/yourusername</c> on a Mac or something like <c>/c/Users/yourusername</c> on Windows. The character string returned by calling <c>pwd</c> represents your working directory. When we first open a terminal, it will start in our home directory so in this case the working directory is the home directory.</p>
 
@@ -165,11 +165,11 @@ pwd
 
             <p>To see the content of your home directory, open a terminal and type:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 ls
               </input>
-            </program>
+            </sage>
 
             <p>We will see more examples soon.</p>
 
@@ -184,48 +184,48 @@ ls
 
             <p>You can try this particular example on your system. Open a terminal and type:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 mkdir projects
               </input>
-            </program>
+            </sage>
 
             <p>If you do this correctly, nothing will happen: no news is good news. If the directory already exists, you will get an error message and the existing directory will remain untouched.</p>
 
             <p>To confirm that you created the directory, you can list the contents of the current working directory:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 ls
               </input>
-            </program>
+            </sage>
 
             <p>You should see the directory we just created listed. Perhaps you can also see many other directories that were already on your computer.</p>
 
             <p>For illustrative purposes, let's make a few more directories. You can list more than one directory name like this:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 mkdir docs teaching
               </input>
-            </program>
+            </sage>
 
             <p>You can check to see if the three directories were created:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 ls
               </input>
-            </program>
+            </sage>
 
             <p>If you made a mistake and need to remove the directory, you can use the command <c>rmdir</c> to remove it.</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 mkdir junk
 rmdir junk
               </input>
-            </program>
+            </sage>
 
             <p>This will remove the directory as long as it is empty. If it is not empty, you will get an error message and the directory will remain untouched. To remove directories that are not empty, we will learn about the command <c>rm</c> later.</p>
 
@@ -238,19 +238,19 @@ rmdir junk
 
             <p>Suppose we open a terminal and our working directory is our home directory. We want to change our working directory to <c>projects</c>. We do this using the <c>cd</c> command, which stands for <em>change directory</em>:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 cd projects
               </input>
-            </program>
+            </sage>
 
             <p>To check that the working directory changed, we can use a command we previously learned to see our location:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 pwd
               </input>
-            </program>
+            </sage>
 
             <p>Our working directory should now be <c>~/projects</c>. Note that on your computer the home directory <c>~</c> will be spelled out to something like <c>/c/Users/yourusername</c>.</p>
 
@@ -258,41 +258,41 @@ pwd
 
             <p>When using <c>cd</c>, we can either type a full path, which will start with <c>/</c> or <c>~</c>, or a <em>relative path</em>. In the example above, in which we typed <c>cd projects</c>, we used a relative path. If the path you type does not start with <c>/</c> or <c>~</c>, Unix will assume you are typing a relative path, meaning that it will look for the directory in your current working directory. So something like this will give you an error:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 cd Users
               </input>
-            </program>
+            </sage>
 
             <p>because there is no <c>Users</c> directory in your working directory.</p>
 
             <p>Now suppose we want to move back to the directory in which <c>projects</c> is a subdirectory, referred to as the <em>parent directory</em>. We could use the full path of the parent directory, but Unix provides a shortcut for this: the parent directory of the working directory is represented with two dots: <c>..</c> so to move back we simply type:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 cd ..
               </input>
-            </program>
+            </sage>
 
             <p>You should now be back in your home directory which you can confirm using <c>pwd</c>.</p>
 
             <p>Because we can use full paths with <c>cd</c>, the following command:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 cd ~
               </input>
-            </program>
+            </sage>
 
             <p>will always take us back to the home directory, no matter where we are in the filesystem.</p>
 
             <p>The working directory also has a nickname, which is a single <c>.</c> so if you type</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 cd .
               </input>
-            </program>
+            </sage>
 
             <p>you will not move. Although this particular use of <c>.</c> is not useful, this nickname does come in handy sometimes. The reasons are not relevant for this section, but you should still be aware of this fact.</p>
 
@@ -300,47 +300,47 @@ cd .
 
             <p>When typing directory names, we can concatenate directories with the forward-slashes. So if we want a command that takes us to the <c>projects</c> directory no matter where we are in the filesystem, we can type:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 cd ~/projects
               </input>
-            </program>
+            </sage>
 
             <p>which is equivalent to writing the entire path out. For example, in Windows we would write something like</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 cd /c/Users/yourusername/projects
               </input>
-            </program>
+            </sage>
 
             <p>The last two commands are equivalent and in both cases we are typing the full path.</p>
 
             <p>We can also concatenate directory names for relative paths. For instance, if we want to move back to the parent directory of the parent directory of the working directory, we can type:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 cd ../..
               </input>
-            </program>
+            </sage>
 
             <p>Here are a couple of final tips related to the <c>cd</c> command. First, you can go back to whatever directory you just left by typing:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 cd -
               </input>
-            </program>
+            </sage>
 
             <p>This can be useful if you type a very long path and then realize you want to go back to where you were, and that too has a very long path.</p>
 
             <p>Second, if you just type:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 cd
               </input>
-            </program>
+            </sage>
 
             <p>you will be returned to your home directory.</p>
 
@@ -359,29 +359,29 @@ cd
 
             <p>Here it is convenient to use relative paths:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 cd project-1/figs
               </input>
-            </program>
+            </sage>
 
             <p>Now suppose our working directory is <c>~/projects</c> and we want to move to <c>reports</c> in <c>docs</c>, how can we do this?</p>
 
             <p>One way is to use relative paths:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 cd ../docs/reports
               </input>
-            </program>
+            </sage>
 
             <p>Another is to use the full path:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 cd ~/docs/reports
               </input>
-            </program>
+            </sage>
 
             <p>If you are trying this out on your system, remember to use auto-complete.</p>
 
@@ -389,19 +389,19 @@ cd ~/docs/reports
 
             <p>With relative paths:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 cd ../../project-2
               </input>
-            </program>
+            </sage>
 
             <p>and with full paths:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 cd ~/projects/project-2
               </input>
-            </program>
+            </sage>
 
           </subsection>
 
@@ -419,65 +419,65 @@ cd ~/projects/project-2
 
             <p>Now that you know how to use full and relative paths, using <c>mv</c> is relatively straightforward. The general form is:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 mv path-to-file path-to-destination-directory
               </input>
-            </program>
+            </sage>
 
             <p>For example, if we want to move the file <c>cv.tex</c> from <c>resumes</c> to <c>reports</c>, you could use the full paths like this:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 mv ~/docs/resumes/cv.tex ~/docs/reports/
               </input>
-            </program>
+            </sage>
 
             <p>You can also use relative paths. You could do this:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 cd ~/docs/resumes
 mv cv.tex ../reports/
               </input>
-            </program>
+            </sage>
 
             <p>or this:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 cd ~/docs/reports/
 mv ../resumes/cv.tex ./
               </input>
-            </program>
+            </sage>
 
             <p>Notice that in the last one we used the working directory shortcut <c>.</c> to give a relative path as the destination directory.</p>
 
             <p>We can also use <c>mv</c> to change the name of a file. To do this, instead of the second argument being the destination directory, it also includes a filename. So, for example, to change the name from <c>cv.tex</c> to <c>resume.tex</c>, we simply type:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 cd ~/docs/resumes
 mv cv.tex resume.tex
               </input>
-            </program>
+            </sage>
 
             <p>We can also combine the move and a rename. For example:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 cd ~/docs/resumes
 mv cv.tex ../reports/resume.tex
               </input>
-            </program>
+            </sage>
 
             <p>And we can move entire directories. To move the <c>resumes</c> directory into <c>reports</c>, we do as follows:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 mv ~/docs/resumes ~/docs/reports/
               </input>
-            </program>
+            </sage>
 
             <p>It is important to add the last <c>/</c> to make it clear you do not want to rename the <c>resumes</c> directory to <c>reports</c>, but rather move it into the <c>reports</c> directory.</p>
 
@@ -501,19 +501,19 @@ mv ~/docs/resumes ~/docs/reports/
 
             <p>The general way it works is as follows:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 rm filename
               </input>
-            </program>
+            </sage>
 
             <p>You can actually list files as well like this:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 rm filename-1 filename-2 filename-3
               </input>
-            </program>
+            </sage>
 
             <p>You can use full or relative paths. To remove non-empty directories, you will have to learn about arguments, which we do later.</p>
 
@@ -524,12 +524,12 @@ rm filename-1 filename-2 filename-3
 
             <p>Often you want to quickly look at the content of a file. If this file is a text file, the quickest way to do is by using the command <c>less</c>. To look a the file <c>cv.tex</c>, you do this:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 cd ~/docs/resumes
 less cv.tex 
               </input>
-            </program>
+            </sage>
 
             <p>To exit the viewer, you type <c>q</c>. If the files are long, you can use the arrow keys to move up and down. There are many other keyboard commands you can use within <c>less</c> to, for example, search or jump pages.</p>
 
@@ -546,26 +546,26 @@ less cv.tex
 
           <p>You should start by creating a directory where you will keep all your projects. We recommend a directory called <em>projects</em> in your home directory. To do this you would type:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 cd ~
 mkdir projects
             </input>
-          </program>
+          </sage>
 
           <p>Our project relates to gun violence murders so we will call the directory for our project <c>murders</c>. It will be a subdirectory in our projects directories. In the <c>murders</c> directory, we will create two subdirectories to hold the raw data and intermediate data. We will call these <c>data</c> and <c>rda</c>, respectively.</p>
 
           <p>Open a terminal and make sure you are in the home directory:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 cd ~
             </input>
-          </program>
+          </sage>
 
           <p>Now run the following commands to create the directory structure we want. At the end, we use <c>ls</c> and <c>pwd</c> to confirm we have generated the correct directories in the correct working directory:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 cd projects
 mkdir murders
@@ -574,17 +574,17 @@ mkdir data rdas
 ls
 pwd
             </input>
-          </program>
+          </sage>
 
           <p>Note that the full path of our <c>murders</c> dataset is <c>~/projects/murders</c>.</p>
 
           <p>So if we open a new terminal and want to navigate into that directory we type:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 cd projects/murders
             </input>
-          </program>
+          </sage>
 
           <p>In <xref ref="sec-organizing"/> we will describe how we can use RStudio to organize a data analysis project, once these directories have been created.</p>
 
@@ -600,67 +600,67 @@ cd projects/murders
 
             <p>Most Unix commands can be run with arguments. Arguments are typically defined by using a dash <c>-</c> or two dashes <c>--</c> (depending on the command) followed by a letter or a word. An example of an argument is the <c>-r</c> behind <c>rm</c>. The <c>r</c> stands for recursive, and the result is that files and directories are removed recursively, which means that if you type:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 rm -r directory-name
               </input>
-            </program>
+            </sage>
 
             <p>all files, subdirectories, files in subdirectories, subdirectories in subdirectories, and so on, will be removed. This is equivalent to throwing a folder in the trash, except you can't recover it. Once you remove it, it is deleted for good. Often, when you are removing directories, you will encounter files that are protected. In such cases, you can use the argument <c>-f</c> which stands for <c>force</c>.</p>
 
             <p>You can also combine arguments. For instance, to remove a directory regardless of protected files, you type:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 rm -rf directory-name
               </input>
-            </program>
+            </sage>
 
             <p>Remember that once you remove there is no going back, so use this command very carefully.</p>
 
             <p>A command that is often called with argument is <c>ls</c>. Here are some examples:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 ls -a 
               </input>
-            </program>
+            </sage>
 
             <p>The <c>a</c> stands for all. This argument makes <c>ls</c> show you all files in the directory, including hidden files. In Unix, all files starting with a <c>.</c> are hidden. Many applications create hidden directories to store important information without getting in the way of your work. An example is <c>git</c> (which we cover in depth in <xref ref="ch-git-and-github"/>). Once you initialize a directory as a git directory with <c>git init</c>, a hidden directory called <c>.git</c> is created. Another hidden file is the <c>.gitignore</c> file.</p>
 
             <p>Another example of using an argument is:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 ls -l 
               </input>
-            </program>
+            </sage>
 
             <p>The <c>l</c> stands for long and the result is that more information about the files is shown.</p>
 
             <p>It is often useful to see files in chronological order. For that we use:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 ls -t 
               </input>
-            </program>
+            </sage>
 
             <p>and to reverse the order of how files are shown you can use:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 ls -r 
               </input>
-            </program>
+            </sage>
 
             <p>We can combine all these arguments to show more information for all files in reverse chronological order:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 ls -lart 
               </input>
-            </program>
+            </sage>
 
             <p>Each command has a different set of arguments. In the next section, we learn how to find out what they each do.</p>
 
@@ -671,19 +671,19 @@ ls -lart
 
             <p>As you may have noticed, Unix uses an extreme version of abbreviations. This makes it very efficient, but hard to guess how to call commands. To make up for this weakness, Unix includes complete help files or <em>man pages</em> (man is short for manual). In most systems, you can type <c>man</c> followed by the command name to get help. So for <c>ls</c>, we would type:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 man ls
               </input>
-            </program>
+            </sage>
 
             <p>This command is not available in some of the compact implementations of Unix, such as Git Bash. An alternative way to get help that works on Git Bash is to type the command followed by <c>--help</c>. So for <c>ls</c>, it would be as follows:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 ls --help
               </input>
-            </program>
+            </sage>
 
           </subsection>
 
@@ -692,27 +692,27 @@ ls --help
 
             <p>The help pages are typically long and if you type the commands above to see the help, it scrolls all the way to the end. It would be useful if we could save the help to a file and then use <c>less</c> to see it. The <c>pipe</c>, written like this <c>|</c>, does something similar. It <em>pipes</em> the results of a command to the command after the <c>pipe</c>. This is similar to the pipe <c>|&gt;</c> that we use in R. To get more help we thus can type:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 man ls | less
               </input>
-            </program>
+            </sage>
 
             <p>or in Git Bash:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 ls --help | less 
               </input>
-            </program>
+            </sage>
 
             <p>This is also useful when listing files with many files. We can type:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 ls -lart | less 
               </input>
-            </program>
+            </sage>
 
           </subsection>
 
@@ -721,37 +721,37 @@ ls -lart | less
 
             <p>Some of the most powerful aspects of Unix are the <em>wild cards</em>. Suppose we want to remove all the temporary html files produced while trouble shooting for a project. Imagine there are dozens of files. It would be quite painful to remove them one by one. In Unix, we can actually write an expression that means all the files that end in <c>.html</c>. To do this we type <em>wild card</em>: <c>*</c>. As discussed in the data wrangling part of this book, this character means any number of any combination of characters. Specifically, to list all html files, we would type:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 ls *.html
               </input>
-            </program>
+            </sage>
 
             <p>To remove all html files in a directory, we would type:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 rm *.html
               </input>
-            </program>
+            </sage>
 
             <p>The other useful wild card is the <c>?</c> symbol. This means any single character. So if all the files we want to erase have the form <c>file-001.html</c> with the numbers going from 1 to 999, we can type:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 rm file-???.html
               </input>
-            </program>
+            </sage>
 
             <p>This will only remove files with that format.</p>
 
             <p>We can combine wild cards. For example, to remove all files with the form <c>file-001</c> up to <c>file-999</c> regardless of suffix, we can type:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 rm file-???.* 
               </input>
-            </program>
+            </sage>
 
             <p>Combining rm with the <c>*</c> wild card can be dangerous. There are combinations of these commands that will erase your entire filesystem without asking "are you sure?". So make sure you understand how it works before using this wild card with the <c>rm</c> command. We recommend always checking what files will match the wild card first by using the <c>ls</c> command.</p>
 
@@ -764,19 +764,19 @@ rm file-???.*
 
             <p>Earlier we saw that <c>echo</c> is the Unix command for print. So we can see our home directory by typing:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 echo $HOME 
               </input>
-            </program>
+            </sage>
 
             <p>You can see them all by typing:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 env
               </input>
-            </program>
+            </sage>
 
             <p>You can change some of these environment variables. But their names vary across different <em>shells</em>. We describe shells in the next section.</p>
 
@@ -787,21 +787,21 @@ env
 
             <p>Much of what we use in this chapter is part of what is called the <em>Unix shell</em>. There are actually different shells, but the differences are almost unnoticeable. They are also important, although we do not cover those here. You can see what shell you are using by typing:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 echo $SHELL
               </input>
-            </program>
+            </sage>
 
             <p>The most common one is <c>bash</c>.</p>
 
             <p>Once you know the shell, you can change environmental variables. In Bash Shell, we do it using <c>export variable value</c>. To change the path, described in more detail soon, you would type:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 export PATH = /usr/bin/
               </input>
-            </program>
+            </sage>
 
             <p>Don't actually run this command though!</p>
 
@@ -822,11 +822,11 @@ which git
 
             <p>That directory is probably full of program files. The directory <c>/usr/bin</c> usually holds many program files. If you type:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 ls /usr/bin
               </input>
-            </program>
+            </sage>
 
             <p>in your terminal, you will see several executable files.</p>
 
@@ -834,21 +834,21 @@ ls /usr/bin
 
             <p>When you type <c>ls</c>, Unix knows to run a program which is an executable that is stored in some other directory. So how does Unix know where to find it? This information is included in the environmental variable <c>$PATH</c>. If you type:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 echo $PATH
               </input>
-            </program>
+            </sage>
 
             <p>you will see a list of directories separated by <c>:</c>. The directory <c>/usr/bin</c> is probably one of the first ones on the list.</p>
 
             <p>Unix looks for program files in those directories in that order. Although we don't teach it here, you can actually create executables yourself. However, if you put it in your working directory and this directory is not on the path, you can't run it just by typing the command. You get around this by typing the full path. So if your command is called my-ls, you can type:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 ./my-ls
               </input>
-            </program>
+            </sage>
 
             <p>Once you have mastered the basics of Unix, you should consider learning to write your own executables as they can help alleviate repetitive work.</p>
 
@@ -859,11 +859,11 @@ echo $PATH
 
             <p>If you type:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 ls -l
               </input>
-            </program>
+            </sage>
 
             <p>At the beginning, you will see a series of symbols like this <c>-rw-r--r--</c>. This string indicates the type of file: regular file <c>-</c>, directory <c>d</c>, or executable <c>x</c>. This string also indicates the permission of the file: is it readable? writable? executable? Can other users on the system read the file? Can other users on the system edit the file? Can other users execute if the file is executable? This is more advanced than what we cover here, but you can learn much more in a Unix reference book.</p>
 
@@ -899,11 +899,11 @@ ls -l
 
             <p>Although not generally recommended, you can run Unix commands in R using <c>system</c>.</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 knitr::opts_chunk$set(out.width = NULL, out.extra = NULL)
               </input>
-            </program>
+            </sage>
 
           </subsection>
 
@@ -1026,12 +1026,12 @@ knitr::opts_chunk$set(out.width = NULL, out.extra = NULL)
 
                 <p>The next step is to let Git know who we are. This will make it easier to connect with GitHub. To to this type the following two commands in our terminal window:</p>
 
-                <program language="r">
+                <sage language="r">
                   <input>
       git config --global user.name "Your Name"
       git config --global user.email "your@email.com"
                   </input>
-                </program>
+                </sage>
 
                 <p>This will change the Git configuration in way that anytime you use Git, it will know this information. Note that <alert>you need to use the email account that you used to open your GitHub account</alert>.</p>
 
@@ -1042,20 +1042,20 @@ knitr::opts_chunk$set(out.width = NULL, out.extra = NULL)
 
                 <p>In a terminal, move to the directory you want to store the local repository. We recommend naming the directory the same as the GitHub repo. In our example we would use:</p>
 
-                <program language="r">
+                <sage language="r">
                   <input>
       mkdir homework-0
       cd homework-0
                   </input>
-                </program>
+                </sage>
 
                 <p>We then initialize the directory as a Git repository, starting the version control process.</p>
 
-                <program language="r">
+                <sage language="r">
                   <input>
       git init
                   </input>
-                </program>
+                </sage>
 
                 <note>
                   <p>## main verus master</p>
@@ -1084,11 +1084,11 @@ knitr::opts_chunk$set(out.width = NULL, out.extra = NULL)
 
                 <p>Once you have this you can type</p>
 
-                <program language="r">
+                <sage language="r">
                   <input>
       git remote add origin https://github.com/rairizarry/homework-0.git
                   </input>
-                </program>
+                </sage>
 
                 <p>To understand this command note that <c>git remote add</c> adds a new remote reference. A <em>remote</em> in Git refers to another place where your code repository is stored, usually on the internet or another network. <c>origin</c> is the conventional name given to the remote repository or the central repository that other people will treat as an main project source. It's essentially a shorthand alias for the repository's URL. You could technically name it anything you want, but <c>origin</c> is the convention most use. Finally, <c>https://github.com/rairizarry/homework-0.git</c>  is the URL of the remote repository. It tells Git where the repository is hosted. Together, these commands set up a new local Git repository and link it to a remote repository on GitHub.</p>
 
@@ -1108,15 +1108,15 @@ knitr::opts_chunk$set(out.width = NULL, out.extra = NULL)
 
                   <p>The working directory is the same as your Unix working directory. In our example, if we create a file in the <c>homework-0</c> directory, it is considered to be in the working directory. Git can tell you how the files in the working directory relate to the versions of the files in other areas with the command</p>
 
-                  <program language="r">
+                  <sage language="r">
                     <input>
       git status
                     </input>
-                  </program>
+                  </sage>
 
                   <p>Because we have not done anything yet, you should receive a message such as</p>
 
-                  <program language="r">
+                  <sage language="r">
                     <input>
       On branch main
 
@@ -1124,17 +1124,17 @@ knitr::opts_chunk$set(out.width = NULL, out.extra = NULL)
 
       nothing to commit (create/copy files and use "git add" to track)
                     </input>
-                  </program>
+                  </sage>
 
                   <p>If we add a file, say <c>code.R</c>, you will see a message like:</p>
 
-                  <program language="r">
+                  <sage language="r">
                     <input>
       Untracked files:
         (use "git add &lt;file&gt;..." to include in what will be committed)
       	code.R
                     </input>
-                  </program>
+                  </sage>
 
                 </subsection>
 
@@ -1149,25 +1149,25 @@ knitr::opts_chunk$set(out.width = NULL, out.extra = NULL)
 
                   <p>To demonstrate, we add <c>code.R</c> to the staging area:</p>
 
-                  <program language="r">
+                  <sage language="r">
                     <input>
       git add code.R
                     </input>
-                  </program>
+                  </sage>
 
                   <p>Running <c>git status</c> now shows</p>
 
-                  <program language="r">
+                  <sage language="r">
                     <input>
       Changes to be committed:
         (use "git rm --cached &lt;file&gt;..." to unstage)
       	new file:   code.R
                     </input>
-                  </program>
+                  </sage>
 
                   <p>Note that it is not a problem to have other files in the working directory that are not in the staging area. For example, if we create files <c>test-1.R</c> and <c>test-2.R</c>, <c>git status</c> reminds us these are not staged:</p>
 
-                  <program language="r">
+                  <sage language="r">
                     <input>
       On branch main
 
@@ -1182,7 +1182,7 @@ knitr::opts_chunk$set(out.width = NULL, out.extra = NULL)
       	test-1.R
       	test-2.R
                     </input>
-                  </program>
+                  </sage>
 
                 </subsection>
 
@@ -1195,72 +1195,72 @@ knitr::opts_chunk$set(out.width = NULL, out.extra = NULL)
 
                   <p>If we are now ready to make a first version of our repository, which only includes <c>code.R</c>, we can use the following command:</p>
 
-                  <program language="r">
+                  <sage language="r">
                     <input>
       git commit -m "Adding a new file." 
                     </input>
-                  </program>
+                  </sage>
 
                   <p>Note that <c>commit</c> requires us to add a message. Making these informative will help us remember why this change was made. After running <c>commit</c> we will receive a message letting us know it was committed:</p>
 
-                  <program language="r">
+                  <sage language="r">
                     <input>
       [main (root-commit) 1735c25] adding a new file
        1 file changed, 0 insertions(+), 0 deletions(-)
        create mode 100644 code.R
                     </input>
-                  </program>
+                  </sage>
 
                   <p>Note that  if we edit <c>code.R</c>, it changes only in the working directory. <c>git status</c> shows us</p>
 
-                  <program language="r">
+                  <sage language="r">
                     <input>
       Changes not staged for commit:
        (use "git add &lt;file&gt;..." to update what will be committed)
         (use "git restore &lt;file&gt;..." to discard changes in working directory)
       	modified:   code.R
                     </input>
-                  </program>
+                  </sage>
 
                   <p>To add the edited file to the local repo, we need to stage the edited file and commit the changes</p>
 
-                  <program language="r">
+                  <sage language="r">
                     <input>
       git add code.R
       git commit -m "Added some lines of code."
                     </input>
-                  </program>
+                  </sage>
 
                   <p>which gives us a message letting us know a change was made:</p>
 
-                  <program language="r">
+                  <sage language="r">
                     <input>
       [main 8843673] added some lines of code
        1 file changed, 1 insertion(+)
                     </input>
-                  </program>
+                  </sage>
 
                   <p>Note that we can achieve the same results with just one line by following the commit command with the files we want committed:</p>
 
-                  <program language="r">
+                  <sage language="r">
                     <input>
       git commit -m "Added some lines of code." code.R
                     </input>
-                  </program>
+                  </sage>
 
                   <p>This is convenient when the number of files that change is small and we can list them at the end.</p>
 
                   <p>To see version control in action note what happens when we type</p>
 
-                  <program language="r">
+                  <sage language="r">
                     <input>
       git log code.R
                     </input>
-                  </program>
+                  </sage>
 
                   <p>we get a list of the version that have been stored in our log:</p>
 
-                  <program language="r">
+                  <sage language="r">
                     <input>
       commit 88436739dcbd57d8ad27a23663d30fd2c06034ca (HEAD -&gt; main)
       Author: Rafael A Irizarry 
@@ -1274,7 +1274,7 @@ knitr::opts_chunk$set(out.width = NULL, out.extra = NULL)
 
           Adding a new file.
                     </input>
-                  </program>
+                  </sage>
 
                 </subsection>
 
@@ -1287,11 +1287,11 @@ knitr::opts_chunk$set(out.width = NULL, out.extra = NULL)
 
                   <p>Once we are ready to sync our local repo with the upstream GitHub repo, we can use</p>
 
-                  <program language="r">
+                  <sage language="r">
                     <input>
       git push -u origin main
                     </input>
-                  </program>
+                  </sage>
 
                   <note>
                     <p>If this is your first time pushing to your GitHub account, you will be asked for a password and you have to enter the personal access token we described in <xref ref="sec-connecting-git-github"/>. You should only need to do this once.</p>
@@ -1299,28 +1299,28 @@ knitr::opts_chunk$set(out.width = NULL, out.extra = NULL)
 
                   <p>The <c>-u</c> flag, short for <c>--set-upstream</c> will make Git remember that in this repository you want to push to the <c>main</c> branch in the remote repo <c>origin</c> defined in the initialization. This is beneficial because the next time you want to push or pull from this branch, you can simply use</p>
 
-                  <program language="r">
+                  <sage language="r">
                     <input>
       git push
                     </input>
-                  </program>
+                  </sage>
 
                   <p>If you need a reminder of where you are pushing to you can type</p>
 
-                  <program language="r">
+                  <sage language="r">
                     <input>
       git remote -v
                     </input>
-                  </program>
+                  </sage>
 
                   <p>The <c>v</c> stands for <c>verbose</c>. In our example we will get</p>
 
-                  <program language="r">
+                  <sage language="r">
                     <input>
       origin  https://github.com/username/homework-0.git (fetch)
       origin  https://github.com/username/homework-0.git (push)
                     </input>
-                  </program>
+                  </sage>
 
                   <p>We describe <c>fetch</c> next. If you don't get anything back it means you have not defined your remote as we did in <xref ref="sec-init"/>.</p>
 
@@ -1339,19 +1339,19 @@ knitr::opts_chunk$set(out.width = NULL, out.extra = NULL)
 
                   <p>If this is a collaborative project, the upstream repo may change and become different than your version. To update your local repository to be like the upstream repo, we use the command <c>fetch</c>:</p>
 
-                  <program language="r">
+                  <sage language="r">
                     <input>
       git fetch
                     </input>
-                  </program>
+                  </sage>
 
                   <p>And then to make these copies to our working directory, we use the command:</p>
 
-                  <program language="r">
+                  <sage language="r">
                     <input>
       git merge
                     </input>
-                  </program>
+                  </sage>
 
                 </subsection>
 
@@ -1364,11 +1364,11 @@ knitr::opts_chunk$set(out.width = NULL, out.extra = NULL)
 
                   <p>We very often just want to fetch and merge without checking. For this, we use:</p>
 
-                  <program language="r">
+                  <sage language="r">
                     <input>
       git pull
                     </input>
-                  </program>
+                  </sage>
 
                 </subsection>
 
@@ -1377,19 +1377,19 @@ knitr::opts_chunk$set(out.width = NULL, out.extra = NULL)
 
                   <p>You can easily download all the code and version control logs from an existing public repository using <c>git clone</c>. When you clone you are essentially making a complete copy of the entire directory. For example, you can download all the code used to create this book using:</p>
 
-                  <program language="r">
+                  <sage language="r">
                     <input>
       git clone https://github.com/rafalab/dsbook-part-1.git
                     </input>
-                  </program>
+                  </sage>
 
                   <p>You can see a simple example with the murders directory created in the Unix chapter by cloning this repository:</p>
 
-                  <program language="r">
+                  <sage language="r">
                     <input>
       git clone https://github.com/rairizarry/murders.git
                     </input>
-                  </program>
+                  </sage>
 
                   <p>If you use <c>git clone</c>, you do not need to initialize as the branch and remote will already be defined. Now, to push changes you need to be added as a collaborator. Otherwise you will have to follow the more complex process of a <em>pull request</em>, which we don't cover here.</p>
 
@@ -1498,7 +1498,7 @@ knitr::opts_chunk$set(out.width = NULL, out.extra = NULL)
 
                 <p>Situations like the ones just described are actually quite common for a data analyst. Here, we describe how you can keep your projects organized with RStudio so that re-running an analysis is straight-forward. We then demonstrate how to generate reproducible reports with quarto or R markdown. The <alert>knitR</alert> package will greatly help with recreating reports with minimal work. This is possible due to the fact that markdown documents permit code and textual descriptions to be combined into the same document, and the figures and tables produced by the code are automatically added to the document.</p>
 
-                <program language="r">
+                <sage language="r">
                   <input>
       img_path &lt;- "productivity/img"
       screenshots &lt;- list.files(file.path(img_path, "windows-screenshots"))
@@ -1506,7 +1506,7 @@ knitr::opts_chunk$set(out.width = NULL, out.extra = NULL)
       mac_screenshots &lt;- list.files(file.path(img_path, "mac-screenshots"))
       mac_screenshots &lt;- file.path(img_path,"mac-screenshots", mac_screenshots)
                   </input>
-                </program>
+                </sage>
 
               <section xml:id="sec-rstudio-projects">
                 <title>RStudio projects</title>
@@ -1599,7 +1599,7 @@ knitr::opts_chunk$set(out.width = NULL, out.extra = NULL)
 
                   <p>At the top you see:</p>
 
-                  <program language="r">
+                  <sage language="r">
                     <input>
       ---
       title: "Report on Gun Murders"
@@ -1607,7 +1607,7 @@ knitr::opts_chunk$set(out.width = NULL, out.extra = NULL)
       format: html
       ---
                     </input>
-                  </program>
+                  </sage>
 
                   <p>The things between the <c>---</c> is the <em>YAML</em> header. YAML is a widely used language mainly used for providing configuration data. With Quarto and R markdown it is mainly used to define options for the document. You can define many other things in the header than what is included in the template. We don't discuss those here, but much information is available from the quarto guide. The one parameter that we will highlight is <c>format</c>. By changing this to, say, <c>pdf</c>, we can control the type of output that is produced when we compile. The title and author parameters are automatically filled because we filled in the blanks in the RStudio dialog box that pops up when creating a new document.</p>
 
@@ -1618,11 +1618,11 @@ knitr::opts_chunk$set(out.width = NULL, out.extra = NULL)
 
                   <p>In various places in the document, we see something like this:</p>
 
-                  <program language="r">
+                  <sage language="r">
                     <input>
       1 + 1
                     </input>
-                  </program>
+                  </sage>
 
                   <p>These are the code chunks. When you compile the document, the R code inside the chunk, in this case <c>1+1</c>, will be evaluated and the result included in that position in the final document.</p>
 
@@ -1630,31 +1630,31 @@ knitr::opts_chunk$set(out.width = NULL, out.extra = NULL)
 
                   <p>This applies to plots as well; the plot will be placed in that position. We can write something like this:</p>
 
-                  <program language="r">
+                  <sage language="r">
                     <input>
       plot(1)
                     </input>
-                  </program>
+                  </sage>
 
                   <p>By default, the code will show up as well. To avoid having the code show up, you can use an argument, which are annotated with <c>#|</c> To avoid showing code in the final document, you can use the argument <c>echo: FALSE</c>. For example:</p>
 
-                  <program language="r">
+                  <sage language="r">
                     <input>
       #| echo: false
 
       1+1
                     </input>
-                  </program>
+                  </sage>
 
                   <p>We recommend getting into the habit of adding a label to the R code chunks. This will be very useful when debugging, among other situations. You do this by adding a descriptive word like this:</p>
 
-                  <program language="r">
+                  <sage language="r">
                     <input>
       #| label: one-plus-one
 
       1+1
                     </input>
-                  </program>
+                  </sage>
 
                 </subsection>
 
@@ -1663,12 +1663,12 @@ knitr::opts_chunk$set(out.width = NULL, out.extra = NULL)
 
                   <p>If you want to apply an option globally, you can include in the header, under <c>execute</c>. For example adding the following line to the header make code not show up, by default:</p>
 
-                  <program language="r">
+                  <sage language="r">
                     <input>
       execute:
         echo: false
                     </input>
-                  </program>
+                  </sage>
 
                   <p>We will not cover more details here, but as you become more experienced with R Markdown, you will learn the advantages of setting global options for the compilation process.</p>
 
@@ -1762,14 +1762,14 @@ knitr::opts_chunk$set(out.width = NULL, out.extra = NULL)
 
                   <p>The content of this file will be:</p>
 
-                  <program language="r">
+                  <sage language="r">
                     <input>
       url &lt;- "https://raw.githubusercontent.com/rafalab/dslabs/master/inst/
       extdata/murders.csv"
       dest_file &lt;- "data/murders.csv"
       download.file(url, destfile = dest_file)
                     </input>
-                  </program>
+                  </sage>
 
                   <p>Notice that we are using the relative path <c>data/murders.csv</c>.</p>
 
@@ -1777,7 +1777,7 @@ knitr::opts_chunk$set(out.width = NULL, out.extra = NULL)
 
                   <p>Now we are ready to write a script to read this data and prepare a table that we can use for analysis. Call the file <c>wrangle-data.R</c>. The content of this file will be:</p>
 
-                  <program language="r">
+                  <sage language="r">
                     <input>
       library(tidyverse)
       murders &lt;- read_csv("data/murders.csv")
@@ -1785,7 +1785,7 @@ knitr::opts_chunk$set(out.width = NULL, out.extra = NULL)
                                    rate = total / population * 10^5)
       save(murders, file = "rdas/murders.rda")
                     </input>
-                  </program>
+                  </sage>
 
                   <p>Again note that we use relative paths exclusively.</p>
 
@@ -1800,21 +1800,21 @@ knitr::opts_chunk$set(out.width = NULL, out.extra = NULL)
 
                   <p>While <c>save</c> let's you save several objects that then get loaded with the same names used when saving, the function <c>saveRDS</c> lets you save one object, without the name. To bring it back you use the <c>readRDS</c> function. An example of how this is used is you save it in one session:</p>
 
-                  <program language="r">
+                  <sage language="r">
                     <input>
       #| eval: false
       saveRDS(murders, file = "rdas/murders.rda")
                     </input>
-                  </program>
+                  </sage>
 
                   <p>Then read it in in another session, using whatever object name you want:</p>
 
-                  <program language="r">
+                  <sage language="r">
                     <input>
       #| eval: false
       dat &lt;- readRDS("rdas/murders.rda")
                     </input>
-                  </program>
+                  </sage>
 
                 </subsection>
 
@@ -1823,7 +1823,7 @@ knitr::opts_chunk$set(out.width = NULL, out.extra = NULL)
 
                   <p>Now we are ready to write the analysis file. Let's call it <c>analysis.R</c>. The content should be the following:</p>
 
-                  <program language="r">
+                  <sage language="r">
                     <input>
       library(tidyverse)
       load("rdas/murders.rda")
@@ -1833,7 +1833,7 @@ knitr::opts_chunk$set(out.width = NULL, out.extra = NULL)
         geom_bar(width = 0.5, stat = "identity", color = "black") +
         coord_flip()
                     </input>
-                  </program>
+                  </sage>
 
                   <p>If you run this analysis, you will see that it generates a plot.</p>
 
@@ -1852,11 +1852,11 @@ knitr::opts_chunk$set(out.width = NULL, out.extra = NULL)
 
                   <p>and then you can add the line:</p>
 
-                  <program language="r">
+                  <sage language="r">
                     <input>
       ggsave("figs/barplot.png")
                     </input>
-                  </program>
+                  </sage>
 
                   <p>to your R script. If you run the script now, a png file will be saved into the <c>figs</c> directory. If we wanted to copy that file to some other directory where we are developing a presentation, we can avoid using the mouse by using the <c>cp</c> command in our terminal.</p>
 
@@ -1867,7 +1867,7 @@ knitr::opts_chunk$set(out.width = NULL, out.extra = NULL)
 
                   <p>You now have a self-contained analysis in one directory. One final recommendation is to create a <c>README.txt</c> file describing what each of these files does for the benefit of others reading your code, including your future self. This would not be a script but just some notes. One of the options provided when opening a new file in RStudio is a text file. You can save something like this into the text file:</p>
 
-                  <program language="r">
+                  <sage language="r">
                     <input>
       We analyze US gun murder data collected by the FBI.
 
@@ -1878,7 +1878,7 @@ knitr::opts_chunk$set(out.width = NULL, out.extra = NULL)
 
       analysis.R - A plot is generated and saved in the figs directory.
                     </input>
-                  </program>
+                  </sage>
 
                 </subsection>
 
@@ -1921,11 +1921,11 @@ knitr::opts_chunk$set(out.width = NULL, out.extra = NULL)
 
                   <p>We can now go to GitHub and confirm that our files are there. You can see a version of this project, organized with Unix directories, on GitHub. You can download a copy to your computer by using the <c>git clone</c> command on your terminal. This command will create a directory called <c>murders</c> in your working directory, so be careful where you call it from.</p>
 
-                  <program language="r">
+                  <sage language="r">
                     <input>
       git clone https://github.com/rairizarry/murders.git
                     </input>
-                  </program>
+                  </sage>
 
                 </subsection>
 
