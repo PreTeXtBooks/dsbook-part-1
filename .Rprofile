@@ -23,15 +23,24 @@ local({
 
   missing_pkgs <- cran_pkgs[!vapply(cran_pkgs, requireNamespace, logical(1), quietly = TRUE)]
   if (length(missing_pkgs) > 0) {
-    install.packages(missing_pkgs, repos = "https://cloud.r-project.org")
+    tryCatch(
+      install.packages(missing_pkgs, repos = "https://cloud.r-project.org"),
+      error = function(e) message("Could not install packages (", paste(missing_pkgs, collapse = ", "), "): ", conditionMessage(e))
+    )
   }
 
   # ggflags is GitHub-only
   if (!requireNamespace("ggflags", quietly = TRUE)) {
     if (!requireNamespace("devtools", quietly = TRUE)) {
-      install.packages("devtools", repos = "https://cloud.r-project.org")
+      tryCatch(
+        install.packages("devtools", repos = "https://cloud.r-project.org"),
+        error = function(e) message("Could not install devtools: ", conditionMessage(e))
+      )
     }
-    devtools::install_github("jimjam-slam/ggflags")
+    tryCatch(
+      devtools::install_github("jimjam-slam/ggflags"),
+      error = function(e) message("Could not install ggflags: ", conditionMessage(e))
+    )
   }
 
   # Load the packages most commonly needed across all chapters.

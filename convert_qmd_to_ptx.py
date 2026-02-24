@@ -37,7 +37,8 @@ def add_r_package_install_checks(code_lines):
                         seen_install_checks.add("devtools")
                         result.append(
                             '{}if (!requireNamespace("devtools", quietly = TRUE)) '
-                            'install.packages("devtools", repos = "https://cloud.r-project.org")'.format(indent)
+                            'tryCatch(install.packages("devtools", repos = "https://cloud.r-project.org"), '
+                            'error = function(e) invisible(NULL))'.format(indent)
                         )
                     result.append(
                         '{}if (!requireNamespace("{}", quietly = TRUE)) '
@@ -46,7 +47,8 @@ def add_r_package_install_checks(code_lines):
                 else:
                     result.append(
                         '{}if (!requireNamespace("{}", quietly = TRUE)) '
-                        'install.packages("{}", repos = "https://cloud.r-project.org")'.format(indent, pkg, pkg)
+                        'tryCatch(install.packages("{}", repos = "https://cloud.r-project.org"), '
+                        'error = function(e) invisible(NULL))'.format(indent, pkg, pkg)
                     )
         result.append(line)
 
