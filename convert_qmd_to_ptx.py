@@ -6,6 +6,53 @@ Convert Quarto markdown (.qmd) files to PreText XML format
 import re
 import sys
 
+# Packages available from GitHub only (not CRAN)
+GITHUB_PACKAGES = {
+    "ggflags": "jimjam-slam/ggflags",
+}
+
+
+def add_r_package_install_checks(code_lines):
+    """
+    For R code, add install checks before library() calls so that sage cells
+    are self-contained and work on the SageMath server even when packages like
+    dslabs are not pre-installed.
+    """
+    result = []
+    seen_install_checks = set()
+
+    for line in code_lines:
+        # Match library(pkg), library("pkg"), or library('pkg')
+        # The optional quote group (\2) uses a backreference so open/close quotes match.
+        m = re.match(r'^(\s*)library\((["\']?)([\w.]+)\2\)', line)
+        if m:
+            indent = m.group(1)
+            pkg = m.group(3)
+            if pkg not in seen_install_checks:
+                seen_install_checks.add(pkg)
+                if pkg in GITHUB_PACKAGES:
+                    repo = GITHUB_PACKAGES[pkg]
+                    # Ensure devtools is available (only once per code block)
+                    if "devtools" not in seen_install_checks:
+                        seen_install_checks.add("devtools")
+                        result.append(
+                            '{}if (!requireNamespace("devtools", quietly = TRUE)) '
+                            'install.packages("devtools", repos = "https://cloud.r-project.org")'.format(indent)
+                        )
+                    result.append(
+                        '{}if (!requireNamespace("{}", quietly = TRUE)) '
+                        'devtools::install_github("{}")'.format(indent, pkg, repo)
+                    )
+                else:
+                    result.append(
+                        '{}if (!requireNamespace("{}", quietly = TRUE)) '
+                        'install.packages("{}", repos = "https://cloud.r-project.org")'.format(indent, pkg, pkg)
+                    )
+        result.append(line)
+
+    return result
+
+
 def escape_xml(text):
     """Escape XML special characters"""
     text = text.replace('&', '&amp;')
@@ -129,6 +176,9 @@ def convert_qmd_to_ptx(qmd_content, chapter_id, chapter_title):
                     lang_attr = 'r' if code_lang == 'r' else code_lang
                     result.append(indent + '<{} language="{}">'.format(tag, lang_attr))
                     result.append(indent + '  <input>')
+                    # For R cells, add install checks before library() calls
+                    if code_lang == 'r':
+                        code_block_content = add_r_package_install_checks(code_block_content)
                     for code_line in code_block_content:
                         result.append(escape_xml(code_line))
                     result.append(indent + '  </input>')

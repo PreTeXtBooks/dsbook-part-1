@@ -1779,6 +1779,7 @@ knitr::opts_chunk$set(out.width = NULL, out.extra = NULL)
 
                   <sage language="r">
                     <input>
+      if (!requireNamespace("tidyverse", quietly = TRUE)) install.packages("tidyverse", repos = "https://cloud.r-project.org")
       library(tidyverse)
       murders &lt;- read_csv("data/murders.csv")
       murders &lt;- murders |&gt; mutate(region = factor(region),
@@ -1825,6 +1826,7 @@ knitr::opts_chunk$set(out.width = NULL, out.extra = NULL)
 
                   <sage language="r">
                     <input>
+      if (!requireNamespace("tidyverse", quietly = TRUE)) install.packages("tidyverse", repos = "https://cloud.r-project.org")
       library(tidyverse)
       load("rdas/murders.rda")
 

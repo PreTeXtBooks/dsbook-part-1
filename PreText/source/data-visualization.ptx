@@ -31,7 +31,9 @@
           
           <sage language="r">
             <input>
+if (!requireNamespace("tidyverse", quietly = TRUE)) install.packages("tidyverse", repos = "https://cloud.r-project.org")
 library(tidyverse)
+if (!requireNamespace("dslabs", quietly = TRUE)) install.packages("dslabs", repos = "https://cloud.r-project.org")
 library(dslabs)
 head(heights)
             </input>
@@ -301,6 +303,7 @@ heights |> filter(sex == "Female") |>
               
               <sage language="r">
                 <input>
+if (!requireNamespace("dslabs", quietly = TRUE)) install.packages("dslabs", repos = "https://cloud.r-project.org")
 library(dslabs)
 male &lt;- heights$height[heights$sex == "Male"]
 female &lt;- heights$height[heights$sex == "Female"]
@@ -317,7 +320,9 @@ female &lt;- heights$height[heights$sex == "Female"]
               
               <sage language="r">
                 <input>
+if (!requireNamespace("tidyverse", quietly = TRUE)) install.packages("tidyverse", repos = "https://cloud.r-project.org")
 library(tidyverse)
+if (!requireNamespace("dslabs", quietly = TRUE)) install.packages("dslabs", repos = "https://cloud.r-project.org")
 library(dslabs)
 ds_theme_set()
 tab &lt;- gapminder |> filter(year == 2010) |> group_by(continent) |> select(continent, population)  
@@ -350,6 +355,7 @@ tab |> ggplot(aes(x = continent, y = population/10^6)) +
               
               <sage language="r">
                 <input>
+if (!requireNamespace("dslabs", quietly = TRUE)) install.packages("dslabs", repos = "https://cloud.r-project.org")
 library(dslabs)
 x &lt;- heights$height[heights$sex=="Male"]
                 </input>
@@ -371,7 +377,9 @@ x &lt;- heights$height[heights$sex=="Male"]
           
           <sage language="r">
             <input>
+if (!requireNamespace("dplyr", quietly = TRUE)) install.packages("dplyr", repos = "https://cloud.r-project.org")
 library(dplyr)
+if (!requireNamespace("ggplot2", quietly = TRUE)) install.packages("ggplot2", repos = "https://cloud.r-project.org")
 library(ggplot2)
             </input>
           </sage>
@@ -394,8 +402,11 @@ library(ggplot2)
           
           <sage language="r">
             <input>
+if (!requireNamespace("dslabs", quietly = TRUE)) install.packages("dslabs", repos = "https://cloud.r-project.org")
 library(dslabs)
+if (!requireNamespace("ggthemes", quietly = TRUE)) install.packages("ggthemes", repos = "https://cloud.r-project.org")
 library(ggthemes)
+if (!requireNamespace("ggrepel", quietly = TRUE)) install.packages("ggrepel", repos = "https://cloud.r-project.org")
 library(ggrepel)
 
 r &lt;- murders |> 
@@ -454,6 +465,7 @@ murders |> ggplot(aes(x = population/10^6, y = total, label = abb)) +
           
           <sage language="r">
             <input>
+if (!requireNamespace("dslabs", quietly = TRUE)) install.packages("dslabs", repos = "https://cloud.r-project.org")
 library(dslabs)
             </input>
           </sage>
@@ -726,6 +738,7 @@ ds_theme_set()
           
           <sage language="r">
             <input>
+if (!requireNamespace("ggthemes", quietly = TRUE)) install.packages("ggthemes", repos = "https://cloud.r-project.org")
 library(ggthemes)
 p6 &lt;- p5 + theme_economist()
             </input>
@@ -743,7 +756,9 @@ p6 &lt;- p5 + theme_economist()
           
           <sage language="r">
             <input>
+if (!requireNamespace("ggthemes", quietly = TRUE)) install.packages("ggthemes", repos = "https://cloud.r-project.org")
 library(ggthemes)
+if (!requireNamespace("ggrepel", quietly = TRUE)) install.packages("ggrepel", repos = "https://cloud.r-project.org")
 library(ggrepel)
 
 r &lt;- murders |> 
@@ -894,6 +909,7 @@ x |> ggplot(aes(x, y, fill = z)) +
           
           <sage language="r">
             <input>
+if (!requireNamespace("gridExtra", quietly = TRUE)) install.packages("gridExtra", repos = "https://cloud.r-project.org")
 library(gridExtra)
 grid.arrange(p5, p6, ncol = 2)
             </input>
@@ -907,8 +923,11 @@ grid.arrange(p5, p6, ncol = 2)
           
           <sage language="r">
             <input>
+if (!requireNamespace("dplyr", quietly = TRUE)) install.packages("dplyr", repos = "https://cloud.r-project.org")
 library(dplyr)
+if (!requireNamespace("ggplot2", quietly = TRUE)) install.packages("ggplot2", repos = "https://cloud.r-project.org")
 library(ggplot2)
+if (!requireNamespace("dslabs", quietly = TRUE)) install.packages("dslabs", repos = "https://cloud.r-project.org")
 library(dslabs)
             </input>
           </sage>
@@ -1106,8 +1125,11 @@ heights |>
 
           <sage language="r">
             <input>
+if (!requireNamespace("tidyverse", quietly = TRUE)) install.packages("tidyverse", repos = "https://cloud.r-project.org")
 library(tidyverse)
+if (!requireNamespace("dslabs", quietly = TRUE)) install.packages("dslabs", repos = "https://cloud.r-project.org")
 library(dslabs)
+if (!requireNamespace("gridExtra", quietly = TRUE)) install.packages("gridExtra", repos = "https://cloud.r-project.org")
 library(gridExtra)
             </input>
           </sage>
@@ -1130,6 +1152,7 @@ browsers &lt;- data.frame(Browser = rep(c("Opera","Safari","Firefox","IE","Chrom
 
           <sage language="r">
             <input>
+if (!requireNamespace("ggthemes", quietly = TRUE)) install.packages("ggthemes", repos = "https://cloud.r-project.org")
 library(ggthemes)
 p1 &lt;- browsers |&gt; ggplot(aes(x = "", y = Percentage, fill = Browser)) +
   geom_col(width = 1, col = "black")  + coord_polar(theta = "y") +
@@ -1193,6 +1216,7 @@ grid.arrange(p1, p2, nrow = 2)
 
           <sage language="r">
             <input>
+if (!requireNamespace("scales", quietly = TRUE)) install.packages("scales", repos = "https://cloud.r-project.org")
 library(scales)
 browsers &lt;- filter(browsers, Year == 2015)
 at &lt;- with(browsers, 100 - cumsum(c(0,Percentage[-length(Percentage)])) - 0.5*Percentage)  
@@ -1764,6 +1788,7 @@ dat |&gt;
             <sage language="r">
               <input>
 #| echo: false
+if (!requireNamespace("ggrepel", quietly = TRUE)) install.packages("ggrepel", repos = "https://cloud.r-project.org")
 library(ggrepel)
 west &lt;- c("Western Europe","Northern Europe","Southern Europe",
           "Northern America","Australia and New Zealand")
@@ -1798,6 +1823,7 @@ dat |&gt;
             <sage language="r">
               <input>
 #| echo: false
+if (!requireNamespace("ggrepel", quietly = TRUE)) install.packages("ggrepel", repos = "https://cloud.r-project.org")
 library(ggrepel)
 dat |&gt; 
   mutate(year = paste0("life_expectancy_", year)) |&gt;
@@ -1881,6 +1907,7 @@ geom_text(dat, mapping=aes(x%%9, x%/%9+0.25, label=x), size=4)
 
           <sage language="r">
             <input>
+if (!requireNamespace("RColorBrewer", quietly = TRUE)) install.packages("RColorBrewer", repos = "https://cloud.r-project.org")
 library(RColorBrewer)
 rafalib::mypar()
 display.brewer.all(type = "seq")
@@ -1891,6 +1918,7 @@ display.brewer.all(type = "seq")
 
           <sage language="r">
             <input>
+if (!requireNamespace("RColorBrewer", quietly = TRUE)) install.packages("RColorBrewer", repos = "https://cloud.r-project.org")
 library(RColorBrewer)
 rafalib::mypar()
 display.brewer.all(type = "div")
@@ -2030,6 +2058,7 @@ if(knitr::is_html_output()){
 
           <sage language="r">
             <input>
+if (!requireNamespace("dslabs", quietly = TRUE)) install.packages("dslabs", repos = "https://cloud.r-project.org")
 library(dslabs)
             </input>
           </sage>
@@ -2044,6 +2073,7 @@ library(dslabs)
             <li><p>What is the problem with the plot below:</p></li>
           <sage language="r">
             <input>
+if (!requireNamespace("tidyverse", quietly = TRUE)) install.packages("tidyverse", repos = "https://cloud.r-project.org")
 library(tidyverse)
 ds_theme_set()
 data.frame(candidate=c("Clinton","Trump"), electoral_votes = c(232, 306)) |&gt;
@@ -2128,6 +2158,7 @@ rate &lt;- dat$count/dat$population*10000*52/dat$weeks_reporting
             <li><p>Say we are interested in comparing gun homicide rates across regions of the US. We see this plot:</p></li>
           <sage language="r">
             <input>
+if (!requireNamespace("dslabs", quietly = TRUE)) install.packages("dslabs", repos = "https://cloud.r-project.org")
 library(dslabs)
 murders |&gt; mutate(rate = total/population*100000) |&gt;
 group_by(region) |&gt;
@@ -2161,7 +2192,9 @@ murders |&gt; mutate(rate = total/population*100000)
             <li><p>The plots below show three continuous variables. </p></li>
           <sage language="r">
             <input>
+if (!requireNamespace("scatterplot3d", quietly = TRUE)) install.packages("scatterplot3d", repos = "https://cloud.r-project.org")
 library(scatterplot3d)
+if (!requireNamespace("RColorBrewer", quietly = TRUE)) install.packages("RColorBrewer", repos = "https://cloud.r-project.org")
 library(RColorBrewer)
 set.seed(1)
 n &lt;- 25
@@ -2223,7 +2256,9 @@ abline(v=2, col=3)
 
           <sage language="r">
             <input>
+if (!requireNamespace("tidyverse", quietly = TRUE)) install.packages("tidyverse", repos = "https://cloud.r-project.org")
 library(tidyverse)
+if (!requireNamespace("dslabs", quietly = TRUE)) install.packages("dslabs", repos = "https://cloud.r-project.org")
 library(dslabs)
 gapminder |&gt; as_tibble()
             </input>
@@ -2462,6 +2497,7 @@ gapminder |&gt; filter(country %in% countries &amp; !is.na(fertility)) |&gt;
 
           <sage language="r">
             <input>
+if (!requireNamespace("geomtextpath", quietly = TRUE)) install.packages("geomtextpath", repos = "https://cloud.r-project.org")
 library(geomtextpath)
 gapminder |&gt; 
   filter(country %in% countries) |&gt; 
@@ -2706,6 +2742,7 @@ gridExtra::grid.arrange(p1, p2, nrow = 1)
 
             <sage language="r">
               <input>
+if (!requireNamespace("ggridges", quietly = TRUE)) install.packages("ggridges", repos = "https://cloud.r-project.org")
 library(ggridges)
 p &lt;- gapminder |&gt; 
   filter(year == past_year &amp; !is.na(dollars_per_day)) |&gt;
@@ -2934,6 +2971,7 @@ gapminder |&gt;
 
           <sage language="r">
             <input>
+if (!requireNamespace("ggrepel", quietly = TRUE)) install.packages("ggrepel", repos = "https://cloud.r-project.org")
 library(ggrepel)
 gapminder &lt;- gapminder |&gt; 
   mutate(group = case_when(
@@ -2995,6 +3033,7 @@ f(p) = \log \left( \frac{p}{1-p} \right)
 
             <sage language="r">
               <input>
+if (!requireNamespace("ggrepel", quietly = TRUE)) install.packages("ggrepel", repos = "https://cloud.r-project.org")
 library(ggrepel)
 highlight &lt;- c("Sierra Leone", "Mauritius",  "Sudan", "Botswana", "Tunisia",
                "Cambodia","Singapore","Chile", "Haiti", "Bolivia",
@@ -3033,8 +3072,11 @@ gapminder |&gt; filter(year %in% present_year &amp; !is.na(gdp) &amp; !is.na(inf
 
             <sage language="r">
               <input>
+if (!requireNamespace("tidyverse", quietly = TRUE)) install.packages("tidyverse", repos = "https://cloud.r-project.org")
 library(tidyverse)
+if (!requireNamespace("RColorBrewer", quietly = TRUE)) install.packages("RColorBrewer", repos = "https://cloud.r-project.org")
 library(RColorBrewer)
+if (!requireNamespace("dslabs", quietly = TRUE)) install.packages("dslabs", repos = "https://cloud.r-project.org")
 library(dslabs)
 names(us_contagious_diseases)
               </input>

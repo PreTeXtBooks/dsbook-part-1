@@ -222,6 +222,7 @@ install.packages("dslabs")
           
           <sage language="r">
             <input>
+if (!requireNamespace("dslabs", quietly = TRUE)) install.packages("dslabs", repos = "https://cloud.r-project.org")
 library(dslabs)
             </input>
           </sage>
@@ -285,10 +286,16 @@ installed.packages()
       ## img_path &lt;- "img"
       ##from http://abcnews.go.com/images/International/homocides_g8_countries_640x360_wmain.jpg
       ##knitr::include_graphics(file.path(img_path,"homocides_g8_countries_640x360_wmain.jpg"))
+      if (!requireNamespace("tidyverse", quietly = TRUE)) install.packages("tidyverse", repos = "https://cloud.r-project.org")
       library(tidyverse)
+      if (!requireNamespace("ggplot2", quietly = TRUE)) install.packages("ggplot2", repos = "https://cloud.r-project.org")
       library(ggplot2)
+      if (!requireNamespace("devtools", quietly = TRUE)) install.packages("devtools", repos = "https://cloud.r-project.org")
+      if (!requireNamespace("ggflags", quietly = TRUE)) devtools::install_github("jimjam-slam/ggflags")
       library(ggflags) # from GitHub repo jimjam-slam/ggflags
+      if (!requireNamespace("countrycode", quietly = TRUE)) install.packages("countrycode", repos = "https://cloud.r-project.org")
       library(countrycode)
+      if (!requireNamespace("dslabs", quietly = TRUE)) install.packages("dslabs", repos = "https://cloud.r-project.org")
       library(dslabs)
       
       dat &lt;- tibble(country = toupper(c("US", "Italy", "Canada", "UK", "Japan", "Germany", "France", "Russia")),
@@ -633,6 +640,7 @@ installed.packages()
       <sage language="r"><input>
       #| cache: false
       
+      if (!requireNamespace("dslabs", quietly = TRUE)) install.packages("dslabs", repos = "https://cloud.r-project.org")
       library(dslabs)
       </input></sage>
       
@@ -1113,6 +1121,7 @@ installed.packages()
       <p>Say we want to rank the states from least to most gun murders. The function <c>sort</c> sorts a vector in increasing order. We can therefore see the largest number of gun murders by typing:</p>
       
       <sage language="r"><input>
+      if (!requireNamespace("dslabs", quietly = TRUE)) install.packages("dslabs", repos = "https://cloud.r-project.org")
       library(dslabs)
       sort(murders$total)
       </input></sage>
@@ -1220,6 +1229,7 @@ installed.packages()
       <p>California had the most murders, but does this mean it is the most dangerous state? What if it just has many more people than any other state? We can quickly confirm that California indeed has the largest population:</p>
       
       <sage language="r"><input>
+      if (!requireNamespace("dslabs", quietly = TRUE)) install.packages("dslabs", repos = "https://cloud.r-project.org")
       library(dslabs)
       murders$state[which.max(murders$population)]
       </input></sage>
@@ -1314,6 +1324,7 @@ installed.packages()
       <p>R provides a powerful and convenient way of indexing vectors. We can, for example, subset a vector based on properties of another vector. In this section, we continue working with our US murders example, which we can load like this:</p>
       
       <sage language="r"><input>
+      if (!requireNamespace("dslabs", quietly = TRUE)) install.packages("dslabs", repos = "https://cloud.r-project.org")
       library(dslabs)
       </input></sage>
       
@@ -1673,6 +1684,7 @@ installed.packages()
       <p>For remaining exercises 35-42, start by loading the library and data.</p>
       
       <sage language="r"><input>
+      if (!requireNamespace("dslabs", quietly = TRUE)) install.packages("dslabs", repos = "https://cloud.r-project.org")
       library(dslabs)
       </input></sage>
       
@@ -1743,6 +1755,7 @@ if (a != 0) {
           
           <sage language="r">
             <input>
+if (!requireNamespace("dslabs", quietly = TRUE)) install.packages("dslabs", repos = "https://cloud.r-project.org")
 library(dslabs)
 murder_rate &lt;- murders$total / murders$population*100000
             </input>
@@ -2112,6 +2125,7 @@ my_func &lt;- function(y){
         
         <sage language="r">
           <input>
+if (!requireNamespace("tidyverse", quietly = TRUE)) install.packages("tidyverse", repos = "https://cloud.r-project.org")
 library(tidyverse)
           </input>
         </sage>
@@ -2125,6 +2139,7 @@ library(tidyverse)
           
           <sage language="r">
             <input>
+if (!requireNamespace("dslabs", quietly = TRUE)) install.packages("dslabs", repos = "https://cloud.r-project.org")
 library(dslabs)
 head(murders)
             </input>
@@ -2337,7 +2352,9 @@ murders |&gt; select(state, region, rate) |&gt; filter(rate &lt;= 0.71)
             
             <sage language="r">
               <input>
+if (!requireNamespace("dplyr", quietly = TRUE)) install.packages("dplyr", repos = "https://cloud.r-project.org")
 library(dplyr)
+if (!requireNamespace("dslabs", quietly = TRUE)) install.packages("dslabs", repos = "https://cloud.r-project.org")
 library(dslabs)
               </input>
             </sage>
@@ -2737,6 +2754,7 @@ s_n &lt;- sapply(n, compute_s_n)
           
           <sage language="r">
             <input>
+if (!requireNamespace("purrr", quietly = TRUE)) install.packages("purrr", repos = "https://cloud.r-project.org")
 library(purrr)
 s_n &lt;- map(n, compute_s_n)
 class(s_n)
@@ -2884,7 +2902,9 @@ between(x, a, b)
               <p>Load the <alert>dplyr</alert> package and the murders dataset.</p>
               <sage language="r">
                 <input>
+if (!requireNamespace("dplyr", quietly = TRUE)) install.packages("dplyr", repos = "https://cloud.r-project.org")
 library(dplyr)
+if (!requireNamespace("dslabs", quietly = TRUE)) install.packages("dslabs", repos = "https://cloud.r-project.org")
 library(dslabs)
                 </input>
               </sage>
@@ -2951,6 +2971,7 @@ filter(murders, population &lt; 5000000 &amp; region == "Northeast")
               <p>For exercises 13-19, we will be using the data from the survey collected by the United States National Center for Health Statistics (NCHS). Load the <alert>NHANES</alert> package and data:</p>
               <sage language="r">
                 <input>
+if (!requireNamespace("NHANES", quietly = TRUE)) install.packages("NHANES", repos = "https://cloud.r-project.org")
 library(NHANES)
                 </input>
               </sage>
@@ -3015,8 +3036,11 @@ exp(mean(log(murders$population)))
           
           <sage language="r">
             <input>
+if (!requireNamespace("dplyr", quietly = TRUE)) install.packages("dplyr", repos = "https://cloud.r-project.org")
 library(dplyr)
+if (!requireNamespace("dslabs", quietly = TRUE)) install.packages("dslabs", repos = "https://cloud.r-project.org")
 library(dslabs)
+if (!requireNamespace("data.table", quietly = TRUE)) install.packages("data.table", repos = "https://cloud.r-project.org")
 library(data.table)
             </input>
           </sage>
@@ -3330,7 +3354,9 @@ murders_dt[order(region, rate)]
           
           <sage language="r">
             <input>
+if (!requireNamespace("data.table", quietly = TRUE)) install.packages("data.table", repos = "https://cloud.r-project.org")
 library(data.table)
+if (!requireNamespace("dslabs", quietly = TRUE)) install.packages("dslabs", repos = "https://cloud.r-project.org")
 library(dslabs)
 murders_dt &lt;- as.data.table(murders)
             </input>
@@ -3404,6 +3430,7 @@ murders_dt[population &lt; 5000000 &amp; region == "Northeast"]
           
           <sage language="r">
             <input>
+if (!requireNamespace("NHANES", quietly = TRUE)) install.packages("NHANES", repos = "https://cloud.r-project.org")
 library(NHANES)
             </input>
           </sage>
@@ -3601,6 +3628,7 @@ x[1:10]
             
             <sage language="r">
               <input>
+if (!requireNamespace("readr", quietly = TRUE)) install.packages("readr", repos = "https://cloud.r-project.org")
 library(readr)
               </input>
             </sage>
@@ -3699,6 +3727,7 @@ names(dat)
             
             <sage language="r">
               <input>
+if (!requireNamespace("readxl", quietly = TRUE)) install.packages("readxl", repos = "https://cloud.r-project.org")
 library(readxl)
               </input>
             </sage>
@@ -3742,6 +3771,7 @@ library(readxl)
             
             <sage language="r">
               <input>
+if (!requireNamespace("data.table", quietly = TRUE)) install.packages("data.table", repos = "https://cloud.r-project.org")
 library(data.table)
 dat &lt;- fread("murders.csv")
               </input>

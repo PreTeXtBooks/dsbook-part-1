@@ -10,7 +10,9 @@
 
           <sage language="r">
             <input>
+if (!requireNamespace("tidyverse", quietly = TRUE)) install.packages("tidyverse", repos = "https://cloud.r-project.org")
 library(tidyverse) 
+if (!requireNamespace("dslabs", quietly = TRUE)) install.packages("dslabs", repos = "https://cloud.r-project.org")
 library(dslabs)
 path &lt;- system.file("extdata", package = "dslabs")
 filename &lt;- file.path(path, "fertility-two-countries-example.csv")
@@ -207,6 +209,7 @@ new_tidy_data &lt;- wide_data |&gt;
               <input>
 #| message: false
 #| warning: false
+if (!requireNamespace("data.table", quietly = TRUE)) install.packages("data.table", repos = "https://cloud.r-project.org")
 library(data.table)
 dt_wide_data &lt;- fread(filename) 
 dt_new_tidy_data  &lt;- melt(dt_wide_data, 
@@ -296,6 +299,7 @@ dat_wide &lt;- dcast(dat_long, country + year ~ name, value.var = "value")
 
           <sage language="r">
             <input>
+if (!requireNamespace("janitor", quietly = TRUE)) install.packages("janitor", repos = "https://cloud.r-project.org")
 library(janitor)
 names(dat) &lt;- c("Country", "Year", "Fertility",  "Life Expectancy")
 clean_names(dat) |&gt; names()
@@ -414,7 +418,9 @@ dat &lt;- admissions |&gt; select(-applicants)
 
           <sage language="r">
             <input>
+if (!requireNamespace("tidyverse", quietly = TRUE)) install.packages("tidyverse", repos = "https://cloud.r-project.org")
 library(tidyverse)
+if (!requireNamespace("dslabs", quietly = TRUE)) install.packages("dslabs", repos = "https://cloud.r-project.org")
 library(dslabs)
 head(murders)
             </input>
@@ -455,6 +461,7 @@ head(tab)
 
           <sage language="r">
             <input>
+if (!requireNamespace("ggrepel", quietly = TRUE)) install.packages("ggrepel", repos = "https://cloud.r-project.org")
 library(ggrepel)
 tab |&gt; ggplot(aes(population/10^6, ev, label = abb)) +
   geom_point() +
@@ -765,6 +772,7 @@ tab &lt;- left_join(murders, results_us_election_2016, by = "state")
             <input>
 #| message: false
 #| warning: false
+if (!requireNamespace("data.table", quietly = TRUE)) install.packages("data.table", repos = "https://cloud.r-project.org")
 library(data.table)
 tab &lt;- merge(murders, results_us_election_2016, by = "state", all.x = TRUE)
             </input>
@@ -785,6 +793,7 @@ tab &lt;- merge(murders, results_us_election_2016, by = "state", all.x = TRUE)
 
           <sage language="r">
             <input>
+if (!requireNamespace("Lahman", quietly = TRUE)) install.packages("Lahman", repos = "https://cloud.r-project.org")
 library(Lahman)
 
 top &lt;- Batting |&gt; 
@@ -846,7 +855,9 @@ co2_wide &lt;- data.frame(matrix(co2, ncol = 12, byrow = TRUE)) |&gt;
 
           <sage language="r">
             <input>
+if (!requireNamespace("tidyverse", quietly = TRUE)) install.packages("tidyverse", repos = "https://cloud.r-project.org")
 library(tidyverse)
+if (!requireNamespace("dslabs", quietly = TRUE)) install.packages("dslabs", repos = "https://cloud.r-project.org")
 library(dslabs)
 polls_us_election_2016$startdate |&gt; head()
             </input>
@@ -897,6 +908,7 @@ polls_us_election_2016 |&gt; filter(pollster == "Ipsos" &amp; state == "U.S.") |
 
           <sage language="r">
             <input>
+if (!requireNamespace("lubridate", quietly = TRUE)) install.packages("lubridate", repos = "https://cloud.r-project.org")
 library(lubridate)
             </input>
           </sage>
@@ -1053,6 +1065,7 @@ polls_us_election_2016 |&gt;
 
           <sage language="r">
             <input>
+if (!requireNamespace("data.table", quietly = TRUE)) install.packages("data.table", repos = "https://cloud.r-project.org")
 library(data.table)
 st &lt;- as.Date("2024-03-04")
 day(st)
@@ -1081,6 +1094,7 @@ object.size(as.IDate(polls_us_election_2016$startdate))
           <sage language="r">
             <input>
 #| eval: false
+if (!requireNamespace("dslabs", quietly = TRUE)) install.packages("dslabs", repos = "https://cloud.r-project.org")
 library(dslabs)
 head(pr_death_counts)
             </input>
@@ -1162,6 +1176,7 @@ Sys.setlocale("LC_ALL", "en_US.UTF-8")
 
           <sage language="r">
             <input>
+if (!requireNamespace("readr", quietly = TRUE)) install.packages("readr", repos = "https://cloud.r-project.org")
 library(readr)
 locale()
             </input>
@@ -1263,6 +1278,7 @@ dat$puntuación
 
           <sage language="r">
             <input>
+if (!requireNamespace("lubridate", quietly = TRUE)) install.packages("lubridate", repos = "https://cloud.r-project.org")
 library(lubridate)
 dmy(dat$f.n.)
             </input>
@@ -1425,7 +1441,9 @@ title="List of U.S. states and territories by population"&gt;Population&lt;/a&gt
 
             <sage language="r">
               <input>
+if (!requireNamespace("tidyverse", quietly = TRUE)) install.packages("tidyverse", repos = "https://cloud.r-project.org")
 library(tidyverse)
+if (!requireNamespace("rvest", quietly = TRUE)) install.packages("rvest", repos = "https://cloud.r-project.org")
 library(rvest)
 h &lt;- read_html(url)
               </input>
@@ -1515,6 +1533,7 @@ head(tab)
 
           <sage language="r">
             <input>
+if (!requireNamespace("jsonlite", quietly = TRUE)) install.packages("jsonlite", repos = "https://cloud.r-project.org")
 library(jsonlite)
 example &lt;- data.frame(name = c("Miguel", "Sofia", "Aya", "Cheng"), 
                       student_id = 1:4, exam_1 = c(85, 94, 87, 90), exam_2 = c(86, 93, 88, 91))
@@ -1527,6 +1546,7 @@ json
 
           <sage language="r">
             <input>
+if (!requireNamespace("jsonlite", quietly = TRUE)) install.packages("jsonlite", repos = "https://cloud.r-project.org")
 library(jsonlite)
 nobel &lt;- fromJSON("http://api.nobelprize.org/v1/prize.json")
             </input>
@@ -1601,6 +1621,7 @@ url &lt;- "https://data.cdc.gov/resource/muzy-jte6.csv"
 
             <sage language="r">
               <input>
+if (!requireNamespace("httr2", quietly = TRUE)) install.packages("httr2", repos = "https://cloud.r-project.org")
 library(httr2)
 response &lt;- request(url) |&gt; req_perform()
               </input>
@@ -1619,6 +1640,7 @@ response
             <sage language="r">
               <input>
 #| message: false
+if (!requireNamespace("readr", quietly = TRUE)) install.packages("readr", repos = "https://cloud.r-project.org")
 library(readr)
 tab &lt;- response |&gt; resp_body_string() |&gt; read_csv()
               </input>
@@ -1754,7 +1776,9 @@ tab_1 &lt;- tab_1 |&gt;
 
           <sage language="r">
             <input>
+if (!requireNamespace("tidyverse", quietly = TRUE)) install.packages("tidyverse", repos = "https://cloud.r-project.org")
 library(tidyverse)
+if (!requireNamespace("stringr", quietly = TRUE)) install.packages("stringr", repos = "https://cloud.r-project.org")
 library(stringr)
             </input>
           </sage>
@@ -1776,6 +1800,7 @@ library(stringr)
 
           <sage language="r">
             <input>
+if (!requireNamespace("dslabs", quietly = TRUE)) install.packages("dslabs", repos = "https://cloud.r-project.org")
 library(dslabs)
 head(reported_heights)
             </input>
@@ -2625,6 +2650,7 @@ converted[!index]
 
           <sage language="r">
             <input>
+if (!requireNamespace("english", quietly = TRUE)) install.packages("english", repos = "https://cloud.r-project.org")
 library(english)
 cleanup &lt;- function(s){
   s &lt;- str_remove_all(s, "inches|in|''|\"|cm|and") |&gt; 
@@ -2727,6 +2753,7 @@ new_heights |&gt; arrange(height) |&gt; head(n = 6)
 
           <sage language="r">
             <input>
+if (!requireNamespace("dslabs", quietly = TRUE)) install.packages("dslabs", repos = "https://cloud.r-project.org")
 library(dslabs)
 research_funding_rates |&gt; 
   select("discipline", "success_rates_men", "success_rates_women")
@@ -2745,6 +2772,7 @@ research_funding_rates |&gt;
 
           <sage language="r">
             <input>
+if (!requireNamespace("pdftools", quietly = TRUE)) install.packages("pdftools", repos = "https://cloud.r-project.org")
 library("pdftools")
 temp_file &lt;- tempfile()
 url &lt;- paste0("https://web.archive.org/web/20150927033124/",
@@ -2889,6 +2917,7 @@ identical(research_funding_rates, new_research_funding_rates)
 
           <sage language="r">
             <input>
+if (!requireNamespace("dslabs", quietly = TRUE)) install.packages("dslabs", repos = "https://cloud.r-project.org")
 library(dslabs)
             </input>
           </sage>
@@ -2927,6 +2956,7 @@ gapminder |&gt;
           <sage language="r">
             <input>
 #| eval: false
+if (!requireNamespace("forcats", quietly = TRUE)) install.packages("forcats", repos = "https://cloud.r-project.org")
 library(forcats)
 gapminder$country &lt;- 
   fct_recode(gapminder$country, 
@@ -3110,10 +3140,15 @@ set.seed(2002)
 
           <sage language="r">
             <input>
+if (!requireNamespace("tidyverse", quietly = TRUE)) install.packages("tidyverse", repos = "https://cloud.r-project.org")
 library(tidyverse)
+if (!requireNamespace("scales", quietly = TRUE)) install.packages("scales", repos = "https://cloud.r-project.org")
 library(scales)
+if (!requireNamespace("tidytext", quietly = TRUE)) install.packages("tidytext", repos = "https://cloud.r-project.org")
 library(tidytext)
+if (!requireNamespace("textdata", quietly = TRUE)) install.packages("textdata", repos = "https://cloud.r-project.org")
 library(textdata)
+if (!requireNamespace("dslabs", quietly = TRUE)) install.packages("dslabs", repos = "https://cloud.r-project.org")
 library(dslabs)
             </input>
           </sage>
