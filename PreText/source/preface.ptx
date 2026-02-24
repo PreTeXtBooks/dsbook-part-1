@@ -2,6 +2,10 @@
       <title>Preface</title>
       
       <p>
+        This is a <url href="https://pretextbook.org/">PreTeXt</url> version of the open-source textbook <em>Introduction to Data Science: Data Wrangling and Visualization with R</em> by Rafael A. Irizarry. The original book and its source code are available at <url href="https://rafalab.github.io/dsbook-part-1/">rafalab.github.io/dsbook-part-1</url> and <url href="https://github.com/rafalab/dsbook-part-1">github.com/rafalab/dsbook-part-1</url>. For any issues related to the PreTeXt rendering of this book, please visit <url href="https://github.com/PreTeXtBooks/dsbook-part-1">our GitHub repository</url>.
+      </p>
+      
+      <p>
         This is the website for the <em>Data Wrangling and Visualization with R</em> part of <em>Introduction to Data Science</em>.
       </p>
       
