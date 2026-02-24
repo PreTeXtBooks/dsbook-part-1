@@ -26,3 +26,5 @@ PreText/logs/
 PreText/.error_schema.log
 PreText/.cache/
 PreText/build_output.log
+*.pyc
+__pycache__/

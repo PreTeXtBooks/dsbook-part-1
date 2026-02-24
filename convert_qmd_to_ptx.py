@@ -125,12 +125,14 @@ def convert_qmd_to_ptx(qmd_content, chapter_id, chapter_title):
                 in_code_block = False
                 if code_block_content:
                     indent = '          ' + '  ' * subsection_depth
-                    result.append(indent + '<program language="{}">'.format(code_lang))
+                    tag = 'sage' if code_lang == 'r' else 'program'
+                    lang_attr = 'r' if code_lang == 'r' else code_lang
+                    result.append(indent + '<{} language="{}">'.format(tag, lang_attr))
                     result.append(indent + '  <input>')
                     for code_line in code_block_content:
                         result.append(escape_xml(code_line))
                     result.append(indent + '  </input>')
-                    result.append(indent + '</program>')
+                    result.append(indent + '</{}>'.format(tag))
                     result.append('')
                 i += 1
                 continue

@@ -8,7 +8,7 @@
 
           <p>We will use the fertility wide format dataset described in <xref ref="sec-tidy-data"/> as an example in this section.</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 library(tidyverse) 
 library(dslabs)
@@ -16,7 +16,7 @@ path &lt;- system.file("extdata", package = "dslabs")
 filename &lt;- file.path(path, "fertility-two-countries-example.csv")
 wide_data &lt;- read_csv(filename)
             </input>
-          </program>
+          </sage>
 
         <section xml:id="sec-pivot-longer">
           <title>`pivot_longer`</title>
@@ -27,59 +27,59 @@ wide_data &lt;- read_csv(filename)
 
           <p>The code to pivot the fertility data therefore looks like this:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 new_tidy_data &lt;- wide_data |&gt;
   pivot_longer(`1960`:`2015`, names_to = "year", values_to = "fertility")
             </input>
-          </program>
+          </sage>
 
           <p>We can see that the data have been converted to tidy format with columns <c>year</c> and <c>fertility</c></p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 head(new_tidy_data)
             </input>
-          </program>
+          </sage>
 
           <p>and that each year resulted in two rows since we have two countries and this column was not pivoted. A somewhat quicker way to write this code is to specify which column will <alert>not</alert> include in the pivot, rather than all the columns that will be pivoted:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 new_tidy_data &lt;- wide_data |&gt;
   pivot_longer(-country, names_to = "year", values_to = "fertility")
             </input>
-          </program>
+          </sage>
 
           <p>The <c>new_tidy_data</c> object looks like the original <c>tidy_data</c> we defined this way</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 tidy_data &lt;- gapminder |&gt; 
   filter(country %in% c("South Korea", "Germany") &amp; !is.na(fertility)) |&gt;
   select(country, year, fertility)
             </input>
-          </program>
+          </sage>
 
           <p>with just one minor difference. Can you spot it? Look at the data type of the year column. The <c>pivot_longer</c> function assumes that column names are characters. So we need a bit more wrangling before we are ready to make a plot. We need to convert the year column to be numbers:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 new_tidy_data &lt;- wide_data |&gt;
   pivot_longer(-country, names_to = "year", values_to = "fertility") |&gt;
   mutate(year = as.integer(year))
             </input>
-          </program>
+          </sage>
 
           <p>Now that the data is tidy, we can use this relatively simple ggplot code:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 new_tidy_data |&gt; 
   ggplot(aes(year, fertility, color = country)) + 
   geom_point()
             </input>
-          </program>
+          </sage>
 
         </section>
 
@@ -88,13 +88,13 @@ new_tidy_data |&gt;
 
           <p>As we will see in later examples, it is sometimes useful for data wrangling purposes to convert tidy data into wide data. We often use this as an intermediate step in tidying up data. The <c>pivot_wider</c> function is basically the inverse of <c>pivot_longer</c>. The first argument is for the data, but since we are using the pipe, we don't show it. The <c>names_from</c> argument tells <c>pivot_wider</c> which variable will be used as the column names. The <c>values_from</c> argument specifies which variable to use to fill out the cells.</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 new_wide_data &lt;- new_tidy_data |&gt; 
   pivot_wider(names_from = year, values_from = fertility)
 select(new_wide_data, country, `1960`:`1967`)
             </input>
-          </program>
+          </sage>
 
           <p>Similar to <c>pivot_wider</c>, <c>names_from</c> and <c>values_from</c> default to <c>name</c> and <c>value</c>.</p>
 
@@ -105,7 +105,7 @@ select(new_wide_data, country, `1960`:`1967`)
 
           <p>The data wrangling shown above was simple compared to what is usually required. In our example spreadsheet files, we include an illustration that is slightly more complicated. It contains two variables: life expectancy and fertility. However, the way it is stored is not tidy and, as we will explain, not optimal.</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 path &lt;- system.file("extdata", package = "dslabs")
 
@@ -115,49 +115,49 @@ filename &lt;-  file.path(path, filename)
 raw_dat &lt;- read_csv(filename)
 select(raw_dat, 1:5)
             </input>
-          </program>
+          </sage>
 
           <p>First, note that the data is in wide format. Second, notice that this table includes values for two variables, fertility and life expectancy, with the column name encoding which column represents which variable. Encoding information in the column names is not recommended but, unfortunately, it is quite common. We will put our wrangling skills to work to extract this information and store it in a tidy fashion.</p>
 
           <p>We can start the data wrangling with the <c>pivot_longer</c> function, but we should no longer use the column name <c>year</c> for the new column since it also contains the variable type. We will call it <c>name</c>, the default, for now:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 dat &lt;- raw_dat |&gt; pivot_longer(-country)
 head(dat)
             </input>
-          </program>
+          </sage>
 
           <p>The result is not exactly what we refer to as tidy since each observation is associated with two, not one, rows. We want to have the values from the two variables, fertility and life expectancy, in two separate columns. The first challenge to achieve this is to separate the <c>name</c> column into the year and the variable type. Notice that the entries in this column separate the year from the variable name with an underscore:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 dat$name[1:5]
             </input>
-          </program>
+          </sage>
 
           <p>Encoding multiple variables in a column name is such a common problem that the <alert>tidyr</alert> package includes function to separate these columns into two or more. The <c>separate_wider_delim</c> function takes three arguments: the name of the column to be separated, the names to be used for the new columns, and the character that separates the variables. So, a first attempt at separating the variable name from the year might be:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 dat |&gt; separate_wider_delim(name, delim = "_", 
                             names = c("year", "name"))
             </input>
-          </program>
+          </sage>
 
           <p>However, this line of code will give an error. This is because the life expectancy names have three strings separated by <c>_</c> and the fertility names have two. This is a common problem so the <c>separate_wider_delim</c> function has arguments <c>too_few</c> and <c>too_many</c> to handle these situations. We see in the help file that the option <c>too_many = merge</c> <em>will merge together any additional pieces</em>. The following line does what we want:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 dat |&gt; separate_wider_delim(name, delim = "_", 
                             names = c("year", "name"), 
                             too_many = "merge")
             </input>
-          </program>
+          </sage>
 
           <p>But we are not done yet. We need to create a column for each variable and change <c>year</c> to a number. As we learned, the <c>pivot_wider</c> function can do this:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 dat &lt;- dat |&gt; 
   separate_wider_delim(name, delim = "_", 
@@ -168,7 +168,7 @@ dat &lt;- dat |&gt;
 
 dat
             </input>
-          </program>
+          </sage>
 
           <p>The data is now in tidy format with one row for each observation with three variables: year, fertility, and life expectancy.</p>
 
@@ -181,29 +181,29 @@ dat
 
           <p>In general, everything you can do with <alert>tidyverse</alert> can be done with <alert>data.table</alert> and base R which, although perhaps harder to read, it is often more flexible, faster, and more efficient. Here we show how the <alert>data.table</alert> approach to <c>pivot_longer</c>, <c>pivot_wider</c>, and <c>separate</c>. We will illustrate with the previously used this example:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 path &lt;- system.file("extdata", package = "dslabs")
 filename &lt;- file.path(path, "fertility-two-countries-example.csv")
             </input>
-          </program>
+          </sage>
 
           <subsection xml:id="subsec-pivot-longer-is-melt">
             <title>`pivot_longer` is `melt`</title>
 
             <p>If in <alert>tidyverse</alert> we  write</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 wide_data &lt;- read_csv(filename)
 new_tidy_data &lt;- wide_data |&gt;
   pivot_longer(-1, names_to = "year", values_to = "fertility")
               </input>
-            </program>
+            </sage>
 
             <p>in <alert>data.table</alert> we use the <c>melt</c> function.</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 #| message: false
 #| warning: false
@@ -214,7 +214,7 @@ dt_new_tidy_data  &lt;- melt(dt_wide_data,
                       variable.name = "year", 
                       value.name = "fertility")
               </input>
-            </program>
+            </sage>
 
           </subsection>
 
@@ -223,21 +223,21 @@ dt_new_tidy_data  &lt;- melt(dt_wide_data,
 
             <p>If in <alert>tidyverse</alert> we  write</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 new_wide_data &lt;- new_tidy_data |&gt; 
   pivot_wider(names_from = year, values_from = fertility)
               </input>
-            </program>
+            </sage>
 
             <p>in <alert>data.table</alert> we use the <c>dcast</c> function.</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 dt_new_wide_data &lt;- dcast(dt_new_tidy_data, formula = ... ~ year,
                           value.var = "fertility")
               </input>
-            </program>
+            </sage>
 
           </subsection>
 
@@ -246,17 +246,17 @@ dt_new_wide_data &lt;- dcast(dt_new_tidy_data, formula = ... ~ year,
 
             <p>We now illustrate with this previously used example:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 path &lt;- system.file("extdata", package = "dslabs")
 filename &lt;- "life-expectancy-and-fertility-two-countries-example.csv"
 filename &lt;-  file.path(path, filename)
               </input>
-            </program>
+            </sage>
 
             <p>In <alert>tidyverse</alert> we wrangled using</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 raw_dat &lt;- read_csv(filename)
 dat &lt;- raw_dat |&gt; pivot_longer(-country) |&gt;
@@ -265,11 +265,11 @@ dat &lt;- raw_dat |&gt; pivot_longer(-country) |&gt;
   pivot_wider() |&gt;
   mutate(year = as.integer(year))
               </input>
-            </program>
+            </sage>
 
             <p>In <alert>data.table</alert> we can use the <c>tstrsplit</c> function:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 dt_raw_dat &lt;- fread(filename)
 dat_long &lt;- melt(dt_raw_dat, 
@@ -281,7 +281,7 @@ dat_long[is.na(name2), name2 := ""]
 dat_long[, name := paste(name, name2, sep = "_")][, name2 := NULL]
 dat_wide &lt;- dcast(dat_long, country + year ~ name, value.var = "value")
               </input>
-            </program>
+            </sage>
 
           </subsection>
 
@@ -294,42 +294,42 @@ dat_wide &lt;- dcast(dat_long, country + year ~ name, value.var = "value")
 
           <p>Spreadsheets often use names that are not compatible with programming. The most common problem is column names with spaces. The <c>clean_names()</c> function attempts to fix this and other common problems. By default it forces variable names to be lower case and with underscore instead of space. In this example we change the variable names of the object <c>dat</c> created in the previous section and then demonstrate how this function works:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 library(janitor)
 names(dat) &lt;- c("Country", "Year", "Fertility",  "Life Expectancy")
 clean_names(dat) |&gt; names()
             </input>
-          </program>
+          </sage>
 
           <p>Another very common challenging reality is that numeric matrices are saved in spreadsheets and include a column with characters defining the row names. To fix this we have to remove the first column, but only after assigning them as vector that we will use to define rownames after converting the data frame to a matrix. The function <c>column_to_rows</c> does these operations for us and all we have to do is specify which column contains the rownames:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 data.frame(ids = letters[1:3], x = 1:3, y = 4:6) |&gt; 
   column_to_rownames("ids") |&gt;
   as.matrix() 
             </input>
-          </program>
+          </sage>
 
           <p>Another common challenge is that spreadsheets include the column names as a first row. To quickly fix this we can <c>row_to_names</c>:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 x &lt;- read.csv(file.path(path, "murders.csv"), header = FALSE) |&gt; 
   row_to_names(1)
 names(x)
             </input>
-          </program>
+          </sage>
 
           <p>Our final example relates to finding duplicates. A very common error in the creation of spreadsheets is that rows are duplicated. The <c>get_dups</c> function finds and reports duplicate records. By default it considers all variables, but you can also specify which ones to use.</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 x &lt;- bind_rows(x, x[1,])
 get_dupes(x)
             </input>
-          </program>
+          </sage>
 
         </section>
 
@@ -338,13 +338,13 @@ get_dupes(x)
 
           <ol>
             <li><p>Run the following command to define the <c>co2_wide</c> object:</p></li>
-          <program language="r">
+          <sage language="r">
             <input>
 co2_wide &lt;- data.frame(matrix(co2, ncol = 12, byrow = TRUE)) |&gt; 
   setNames(1:12) |&gt;
   mutate(year = as.character(1959:1997))
             </input>
-          </program>
+          </sage>
 
           </ol>
 
@@ -352,21 +352,21 @@ co2_wide &lt;- data.frame(matrix(co2, ncol = 12, byrow = TRUE)) |&gt;
 
           <ol>
             <li><p>Plot CO2 versus month with a different curve for each year using this code:</p></li>
-          <program language="r">
+          <sage language="r">
             <input>
 co2_tidy |&gt; ggplot(aes(month, co2, color = year)) + geom_line()
             </input>
-          </program>
+          </sage>
 
           </ol>
 
           <p>If the expected plot is not made, it is probably because <c>co2_tidy$month</c> is not numeric:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 class(co2_tidy$month)
             </input>
-          </program>
+          </sage>
 
           <p>Rewrite your code to make sure the month column is numeric. Then make the plot.</p>
 
@@ -378,12 +378,12 @@ class(co2_tidy$month)
 
           <ol>
             <li><p>Now load the <c>admissions</c> data set, which contains admission information for men and women across six majors and keep only the admitted percentage column:</p></li>
-          <program language="r">
+          <sage language="r">
             <input>
 load(admissions)
 dat &lt;- admissions |&gt; select(-applicants)
             </input>
-          </program>
+          </sage>
 
           </ol>
 
@@ -412,29 +412,29 @@ dat &lt;- admissions |&gt; select(-applicants)
 
           <p>Suppose we want to explore the relationship between population size for US states and electoral votes. We have the population size in this table:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 library(tidyverse)
 library(dslabs)
 head(murders)
             </input>
-          </program>
+          </sage>
 
           <p>and electoral votes in this one:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 head(results_us_election_2016)
             </input>
-          </program>
+          </sage>
 
           <p>Just concatenating these two tables together will not work since the order of the states is not the same.</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 identical(results_us_election_2016$state, murders$state)
             </input>
-          </program>
+          </sage>
 
           <p>The <em>join</em> functions, described below, are designed to handle this challenge.</p>
 
@@ -443,17 +443,17 @@ identical(results_us_election_2016$state, murders$state)
 
           <p>The <em>join</em> functions in the __dplyr__ package make sure that the tables are combined so that matching rows are together. If you know SQL, you will see that the approach and syntax is very similar. The general idea is that one needs to identify one or more columns that will serve to match the two tables. Then a new table with the combined information is returned. Notice what happens if we join the two tables above by state using <c>left_join</c> (we will remove the <c>others</c> column and rename <c>electoral_votes</c> so that the tables fit on the page):</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 tab &lt;- left_join(murders, results_us_election_2016, by = "state") |&gt;
   select(-others) |&gt; rename(ev = electoral_votes)
 head(tab)
             </input>
-          </program>
+          </sage>
 
           <p>The data has been successfully joined and we can now, for example, make a plot to explore the relationship:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 library(ggrepel)
 tab |&gt; ggplot(aes(population/10^6, ev, label = abb)) +
@@ -462,13 +462,13 @@ tab |&gt; ggplot(aes(population/10^6, ev, label = abb)) +
   geom_text_repel() + 
   geom_smooth(method = "lm", se = FALSE)
             </input>
-          </program>
+          </sage>
 
           <p>We see the relationship is close to linear with about 2 electoral votes for every million persons, but with very small states getting higher ratios.</p>
 
           <p>In practice, it is not always the case that each row in one table has a matching row in the other. For this reason, we have several versions of join. To illustrate this challenge, we will take subsets of the tables above. We create the tables <c>tab1</c> and <c>tab2</c> so that they have some states in common but not all:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 tab_1 &lt;- slice(murders, 1:6) |&gt; select(state, population)
 tab_2 &lt;- results_us_election_2016 |&gt; 
@@ -476,7 +476,7 @@ tab_2 &lt;- results_us_election_2016 |&gt;
                     "California", "Connecticut", "Delaware")) |&gt; 
   select(state, electoral_votes) |&gt; rename(ev = electoral_votes)
             </input>
-          </program>
+          </sage>
 
           <p>We will use these two tables as examples in the next sections.</p>
 
@@ -485,19 +485,19 @@ tab_2 &lt;- results_us_election_2016 |&gt;
 
             <p>Suppose we want a table like <c>tab_1</c>, but adding electoral votes to whatever states we have available. For this, we use <c>left_join</c> with <c>tab_1</c> as the first argument. We specify which column to use to match with the <c>by</c> argument.</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 left_join(tab_1, tab_2, by = "state")
               </input>
-            </program>
+            </sage>
 
             <p>Note that <c>NA</c>s are added to the two states not appearing in <c>tab_2</c>. Also, notice that this function, as well as all the other joins, can receive the first arguments through the pipe:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 tab_1 |&gt; left_join(tab_2, by = "state")
               </input>
-            </program>
+            </sage>
 
           </subsection>
 
@@ -506,11 +506,11 @@ tab_1 |&gt; left_join(tab_2, by = "state")
 
             <p>If instead of a table with the same rows as first table, we want one with the same rows as second table, we can use <c>right_join</c>:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 tab_1 |&gt; right_join(tab_2, by = "state")
               </input>
-            </program>
+            </sage>
 
             <p>Now the NAs are in the column coming from <c>tab_1</c>.</p>
 
@@ -521,11 +521,11 @@ tab_1 |&gt; right_join(tab_2, by = "state")
 
             <p>If we want to keep only the rows that have information in both tables, we use <c>inner_join</c>. You can think of this as an intersection:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 inner_join(tab_1, tab_2, by = "state")
               </input>
-            </program>
+            </sage>
 
           </subsection>
 
@@ -534,11 +534,11 @@ inner_join(tab_1, tab_2, by = "state")
 
             <p>If we want to keep all the rows and fill the missing parts with NAs, we can use <c>full_join</c>. You can think of this as a union:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 full_join(tab_1, tab_2, by = "state")
               </input>
-            </program>
+            </sage>
 
           </subsection>
 
@@ -547,11 +547,11 @@ full_join(tab_1, tab_2, by = "state")
 
             <p>The <c>semi_join</c> function lets us keep the part of first table for which we have information in the second. It does not add the columns of the second:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 semi_join(tab_1, tab_2, by = "state")
               </input>
-            </program>
+            </sage>
 
           </subsection>
 
@@ -560,11 +560,11 @@ semi_join(tab_1, tab_2, by = "state")
 
             <p>The function <c>anti_join</c> is the opposite of <c>semi_join</c>. It keeps the elements of the first table for which there is no information in the second:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 anti_join(tab_1, tab_2, by = "state")
               </input>
-            </program>
+            </sage>
 
             <p>The following diagram summarizes the above joins:</p>
 
@@ -588,11 +588,11 @@ anti_join(tab_1, tab_2, by = "state")
 
             <p>The __dplyr__ function _bind_cols_ binds two objects by making them columns in a tibble. For example, we quickly want to make a data frame consisting of numbers we can use</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 bind_cols(a = 1:3, b = 4:6)
               </input>
-            </program>
+            </sage>
 
             <p>This function requires that we assign names to the columns. Here we chose <c>a</c> and <c>b</c>.</p>
 
@@ -600,7 +600,7 @@ bind_cols(a = 1:3, b = 4:6)
 
             <p><c>bind_cols</c> can also bind two different data frames. For example, here we break up the <c>tab</c> data frame and then bind them back together:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 tab_1 &lt;- tab[, 1:3]
 tab_2 &lt;- tab[, 4:6]
@@ -608,7 +608,7 @@ tab_3 &lt;- tab[, 7:8]
 new_tab &lt;- bind_cols(tab_1, tab_2, tab_3)
 head(new_tab)
               </input>
-            </program>
+            </sage>
 
           </subsection>
 
@@ -617,13 +617,13 @@ head(new_tab)
 
             <p>The <c>bind_rows</c> function is similar to <c>bind_cols</c>, but binds rows instead of columns:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 tab_1 &lt;- tab[1:2,]
 tab_2 &lt;- tab[3:4,]
 bind_rows(tab_1, tab_2)
               </input>
-            </program>
+            </sage>
 
             <p>This is based on an R-base function <c>rbind</c>.</p>
 
@@ -641,29 +641,29 @@ bind_rows(tab_1, tab_2)
 
             <p>You can take intersections of vectors of any type, such as numeric:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 intersect(1:10, 6:15)
               </input>
-            </program>
+            </sage>
 
             <p>or characters:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 intersect(c("a","b","c"), c("b","c","d"))
               </input>
-            </program>
+            </sage>
 
             <p>The __dplyr__ package includes an <c>intersect</c> function that can be applied to tables with the same column names. This function returns the rows in common between two tables. To make sure we use the __dplyr__ version of <c>intersect</c> rather than the base R version, we can use <c>dplyr::intersect</c> like this:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 tab_1 &lt;- tab[1:5,]
 tab_2 &lt;- tab[3:7,]
 dplyr::intersect(tab_1, tab_2)
               </input>
-            </program>
+            </sage>
 
           </subsection>
 
@@ -672,22 +672,22 @@ dplyr::intersect(tab_1, tab_2)
 
             <p>Similarly <em>union</em> takes the union of vectors. For example:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 union(1:10, 6:15)
 union(c("a","b","c"), c("b","c","d"))
               </input>
-            </program>
+            </sage>
 
             <p>The __dplyr__ package includes a version of <c>union</c> that combines all the rows of two tables with the same column names.</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 tab_1 &lt;- tab[1:5,]
 tab_2 &lt;- tab[3:7,]
 dplyr::union(tab_1, tab_2) 
               </input>
-            </program>
+            </sage>
 
           </subsection>
 
@@ -696,22 +696,22 @@ dplyr::union(tab_1, tab_2)
 
             <p>The set difference between a first and second argument can be obtained with <c>setdiff</c>. Unlike <c>intersect</c> and <c>union</c>, this function is not symmetric:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 setdiff(1:10, 6:15)
 setdiff(6:15, 1:10)
               </input>
-            </program>
+            </sage>
 
             <p>As with the functions shown above, __dplyr__ has a version for data frames:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 tab_1 &lt;- tab[1:5,]
 tab_2 &lt;- tab[3:7,]
 dplyr::setdiff(tab_1, tab_2)
               </input>
-            </program>
+            </sage>
 
           </subsection>
 
@@ -720,27 +720,27 @@ dplyr::setdiff(tab_1, tab_2)
 
             <p>Finally, the function <c>setequal</c> tells us if two sets are the same, regardless of order. So notice that:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 setequal(1:5, 1:6)
               </input>
-            </program>
+            </sage>
 
             <p>but:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 setequal(1:5, 5:1)
               </input>
-            </program>
+            </sage>
 
             <p>The __dplyr__ version checks whether data frames are equal, regardless of order of rows <em>or</em> columns:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 dplyr::setequal(tab_1, tab_2)
               </input>
-            </program>
+            </sage>
 
           </subsection>
 
@@ -753,22 +753,22 @@ dplyr::setequal(tab_1, tab_2)
 
           <p>In <alert>tidyverse</alert> we joined two tables with <c>left_join</c>:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 tab &lt;- left_join(murders, results_us_election_2016, by = "state") 
             </input>
-          </program>
+          </sage>
 
           <p>In <alert>data.table</alert> the <c>merge</c> functions works similarly:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 #| message: false
 #| warning: false
 library(data.table)
 tab &lt;- merge(murders, results_us_election_2016, by = "state", all.x = TRUE)
             </input>
-          </program>
+          </sage>
 
           <p>Instead of defining different functions for the different type of joins, <c>merge</c> uses the the logical arguments <c>all</c> (full join), <c>all.x</c> (left join), and <c>all.y</c> (right join).</p>
 
@@ -783,7 +783,7 @@ tab &lt;- merge(murders, results_us_election_2016, by = "state", all.x = TRUE)
 
           <p>The <c>Batting</c> data frame contains the offensive statistics for all players for many years. You can see, for example, the top 10 hitters by running this code:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 library(Lahman)
 
@@ -794,22 +794,22 @@ top &lt;- Batting |&gt;
 
 top |&gt; as_tibble()
             </input>
-          </program>
+          </sage>
 
           <p>But who are these players? We see an ID, but not the names. The player names are in this table</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 People |&gt; as_tibble()
             </input>
-          </program>
+          </sage>
 
           <p>We can see column names <c>nameFirst</c> and <c>nameLast</c>. Use the <c>left_join</c> function to create a table of the top home run hitters. The table should have <c>playerID</c>, first name, last name, and number of home runs (HR).  Rewrite the object <c>top</c> with this new table.</p>
 
           <ol>
             <li><p>Now use the <c>Salaries</c> data frame to add each player's salary to the table you created in exercise 1. Note that salaries are different every year so make sure to filter for the year 2016, then use <c>right_join</c>. This time show first name, last name, team, HR, and salary.</p></li>
             <li><p>In a previous exercise, we created a tidy version of the <c>co2</c> dataset:</p></li>
-          <program language="r">
+          <sage language="r">
             <input>
 co2_wide &lt;- data.frame(matrix(co2, ncol = 12, byrow = TRUE)) |&gt; 
   setNames(1:12) |&gt;
@@ -817,7 +817,7 @@ co2_wide &lt;- data.frame(matrix(co2, ncol = 12, byrow = TRUE)) |&gt;
   pivot_longer(-year, names_to = "month", values_to = "co2") |&gt;
   mutate(month = as.numeric(month))
             </input>
-          </program>
+          </sage>
 
           </ol>
 
@@ -844,47 +844,47 @@ co2_wide &lt;- data.frame(matrix(co2, ncol = 12, byrow = TRUE)) |&gt;
 
           <p>We can see an example of the data type R uses for data here:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 library(tidyverse)
 library(dslabs)
 polls_us_election_2016$startdate |&gt; head()
             </input>
-          </program>
+          </sage>
 
           <p>The dates look like strings, but they are not:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 class(polls_us_election_2016$startdate)
             </input>
-          </program>
+          </sage>
 
           <p>Look at what happens when we convert them to numbers:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 as.numeric(polls_us_election_2016$startdate) |&gt; head()
             </input>
-          </program>
+          </sage>
 
           <p>It turns them into days since the epoch. The <c>as.Date</c> function can convert a character into a date. So to see that the epoch is day 0 we can type</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 as.Date("1970-01-01") |&gt; as.numeric()
             </input>
-          </program>
+          </sage>
 
           <p>Plotting functions, such as those in ggplot, are aware of the date format. This means that, for example, a scatterplot can use the numeric representation to decide on the position of the point, but include the string in the labels:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 polls_us_election_2016 |&gt; filter(pollster == "Ipsos" &amp; state == "U.S.") |&gt;
   ggplot(aes(startdate, rawpoll_trump)) +
   geom_line()
             </input>
-          </program>
+          </sage>
 
           <p>Note in particular that the month names are displayed, a very convenient feature.</p>
 
@@ -895,53 +895,53 @@ polls_us_election_2016 |&gt; filter(pollster == "Ipsos" &amp; state == "U.S.") |
 
           <p>The __lubridate__ package provides tools to work with date and times.</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 library(lubridate)
             </input>
-          </program>
+          </sage>
 
           <p>We will take a random sample of dates to show some of the useful things one can do:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 set.seed(2002)
 dates &lt;- sample(polls_us_election_2016$startdate, 10) |&gt; sort()
 dates
             </input>
-          </program>
+          </sage>
 
           <p>The functions <c>year</c>, <c>month</c> and <c>day</c> extract those values:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 tibble(date = dates, month = month(dates), day = day(dates), year = year(dates))
             </input>
-          </program>
+          </sage>
 
           <p>We can also extract the month labels:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 month(dates, label = TRUE)
             </input>
-          </program>
+          </sage>
 
-          <program language="r">
+          <sage language="r">
             <input>
 lubridate::month(dates, label = TRUE)
             </input>
-          </program>
+          </sage>
 
           <p>Another useful set of functions are the <em>parsers</em> that convert strings into dates. The function <c>ymd</c> assumes the dates are in the format YYYY-MM-DD and tries to parse as well as possible.</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 x &lt;- c(20090101, "2009-01-02", "2009 01 03", "2009-1-4",
        "2009-1, 5", "Created on 2009 1 6", "200901 !!! 07")
 ymd(x)
             </input>
-          </program>
+          </sage>
 
           <p>A further complication comes from the fact that dates often come in different formats in which the order of year, month, and day are different. The preferred format is to show year (with all four digits), month (two digits), and then day, or what is called the ISO 8601. Specifically we use YYYY-MM-DD so that if we order the string, it will be ordered by date. You can see the function <c>ymd</c> returns them in this format.</p>
 
@@ -949,89 +949,89 @@ ymd(x)
 
           <p>For example, if the string is:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 x &lt;- "09/01/02"
             </input>
-          </program>
+          </sage>
 
           <p>The <c>ymd</c> function assumes the first entry is the year, the second is the month, and the third is the day, so it converts it to:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 ymd(x)
             </input>
-          </program>
+          </sage>
 
           <p>The <c>mdy</c> function assumes the first entry is the month, then the day, then the year:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 mdy(x)
             </input>
-          </program>
+          </sage>
 
           <p>The <em>lubridate</em> package provides a function for every possibility. Here is the other common one:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 dmy(x)
             </input>
-          </program>
+          </sage>
 
           <p>The __lubridate__ package is also useful for dealing with times. In base R, you can get the current time typing <c>Sys.time()</c>. The __lubridate__ package provides a slightly more advanced function, <c>now</c>, that permits you to define the time zone:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 now()
 now("GMT")
             </input>
-          </program>
+          </sage>
 
           <p>You can see all the available time zones with <c>OlsonNames()</c> function.</p>
 
           <p>We can also extract hours, minutes, and seconds:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 now() |&gt; hour()
 now() |&gt; minute()
 now() |&gt; second()
             </input>
-          </program>
+          </sage>
 
           <p>The package also includes a function to parse strings into times as well as parsers for time objects that include dates:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 x &lt;- c("12:34:56")
 hms(x)
 x &lt;- "Nov/2/2012 12:34:56"
 mdy_hms(x)
             </input>
-          </program>
+          </sage>
 
           <p>This package has many other useful functions. We describe two of these here that we find particularly useful.</p>
 
           <p>The <c>make_date</c> function can be used to quickly create a date object. It can take up to seven arguments: year, month, day, hour, minute, seconds, and time zone defaulting to the epoch values on UTC time. To create an date object representing, for example, July 6, 2019 we write:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 make_date(2019, 7, 6)
             </input>
-          </program>
+          </sage>
 
           <p>To make a vector of January 1 for the 80s we write:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 make_date(1980:1989)
             </input>
-          </program>
+          </sage>
 
           <p>Another very useful function is <c>round_date</c>. It can be used to <em>round</em> dates to nearest year, quarter,  month, week, day, hour, minutes, or seconds. So if we want to group all the polls by week of the year we can do the following:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 polls_us_election_2016 |&gt; 
   mutate(week = round_date(startdate, "week")) |&gt;
@@ -1040,7 +1040,7 @@ polls_us_election_2016 |&gt;
   ggplot(aes(week, margin)) +
   geom_point()
             </input>
-          </program>
+          </sage>
 
           <p>Finally, you should be aware the there are useful function for computing operations on time such a <c>difftime</c>, <c>time_length</c>, and <c>interval</c>.</p>
 
@@ -1051,25 +1051,25 @@ polls_us_election_2016 |&gt;
 
           <p>The <alert>data.table</alert> package includes some of the same functionality as <alert>lubridate</alert>. For example, it includes the <c>month</c>, and <c>year</c> functions that are the same as those in <alert>lubridate</alert>. The equilvalent of <alert>lubridate</alert>'s <c>day</c> is <c>mday</c>:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 library(data.table)
 st &lt;- as.Date("2024-03-04")
 day(st)
 mday(st)
             </input>
-          </program>
+          </sage>
 
           <p>Other similar functions included in <alert>data.table</alert> are <c>second</c>, <c>minute</c>, <c>hour</c>, <c>yday</c>, <c>wday</c>, <c>week</c>, <c>isoweek</c> and <c>quarter</c>.</p>
 
           <p>The package also includes the classes <c>IDate</c> and <c>ITime</c>, which store dates and times more efficiently that <c>lubridate</c> and base R. This convenient for large files with date stamps. You can convert dates in the usual R format: using <c>as.IDate</c> and <c>as.ITime</c>. You can see this by using the <c>object.size</c> function:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 object.size(polls_us_election_2016$startdate)
 object.size(as.IDate(polls_us_election_2016$startdate))
             </input>
-          </program>
+          </sage>
 
         </section>
 
@@ -1078,13 +1078,13 @@ object.size(as.IDate(polls_us_election_2016$startdate))
 
           <p>For these exercises we will use the following dataset:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 #| eval: false
 library(dslabs)
 head(pr_death_counts)
             </input>
-          </program>
+          </sage>
 
           <ol>
             <li><p>We want to make a plot of death counts versus date. Confirm that the <c>date</c> variable are in fact dates and not strings.</p></li>
@@ -1125,19 +1125,19 @@ head(pr_death_counts)
 
           <p>To access the current locale settings in R, you can use the <c>Sys.getlocale()</c> function:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 Sys.getlocale()
             </input>
-          </program>
+          </sage>
 
           <p>To set a specific locale, use the <c>Sys.setlocale()</c> function. For example, to set the locale to US English:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 Sys.setlocale("LC_ALL", "en_US.UTF-8")
             </input>
-          </program>
+          </sage>
 
           <p>The exact string to use for setting the locale (like "en_US.UTF-8") can depend on your operating system and its configuration.</p>
 
@@ -1160,36 +1160,36 @@ Sys.setlocale("LC_ALL", "en_US.UTF-8")
 
           <p>The <alert>readr</alert> package includes a <c>locale()</c> function that can be used to learn or change the current locale from within R:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 library(readr)
 locale()
             </input>
-          </program>
+          </sage>
 
-          <program language="r">
+          <sage language="r">
             <input>
 #| echo: false
 options(readr.show_col_types = FALSE)
             </input>
-          </program>
+          </sage>
 
           <p>You can see all the locales available on your system by typing:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 #| eval: false
 system("locale -a")
             </input>
-          </program>
+          </sage>
 
           <p>Here is what you obtain if you change the dates locale to Spanish:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 locale(date_names = "es")
             </input>
-          </program>
+          </sage>
 
         </section>
 
@@ -1198,126 +1198,126 @@ locale(date_names = "es")
 
           <p>When reading the file:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 fn &lt;- file.path(system.file("extdata", package = "dslabs"), "calificaciones.csv")
             </input>
-          </program>
+          </sage>
 
           <p>we note that it has an encoding different than UTF-8, the default. We can use <c>guess_encoding</c> to determine the correct one:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 guess_encoding(fn)$encoding[1]
             </input>
-          </program>
+          </sage>
 
           <p>and used the <c>locale</c> function to change this and read in this encoding instead:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 #| eval: false
 dat &lt;- read_csv(fn, locale = locale(encoding = "ISO-8859-1"))
             </input>
-          </program>
+          </sage>
 
           <p>This file provides homework assignment scores for seven students. The columns represent the student name, their date of birth, the time they submitted their assignment, and the score they obtained, respectively. You can see the entire file using <c>read_lines</c>:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 read_lines(fn, locale = locale(encoding = "ISO-8859-1"))
             </input>
-          </program>
+          </sage>
 
           <p>As an illustrative example, we will write code to compute the students age and check if they turned in their assignment by the deadline of September 21, 2023, before midnight.</p>
 
           <p>We can read in the file with correct encoding like this:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 dat &lt;- read_csv(fn, locale = locale(encoding = "ISO-8859-1"))
             </input>
-          </program>
+          </sage>
 
           <p>However, notice that the last column, which is supposed to contain exam scores between 0 and 100, shows numbers larger than 800:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 dat$puntuación
             </input>
-          </program>
+          </sage>
 
           <p>This happens because the scores in the file use the European decimal point, which confuses <c>read_csv</c>.</p>
 
           <p>To address this issue, we can also change the encoding to use European decimals, which fixes the problem:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 dat &lt;- read_csv(fn, locale = locale(decimal_mark = ",",
                                     encoding = "ISO-8859-1"))
 dat$puntuación
             </input>
-          </program>
+          </sage>
 
           <p>Now, to compute the student ages, let's try changing the submission times to date format:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 library(lubridate)
 dmy(dat$f.n.)
             </input>
-          </program>
+          </sage>
 
           <p>Nothing gets converted correctly. This is because the dates are in Spanish. We can change the locale to use Spanish as the language for dates:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 parse_date(dat$f.n., format = "%d de %B de %Y", locale = locale(date_names = "es"))
             </input>
-          </program>
+          </sage>
 
           <p>We can also reread the file using the correct locales:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 dat &lt;- read_csv(fn, locale = locale(date_names = "es",
                                     date_format = "%d de %B de %Y",
                                     decimal_mark = ",",
                                     encoding = "ISO-8859-1"))
             </input>
-          </program>
+          </sage>
 
           <p>Computing the students' ages is now straightforward:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 time_length(today() - dat$f.n., unit = "years") |&gt; floor()
             </input>
-          </program>
+          </sage>
 
           <p>Finally, let's check which students turned in their homework past the deadline of September 22:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 dat$estampa &gt;= make_date(2023, 9, 22)
             </input>
-          </program>
+          </sage>
 
           <p>We see that two students where late. However, with times we have to be particularly careful as some functions default to the UTC timezone:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 tz(dat$estampa)
             </input>
-          </program>
+          </sage>
 
           <p>If we change to the timezone to Eastern Standard Time (EST), we see no one was late:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 with_tz(dat$estampa, tz =  "EST") &gt;= make_date(2023, 9, 22)
             </input>
-          </program>
+          </sage>
 
         </section>
 
@@ -1347,13 +1347,13 @@ with_tz(dat$estampa, tz =  "EST") &gt;= make_date(2023, 9, 22)
 
           <p>The data we need to answer a question is not always in a spreadsheet ready for us to read. For example, the US murders dataset we used in the R Basics chapter originally comes from this Wikipedia page:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 url &lt;- paste0("https://en.wikipedia.org/w/index.php?title=",
               "Gun_violence_in_the_United_States_by_state",
               "&amp;direction=prev&amp;oldid=810166167")
             </input>
-          </program>
+          </sage>
 
           <p>You can see the data table when you visit the webpage:</p>
 
@@ -1374,7 +1374,7 @@ url &lt;- paste0("https://en.wikipedia.org/w/index.php?title=",
 
             <p>Because this code is accessible, we can download the HTML file, import it into R, and then write programs to extract the information we need from the page. However, once we look at HTML code, this might seem like a daunting task. But we will show you some convenient tools to facilitate the process. To get an idea of how it works, here are a few lines of code from the Wikipedia page that provides the US murders data:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 &lt;table class="wikitable sortable"&gt;
 &lt;tr&gt;
@@ -1410,7 +1410,7 @@ title="List of U.S. states and territories by population"&gt;Population&lt;/a&gt
 &lt;/tr&gt;
 &lt;tr&gt;
               </input>
-            </program>
+            </sage>
 
             <p>You can actually see the data, except data values are surrounded by html code such as <c>&lt;td&gt;</c>. We can also see a pattern of how it is stored. If you know HTML, you can write programs that leverage knowledge of these patterns to extract what we want. We also take advantage of a language widely used to make webpages look "pretty" called Cascading Style Sheets (CSS). We say more about this in <xref ref="sec-css-selectors"/>.</p>
 
@@ -1423,73 +1423,73 @@ title="List of U.S. states and territories by population"&gt;Population&lt;/a&gt
 
             <p>The __tidyverse__ provides a web harvesting package called __rvest__. The first step using this package is to import the webpage into R. The package makes this quite simple:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 library(tidyverse)
 library(rvest)
 h &lt;- read_html(url)
               </input>
-            </program>
+            </sage>
 
             <p>Note that the entire Murders in the US Wikipedia webpage is now contained in <c>h</c>. The class of this object is:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 class(h)
               </input>
-            </program>
+            </sage>
 
             <p>The __rvest__ package is actually more general; it handles XML documents. XML is a general markup language (that's what the ML stands for) that can be used to represent any kind of data. HTML is a specific type of XML specifically developed for representing webpages. Here we focus on HTML documents.</p>
 
             <p>Now, how do we extract the table from the object <c>h</c>? If you were to print <c>h</c>,  we would see information about the object that is not very informative. We can see all the code that defines the downloaded webpage using the <c>html_text</c> function like this:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 html_text(h)
               </input>
-            </program>
+            </sage>
 
             <p>We don't show the output here because it includes thousands of characters. But if we look at it, we can see the data we are after are stored in an HTML table: you can see this in this line of the HTML code above <c>&lt;table class="wikitable sortable"&gt;</c>. The different parts of an HTML document, often defined with a message in between  <c>&lt;</c> and <c>&gt;</c>  are referred to as <em>nodes</em>. The __rvest__ package includes functions to extract nodes of an HTML document: <c>html_nodes</c> extracts all nodes of different types and <c>html_node</c> extracts the first one. To extract the tables from the html code we use:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 tab &lt;- h |&gt; html_nodes("table")
               </input>
-            </program>
+            </sage>
 
             <p>Now, instead of the entire webpage, we just have the html code for the tables in the page:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 tab
               </input>
-            </program>
+            </sage>
 
             <p>The table we are interested is the first one:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 tab[[1]]
               </input>
-            </program>
+            </sage>
 
             <p>This is clearly not a tidy dataset, not even a data frame. In the code above, you can definitely see a pattern and writing code to extract just the data is very doable. In fact, __rvest__ includes a function just for converting HTML tables into data frames:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 tab &lt;- tab[[1]] |&gt; html_table()
 class(tab)
               </input>
-            </program>
+            </sage>
 
             <p>We are now much closer to having a usable data table:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 tab &lt;- tab |&gt; setNames(c("state", "population", "total", "murder_rate")) 
 head(tab)
               </input>
-            </program>
+            </sage>
 
             <p>We still have some wrangling to do. For example, we need to remove the commas and turn characters into numbers. Before continuing with this, we will learn a more general approach to extracting information from web sites.</p>
 
@@ -1513,7 +1513,7 @@ head(tab)
 
           <p>Sharing data on the internet has become more and more common. Unfortunately, providers use different formats, which makes it harder for data analysts to wrangle data into R. Yet there are some standards that are also becoming more common. Currently, a format that is widely being adopted is the JavaScript Object Notation or JSON. Because this format is very general, it is nothing like a spreadsheet. This JSON file looks more like the code you use to define a list. Here is an example of information stored in a JSON format:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 library(jsonlite)
 example &lt;- data.frame(name = c("Miguel", "Sofia", "Aya", "Cheng"), 
@@ -1521,20 +1521,20 @@ example &lt;- data.frame(name = c("Miguel", "Sofia", "Aya", "Cheng"),
 json &lt;- toJSON(example, pretty = TRUE) 
 json
             </input>
-          </program>
+          </sage>
 
           <p>The file above actually represents a data frame. To read it, we can use the function <c>fromJSON</c> from the __jsonlite__ package. Note that JSON files are often made available via the internet. Several organizations provide a JSON API or a web service that you can connect directly to and obtain data. Here is an example providing information Nobel prize winners:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 library(jsonlite)
 nobel &lt;- fromJSON("http://api.nobelprize.org/v1/prize.json")
             </input>
-          </program>
+          </sage>
 
           <p>This downloads a list. The first argument, named "prizes" is a table with information about Nobel prize winners. Each row holds corresponds to a particular year and category. The "laureates" column holds a list with a data frame for each winner with columns for id, firstname, surname, and motivation.</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 nobel$prizes |&gt;
   filter(category == "literature" &amp; year == "1971") |&gt; 
@@ -1542,7 +1542,7 @@ nobel$prizes |&gt;
   first() |&gt;
   select(id, firstname, surname)
             </input>
-          </program>
+          </sage>
 
           <p>You can learn much more by examining tutorials and help files from the __jsonlite__ package. This package is intended for relatively simple tasks such as converting data into tables. For more flexibility, we recommend the __rjson__ package.</p>
 
@@ -1591,67 +1591,67 @@ nobel$prizes |&gt;
 
             <p>Let's say you want to retrieve COVID-19 deaths by state from the CDC. By visiting their data catalog you can search for datasets and find that the data is provided through this API:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 url &lt;- "https://data.cdc.gov/resource/muzy-jte6.csv"
               </input>
-            </program>
+            </sage>
 
             <p>We can then make create and perform a request like this:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 library(httr2)
 response &lt;- request(url) |&gt; req_perform()
               </input>
-            </program>
+            </sage>
 
             <p>We can see the results of the request by looking at the returned object.</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 response
               </input>
-            </program>
+            </sage>
 
             <p>To extract the body, which is where the data are, we can use <c>resp_body_string</c> and send the result, a comma delimited string, to <c>read_csv</c></p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 #| message: false
 library(readr)
 tab &lt;- response |&gt; resp_body_string() |&gt; read_csv()
               </input>
-            </program>
+            </sage>
 
             <p>We note that the returned object is only <c>nrow(tab)</c> entries. API often limit how much you can download. The documentation for this API explains that we can change this limit through the <c>$limit</c> parameters. We can use the <c>req_url_query</c> to add this to our request:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 response &lt;- request(url) |&gt; 
   req_url_query(`$limit` = 100000) |&gt;
   req_perform() 
               </input>
-            </program>
+            </sage>
 
             <p>The CDC service returns data in csv format but a more common format used by web services is JSON. The CDC also provides data in json format through a the url:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 url &lt;- "https://data.cdc.gov/resource/muzy-jte6.json"
               </input>
-            </program>
+            </sage>
 
             <p>To extract the data table we use the <c>fromJSON</c> function from the <alert>jsonlite</alert> package.</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 tab &lt;- request(url) |&gt; 
    req_perform() |&gt; 
    resp_body_string() |&gt; 
    fromJSON(flatten = TRUE)
               </input>
-            </program>
+            </sage>
 
             <p>When working with APIs, it's essential to check the API's documentation for rate limits, required headers, or authentication methods. The <c>httr2</c> package provides tools to handle these requirements, such as setting headers or authentication parameters.</p>
 
@@ -1672,11 +1672,11 @@ tab &lt;- request(url) |&gt;
 
           <ol>
             <li><p>Note that, although not very useful, we can actually see the content of the page by typing:</p></li>
-          <program language="r">
+          <sage language="r">
             <input>
 html_text(h)
             </input>
-          </program>
+          </sage>
 
           </ol>
 
@@ -1684,11 +1684,11 @@ html_text(h)
 
           <ol>
             <li><p>The <c>html_nodes</c> function returns a list of objects of class <c>xml_node</c>. We can see the content of each one using, for example, the <c>html_text</c> function. You can see the content for an arbitrarily picked component like this:</p></li>
-          <program language="r">
+          <sage language="r">
             <input>
 html_text(nodes[[8]])
             </input>
-          </program>
+          </sage>
 
           </ol>
 
@@ -1719,12 +1719,12 @@ html_text(nodes[[8]])
             <li><p>Use a <c>full_join</c> function to combine these two tables. Before you do this you will have to fix the missing header problem. You will also need to make the names match.</p></li>
             <li><p>After joining the tables, you see several <c>NA</c>s. This is because some teams are in one table and not the other. Use the <c>anti_join</c> function to get a better idea of why this is happening.</p></li>
             <li><p>We see see that one of the problems is that Yankees are listed as both <em>N.Y. Yankees</em> and <em>NY Yankees</em>. In the next section, we will learn efficient approaches to fixing problems like this. Here we can do it "by hand" as follows:</p></li>
-          <program language="r">
+          <sage language="r">
             <input>
 tab_1 &lt;- tab_1 |&gt;
   mutate(Team = ifelse(Team == "N.Y. Yankees", "NY Yankees", Team))
             </input>
-          </program>
+          </sage>
 
           </ol>
 
@@ -1752,12 +1752,12 @@ tab_1 &lt;- tab_1 |&gt;
         <section xml:id="sec-stringr">
           <title>The stringr package</title>
 
-          <program language="r">
+          <sage language="r">
             <input>
 library(tidyverse)
 library(stringr)
             </input>
-          </program>
+          </sage>
 
           <p>In general, string processing tasks can be divided into <alert>detecting</alert>, <alert>locating</alert>, <alert>extracting</alert>, or <alert>replacing</alert> patterns in strings. We will see several examples. The table below includes the functions available to you in the <alert>stringr</alert> package. We split them by task. We also include the base R equivalent when available.</p>
 
@@ -1774,47 +1774,47 @@ library(stringr)
 
           <p>The <alert>dslabs</alert> package includes the raw data from which the heights dataset was obtained. You can load it like this:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 library(dslabs)
 head(reported_heights)
             </input>
-          </program>
+          </sage>
 
           <p>These heights were obtained using a web form in which students were asked to enter their heights. They could enter anything, but the instructions asked for <em>height in inches</em>, a number. We compiled <c>prettyNum(nrow(reported_heights), big.mark=",")</c> submissions, but unfortunately the column vector with the reported heights had several non-numeric entries and as a result became a character vector:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 class(reported_heights$height)
             </input>
-          </program>
+          </sage>
 
           <p>If we try to parse it into numbers, we get a warning:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 x &lt;- as.numeric(reported_heights$height)
             </input>
-          </program>
+          </sage>
 
           <p>Although most values appear to be height in inches as requested we do end up with many <c>NA</c>s:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 sum(is.na(x))
             </input>
-          </program>
+          </sage>
 
           <p>Here are some of the entries that are not successfully converted:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 reported_heights |&gt; 
   mutate(new_height = as.numeric(height)) |&gt;
   filter(is.na(new_height)) |&gt; 
   head(n = 10)
             </input>
-          </program>
+          </sage>
 
           <p>We immediately see what is happening. Some of the students did not report their heights in inches as requested. We could discard these data and continue. However, many of the entries follow patterns that, in principle, we can easily convert to inches. For example, in the output above, we see various cases that use the format <c>x'y"</c> or <c>x'y''</c> with <c>x</c> and <c>y</c> representing feet and inches, respectively. Each one of these cases can be read and converted to inches by a human, for example <c>5'4"</c> is <c>5*12 + 4 = 64</c>. So we could fix all the problematic entries <em>by hand</em>. However, humans are prone to making mistakes, so an automated approach is preferable. Also, because we plan on continuing to collect data, it will be convenient to write code that automatically corrects entries entered in error.</p>
 
@@ -1822,17 +1822,17 @@ reported_heights |&gt;
 
           <p>To look for such patterns, it helps to remove the entries that are consistent with being in inches and to view only the problematic entries. We thus write a function to automatically do this. We keep entries that either result in <c>NA</c>s when applying <c>as.numeric</c> or are outside a range of plausible heights. We permit a range that covers about 99.9999% of the adult population. We also use <c>suppressWarnings</c> to avoid the warning message we know <c>as.numeric</c> will gives us.</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 alpha &lt;- 1 / 10^6
 qnorm(1 - alpha / 2, 69.1, 2.9)
 qnorm(alpha / 2, 63.7, 2.7)
             </input>
-          </program>
+          </sage>
 
           <p>We apply this function and find the number of problematic entries:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 problems &lt;- reported_heights |&gt; 
   mutate(inches = suppressWarnings(as.numeric(height))) |&gt;
@@ -1840,7 +1840,7 @@ problems &lt;- reported_heights |&gt;
   pull(height)
 length(problems)
             </input>
-          </program>
+          </sage>
 
           <p>We can now view all the cases by simply printing them. If we do, we see that three patterns can be used to define three large groups within these exceptions.</p>
 
@@ -1850,12 +1850,12 @@ length(problems)
 
           <p>representing feet and inches, respectively. Here are ten examples:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 pattern &lt;- "^\\d\\s*'\\s*\\d{1,2}\\.*\\d*'*\"*$"
 str_subset(problems, pattern) |&gt; head(n = 10) |&gt; cat()
             </input>
-          </program>
+          </sage>
 
           <ol>
             <li><p>A pattern of the form <c>x.y</c> or <c>x,y</c> with <c>x</c> feet and <c>y</c> inches.</p></li>
@@ -1863,12 +1863,12 @@ str_subset(problems, pattern) |&gt; head(n = 10) |&gt; cat()
 
           <p>Here are ten examples:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 pattern &lt;- "^[4-6]\\s*[\\.|,]\\s*([0-9]|10|11)$"
 str_subset(problems, pattern) |&gt; head(n = 10) |&gt; cat()
             </input>
-          </program>
+          </sage>
 
           <ol>
             <li><p>Entries that were reported in centimeters rather than inches. Here</p></li>
@@ -1876,13 +1876,13 @@ str_subset(problems, pattern) |&gt; head(n = 10) |&gt; cat()
 
           <p>are ten examples:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 ind &lt;- which(between(suppressWarnings(as.numeric(problems))/2.54, 54, 81) )
 ind &lt;- ind[!is.na(ind)]
 problems[ind] |&gt; head(n = 10) |&gt; cat()
             </input>
-          </program>
+          </sage>
 
           <p>Once we see these large groups following specific patterns, we can develop a plan of attack.</p>
 
@@ -1923,74 +1923,74 @@ problems[ind] |&gt; head(n = 10) |&gt; cat()
 
           <p>To define strings in R, we can use either double quotes or single quotes:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 s &lt;- "Hello!"
 s &lt;- 'Hello!' 
             </input>
-          </program>
+          </sage>
 
           <p>Make sure you choose the correct single quote, as opposed to the back quote `<c> </c> ``.</p>
 
           <p>Now, what happens if the string we want to define includes double quotes? For example, if we want to write 10 inches like this <c>10"</c>? In this case you can't use:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 s &lt;- "10""
             </input>
-          </program>
+          </sage>
 
           <p>because this is just the string <c>10</c> followed by a double quote. If you type this into R, you get an error because you failed to close the double quote. To avoid this, we can use the single quotes:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 s &lt;- '10"'
             </input>
-          </program>
+          </sage>
 
           <p>If we print out <c>s</c> we see that the double quotes are <em>escaped</em> with the backslash <c>\</c>.</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 s
             </input>
-          </program>
+          </sage>
 
           <p>In fact, escaping with the backslash provides a way to define the string while still using the double quotes to define strings:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 s &lt;- "10\""
             </input>
-          </program>
+          </sage>
 
           <p>In R, the function <c>cat</c> lets us see what the string actually looks like:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 cat(s)
             </input>
-          </program>
+          </sage>
 
           <p>Now, what if we want our string to be 5 feet written like this <c>5'</c>? In this case, we can use the double quotes or escape the single quote</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 s &lt;- "5'"
 s &lt;- '5\''
             </input>
-          </program>
+          </sage>
 
           <p>So we've learned how to write 5 feet and 10 inches separately, but what if we want to write them together to represent <em>5 feet and 10 inches</em> like this <c>5'10"</c>? In this case, neither the single nor double quotes will work since <c>'5'10"'</c> closes the string after 5 and this <c>"5'10""</c> closes the string after 10. Keep in mind that if we type one of the above code snippets into R, it will get stuck waiting for you to close the open quote and you will have to exit the execution with the <em>esc</em> button.</p>
 
           <p>To achieve the desired result we need to escape both quotes with the backslash <c>\</c>. You can escape either character that can be confused with a closing quote. These are the two options:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 s &lt;- '5\'10"'
 s &lt;- "5'10\""
             </input>
-          </program>
+          </sage>
 
           <p>Escaping characters is something we often have to use when processing strings. Another characters that often needs escaping is the backslash character itself. We can do this with <c>\\</c>. When using regular expression, the topic of the next section, we often have to escape the <em>special characters</em> used in this approach.</p>
 
@@ -2010,20 +2010,20 @@ s &lt;- "5'10\""
 
             <p>Technically any string is a regex, perhaps the simplest example is a single character. So the comma <c>,</c> used in the next code example is a simple example of searching with regex.</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 pattern &lt;- ","
 str_detect(c("1", "10", "100", "1,000", "10,000"), pattern) 
               </input>
-            </program>
+            </sage>
 
             <p>Above, we noted that an entry included a <c>cm</c>. This is also a simple example of a regex. We can show all the entries that used <c>cm</c> like this:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 str_subset(reported_heights$height, "cm")
               </input>
-            </program>
+            </sage>
 
           </subsection>
 
@@ -2032,29 +2032,29 @@ str_subset(reported_heights$height, "cm")
 
             <p>Now let's consider a slightly more complicated example. Which of the following strings contain the pattern <c>cm</c> or <c>inches</c>?</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 yes &lt;- c("180 cm", "70 inches")
 no &lt;- c("180", "70''")
 s &lt;- c(yes, no)
               </input>
-            </program>
+            </sage>
 
             <p>We can do this with two searches:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 str_detect(s, "cm") | str_detect(s, "inches")
               </input>
-            </program>
+            </sage>
 
             <p>However, we don't need to do this. The main feature that distinguishes the regex <em>language</em> from plain strings is that we can use special characters. These are characters with a meaning. We start by introducing <c>|</c> which means <em>or</em>. So if we want to know if either <c>cm</c> or <c>inches</c> appears in the strings, we can use the regex <c>cm|inches</c>:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 str_detect(s, "cm|inches")
               </input>
-            </program>
+            </sage>
 
             <p>and obtain the correct answer.</p>
 
@@ -2066,7 +2066,7 @@ str_detect(s, "cm|inches")
 
             <p>we have to <em>escape</em> the backslash <c>\</c> so we actually have to use <c>\\d</c> to represent digits. Here is an example:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 yes &lt;- c("5", "6", "5'10", "5 feet", "4'11")
 no &lt;- c("", ".", "Five", "six")
@@ -2074,15 +2074,15 @@ s &lt;- c(yes, no)
 pattern &lt;- "\\d"
 str_detect(s, pattern)
               </input>
-            </program>
+            </sage>
 
             <p>We take this opportunity to introduce the <c>str_view</c> function, which is helpful for troubleshooting as it shows us all matches for each string that has matches. Each match is surrounded by the characters <c>&lt;</c> and <c>&gt;</c>. Below, we see that <c>5</c> has one match and <c>5'10</c> has three matches.</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 str_view(s, pattern)
               </input>
-            </program>
+            </sage>
 
             <figure>
               <image source="wrangling/img/str_view-1.png"/>
@@ -2090,11 +2090,11 @@ str_view(s, pattern)
 
             <p>To view all strings, even if there wasn't a match, we can use the <c>match = NA</c> parameter.</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 str_view(s, pattern, match = NA)
               </input>
-            </program>
+            </sage>
 
             <figure>
               <image source="wrangling/img/str_view-2.png"/>
@@ -2111,11 +2111,11 @@ str_view(s, pattern, match = NA)
 
             <p>Character classes are used to define a series of characters that can be matched. We define character classes with square brackets <c>[]</c>. So, for example, if we want the pattern to match only if we have a <c>5</c> or a <c>6</c>, we use the regex <c>[56]</c>:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 str_view(s, "[56]", match = NA)
               </input>
-            </program>
+            </sage>
 
             <figure>
               <image source="wrangling/img/str_view-3.png"/>
@@ -2123,14 +2123,14 @@ str_view(s, "[56]", match = NA)
 
             <p>Suppose we want to match values between 4 and 7. A common way to define character classes is with ranges. So, for example, <c>[0-9]</c> is equivalent to <c>\\d</c>. The pattern we want is therefore <c>[4-7]</c>.</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 yes &lt;- as.character(4:7)
 no &lt;- as.character(1:3)
 s &lt;- c(yes, no)
 str_detect(s, "[4-7]")
               </input>
-            </program>
+            </sage>
 
             <p>However, it is important to know that in regex everything is a character; there are no numbers. So <c>4</c> is the character <c>4</c> not the number four. Notice, for example, that <c>[1-20]</c> does <alert>not</alert> mean 1 through 20, it means the characters 1 through 2 or the character 0. So <c>[1-20]</c> simply means the character class composed of 0, 1, and 2.</p>
 
@@ -2147,7 +2147,7 @@ str_detect(s, "[4-7]")
 
             <p>This pattern now only detects the strings with exactly one digit:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 pattern &lt;- "^\\d$"
 yes &lt;- c("1", "5", "9")
@@ -2155,7 +2155,7 @@ no &lt;- c("12", "123", " 1", "a4", "b")
 s &lt;- c(yes, no)
 str_view(s, pattern, match = NA)
               </input>
-            </program>
+            </sage>
 
             <figure>
               <image source="wrangling/img/str_view-4.png"/>
@@ -2172,14 +2172,14 @@ str_view(s, pattern, match = NA)
 
             <p>We use an example to illustrate. The pattern for one or two digits is:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 pattern &lt;- "^\\d{1,2}$"
 yes &lt;- c("1", "5", "9", "12")
 no &lt;- c("123", "a4", "b")
 str_view(c(yes, no), pattern, match = NA)
               </input>
-            </program>
+            </sage>
 
             <figure>
               <image source="wrangling/img/str_view-5.png"/>
@@ -2189,11 +2189,11 @@ str_view(c(yes, no), pattern, match = NA)
 
             <p>With what we have learned, we can now construct an example for the pattern <c>x'y"</c> with <c>x</c> feet and <c>y</c> inches.</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 pattern &lt;- "^[4-7]'\\d{1,2}\"$"
               </input>
-            </program>
+            </sage>
 
             <p>The pattern is now getting complex, but you can look at it carefully and break it down:</p>
 
@@ -2201,14 +2201,14 @@ pattern &lt;- "^[4-7]'\\d{1,2}\"$"
 
             <p>Let's test it out:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 yes &lt;- c("5'7\"", "6'2\"",  "5'12\"")
 no &lt;- c("6,2\"", "6.2\"","I am 5'11\"", "3'2\"", "64")
 str_detect(yes, pattern)
 str_detect(no, pattern)
               </input>
-            </program>
+            </sage>
 
             <p>For now, we are permitting the inches to be 12 or larger. We will add a restriction later as the regex for this is a bit more complex than we are ready to show.</p>
 
@@ -2219,20 +2219,20 @@ str_detect(no, pattern)
 
             <p>Another problem we have is spaces. For example, our pattern does not match <c>5' 4"</c> because there is a space between <c>'</c> and <c>4</c> which our pattern does not permit. Spaces are characters and R does not ignore them:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 identical("Hi", "Hi ")
               </input>
-            </program>
+            </sage>
 
             <p>In regex, <c>\s</c> represents white space. To find patterns like <c>5' 4</c>, we can change our pattern to:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 pattern_2 &lt;- "^[4-7]'\\s\\d{1,2}\"$"
 str_subset(problems, pattern_2)
               </input>
-            </program>
+            </sage>
 
             <p>However, this will not match the patterns with no space. So do we need more than one regex pattern? It turns out we can use a quantifier for this as well.</p>
 
@@ -2243,27 +2243,27 @@ str_subset(problems, pattern_2)
 
             <p>We want the pattern to permit spaces but not require them. Even if there are several spaces, like in this example <c>5'   4</c>, we still want it to match. There is a quantifier for exactly this purpose. In regex, the character <c>*</c> means zero or more instances of the previous character. Here is an example:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 yes &lt;- c("AB", "A1B", "A11B", "A111B", "A1111B")
 no &lt;- c("A2B", "A21B")
 str_detect(yes, "A1*B")
 str_detect(no, "A1*B")
               </input>
-            </program>
+            </sage>
 
             <p>The above matches the first string which has zero 1s and all the strings with one or more 1s. We can then improve our pattern by adding the <c>*</c> after the space character <c>\s</c>.</p>
 
             <p>There are two other similar quantifiers. For none or once, we can use <c>?</c>, and for one or more, we can use <c>+</c>. You can see how they differ with this example:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 data.frame(string = c("AB", "A1B", "A11B", "A111B", "A1111B"),
            none_or_more = str_detect(yes, "A1*B"),
            nore_or_once = str_detect(yes, "A1?B"),
            once_or_more = str_detect(yes, "A1+B"))
               </input>
-            </program>
+            </sage>
 
             <p>We will actually use all three in our reported heights example, but we will see these in a later section.</p>
 
@@ -2274,7 +2274,7 @@ data.frame(string = c("AB", "A1B", "A11B", "A111B", "A1111B"),
 
             <p>To specify patterns that we do <alert>not</alert> want to detect, we can use the <c>^</c> symbol but only <alert>inside</alert> square brackets. Remember that outside the square bracket <c>^</c> means the start of the string. So, for example, if we want to detect digits that are preceded by anything except a letter we can do the following:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 pattern &lt;- "[^a-zA-Z]\\d"
 yes &lt;- c(".3", "+2", "-0","*4")
@@ -2282,7 +2282,7 @@ no &lt;- c("A3", "B2", "C0", "E4")
 str_detect(yes, pattern)
 str_detect(no, pattern)
               </input>
-            </program>
+            </sage>
 
             <p>Another way to generate a pattern that searches for <em>everything except</em> is to use the upper case of the special character. For example <c>\\D</c> means anything other than a digit, <c>\\S</c> means anything except a space, and so on.</p>
 
@@ -2297,23 +2297,23 @@ str_detect(no, pattern)
 
             <p>To avoid changing patterns such as <c>70.2</c>, we will require that the first digit be between 4 and 7 <c>[4-7]</c> and that the second be none or more digits <c>\\d*</c>. Let's start by defining a simple pattern that matches this:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 pattern_without_groups &lt;- "^[4-7],\\d*$"
               </input>
-            </program>
+            </sage>
 
             <p>We want to extract the digits so we can then form the new version using a period. These are our two groups, so we encapsulate them with parentheses:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 pattern_with_groups &lt;-  "^([4-7]),(\\d*)$"
               </input>
-            </program>
+            </sage>
 
             <p>We encapsulate the part of the pattern that matches the parts we want to keep for later use. Adding groups does not affect the detection, since it only signals that we want to save what is captured by the groups. Note that both patterns return the same result when using <c>str_detect</c>:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 yes &lt;- c("5,9", "5,11", "6,", "6,1")
 no &lt;- c("5'9", ",", "2,8", "6.1.1")
@@ -2321,25 +2321,25 @@ s &lt;- c(yes, no)
 str_detect(s, pattern_without_groups)
 str_detect(s, pattern_with_groups)
               </input>
-            </program>
+            </sage>
 
             <p>Once we define groups, we can use the function <c>str_match</c> to extract the values these groups define:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 str_match(s, pattern_with_groups)
               </input>
-            </program>
+            </sage>
 
             <p>Notice that the second and third columns contain feet and inches, respectively. The first column is the part of the string matching the pattern. If no match occurred, we see an <c>NA</c>.</p>
 
             <p>Now we can understand the difference between the functions <c>str_extract</c> and <c>str_match</c>. <c>str_extract</c> extracts only strings that match a pattern, not the values defined by groups:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 str_extract(s, pattern_with_groups)
               </input>
-            </program>
+            </sage>
 
           </subsection>
 
@@ -2348,20 +2348,20 @@ str_extract(s, pattern_with_groups)
 
             <p>Earlier we defined the object <c>problems</c> containing the strings that do not appear to be in inches. We can see that not too many of our problematic strings match the pattern:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 pattern &lt;- "^[4-7]'\\d{1,2}\"$"
 sum(str_detect(problems, pattern))
               </input>
-            </program>
+            </sage>
 
             <p>To see why this is, we show some examples that expose why we don't have more matches:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 problems[c(2, 10, 11, 12, 15)] |&gt; str_view(pattern)
               </input>
-            </program>
+            </sage>
 
             <figure>
               <image source="wrangling/img/str_view-6.png"/>
@@ -2369,31 +2369,31 @@ problems[c(2, 10, 11, 12, 15)] |&gt; str_view(pattern)
 
             <p>An initial problem we see immediately is that some students wrote out the words "feet" and "inches". We can see the entries that did this with the <c>str_subset</c> function:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 str_subset(problems, "inches")
               </input>
-            </program>
+            </sage>
 
             <p>We also see that some entries used two single quotes <c>''</c> instead of a double quote <c>"</c>.</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 str_subset(problems, "''")
               </input>
-            </program>
+            </sage>
 
             <p>To correct this, we can replace the different ways of representing inches and feet with a uniform symbol. We will use <c>'</c> for feet, whereas for inches we will simply not use a symbol since some entries were of the form <c>x'y</c>. Now, if we no longer use the inches symbol, we have to change our pattern accordingly:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 pattern &lt;- "^[4-7]'\\d{1,2}$"
               </input>
-            </program>
+            </sage>
 
             <p>If we do this replacement before the matching, we get many more matches:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 problems |&gt; 
   str_replace("feet|ft|foot", "'") |&gt; # replace feet, ft, foot with ' 
@@ -2401,7 +2401,7 @@ problems |&gt;
   str_detect(pattern) |&gt; 
   sum()
               </input>
-            </program>
+            </sage>
 
             <p>However, we still have many cases to go.</p>
 
@@ -2409,7 +2409,7 @@ problems |&gt;
 
             <p>For now, we improve our pattern by adding <c>\\s*</c> in front of and after the feet symbol <c>'</c> to permit space between the feet symbol and the numbers. Now we match a few more entries:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 pattern &lt;- "^[4-7]\\s*'\\s*\\d{1,2}$"
 problems |&gt; 
@@ -2418,7 +2418,7 @@ problems |&gt;
   str_detect(pattern) |&gt; 
   sum()
               </input>
-            </program>
+            </sage>
 
             <p>We might be tempted to avoid doing this by removing all the spaces with <c>str_replace_all</c>. However, when doing such an operation we need to make sure that it does not have unintended effects. In our reported heights examples, this will be a problem because some entries are of the form <c>x y</c> with space separating the feet from the inches. If we remove all spaces, we will incorrectly turn <c>x y</c> into <c>xy</c> which implies that a <c>6 1</c> would become <c>61</c> inches instead of <c>73</c> inches.</p>
 
@@ -2433,7 +2433,7 @@ problems |&gt;
 
             <p>The regex special character for the <c>i</c>-th group is <c>\\i</c>. So <c>\\1</c> is the value extracted from the first group, <c>\\2</c> the value from the second and so on. As a simple example, note that the following code will replace a comma with period, but only if it is after a digit between 4 and 7, and followed by zero or more digits:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 pattern_with_groups &lt;-  "^([4-7]),(\\d*)$"
 yes &lt;- c("5,9", "5,11", "6,", "6,1")
@@ -2441,17 +2441,17 @@ no &lt;- c("5'9", ",", "2,8", "6.1.1")
 s &lt;- c(yes, no)
 str_replace(s, pattern_with_groups, "\\1'\\2")
               </input>
-            </program>
+            </sage>
 
             <p>We can use this to convert cases in our reported heights.</p>
 
             <p>We are now ready to define a pattern that helps us convert all the <c>x.y</c>, <c>x,y</c> and <c>x y</c> to our preferred format. We need to adapt <c>pattern_with_groups</c> to be a bit more flexible and capture all the cases.</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 pattern_with_groups &lt;- "^([4-7])\\s*[,\\.\\s+]\\s*(\\d*)$"
               </input>
-            </program>
+            </sage>
 
             <p>Let's break this one down:</p>
 
@@ -2459,20 +2459,20 @@ pattern_with_groups &lt;- "^([4-7])\\s*[,\\.\\s+]\\s*(\\d*)$"
 
             <p>We can see that it appears to be working:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 str_subset(problems, pattern_with_groups) |&gt; head()
               </input>
-            </program>
+            </sage>
 
             <p>and will be able to perform the search and replace:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 str_subset(problems, pattern_with_groups) |&gt; 
   str_replace(pattern_with_groups, "\\1'\\2") |&gt; head()
               </input>
-            </program>
+            </sage>
 
             <p>Again, we will deal with the inches-larger-than-twelve challenge later.</p>
 
@@ -2487,20 +2487,20 @@ str_subset(problems, pattern_with_groups) |&gt;
 
             <p>The conventional example checking password that must satisfy several conditions such as 1) 8-16 word characters, 2) starts with a letter, and 3) has at least one digit. You can concatenate lookarounds to check for multiple conditions. For our example we can write</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 pattern &lt;- "(?=\\w{8,16})(?=^[a-z|A-Z].*)(?=.*\\d+.*)"
               </input>
-            </program>
+            </sage>
 
             <p>A simpler example is changing all <c>superman</c> to <c>supergirl</c> without changing all the men to girl. We could use a lookaround like this:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 s &lt;- "Superman saved a man. The man thanked superman."
 str_replace_all(s, "(?&lt;=[Ss]uper)man", "girl")
               </input>
-            </program>
+            </sage>
 
           </subsection>
 
@@ -2511,20 +2511,20 @@ str_replace_all(s, "(?&lt;=[Ss]uper)man", "girl")
 
             <p>Suppose we have data frame like this:</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 tab &lt;- data.frame(x = c("5'10", "6' 1", "5 ' 9", "5'11\""))
               </input>
-            </program>
+            </sage>
 
             <p>Note that using <c>separate_wider_delim</c> won't work here because the delimiter can varies across entries. With <c>separate_wider_regex</c> we can define flexible patterns that are matched to define each column.</p>
 
-            <program language="r">
+            <sage language="r">
               <input>
 patterns &lt;- c(feet = "\\d", "\\s*'\\s*", inches = "\\d{1,2}", ".*")
 tab |&gt; separate_wider_regex(x, patterns = patterns)
               </input>
-            </program>
+            </sage>
 
             <p>By not naming the second and fourth entries of <c>patterns</c> we tell the function not to keep the values that match that pattern.</p>
 
@@ -2537,21 +2537,21 @@ tab |&gt; separate_wider_regex(x, patterns = patterns)
 
           <p>In general, spaces at the start or end of the string are uninformative. These can be particularly deceptive because sometimes they can be hard to see:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 s &lt;- "Hi "
 cat(s)
 identical(s, "Hi")
             </input>
-          </program>
+          </sage>
 
           <p>This is a general enough problem that there is a function dedicated to removing them: <c>str_trim</c>.</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 str_trim("5 ' 9 ")
             </input>
-          </program>
+          </sage>
 
         </section>
 
@@ -2560,12 +2560,12 @@ str_trim("5 ' 9 ")
 
           <p>Notice that regex is case sensitive. Often we want to match a word regardless of case. One approach to doing this is to first change everything to lower case and then proceeding ignoring case. As an example, note that one of the entries writes out numbers as words <c>Five foot eight inches</c>. Although not efficient, we could add 13 extra <c>str_replace</c> calls to convert <c>zero</c> to <c>0</c>, <c>one</c> to <c>1</c>, and so on. To avoid having to write two separate operations for <c>Zero</c> and <c>zero</c>, <c>One</c> and <c>one</c>, etc., we can use the <c>str_to_lower</c> function to make all works lower case first:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 s &lt;- c("Five feet eight inches")
 str_to_lower(s)
             </input>
-          </program>
+          </sage>
 
           <p>Other related functions are <c>str_to_upper</c> and <c>str_to_title</c>. We are now ready to define a procedure that converts all the problematic cases to inches.</p>
 
@@ -2578,7 +2578,7 @@ str_to_lower(s)
 
           <p>Let's see how many problematic entries we can recover with the approaches we covered in <xref ref="sec-regex"/>. We will first define a function that detects entries that are not reported as inches or centimeters:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 not_inches_or_cm &lt;- function(x, smallest = 50, tallest = 84){
   inches &lt;- suppressWarnings(as.numeric(x))
@@ -2587,22 +2587,22 @@ not_inches_or_cm &lt;- function(x, smallest = 50, tallest = 84){
         (inches/2.54 &gt;= smallest &amp; inches/2.54 &lt;= tallest))
 }
             </input>
-          </program>
+          </sage>
 
           <p>We can see how many entries are not inches or centimeters:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 problems &lt;- reported_heights |&gt; 
   filter(not_inches_or_cm(height)) |&gt;
   pull(height)
 length(problems)
             </input>
-          </program>
+          </sage>
 
           <p>Let's see how many feet<c>'</c>inches format we can recover applying the finding from <xref ref="sec-regex"/>. Specifically we replace feet/foot/ft with <c>'</c>, we remove the word inches and its abbreviations, then rewrite similar patterns into the desired feet<c>'</c>inches pattern. Once this is done we see what proportion don't fit the desired pattern</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 converted &lt;- problems |&gt; 
   str_replace("feet|foot|ft", "'") |&gt; 
@@ -2611,19 +2611,19 @@ converted &lt;- problems |&gt;
 index &lt;- str_detect(converted, "^[4-7]\\s*'\\s*\\d{1,2}$")
 mean(!index)
             </input>
-          </program>
+          </sage>
 
           <p>We see that a substantial proportion has not yet been fixed. Trial and error is a common approach to finding the regex pattern that satisfies all desired conditions. We can examine the remaining cases to try to decipher if new patterns we can use to fix them:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 converted[!index]
             </input>
-          </program>
+          </sage>
 
           <p>We noticed that two students added <c>cm</c> and some entries have space at the end so we write incorporate this into our cleanup stage. We also notice that at least one entry wrote out numbers such as <c>Five foot eight inches</c>. We can use  the <c>words()</c> function in the <alert>english</alert> package to change these to actual numbers. In preparation for our final product, we define a function that cleans up previously noticed problems and these new ones:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 library(english)
 cleanup &lt;- function(s){
@@ -2636,11 +2636,11 @@ cleanup &lt;- function(s){
   return(s)
 }
             </input>
-          </program>
+          </sage>
 
           <p>Many also notice that students measuring exactly 5 or 6 feet did not enter any inches, for example <c>6'</c>, and our pattern requires that inches be included, and that some entries are in meters and some of these use European decimals, for example <c>1.6</c> and <c>1,70</c>. So we create a function that add these corrections to those already identified as needed to reformat the entry as feet<c>'</c>inches:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 convert_format &lt;- function(s){
   s |&gt; str_replace("feet|foot|ft", "'") |&gt; 
@@ -2649,7 +2649,7 @@ convert_format &lt;- function(s){
     str_replace("^([12])\\s*,\\s*(\\d*)$", "\\1\\.\\2")
 }
             </input>
-          </program>
+          </sage>
 
           <p>Now we are ready to wrangle our reported heights dataset. The strategy is as follows:</p>
 
@@ -2657,7 +2657,7 @@ convert_format &lt;- function(s){
             <li><p>We start by defining a variable to keep a copy of the original entry, we then clean up and covert the <c>height</c> entry using the functions described above. </p></li>
             <li><p>We then use the <c>separate_wider_regex_</c> function to extract feet and inches when the entry matches our feet<c>'</c>inches format. </p></li>
             <li><p>We use a lookaround to make sure that entries that have numbers with no <c>'</c> following them don't match and return an <c>NA</c>. </p></li>
-          <program language="r">
+          <sage language="r">
             <input>
 patterns &lt;- c(feet = "[4-7](?=\\s*'\\s*)", 
               "\\s*'\\s*", 
@@ -2683,21 +2683,21 @@ new_heights &lt;- reported_heights |&gt;
                          guess, height)) |&gt;
   select(-feet, -inches, -guess)
             </input>
-          </program>
+          </sage>
 
           </ol>
 
           <p>We see that we fix all but <c>sum(is.na(new_heights$height))</c> entries. You can see that these are mostly un-fixable:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 new_heights |&gt; filter(is.na(height)) |&gt; pull(original)
             </input>
-          </program>
+          </sage>
 
           <p>You can review the ones we did fix by typing:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 #| eval: false
 new_heights |&gt;
@@ -2706,15 +2706,15 @@ new_heights |&gt;
   arrange(height) |&gt;
   View()
             </input>
-          </program>
+          </sage>
 
           <p>A final observation is that if we look at the shortest students in our course:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 new_heights |&gt; arrange(height) |&gt; head(n = 6)
             </input>
-          </program>
+          </sage>
 
           <p>We see heights of 50, 51, 52, and so on. These short heights are rare and it is likely that the students actually meant 5'0,  5'1, 5'2 and so on. Because we are not completely sure, we will leave them as reported. The object new_heights contains our final solution for this case study.</p>
 
@@ -2725,13 +2725,13 @@ new_heights |&gt; arrange(height) |&gt; head(n = 6)
 
           <p>One of the datasets provided in <alert>dslabs</alert> shows scientific funding rates by gender in the Netherlands:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 library(dslabs)
 research_funding_rates |&gt; 
   select("discipline", "success_rates_men", "success_rates_women")
             </input>
-          </program>
+          </sage>
 
           <p>The data comes from a paper published in the Proceedings of the National Academy of Science (PNAS), a widely read scientific journal. However, the data is not provided in a spreadsheet; it is in a table in a PDF document. Here is a screenshot of the table:</p>
 
@@ -2743,7 +2743,7 @@ research_funding_rates |&gt;
 
           <p>We could extract the numbers by hand, but this could lead to human error. Instead, we can try to wrangle the data using R. We start by downloading the pdf document, then importing into R:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 library("pdftools")
 temp_file &lt;- tempfile()
@@ -2754,7 +2754,7 @@ download.file(url, temp_file, mode = "wb")
 txt &lt;- pdf_text(temp_file)
 file.remove(temp_file)
             </input>
-          </program>
+          </sage>
 
           <note>
             <p>The <c>mode = "wb"</c> argument is only necessary if using Microsoft Windows. On MacOs or Linux the default <c>mode = "w"</c> works. To understand this difference please refer to the <c>download.file</c> help file.</p>
@@ -2762,21 +2762,21 @@ file.remove(temp_file)
 
           <p>If we examine the object text, we notice that it is a character vector with an entry for each page. So we keep the page we want:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 raw_data_research_funding_rates &lt;- txt[2]
             </input>
-          </program>
+          </sage>
 
           <p>The steps above can actually be skipped because we include this raw data in the <alert>dslabs</alert> package as well.</p>
 
           <p>Examining the object <c>raw_data_research_funding_rates</c> we see that it is a long string and each line on the page, including the table rows, are separated by the symbol for newline: <c>\n</c>. A first step in converting this into a data frame is to store rows separately in a way that will make them easy to access. For this we use the <c>str_split</c> function:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 tab &lt;- str_split(raw_data_research_funding_rates, "\n+")
             </input>
-          </program>
+          </sage>
 
           <note>
             <p>On MacOS or Linux you can simply use <c>\n</c> as the separator. Microsoft Windows and macOS (which is based on Unix) use different conventions for line endings in text files and a result <c>raw_data_research_funding_rates</c> has more <c>\n</c> when using Windows.</p>
@@ -2784,35 +2784,35 @@ tab &lt;- str_split(raw_data_research_funding_rates, "\n+")
 
           <p>Because we start off with just one string, we end up with a list with just one entry.</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 tab &lt;- tab[[1]]
             </input>
-          </program>
+          </sage>
 
           <p>By examining <c>tab</c> we see that the information for the column names is the third and fourth entries:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 the_names_1 &lt;- tab[3]
 the_names_2 &lt;- tab[4]
             </input>
-          </program>
+          </sage>
 
           <p>The first of these rows looks like this:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 cat(substr(the_names_1, 1, options()$width))
 cat(substr(the_names_1, options()$width, nchar(the_names_1)))
             </input>
-          </program>
+          </sage>
 
           <p>We want to create one vector with one name for each column. Using some of the functions we have just learned, we do this.</p>
 
           <p>Let's start with <c>the_names_1</c>, shown above. We want to remove the leading space and anything following the comma. We use regex for the latter. Then we can obtain the elements by splitting strings separated by space. We want to split only when there are 2 or more spaces to avoid splitting <c>Success rates</c>. So we use the regex <c>\\s{2,}</c></p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 the_names_1 &lt;- the_names_1 |&gt;
   str_trim() |&gt;
@@ -2820,31 +2820,31 @@ the_names_1 &lt;- the_names_1 |&gt;
   str_split("\\s{2,}", simplify = TRUE)
 the_names_1 
             </input>
-          </program>
+          </sage>
 
           <p>Now we will look at <c>the_names_2</c>:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 cat(substr(the_names_2, 1, options()$width))
 cat(substr(the_names_2, options()$width, nchar(the_names_2)))
             </input>
-          </program>
+          </sage>
 
           <p>Here we want to trim the leading space and then split by space as we did for the first line:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 the_names_2 &lt;- the_names_2 |&gt;
   str_trim() |&gt;
   str_split("\\s+", simplify = TRUE)
 the_names_2
             </input>
-          </program>
+          </sage>
 
           <p>We can then join these to generate one name for each column:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 tmp_names &lt;- paste(rep(the_names_1, each = 3), the_names_2[-1], sep = "_")
 the_names &lt;- c(the_names_2[1], tmp_names) |&gt;
@@ -2852,11 +2852,11 @@ the_names &lt;- c(the_names_2[1], tmp_names) |&gt;
   str_replace_all("\\s", "_")
 the_names
             </input>
-          </program>
+          </sage>
 
           <p>Now we are ready to get the actual data. By examining the <c>tab</c> object, we notice that the information is in lines 6 through 14. We can use <c>str_split</c> again to achieve our goal:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 new_research_funding_rates &lt;- tab[6:14] |&gt;
   str_trim() |&gt;
@@ -2866,15 +2866,15 @@ new_research_funding_rates &lt;- tab[6:14] |&gt;
   mutate(across(-1, parse_number))
 new_research_funding_rates |&gt; as_tibble()
             </input>
-          </program>
+          </sage>
 
           <p>We can see that the objects are identical:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 identical(research_funding_rates, new_research_funding_rates)
             </input>
-          </program>
+          </sage>
 
         </section>
 
@@ -2887,26 +2887,26 @@ identical(research_funding_rates, new_research_funding_rates)
 
           <p>Here is an example that shows how to rename countries with long names:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 library(dslabs)
             </input>
-          </program>
+          </sage>
 
           <p>Suppose we want to show life expectancy time series by country for the Caribbean. If we make this plot</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 gapminder |&gt; 
   filter(region == "Caribbean") |&gt;
   ggplot(aes(year, life_expectancy, color = country)) +
   geom_line()
             </input>
-          </program>
+          </sage>
 
           <p>we see that the legend takes up much of the plot because we have four countries with names longer than 12 characters. We can rename these levels using the <c>case_when</c> function:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 x &lt;- levels(gapminder$country)
 levels(gapminder$country) &lt;- case_when(
@@ -2920,11 +2920,11 @@ gapminder |&gt;
   ggplot(aes(year, life_expectancy, color = country)) +
   geom_line()
             </input>
-          </program>
+          </sage>
 
           <p>We can instead use the <c>fct_recode</c> function in the <alert>forcats</alert> package:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 #| eval: false
 library(forcats)
@@ -2935,7 +2935,7 @@ gapminder$country &lt;-
              "St. Vincent" = "St. Vincent and the Grenadines",
              "Trinidad" = "Trinidad and Tobago")
             </input>
-          </program>
+          </sage>
 
         </section>
 
@@ -2954,28 +2954,28 @@ gapminder$country &lt;-
 
           <p>a PDF file containing daily mortality data for Puerto Rico from Jan 1, 2015 to May 31, 2018. You can find the file like this:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 fn &lt;- system.file("extdata", "RD-Mortality-Report_2015-18-180531.pdf",
                   package="dslabs")
             </input>
-          </program>
+          </sage>
 
           <p>Find and open the file or open it directly from RStudio. On a Mac, you can type:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 system2("open", args = fn)
             </input>
-          </program>
+          </sage>
 
           <p>and on Windows, you can type:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 system("cmd.exe", input = paste("start", fn))
             </input>
-          </program>
+          </sage>
 
           <p>Which of the following best describes this file:</p>
 
@@ -2987,12 +2987,12 @@ system("cmd.exe", input = paste("start", fn))
 
           <p>observation. The variables in this dataset will be year, month, day, and deaths. Start by installing and loading the <alert>pdftools</alert> package:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 install.packages("pdftools")
 library(pdftools)
             </input>
-          </program>
+          </sage>
 
           <p>Now read-in <c>fn</c> using the <c>pdf_text</c> function and store the results in an object called <c>txt</c>. Which of the following best describes what you see in <c>txt</c>?</p>
 
@@ -3100,15 +3100,15 @@ library(pdftools)
 
           <p>During the 2016 US presidential election, then candidate Donald J. Trump used his twitter account as a way to communicate with potential voters. On August 6, 2016, Todd Vaziri tweeted about Trump that "Every non-hyperbolic tweet is from iPhone (his staff). Every hyperbolic tweet is from Android (from him)." David Robinson conducted an analysis to determine if data supported this assertion. Here, we go through David's analysis to learn some of the basics of text analysis. To learn more about text analysis in R, we recommend the Text Mining with R book by Julia Silge and David Robinson.</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 set.seed(2002)
             </input>
-          </program>
+          </sage>
 
           <p>We will use the following libraries:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 library(tidyverse)
 library(scales)
@@ -3116,43 +3116,43 @@ library(tidytext)
 library(textdata)
 library(dslabs)
             </input>
-          </program>
+          </sage>
 
           <p>X, formerly known as twitter, provides an API that permits downloading tweets. Brendan Brown runs the trump archive, which compiles tweet data from Trump's account. The <alert>dslabs</alert> package includes tweets from the following range:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 range(trump_tweets$created_at)
             </input>
-          </program>
+          </sage>
 
           <p>The data frame includes the the following variables:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 names(trump_tweets)
             </input>
-          </program>
+          </sage>
 
           <p>The help file <c>?trump_tweets</c> provides details on what each variable represents. The actual tweets are in the <c>text</c> variable:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 trump_tweets$text[16413] |&gt; str_wrap(width = options()$width) |&gt; cat()
             </input>
-          </program>
+          </sage>
 
           <p>and the source variable tells us which device was used to compose and upload each tweet:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 trump_tweets |&gt; count(source) |&gt; arrange(desc(n)) |&gt; head(5)
             </input>
-          </program>
+          </sage>
 
           <p>We are interested in what happened during the 2016 campaign, so for this analysis we will focus on what was tweeted between the day Trump announced his campaign and election day. We define the following table containing just the tweets from that time period. We remove the <c>Twitter for</c> part of the source, only keep tweets from Android or iPhone, and filter out retweets.</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 campaign_tweets &lt;- trump_tweets |&gt; 
   filter(source %in% paste("Twitter for", c("Android", "iPhone")) &amp;
@@ -3163,11 +3163,11 @@ campaign_tweets &lt;- trump_tweets |&gt;
   arrange(created_at) |&gt; 
   as_tibble()
             </input>
-          </program>
+          </sage>
 
           <p>We can now use data visualization to explore the possibility that two different groups were tweeting from these devices. For each tweet, we will extract the hour, Eastern Standard Time (EST), it was tweeted and then compute the proportion of tweets tweeted at each hour for each device:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 campaign_tweets |&gt;
   mutate(hour = hour(with_tz(created_at, "EST"))) |&gt;
@@ -3181,7 +3181,7 @@ campaign_tweets |&gt;
   scale_y_continuous(labels = percent_format()) +
   labs(x = "Hour of day (EST)", y = "% of tweets", color = "")
             </input>
-          </program>
+          </sage>
 
           <p>We notice a big peak for the Android in the early hours of the morning, between 6 and 8 AM. There seems to be a clear difference in these patterns. We will therefore assume that two different entities are using these two devices.</p>
 
@@ -3196,7 +3196,7 @@ campaign_tweets |&gt;
 
           <p>The main function needed to achieve this is <c>unnest_tokens</c>. A <em>token</em> refers to a unit that we are considering to be a data point. The most common <em>token</em> will be words, but they can also be single characters, n-grams, sentences, lines, or a pattern defined by a regex. The function will take a vector of strings and extract the tokens so that each one gets a row in the new table. Here is a simple example:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 poem &lt;- c("Roses are red,", "Violets are blue,", 
           "Sugar is sweet,", "And so are you.")
@@ -3205,11 +3205,11 @@ example &lt;- tibble(line = c(1, 2, 3, 4),
 example
 example |&gt; unnest_tokens(word, text)
             </input>
-          </program>
+          </sage>
 
           <p>Now let's look at Trump's tweets. We will look at tweet number 3008 because it will later permit us to illustrate a couple of points:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 i &lt;- 3008
 campaign_tweets$text[i] |&gt; str_wrap(width = 65) |&gt; cat()
@@ -3217,11 +3217,11 @@ campaign_tweets[i,] |&gt;
   unnest_tokens(word, text) |&gt;
   pull(word) 
             </input>
-          </program>
+          </sage>
 
           <p>Note that the function tries to convert tokens into words. A minor adjustment is to remove the links to pictures:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 links_to_pics &lt;- "https://t.co/[A-Za-z\\d]+|&amp;amp;"
 campaign_tweets[i,] |&gt; 
@@ -3229,61 +3229,61 @@ campaign_tweets[i,] |&gt;
   unnest_tokens(word, text) |&gt;
   pull(word)
             </input>
-          </program>
+          </sage>
 
           <p>Now we are now ready to extract the words from all our tweets.</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 tweet_words &lt;- campaign_tweets |&gt; 
   mutate(text = str_remove_all(text, links_to_pics))  |&gt;
   unnest_tokens(word, text)
             </input>
-          </program>
+          </sage>
 
           <p>And we can now answer questions such as "what are the most commonly used words?":</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 tweet_words |&gt; 
   count(word) |&gt;
   arrange(desc(n))
             </input>
-          </program>
+          </sage>
 
           <p>It is not surprising that these are the top words, which are not informative. The <em>tidytext</em> package has a database of these commonly used words, referred to as <em>stop words</em>, in text analysis:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 head(stop_words)
             </input>
-          </program>
+          </sage>
 
           <p>If we filter out rows representing stop words with <c>filter(!word %in% stop_words$word)</c>:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 tweet_words &lt;- campaign_tweets |&gt; 
   mutate(text = str_remove_all(text, links_to_pics))  |&gt;
   unnest_tokens(word, text) |&gt;
   filter(!word %in% stop_words$word ) 
             </input>
-          </program>
+          </sage>
 
           <p>we end up with a much more informative set of top 10 tweeted words:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 tweet_words |&gt; 
   count(word) |&gt;
   slice_max(n, n = 10) |&gt;
   arrange(desc(n))
             </input>
-          </program>
+          </sage>
 
           <p>Some exploration of the resulting words (not shown here) reveals a couple of unwanted characteristics in our tokens. First, some of our tokens are just numbers (years, for example). We want to remove these and we can find them using the regex <c>^\d+$</c>. Second, some of our tokens come from a quote and they start with <c>'</c>. We want to remove the <c>'</c> when it is at the start of a word so we will just <c>str_replace</c>. We add these two lines to the code above to generate our final table:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 tweet_words &lt;- campaign_tweets |&gt; 
   mutate(text = str_remove_all(text, links_to_pics))  |&gt;
@@ -3292,13 +3292,13 @@ tweet_words &lt;- campaign_tweets |&gt;
            !str_detect(word, "^\\d+$")) |&gt;
   mutate(word = str_replace(word, "^'", ""))
             </input>
-          </program>
+          </sage>
 
           <p>Now that we have all our words in a table, along with information about what device was used to compose the tweet they came from, we can start exploring which words are more common when comparing Android to iPhone.</p>
 
           <p>For each word, we want to know if it is more likely to come from an Android tweet or an iPhone tweet. We therefore compute, for each word, its frequency among words tweeted from Android and iPhone, respectively and then derive the ratio of these proportions (Android proportion divided by iPhone proportion). Because some words are infrequent, we apply the continuity correction described in <xref ref="sec-log-transform"/>:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 android_vs_iphone &lt;- tweet_words |&gt;
   count(word, source) |&gt;
@@ -3307,23 +3307,23 @@ android_vs_iphone &lt;- tweet_words |&gt;
          p_i = (iPhone + 0.5)/(sum(iPhone) + 0.5),  
          ratio = p_a / p_i)
             </input>
-          </program>
+          </sage>
 
           <p>For words appearing at least 100 times in total, here are the highest percent differences for Android</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 android_vs_iphone |&gt; filter(Android + iPhone &gt;= 100) |&gt; arrange(desc(ratio))
             </input>
-          </program>
+          </sage>
 
           <p>and the top for iPhone:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 android_vs_iphone |&gt; filter(Android + iPhone &gt;= 100) |&gt;  arrange(ratio)
             </input>
-          </program>
+          </sage>
 
           <p>We already see somewhat of a pattern in the types of words that are being tweeted more from one device versus the other. However, we are not interested in specific words but rather in the tone. Vaziri's assertion is that the Android tweets are more hyperbolic. So how can we check this with data? <em>Hyperbolic</em> is a hard sentiment to extract from words as it relies on interpreting phrases. However, words can be associated to more basic sentiment such as anger, fear, joy, and surprise. In the next section, we demonstrate basic sentiment analysis.</p>
 
@@ -3338,45 +3338,45 @@ android_vs_iphone |&gt; filter(Android + iPhone &gt;= 100) |&gt;  arrange(ratio)
 
           <p>The <c>bing</c> lexicon divides words into <c>positive</c> and <c>negative</c> sentiments. We can see this using the <em>tidytext</em> function <c>get_sentiments</c>:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 get_sentiments("bing")
             </input>
-          </program>
+          </sage>
 
           <p>The <c>AFINN</c> lexicon assigns a score between -5 and 5, with -5 the most negative and 5 the most positive. Note that this lexicon needs to be downloaded the first time you call the function <c>get_sentiment</c>:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 get_sentiments("afinn")
             </input>
-          </program>
+          </sage>
 
           <p>The <c>nrc</c> lexicon provide several different sentiments. Note that this also has to be downloaded the first time you use it.</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 get_sentiments("nrc") |&gt; count(sentiment)
             </input>
-          </program>
+          </sage>
 
           <p>For our analysis, we are interested in exploring the different sentiments of each tweet so we will use the <c>nrc</c> lexicon:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 nrc &lt;- get_sentiments("nrc") |&gt; select(word, sentiment)
             </input>
-          </program>
+          </sage>
 
           <p>We can combine the words and sentiments using <c>inner_join</c>, which will only keep words associated with a sentiment. Here are 5 random words extracted from the tweets:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 tweet_words |&gt; inner_join(nrc, by = "word", relationship = "many-to-many") |&gt; 
   select(source, word, sentiment) |&gt; 
   sample_n(5)
             </input>
-          </program>
+          </sage>
 
           <note>
             <p><c>relationship = "many-to-many"</c> is added to address a warning that arises from <c>left_join</c> detecting an "unexpected many-to-many relationship". However, this behavior is actually expected in this context because many words have multiple sentiments associated with them.</p>
@@ -3384,7 +3384,7 @@ tweet_words |&gt; inner_join(nrc, by = "word", relationship = "many-to-many") |&
 
           <p>Now we are ready to perform a quantitative analysis comparing Android and iPhone by comparing the sentiments of the tweets posted from each device. Here we could perform a tweet-by-tweet analysis, assigning a sentiment to each tweet. However, this will be challenging since each tweet will have several sentiments attached to it, one for each word appearing in the lexicon. For illustrative purposes, we will perform a much simpler analysis: we will count and compare the frequencies of each sentiment appearing in each device.</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 sentiment_counts &lt;- tweet_words |&gt;
   left_join(nrc, by = "word", relationship = "many-to-many") |&gt;
@@ -3392,24 +3392,24 @@ sentiment_counts &lt;- tweet_words |&gt;
   pivot_wider(names_from = "source", values_from = "n") |&gt;
   mutate(sentiment = replace_na(sentiment, replace = "none"))
             </input>
-          </program>
+          </sage>
 
           <p>For each sentiment, we calculate its proportion relative to the total responses for  Android and iPhone, respectively, and derive the ratio of these proportions (Android proportion divided by iPhone proportion).</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 sentiment_counts &lt;- sentiment_counts |&gt;
   mutate(p_a = Android/sum(Android), p_i = iPhone/sum(iPhone), ratio = p_a/p_i) |&gt; 
   arrange(desc(ratio))
 sentiment_counts
             </input>
-          </program>
+          </sage>
 
           <p>So we do see some differences and the order is interesting: the largest three sentiments are disgust, anger, and negative!</p>
 
           <p>If we are interested in exploring which specific words are driving these differences, we can refer back to our <c>android_vs_iphone</c> object. For each sentiment we show the 10 largest ratios, in either direction. We exclude words appearing less than 10 times total.</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 ordered_levels &lt;- sentiment_counts$sentiment
 
@@ -3427,7 +3427,7 @@ android_vs_iphone |&gt;
   facet_wrap(~sentiment, scales = "free_x", nrow = 2) + 
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) 
             </input>
-          </program>
+          </sage>
 
           <p>This is just a simple example of the many analyses one can perform with tidytext. To learn more, we again recommend the Tidy Text Mining book.</p>
 
@@ -3440,20 +3440,20 @@ android_vs_iphone |&gt;
 
           <p>You can install and load by typing:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 install.packages("gutenbergr")
 library(gutenbergr)
             </input>
-          </program>
+          </sage>
 
           <p>You can see the books that are available like this:</p>
 
-          <program language="r">
+          <sage language="r">
             <input>
 gutenberg_metadata
             </input>
-          </program>
+          </sage>
 
           <ol>
             <li><p>Use <c>str_detect</c> to find the ID of the novel <em>Pride and Prejudice</em>.</p></li>
