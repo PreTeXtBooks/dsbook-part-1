@@ -46,6 +46,19 @@
 0.15 * 19.71
             </input>
           </sage>
+
+          <sage language="r">
+            <input>
+x <- 0.15 * 19.71
+x * 2
+            </input>
+          </sage>
+
+          <sage language="r">
+            <input>
+x + 10
+            </input>
+          </sage>
           
           <p>
             <alert>Note that in this book, grey boxes are used to show R code typed into the R console. The symbol <c>#&gt;</c> is used to denote what the R console outputs.</alert>
@@ -59,6 +72,12 @@
           <p>
             One of the great advantages of R over point-and-click analysis software is that you can save your work as scripts. You can edit and save these scripts using a text editor. The material in this book was developed using the interactive <em>integrated development environment</em> (IDE) <url href="https://posit.co/">RStudio</url>. RStudio includes an editor with many R specific features, a console to execute your code, and other useful panes, including one to show figures.
           </p>
+
+          <sage language="r">
+            <input>
+x + 10
+            </input>
+          </sage>
           
           <figure xml:id="fig-rstudio">
             <caption>RStudio interface</caption>
