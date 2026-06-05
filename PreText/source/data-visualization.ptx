@@ -392,7 +392,7 @@ library(ggplot2)
           
           <p>One limitation is that <alert>ggplot2</alert> is designed to work exclusively with data tables in tidy format. However, a substantial percentage of datasets that beginners work with are in, or can be converted into, this format. An advantage of this approach is that, assuming that our data is tidy, <alert>ggplot2</alert> simplifies plotting code and the learning of grammar for a variety of plots.</p>
           
-          <p>To use <alert>ggplot2</alert> you will have to learn several functions and arguments. These are hard to memorize, so we highly recommend you have the ggplot2 cheat sheet handy. You can get a copy from Posit's website or simply perform an internet search for "ggplot2 cheat sheet".</p>
+          <p>To use <alert>ggplot2</alert> you will have to learn several functions and arguments. These are hard to memorize, so we highly recommend you have the ggplot2 cheat sheet handy. You can get a copy from Posit's website<fn><url href="https://posit.co/"/></fn> or simply perform an internet search for "ggplot2 cheat sheet".</p>
         </introduction>
         
         <section xml:id="sec-components-of-graph">
@@ -830,6 +830,12 @@ heights |> filter(sex == "Female") |>
             </sage>
             
             <p>Note that we use the optional arguments <c>binwidth = 1</c> to change the bin size to 1 inch. The default is to create 30 bins. We also use the optional arguments <c>fill = "blue"</c> and <c>col = "black"</c> to fill the bars with colors and use a different color to outline the bars.</p>
+
+            <p>Another striking example comes from a New York Times chart<fn><url href="https://graphics8.nytimes.com/images/2011/02/19/nyregion/19schoolsch/19schoolsch-popup.gif"/></fn>, which summarizes scores from the NYC Regents Exams. As described in the article<fn><url href="https://www.nytimes.com/2011/02/19/nyregion/19schools.html"/></fn>, these scores are collected for several reasons, including to determine if a student graduates from high school. In New York City you need a 65 to pass. The distribution of the test scores forces us to notice something somewhat problematic:</p>
+
+            <figure>
+              <image source="dataviz/img/nythist.png" description="Histogram with exam score on the x-axis and frequency on the y-axis, showing a spike at the Regents passing threshold of 65."/>
+            </figure>
           </subsection>
           
           <subsection xml:id="subsec-density-plots-geom">
@@ -1117,11 +1123,11 @@ heights |>
       <chapter xml:id="ch-data-visualization-principles">
         <title>Data visualization principles</title>
         
-          <p>In this chapter we aim to provide some general principles we can use as a guide for effective data visualization. Much of this section is based on a talk by Karl Broman titled "Creating Effective Figures and Tables" and includes some of the figures which were made with code that Karl makes available on his GitHub repository, as well as class notes from Peter Aldhous' Introduction to Data Visualization course. Following Karl's approach, we show some examples of plot styles we should avoid, explain how to improve them, and use these as motivation for a list of principles. We compare and contrast plots that follow these principles to those that don't.</p>
+          <p>In this chapter we aim to provide some general principles we can use as a guide for effective data visualization. Much of this section is based on a talk by Karl Broman<fn><url href="http://kbroman.org/"/></fn> titled "Creating Effective Figures and Tables"<fn><url href="https://www.biostat.wisc.edu/~kbroman/presentations/graphs2017.pdf"/></fn> and includes some of the figures which were made with code that Karl makes available on his GitHub repository<fn><url href="https://github.com/kbroman/Talk_Graphs"/></fn>, as well as class notes from Peter Aldhous' Introduction to Data Visualization course<fn><url href="https://www.peteraldhous.com/ucb/2014/dataviz/index.html"/></fn>. Following Karl's approach, we show some examples of plot styles we should avoid, explain how to improve them, and use these as motivation for a list of principles. We compare and contrast plots that follow these principles to those that don't.</p>
 
           <p>The principles are mostly based on research related to how humans detect patterns and make visual comparisons. The preferred approaches are those that best fit the way our brains process visual information. When deciding on a visualization approach, it is also important to keep our goal in mind. We may be comparing a viewable number of quantities, describing distributions for categories or numeric values, comparing the data from two groups, or describing the relationship between two variables. As a final note, we want to emphasize that it is important to adapt and optimize graphs to the audience. For example, an exploratory plot made for ourselves will be different than a chart intended to communicate a finding to a general audience.</p>
 
-          <p>In this chapter we focus on the principles and do not show code (code can be viewed on GitHub). In <xref ref="sec-dataviz-in-practice"/>, we apply these principles in case study and do show code.</p>
+          <p>In this chapter we focus on the principles and do not show code (code can be viewed on GitHub<fn><url href="https://github.com/rafalab/dsbook-part-1/blob/main/dataviz/dataviz-principles.qmd"/></fn>). In <xref ref="ch-data-visualization-in-practice"/>, we apply these principles in case study and do show code.</p>
 
           <sage language="r">
             <input>
@@ -1742,7 +1748,7 @@ p1 + scale_color_manual(values=color_blind_friendly_cols)
             </input>
           </sage>
 
-          <p>There are several resources that can help you select colors, for example tutorials on R-bloggers.</p>
+          <p>There are several resources that can help you select colors, for example tutorials on R-bloggers<fn><url href="https://www.r-bloggers.com/"/></fn>.</p>
 
         </section>
 
@@ -2234,18 +2240,18 @@ abline(v=2, col=3)
       <chapter xml:id="ch-data-visualization-in-practice">
         <title>Data visualization in practice</title>
         
-          <p>In this chapter, we will demonstrate how relatively simple <alert>ggplot2</alert> code can create insightful and aesthetically pleasing plots. As motivation we will create plots that help us better understand trends in world health and economics. We will implement what we learned in <xref ref="sec-ggplot2"/> and <xref ref="sec-dataviz-principles"/> and learn how to augment the code to perfect the plots. As we go through our case study, we will describe relevant general data visualization principles and learn concepts such as <em>faceting</em>, <em>time series plots</em>, <em>transformations</em>, and <em>ridge plots</em>.</p>
+          <p>In this chapter, we will demonstrate how relatively simple <alert>ggplot2</alert> code can create insightful and aesthetically pleasing plots. As motivation we will create plots that help us better understand trends in world health and economics. We will implement what we learned in <xref ref="ch-ggplot2"/> and <xref ref="ch-data-visualization-principles"/> and learn how to augment the code to perfect the plots. As we go through our case study, we will describe relevant general data visualization principles and learn concepts such as <em>faceting</em>, <em>time series plots</em>, <em>transformations</em>, and <em>ridge plots</em>.</p>
 
         <section xml:id="sec-case-study-1-new-insights-on-poverty">
           <title>Case study 1: new insights on poverty</title>
 
-          <p>Hans Rosling was the co-founder of the Gapminder Foundation, an organization dedicated to educating the public by using data to dispel common myths about the so-called developing world. The organization uses data to show how actual trends in health and economics contradict the narratives that emanate from sensationalist media coverage of catastrophes, tragedies, and other unfortunate events. As stated in the Gapminder Foundation's website:</p>
+          <p>Hans Rosling<fn><url href="https://en.wikipedia.org/wiki/Hans_Rosling"/></fn> was the co-founder of the Gapminder Foundation<fn><url href="http://www.gapminder.org/"/></fn>, an organization dedicated to educating the public by using data to dispel common myths about the so-called developing world. The organization uses data to show how actual trends in health and economics contradict the narratives that emanate from sensationalist media coverage of catastrophes, tragedies, and other unfortunate events. As stated in the Gapminder Foundation's website:</p>
 
           <blockquote>
             <p>Journalists and lobbyists tell dramatic stories. That's their job. They tell stories about extraordinary events and unusual people. The piles of dramatic stories pile up in peoples' minds into an over-dramatic worldview and strong negative stress feelings: "The world is getting worse!", "It's we vs. them!", "Other people are strange!", "The population just keeps growing!" and "Nobody cares!"</p>
           </blockquote>
 
-          <p>Hans Rosling conveyed actual data-based trends in a dramatic way of his own, using effective data visualization. This section is based on two talks that exemplify this approach to education: New Insights on Poverty and The Best Stats You've Ever Seen. Specifically, in this section, we use data to attempt to answer the following two questions:</p>
+          <p>Hans Rosling conveyed actual data-based trends in a dramatic way of his own, using effective data visualization. This section is based on two talks that exemplify this approach to education: New Insights on Poverty<fn><url href="https://www.ted.com/talks/hans_rosling_reveals_new_insights_on_poverty?language=en"/></fn> and The Best Stats You've Ever Seen<fn><url href="https://www.ted.com/talks/hans_rosling_shows_the_best_stats_you_ve_ever_seen"/></fn>. Specifically, in this section, we use data to attempt to answer the following two questions:</p>
 
           <ol>
             <li><p>Is it a fair characterization of today's world to say it is divided into western rich nations and the developing world in Africa, Asia, and Latin America?</p></li>
@@ -3061,7 +3067,7 @@ gapminder |&gt; filter(year %in% present_year &amp; !is.na(gdp) &amp; !is.na(inf
 
           <p>Vaccines have helped save millions of lives. In the 19th century, before herd immunization was achieved through vaccination programs, deaths from infectious diseases, such as smallpox and polio, were common. Today however, vaccination programs have become somewhat controversial despite all the scientific evidence for their importance.</p>
 
-          <p>The controversy started with a paper published in 1988 and led by Andrew Wakefield claiming there was a link between the administration of the measles, mumps, and rubella (MMR) vaccine and the appearance of autism and bowel disease. Despite much scientific evidence contradicting this finding, sensationalist media reports and fear-mongering from conspiracy theorists led parts of the public into believing that vaccines were harmful. As a result, many parents ceased to vaccinate their children. This dangerous practice can be potentially disastrous given that the Centers for Disease Control (CDC) estimates that vaccinations will prevent more than 21 million hospitalizations and 732,000 deaths among children born in the last 20 years (see Benefits from Immunization during the Vaccines for Children Program Era — United States, 1994-2013, MMWR). The 1988 paper has since been retracted and Andrew Wakefield was eventually "struck off the UK medical register, with a statement identifying deliberate falsification in the research published in The Lancet, and was thereby barred from practicing medicine in the UK." (source: Wikipedia). Yet misconceptions persist, in part due to self-proclaimed activists who continue to disseminate misinformation about vaccines.</p>
+          <p>The controversy started with a paper published in 1988 and led by Andrew Wakefield claiming there was a link between the administration of the measles, mumps, and rubella (MMR) vaccine and the appearance of autism and bowel disease. Despite much scientific evidence contradicting this finding, sensationalist media reports and fear-mongering from conspiracy theorists led parts of the public into believing that vaccines were harmful. As a result, many parents ceased to vaccinate their children. This dangerous practice can be potentially disastrous given that the Centers for Disease Control (CDC) estimates that vaccinations will prevent more than 21 million hospitalizations and 732,000 deaths among children born in the last 20 years (see Benefits from Immunization during the Vaccines for Children Program Era — United States, 1994-2013<fn><url href="https://www.cdc.gov/mmwr/preview/mmwrhtml/mm6429a4.htm"/></fn>, MMWR). The 1988 paper has since been retracted and Andrew Wakefield was eventually "struck off the UK medical register, with a statement identifying deliberate falsification in the research published in The Lancet, and was thereby barred from practicing medicine in the UK." (source: Wikipedia<fn><url href="https://en.wikipedia.org/wiki/Andrew_Wakefield"/></fn>). Yet misconceptions persist, in part due to self-proclaimed activists who continue to disseminate misinformation about vaccines.</p>
 
           <p>Effective communication of data is a strong antidote to misinformation and fear-mongering. In the introduction to this part of the book we showed an example, provided by a Wall Street Journal article, showing data related to the impact of vaccines on battling infectious diseases.  Here we reconstruct that example.</p>
 
