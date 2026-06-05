@@ -834,7 +834,7 @@ heights |> filter(sex == "Female") |>
             <p>Another striking example comes from a New York Times chart<fn><url href="https://graphics8.nytimes.com/images/2011/02/19/nyregion/19schoolsch/19schoolsch-popup.gif"/></fn>, which summarizes scores from the NYC Regents Exams. As described in the article<fn><url href="https://www.nytimes.com/2011/02/19/nyregion/19schools.html"/></fn>, these scores are collected for several reasons, including to determine if a student graduates from high school. In New York City you need a 65 to pass. The distribution of the test scores forces us to notice something somewhat problematic:</p>
 
             <figure>
-              <image source="dataviz/img/nythist.png"/>
+              <image source="dataviz/img/nythist.png" description="Histogram with exam score on the x-axis and frequency on the y-axis, showing a spike at the Regents passing threshold of 65."/>
             </figure>
           </subsection>
           
