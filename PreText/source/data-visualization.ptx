@@ -831,10 +831,13 @@ heights |> filter(sex == "Female") |>
             
             <p>Note that we use the optional arguments <c>binwidth = 1</c> to change the bin size to 1 inch. The default is to create 30 bins. We also use the optional arguments <c>fill = "blue"</c> and <c>col = "black"</c> to fill the bars with colors and use a different color to outline the bars.</p>
 
-            <p>A striking real-world histogram example is the New York Times chart of Regents exam scores, where the spike at the passing threshold suggests something unusual in the data.</p>
+            <p>A striking real-world histogram example is the New York Times chart of Regents exam scores, where the spike at the passing threshold suggests something unusual in the data. <fn><url href="https://www.nytimes.com/2011/02/19/nyregion/19schools.html">New York Times: Under Bloomberg, a Sharp Rise in Accusations of Cheating by Educators</url></fn></p>
 
             <figure>
-              <image source="dataviz/img/nythist.png"/>
+              <image source="dataviz/img/nythist.png" description="Histogram with exam score on the x-axis and frequency on the y-axis, showing a spike at the Regents passing threshold of 65."/>
+              <caption>
+                <p>New York Times histogram of New York City Regents exam scores.</p>
+              </caption>
             </figure>
           </subsection>
           
