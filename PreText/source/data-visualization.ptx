@@ -392,7 +392,7 @@ library(ggplot2)
           
           <p>One limitation is that <alert>ggplot2</alert> is designed to work exclusively with data tables in tidy format. However, a substantial percentage of datasets that beginners work with are in, or can be converted into, this format. An advantage of this approach is that, assuming that our data is tidy, <alert>ggplot2</alert> simplifies plotting code and the learning of grammar for a variety of plots.</p>
           
-          <p>To use <alert>ggplot2</alert> you will have to learn several functions and arguments. These are hard to memorize, so we highly recommend you have the ggplot2 cheat sheet handy. You can get a copy from Posit's website or simply perform an internet search for "ggplot2 cheat sheet".</p>
+          <p>To use <alert>ggplot2</alert> you will have to learn several functions and arguments. These are hard to memorize, so we highly recommend you have the ggplot2 cheat sheet handy. You can get a copy from Posit's website<fn><url href="https://posit.co/"/></fn> or simply perform an internet search for "ggplot2 cheat sheet".</p>
         </introduction>
         
         <section xml:id="sec-components-of-graph">
@@ -1742,7 +1742,7 @@ p1 + scale_color_manual(values=color_blind_friendly_cols)
             </input>
           </sage>
 
-          <p>There are several resources that can help you select colors, for example tutorials on R-bloggers.</p>
+          <p>There are several resources that can help you select colors, for example tutorials on R-bloggers<fn><url href="https://www.r-bloggers.com/"/></fn>.</p>
 
         </section>
 
@@ -3061,7 +3061,7 @@ gapminder |&gt; filter(year %in% present_year &amp; !is.na(gdp) &amp; !is.na(inf
 
           <p>Vaccines have helped save millions of lives. In the 19th century, before herd immunization was achieved through vaccination programs, deaths from infectious diseases, such as smallpox and polio, were common. Today however, vaccination programs have become somewhat controversial despite all the scientific evidence for their importance.</p>
 
-          <p>The controversy started with a paper published in 1988 and led by Andrew Wakefield claiming there was a link between the administration of the measles, mumps, and rubella (MMR) vaccine and the appearance of autism and bowel disease. Despite much scientific evidence contradicting this finding, sensationalist media reports and fear-mongering from conspiracy theorists led parts of the public into believing that vaccines were harmful. As a result, many parents ceased to vaccinate their children. This dangerous practice can be potentially disastrous given that the Centers for Disease Control (CDC) estimates that vaccinations will prevent more than 21 million hospitalizations and 732,000 deaths among children born in the last 20 years (see Benefits from Immunization during the Vaccines for Children Program Era — United States, 1994-2013, MMWR). The 1988 paper has since been retracted and Andrew Wakefield was eventually "struck off the UK medical register, with a statement identifying deliberate falsification in the research published in The Lancet, and was thereby barred from practicing medicine in the UK." (source: Wikipedia). Yet misconceptions persist, in part due to self-proclaimed activists who continue to disseminate misinformation about vaccines.</p>
+          <p>The controversy started with a paper published in 1988 and led by Andrew Wakefield claiming there was a link between the administration of the measles, mumps, and rubella (MMR) vaccine and the appearance of autism and bowel disease. Despite much scientific evidence contradicting this finding, sensationalist media reports and fear-mongering from conspiracy theorists led parts of the public into believing that vaccines were harmful. As a result, many parents ceased to vaccinate their children. This dangerous practice can be potentially disastrous given that the Centers for Disease Control (CDC) estimates that vaccinations will prevent more than 21 million hospitalizations and 732,000 deaths among children born in the last 20 years (see Benefits from Immunization during the Vaccines for Children Program Era — United States, 1994-2013<fn><url href="https://www.cdc.gov/mmwr/preview/mmwrhtml/mm6429a4.htm"/></fn>, MMWR). The 1988 paper has since been retracted and Andrew Wakefield was eventually "struck off the UK medical register, with a statement identifying deliberate falsification in the research published in The Lancet, and was thereby barred from practicing medicine in the UK." (source: Wikipedia<fn><url href="https://en.wikipedia.org/wiki/Andrew_Wakefield"/></fn>). Yet misconceptions persist, in part due to self-proclaimed activists who continue to disseminate misinformation about vaccines.</p>
 
           <p>Effective communication of data is a strong antidote to misinformation and fear-mongering. In the introduction to this part of the book we showed an example, provided by a Wall Street Journal article, showing data related to the impact of vaccines on battling infectious diseases.  Here we reconstruct that example.</p>
 
