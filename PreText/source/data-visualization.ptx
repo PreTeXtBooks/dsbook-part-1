@@ -1121,7 +1121,7 @@ heights |>
 
           <p>The principles are mostly based on research related to how humans detect patterns and make visual comparisons. The preferred approaches are those that best fit the way our brains process visual information. When deciding on a visualization approach, it is also important to keep our goal in mind. We may be comparing a viewable number of quantities, describing distributions for categories or numeric values, comparing the data from two groups, or describing the relationship between two variables. As a final note, we want to emphasize that it is important to adapt and optimize graphs to the audience. For example, an exploratory plot made for ourselves will be different than a chart intended to communicate a finding to a general audience.</p>
 
-          <p>In this chapter we focus on the principles and do not show code (code can be viewed on GitHub). In <xref ref="sec-dataviz-in-practice"/>, we apply these principles in case study and do show code.</p>
+          <p>In this chapter we focus on the principles and do not show code (code can be viewed on GitHub). In <xref ref="ch-data-visualization-in-practice"/>, we apply these principles in case study and do show code.</p>
 
           <sage language="r">
             <input>
@@ -2234,7 +2234,7 @@ abline(v=2, col=3)
       <chapter xml:id="ch-data-visualization-in-practice">
         <title>Data visualization in practice</title>
         
-          <p>In this chapter, we will demonstrate how relatively simple <alert>ggplot2</alert> code can create insightful and aesthetically pleasing plots. As motivation we will create plots that help us better understand trends in world health and economics. We will implement what we learned in <xref ref="sec-ggplot2"/> and <xref ref="sec-dataviz-principles"/> and learn how to augment the code to perfect the plots. As we go through our case study, we will describe relevant general data visualization principles and learn concepts such as <em>faceting</em>, <em>time series plots</em>, <em>transformations</em>, and <em>ridge plots</em>.</p>
+          <p>In this chapter, we will demonstrate how relatively simple <alert>ggplot2</alert> code can create insightful and aesthetically pleasing plots. As motivation we will create plots that help us better understand trends in world health and economics. We will implement what we learned in <xref ref="ch-ggplot2"/> and <xref ref="ch-data-visualization-principles"/> and learn how to augment the code to perfect the plots. As we go through our case study, we will describe relevant general data visualization principles and learn concepts such as <em>faceting</em>, <em>time series plots</em>, <em>transformations</em>, and <em>ridge plots</em>.</p>
 
         <section xml:id="sec-case-study-1-new-insights-on-poverty">
           <title>Case study 1: new insights on poverty</title>
