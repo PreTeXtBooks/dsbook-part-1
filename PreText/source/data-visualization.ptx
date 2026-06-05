@@ -1117,11 +1117,11 @@ heights |>
       <chapter xml:id="ch-data-visualization-principles">
         <title>Data visualization principles</title>
         
-          <p>In this chapter we aim to provide some general principles we can use as a guide for effective data visualization. Much of this section is based on a talk by Karl Broman titled "Creating Effective Figures and Tables" and includes some of the figures which were made with code that Karl makes available on his GitHub repository, as well as class notes from Peter Aldhous' Introduction to Data Visualization course. Following Karl's approach, we show some examples of plot styles we should avoid, explain how to improve them, and use these as motivation for a list of principles. We compare and contrast plots that follow these principles to those that don't.</p>
+          <p>In this chapter we aim to provide some general principles we can use as a guide for effective data visualization. Much of this section is based on a talk by Karl Broman<fn><url href="http://kbroman.org/"/></fn> titled "Creating Effective Figures and Tables"<fn><url href="https://www.biostat.wisc.edu/~kbroman/presentations/graphs2017.pdf"/></fn> and includes some of the figures which were made with code that Karl makes available on his GitHub repository<fn><url href="https://github.com/kbroman/Talk_Graphs"/></fn>, as well as class notes from Peter Aldhous' Introduction to Data Visualization course<fn><url href="https://www.peteraldhous.com/ucb/2014/dataviz/index.html"/></fn>. Following Karl's approach, we show some examples of plot styles we should avoid, explain how to improve them, and use these as motivation for a list of principles. We compare and contrast plots that follow these principles to those that don't.</p>
 
           <p>The principles are mostly based on research related to how humans detect patterns and make visual comparisons. The preferred approaches are those that best fit the way our brains process visual information. When deciding on a visualization approach, it is also important to keep our goal in mind. We may be comparing a viewable number of quantities, describing distributions for categories or numeric values, comparing the data from two groups, or describing the relationship between two variables. As a final note, we want to emphasize that it is important to adapt and optimize graphs to the audience. For example, an exploratory plot made for ourselves will be different than a chart intended to communicate a finding to a general audience.</p>
 
-          <p>In this chapter we focus on the principles and do not show code (code can be viewed on GitHub). In <xref ref="ch-data-visualization-in-practice"/>, we apply these principles in case study and do show code.</p>
+          <p>In this chapter we focus on the principles and do not show code (code can be viewed on GitHub<fn><url href="https://github.com/rafalab/dsbook-part-1/blob/main/dataviz/dataviz-principles.qmd"/></fn>). In <xref ref="ch-data-visualization-in-practice"/>, we apply these principles in case study and do show code.</p>
 
           <sage language="r">
             <input>
@@ -2239,13 +2239,13 @@ abline(v=2, col=3)
         <section xml:id="sec-case-study-1-new-insights-on-poverty">
           <title>Case study 1: new insights on poverty</title>
 
-          <p>Hans Rosling was the co-founder of the Gapminder Foundation, an organization dedicated to educating the public by using data to dispel common myths about the so-called developing world. The organization uses data to show how actual trends in health and economics contradict the narratives that emanate from sensationalist media coverage of catastrophes, tragedies, and other unfortunate events. As stated in the Gapminder Foundation's website:</p>
+          <p>Hans Rosling<fn><url href="https://en.wikipedia.org/wiki/Hans_Rosling"/></fn> was the co-founder of the Gapminder Foundation<fn><url href="http://www.gapminder.org/"/></fn>, an organization dedicated to educating the public by using data to dispel common myths about the so-called developing world. The organization uses data to show how actual trends in health and economics contradict the narratives that emanate from sensationalist media coverage of catastrophes, tragedies, and other unfortunate events. As stated in the Gapminder Foundation's website:</p>
 
           <blockquote>
             <p>Journalists and lobbyists tell dramatic stories. That's their job. They tell stories about extraordinary events and unusual people. The piles of dramatic stories pile up in peoples' minds into an over-dramatic worldview and strong negative stress feelings: "The world is getting worse!", "It's we vs. them!", "Other people are strange!", "The population just keeps growing!" and "Nobody cares!"</p>
           </blockquote>
 
-          <p>Hans Rosling conveyed actual data-based trends in a dramatic way of his own, using effective data visualization. This section is based on two talks that exemplify this approach to education: New Insights on Poverty and The Best Stats You've Ever Seen. Specifically, in this section, we use data to attempt to answer the following two questions:</p>
+          <p>Hans Rosling conveyed actual data-based trends in a dramatic way of his own, using effective data visualization. This section is based on two talks that exemplify this approach to education: New Insights on Poverty<fn><url href="https://www.ted.com/talks/hans_rosling_reveals_new_insights_on_poverty?language=en"/></fn> and The Best Stats You've Ever Seen<fn><url href="https://www.ted.com/talks/hans_rosling_shows_the_best_stats_you_ve_ever_seen"/></fn>. Specifically, in this section, we use data to attempt to answer the following two questions:</p>
 
           <ol>
             <li><p>Is it a fair characterization of today's world to say it is divided into western rich nations and the developing world in Africa, Asia, and Latin America?</p></li>
