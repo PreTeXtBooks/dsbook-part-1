@@ -683,25 +683,32 @@ install.packages(c("tidyverse", "dslabs"))
       
       <p>The object <c>murders$population</c> is not one number but several. We call these types of objects <em>vectors</em>. A single number is technically a vector of length 1, but in general we use the term vectors to refer to objects with several entries. The function <c>length</c> tells you how many entries are in the vector:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       pop &lt;- murders$population
       length(pop)
-      </input></sage>
+      </input></program>
+<pre>
+#&gt; [1] 51
+</pre>
       
       <p>This particular vector is <em>numeric</em> since population sizes are numbers:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       class(pop)
-      </input></sage>
-      
+      </input></program>
+      <pre>
+#&gt; [1] "numeric"
+</pre>
       <p>In a numeric vector, every entry must be a number.</p>
       
       <p>To store character strings, vectors can also be of class <em>character</em>. For example, the state names are characters:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       class(murders$state)
-      </input></sage>
-      
+      </input></program>
+      <pre>
+#&gt; [1] "character"
+</pre>
       <p>As with numeric vectors, all entries in a character vector need to be a character.</p>
       
       <p>Another important type of vectors are <em>logical vectors</em>. These must be either <c>TRUE</c> or <c>FALSE</c>.</p>
@@ -716,9 +723,9 @@ install.packages(c("tidyverse", "dslabs"))
       
       <p>You can see the other <em>relational operators</em> by typing:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       ?Comparison
-      </input></sage>
+      </input></program>
       
       <p>In future sections, you will see how useful relational operators can be.</p>
       
@@ -734,29 +741,35 @@ install.packages(c("tidyverse", "dslabs"))
       
       <p>In the <c>murders</c> dataset, we might expect the region to also be a character vector. However, it is not:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       class(murders$region)
-      </input></sage>
-      
+      </input></program>
+            <pre>
+#&gt; [1] "factor"
+</pre>
       <p>It is a <em>factor</em>. Factors are useful for storing categorical data. We can see that there are only 4 regions by using the <c>levels</c> function:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       levels(murders$region)
-      </input></sage>
-      
+      </input></program>
+<pre>
+#&gt; [1] "Northeast"     "South"         "North Central" "West"
+</pre>
       <p>In the background, R stores these <em>levels</em> as integers and keeps a map to keep track of the labels. This is more memory efficient than storing all the characters.</p>
       
       <p>Note that the levels have an order that is different from the order of appearance in the factor object. The default in R is for the levels to follow alphabetical order. However, often we want the levels to follow a different order. You can specify an order through the <c>levels</c> argument when creating the factor with the <c>factor</c> function. For example, in the murders dataset regions are ordered from east to west. The function <c>reorder</c> lets us change the order of the levels of a factor variable based on a summary computed on a numeric vector. We will demonstrate this with a simple example, and will see more advanced ones in the Data Visualization part of the book.</p>
       
       <p>Suppose we want the levels of region ordered by the total number of murders rather than alphabetically If there are values associated with each level, we can use the <c>reorder</c> function and specify a data summary to determine the order. The following code takes the sum of the total murders in each region, and reorders the factor following these sums.</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       region &lt;- murders$region
       value &lt;- murders$total
       region &lt;- reorder(region, value, FUN = sum)
       levels(region)
-      </input></sage>
-      
+      </input></program>
+      <pre>
+#&gt; [1] "Northeast"     "North Central" "West"          "South"
+</pre>
       <p>The new order is in agreement with the fact that the Northeast has the least murders and the South has the most.</p>
       
       <note>
@@ -875,10 +888,17 @@ install.packages(c("tidyverse", "dslabs"))
       
       <p>You can also use single square brackets (<c>[</c>) to access rows and columns of a data frame:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       murders[25, 1]
       murders[2:3, ]
-      </input></sage>
+      </input></program>
+<pre>
+#&gt; [1] "Mississippi"
+
+#&gt;     state abb region population total
+#&gt; 2  Alaska  AK   West     710231    19
+#&gt; 3 Arizona  AZ   West    6392017   232
+</pre>
       
       <note>
       <p>You are ready to do exercises 6-11.</p>
@@ -1024,6 +1044,9 @@ install.packages(c("tidyverse", "dslabs"))
       
       <sage language="r"><input>
       codes["canada"]
+      </input></sage>
+
+      <sage language="r"><input>
       codes[c("egypt","italy")]
       </input></sage>
       
@@ -1095,11 +1118,16 @@ install.packages(c("tidyverse", "dslabs"))
       
       <p>Say we want to rank the states from least to most gun murders. The function <c>sort</c> sorts a vector in increasing order. We can therefore see the largest number of gun murders by typing:</p>
       
-      <sage language="r"><input>
-      if (!requireNamespace("dslabs", quietly = TRUE)) tryCatch(install.packages("dslabs", repos = "https://cloud.r-project.org"), error = function(e) invisible(NULL))
+      <program language="r"><input>
       library(dslabs)
       sort(murders$total)
-      </input></sage>
+      </input></program>
+<pre>
+#&gt; [1]    2    4    5    5    7    8   11   12   12   16   19   21   22
+#&gt;[14]   27   32   36   38   53   63   65   67   84   93   93   97   97
+#&gt;[27]   99  111  116  118  120  135  142  207  219  232  246  250  286
+#&gt;[40]  293  310  321  351  364  376  413  457  517  669  805 1257
+</pre>
       
       <p>However, this does not give us information about which states have which murder totals. For example, we don't know which state had the maximum number of murders.</p>
       
@@ -1132,17 +1160,29 @@ install.packages(c("tidyverse", "dslabs"))
       
       <p>How does this help us order the states by murders? First, remember that the entries of vectors you access with <c>$</c> follow the same order as the rows in the table. For example, these two vectors containing state names and abbreviations, respectively, are matched by their order:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       murders$state[1:6]
       murders$abb[1:6]
-      </input></sage>
+      </input></program>
+<pre>
+#&gt;[1] "Alabama"    "Alaska"     "Arizona"    "Arkansas"   "California"
+#&gt;[6] "Colorado"
+
+#&gt;[1] "AL" "AK" "AZ" "AR" "CA" "CO"
+</pre>
       
       <p>This means we can order the state names by their total murders. We first obtain the index that orders the vectors according to murder totals and then index the state names vector:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       ind &lt;- order(murders$total) 
       murders$abb[ind] 
-      </input></sage>
+      </input></program>
+      <pre>
+#&gt; [1] "VT" "ND" "NH" "WY" "HI" "SD" "ME" "ID" "MT" "RI" "AK" "IA" "UT"
+#&gt;[14] "WV" "NE" "OR" "DE" "MN" "KS" "CO" "NM" "NV" "AR" "WA" "CT" "WI"
+#&gt;[27] "DC" "OK" "KY" "MA" "MS" "AL" "IN" "SC" "TN" "AZ" "NJ" "VA" "NC"
+#&gt;[40] "MD" "OH" "MO" "LA" "IL" "GA" "MI" "PA" "NY" "FL" "TX" "CA"
+</pre>
       
       <p>According to the above, California had the most murders.</p>
       
@@ -1152,17 +1192,22 @@ install.packages(c("tidyverse", "dslabs"))
       
       <p>If we are only interested in the entry with the largest value, we can use <c>max</c> for the value:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       max(murders$total)
-      </input></sage>
-      
+      </input></program>
+      <pre>
+#&gt; [1] 1257
+</pre>
+       
       <p>and <c>which.max</c> for the index of the largest value:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       i_max &lt;- which.max(murders$total)
       murders$state[i_max]
-      </input></sage>
-      
+      </input></program>
+            <pre>
+#&gt; [1] "California"
+</pre>
       <p>For the minimum, we can use <c>min</c> and <c>which.min</c> in the same way.</p>
       
       <p>Does this mean California is the most dangerous state? In an upcoming section, we argue that we should be considering rates instead of totals. Before doing that, we introduce one last order-related function: <c>rank</c>.</p>
@@ -1179,17 +1224,16 @@ install.packages(c("tidyverse", "dslabs"))
       </input></sage>
       
       <p>To summarize, let's look at the results of the three functions we have introduced:</p>
-      
-      <sage language="r"><input>
-      tmp &lt;- data.frame(original=x, sort=sort(x), order=order(x), rank=rank(x))
-      if(knitr::is_html_output()){
-        knitr::kable(tmp, "html") |&gt;
-          kableExtra::kable_styling(bootstrap_options = "striped", full_width = FALSE)
-      } else{
-        knitr::kable(tmp, "latex", booktabs = TRUE) |&gt;
-          kableExtra::kable_styling(font_size = 8)
-      }
-      </input></sage>
+
+<pre>
+original	sort	order	rank
+31	        4      	2	    3
+4	        15	    3	    1
+15	        31	    1		2
+92	        65	    5		5
+65	        92	    4		4
+</pre>
+
       
       <note>
       <p>You are ready to do exercises 24-31</p>
@@ -1203,11 +1247,13 @@ install.packages(c("tidyverse", "dslabs"))
       
       <p>California had the most murders, but does this mean it is the most dangerous state? What if it just has many more people than any other state? We can quickly confirm that California indeed has the largest population:</p>
       
-      <sage language="r"><input>
-      if (!requireNamespace("dslabs", quietly = TRUE)) tryCatch(install.packages("dslabs", repos = "https://cloud.r-project.org"), error = function(e) invisible(NULL))
+      <program language="r"><input>
       library(dslabs)
       murders$state[which.max(murders$population)]
-      </input></sage>
+      </input></program>
+<pre>
+#&gt; [1] "California"
+</pre>
       
       <p>with over 37 million inhabitants. It is therefore unfair to compare the totals if we are interested in learning how safe the state is. What we really should be computing is the murders per capita. The reports we describe in the motivating section used murders per 100,000 as the unit. To compute this quantity, the powerful vector arithmetic capabilities of R come in handy.</p>
       
@@ -1262,15 +1308,21 @@ install.packages(c("tidyverse", "dslabs"))
       
       <p>This implies that to compute the murder rates we can simply type:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       murder_rate &lt;- murders$total / murders$population * 100000
-      </input></sage>
+      </input></program>
       
       <p>Once we do this, we notice that California is no longer near the top of the list. In fact, we can use what we have learned to order the states by murder rate:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       murders$abb[order(murder_rate)]
-      </input></sage>
+      </input></program>
+<pre>
+#&gt; [1] "VT" "NH" "HI" "ND" "IA" "ID" "UT" "ME" "WY" "OR" "SD" "MN" "MT"
+#&gt;[14] "CO" "WA" "WV" "RI" "WI" "NE" "MA" "IN" "KS" "NY" "KY" "AK" "OH"
+#&gt;[27] "CT" "NJ" "AL" "IL" "OK" "NC" "NV" "VA" "AR" "TX" "NM" "CA" "FL"
+#&gt;[40] "TN" "PA" "AZ" "GA" "MS" "MI" "DE" "SC" "MD" "MO" "LA" "DC"
+</pre>
       
       </subsection>
       
@@ -1284,7 +1336,7 @@ install.packages(c("tidyverse", "dslabs"))
       x + y
       </input></sage>
       
-      <p>We do get a warning, but no error. For the output, R has recycled the numbers in <c>x</c>. Notice the last digit of numbers in the output.</p>
+      <p>When run in R, we get a warning, but no error. For the output, R has recycled the numbers in <c>x</c>. Notice the last digit of numbers in the output.</p>
       
       <note>
       <p>You are now ready to do exercises 32-34.</p>
@@ -1298,43 +1350,48 @@ install.packages(c("tidyverse", "dslabs"))
       
       <p>R provides a powerful and convenient way of indexing vectors. We can, for example, subset a vector based on properties of another vector. In this section, we continue working with our US murders example, which we can load like this:</p>
       
-      <sage language="r"><input>
-      if (!requireNamespace("dslabs", quietly = TRUE)) tryCatch(install.packages("dslabs", repos = "https://cloud.r-project.org"), error = function(e) invisible(NULL))
+      <program language="r"><input>
       library(dslabs)
-      </input></sage>
+      </input></program>
       
       <subsection xml:id="subsetting-with-logicals"><title>Subsetting with logicals</title>
       
       <p>We have now calculated the murder rate using:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       murder_rate &lt;- murders$total / murders$population * 100000 
-      </input></sage>
+      </input></program>
       
       <p>Imagine you are moving from Italy where, according to an ABC news report, the murder rate is only 0.71 per 100,000. You would prefer to move to a state with a similar murder rate. Another powerful feature of R is that we can use logicals to index vectors. If we compare a vector to a single number, it actually performs the test for each entry. The following is an example related to the question above:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       ind &lt;- murder_rate &lt; 0.71
-      </input></sage>
+      </input></program>
       
       <p>If we instead want to know if a value is less or equal, we can use:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       ind &lt;- murder_rate &lt;= 0.71
-      </input></sage>
+      </input></program>
       
       <p>Note that we get back a logical vector with <c>TRUE</c> for each entry smaller than or equal to 0.71. To see which states these are, we can leverage the fact that vectors can be indexed with logicals.</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       murders$state[ind]
-      </input></sage>
+      </input></program>
+<pre>
+#&gt;[1] "Hawaii"        "Iowa"          "New Hampshire" "North Dakota" 
+#&gt;[5] "Vermont"
+</pre>
       
       <p>In order to count how many are TRUE, the function <c>sum</c> returns the sum of the entries of a vector and logical vectors get <em>coerced</em> to numeric with <c>TRUE</c> coded as 1 and <c>FALSE</c> as 0. Thus we can count the states using:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       sum(ind)
-      </input></sage>
-      
+      </input></program>
+<pre>
+#&gt;[1] 5
+</pre>
       </subsection>
       
       <subsection xml:id="logical-operators"><title>Logical operators</title>
@@ -1343,23 +1400,29 @@ install.packages(c("tidyverse", "dslabs"))
       
       <sage language="r"><input>
       TRUE &amp; TRUE
+      </input></sage>
+      <sage language="r"><input>
       TRUE &amp; FALSE
+      </input></sage>
+      <sage language="r"><input>
       FALSE &amp; FALSE
       </input></sage>
       
       <p>For our example, we can form two logicals:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       west &lt;- murders$region == "West"
       safe &lt;- murder_rate &lt;= 1
-      </input></sage>
+      </input></program>
       
       <p>and we can use the <c>&amp;</c> to get a vector of logicals that tells us which states satisfy both conditions:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       ind &lt;- safe &amp; west
       murders$state[ind]
-      </input></sage>
+      </input></program>
+<pre>#&gt;[1] "Hawaii"  "Idaho"   "Oregon"  "Utah"    "Wyoming"
+</pre>
       
       </subsection>
       
@@ -1367,47 +1430,61 @@ install.packages(c("tidyverse", "dslabs"))
       
       <p>Suppose we want to look up California's murder rate. For this type of operation, it is convenient to convert vectors of logicals into indexes instead of keeping long vectors of logicals. The function <c>which</c> tells us which entries of a logical vector are TRUE. So we can type:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       ind &lt;- which(murders$state == "California")
       murder_rate[ind]
-      </input></sage>
-      
+      </input></program>
+
+<pre>
+#&gt;[1] 3.37
+</pre>
       </subsection>
       
       <subsection xml:id="match"><title>`match`</title>
       
       <p>If instead of just one state we want to find out the murder rates for several states, say New York, Florida, and Texas, we can use the function <c>match</c>. This function tells us which indexes of a second vector match each of the entries of a first vector:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       ind &lt;- match(c("New York", "Florida", "Texas"), murders$state)
       ind
-      </input></sage>
-      
+      </input></program>
+      <pre>
+#&gt;[1] 33 10 44
+</pre>
       <p>Now we can look at the murder rates:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       murder_rate[ind]
-      </input></sage>
-      
+      </input></program>
+      <pre>
+#&gt;[1] 2.67 3.40 3.20
+</pre>
       </subsection>
       
       <subsection xml:id="in"><title>`%in%`</title>
       
       <p>If rather than an index we want a logical that tells us whether or not each element of a first vector is in a second, we can use the function <c>%in%</c>. Let's imagine you are not sure if Boston, Dakota, and Washington are states. You can find out like this:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       c("Boston", "Dakota", "Washington") %in% murders$state
-      </input></sage>
+      </input></program>
+<pre>
+#&gt;[1] FALSE FALSE  TRUE
+</pre>
       
       <p>Note that we will be using <c>%in%</c> often throughout the book.</p>
       
       <p>There is a connection between <c>match</c> and <c>%in%</c> through <c>which</c>. To see this, notice that the following two lines produce the same index (although in different order):</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       match(c("New York", "Florida", "Texas"), murders$state)
       which(murders$state %in% c("New York", "Florida", "Texas"))
-      </input></sage>
-      
+      </input></program>
+      <pre>
+#&gt;[1] 33 10 44
+
+#&gt;[1] 10 33 44
+</pre>
       <note>
       <p>You are now ready to do exercises 35-42.</p>
       </note>
@@ -1556,9 +1633,9 @@ install.packages(c("tidyverse", "dslabs"))
       <li>
       <p>We saw that the <c>region</c> column stores a factor. You can corroborate this by typing:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       class(murders$region)
-      </input></sage>
+      </input></program>
       
       <p>With one line of code, use the functions <c>levels</c> and <c>length</c> to determine the number of regions defined by this dataset.</p>
       </li>
@@ -1623,15 +1700,15 @@ install.packages(c("tidyverse", "dslabs"))
       <li>
       <p>The <c>na_example</c> vector represents a series of counts. You can quickly examine the object using:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       str(na_example)
-      </input></sage>
+      </input></program>
       
       <p>However, when we compute the average with the function <c>mean</c>, we obtain an <c>NA</c>:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       mean(na_example)
-      </input></sage>
+      </input></program>
       
       <p>The <c>is.na</c> function returns a logical vector that tells us which entries are <c>NA</c>. Assign this logical vector to an object called <c>ind</c> and determine how many <c>NA</c>s does <c>na_example</c> have.</p>
       </li>
@@ -1658,10 +1735,9 @@ install.packages(c("tidyverse", "dslabs"))
       <li>
       <p>For remaining exercises 35-42, start by loading the library and data.</p>
       
-      <sage language="r"><input>
-      if (!requireNamespace("dslabs", quietly = TRUE)) tryCatch(install.packages("dslabs", repos = "https://cloud.r-project.org"), error = function(e) invisible(NULL))
+      <program language="r"><input>
       library(dslabs)
-      </input></sage>
+      </input></program>
       
       <p>Compute the per 100,000 murder rate for each state and store it in an object called <c>murder_rate</c>. Then use logical operators to create a logical vector named <c>low</c> that tells us which entries of <c>murder_rate</c> are lower than 1.</p>
       </li>
