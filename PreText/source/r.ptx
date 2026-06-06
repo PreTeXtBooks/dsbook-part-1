@@ -241,13 +241,13 @@ install.packages("dslabs")
           <p>
             In RStudio, you can navigate to the <em>Tools</em> tab and select install packages. We can then load the package into our R sessions using the <c>library</c> function:
           </p>
-          
-          <sage language="r">
+
+          <program language="r">
             <input>
-if (!requireNamespace("dslabs", quietly = TRUE)) tryCatch(install.packages("dslabs", repos = "https://cloud.r-project.org"), error = function(e) invisible(NULL))
-library(dslabs)
+library("dslabs")
             </input>
-          </sage>
+          </program>
+          
           
           <p>
             As you go through this book, you will see that we load packages without installing them. This is because once you install a package, it remains installed and only needs to be loaded with <c>library</c>. The package remains loaded until we quit the R session. If you try to load a package and get an error, it probably means you need to install it first.
@@ -283,12 +283,6 @@ install.packages(c("tidyverse", "dslabs"))
             You can see all the packages you have installed using the following function:
           </p>
           
-          <sage language="r">
-            <input>
-installed.packages()
-            </input>
-          </sage>
-          
         </section>
         
       </chapter>
@@ -301,92 +295,22 @@ installed.packages()
       
       <figure xml:id="fig-us-gun-murders-g8">
         <caption>Homicide rates per 100,000 in G-8 countries</caption>
-        <image source="R/img/homocides_g8_countries_640x360_wmain.jpg" width="70%"/>
+        <image source="R/img/homocides_g8_countries_640x360_wmain.png" width="70%"/>
       </figure>
       
-      <sage language="r"><input>
-      ## img_path &lt;- "img"
-      ##from http://abcnews.go.com/images/International/homocides_g8_countries_640x360_wmain.jpg
-      ##knitr::include_graphics(file.path(img_path,"homocides_g8_countries_640x360_wmain.jpg"))
-      if (!requireNamespace("tidyverse", quietly = TRUE)) tryCatch(install.packages("tidyverse", repos = "https://cloud.r-project.org"), error = function(e) invisible(NULL))
-      library(tidyverse)
-      if (!requireNamespace("ggplot2", quietly = TRUE)) tryCatch(install.packages("ggplot2", repos = "https://cloud.r-project.org"), error = function(e) invisible(NULL))
-      library(ggplot2)
-      if (!requireNamespace("devtools", quietly = TRUE)) tryCatch(install.packages("devtools", repos = "https://cloud.r-project.org"), error = function(e) invisible(NULL))
-      if (!requireNamespace("ggflags", quietly = TRUE)) devtools::install_github("jimjam-slam/ggflags")
-      library(ggflags) # from GitHub repo jimjam-slam/ggflags
-      if (!requireNamespace("countrycode", quietly = TRUE)) tryCatch(install.packages("countrycode", repos = "https://cloud.r-project.org"), error = function(e) invisible(NULL))
-      library(countrycode)
-      if (!requireNamespace("dslabs", quietly = TRUE)) tryCatch(install.packages("dslabs", repos = "https://cloud.r-project.org"), error = function(e) invisible(NULL))
-      library(dslabs)
-      
-      dat &lt;- tibble(country = toupper(c("US", "Italy", "Canada", "UK", "Japan", "Germany", "France", "Russia")),
-                    count = c(3.2, 0.71, 0.5, 0.1, 0, 0.2, 0.1, 0),
-                    label = c(as.character(c(3.2, 0.71, 0.5, 0.1, 0, 0.2, 0.1)), "No Data"),
-                   code = c("us", "it", "ca", "gb", "jp", "de", "fr", "ru"))
-      
-      
-      dat |&gt; 
-        mutate(country = reorder(country, -count)) |&gt;
-        ggplot(aes(country, count, label = label)) +
-        geom_bar(stat = "identity", fill = "darkred") +
-        geom_text(nudge_y = 0.2, color = "darkred", size = 5) +
-        geom_flag(y = -.5, aes(country = code), size = 12) +
-        scale_y_continuous(breaks = c(0, 1, 2, 3, 4), limits = c(0,4)) +
-        geom_text(aes(6.25, 3.8, label = "Source UNODC Homicide Statistics")) + 
-        ggtitle(toupper("Homicide Per 100,000 in G-8 Countries")) + 
-        xlab("") + 
-        ylab("# of gun-related homicides\nper 100,000 people") +
-        ggthemes::theme_economist() +
-        theme(axis.text.x = element_text(size = 8, vjust = -12),
-              axis.ticks.x = element_blank(),
-              axis.line.x = element_blank(),
-              plot.margin = unit(c(1,1,1,1), "cm")) 
-      </input></sage>
-      
       <p>Or even worse, this version from <url href="https://everytownresearch.org">everytown.org</url><fn><url href="https://everytownresearch.org"/></fn>:</p>
-      
-      <sage language="r"><input>
-      # from https://everytownresearch.org/wp-content/uploads/2016/07/GunTrends_murders_per_1000.png
-      # knitr::include_graphics(file.path(img_path,"GunTrends_murders_per_1000.png"))
-      
-      dat &lt;- tibble(country = toupper(c("United States", "Canada", "Portugal", "Ireland", "Italy", "Belgium", "Finland", "France", "Netherlands", "Denmark", "Sweden", "Slovakia", "Austria", "New Zealand", "Australia", "Spain", "Czech Republic", "Hungary", "Germany", "United Kingdom", "Norway", "Japan", "Republic of Korea")),
-                    count = c(3.61, 0.5, 0.48, 0.35, 0.35, 0.33, 0.26, 0.20, 0.20, 0.20, 0.19, 0.19, 0.18, 0.16, 0.16, 0.15, 0.12, 0.10, 0.06, 0.04, 0.04, 0.01, 0.01))
-      
-      dat |&gt; 
-        mutate(country = reorder(country, count)) |&gt;
-        ggplot(aes(country, count, label = count)) +   
-        geom_bar(stat = "identity", fill = "darkred", width = 0.5) +
-        geom_text(nudge_y = 0.2,  size = 3) +
-        xlab("") + ylab("") + 
-        ggtitle(toupper("Gun Homicides per 100,000 residents")) + 
-        theme_minimal() +
-        theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
-              axis.text.x = element_blank(),
-              axis.ticks.length = unit(-0.4, "cm")) + 
-        coord_flip() 
-      rm(dat)
-      </input></sage>
+
+      <figure xml:id="fig-gun-homocides-per-100000">
+        <caption>Homicide rates per 100,000 residents</caption>
+        <image source="R/img/homocides-per-100000.png" width="70%"/>
+      </figure>
       
       <p>But then you remember that the US is a large and diverse country with 50 very different states as well as the District of Columbia (DC).</p>
       
-      <sage language="r"><input>
-      fifty_states &lt;- map_data("state")
-      murders |&gt; mutate(murder_rate = total/population*10^5,
-                        state = tolower(state), 
-                        colors = factor(ceiling(pmin(murder_rate, 9)))) |&gt;
-        ggplot(aes(map_id = state)) + 
-        geom_map(aes(fill = colors), color = "black", map = fifty_states) + 
-        expand_limits(x = fifty_states$long, y = fifty_states$lat) +
-        coord_map() +
-        scale_x_continuous(breaks = NULL) + 
-        scale_y_continuous(breaks = NULL) +
-        labs(x = "", y = "") +
-        theme(panel.background = element_blank()) + 
-        scale_fill_brewer(guide = "none") +
-        theme_minimal()
-      rm(fifty_states)
-      </input></sage>
+      <figure xml:id="fig-us-large-overall">
+        <caption></caption>
+        <image source="R/img/us-large-overall.png" width="70%"/>
+      </figure>
       
       <p>California, for example, has a larger population than Canada, and 20 US states have populations larger than that of Norway. In some respects, the variability across states in the US is akin to the variability across countries in Europe. Furthermore, although not included in the charts above, the murder rates in Lithuania, Ukraine, and Russia are higher than 4 per 100,000. So perhaps the news reports that worried you are too superficial. You have options of where to live and want to determine the safety of each particular state. We will gain some insights by examining data related to gun homicides in the US during 2010 using R.</p>
       
@@ -406,11 +330,11 @@ installed.packages()
       
       <p>which of course change depending on the values of <m>a</m>, <m>b</m>, and <m>c</m>. One advantage of programming languages is that we can define variables and write expressions with these variables, similar to how we do so in math, but obtain a numeric solution. We will write out general code for the quadratic equation below, but if we are asked to solve <m>x^2 + x -1 = 0</m>, then we define the coefficients:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       coef_a &lt;- 1
       coef_b &lt;- 1
       coef_c &lt;- -1
-      </input></sage>
+      </input></program>
       
       <p>which stores the values for later use. We use <c>&lt;-</c> to assign values to the variables. We can also assign values using <c>=</c> instead of <c>&lt;-</c>, but we recommend against using <c>=</c> to avoid confusion.</p>
       
@@ -418,16 +342,18 @@ installed.packages()
       
       <p>To see the value stored in a variable, we simply ask R to evaluate <c>coef_a</c> and it shows the stored value:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       coef_a
-      </input></sage>
+      </input></program>
+<pre>#&gt; [1] 1</pre>
       
       <p>A more explicit way to ask R to show us the value stored in <c>coef_a</c> is using <c>print</c> like this:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       print(coef_a)
-      </input></sage>
-      
+      </input></program>
+      <pre>#&gt; [1] 1</pre>
+
       <p>We use the term <em>object</em> to describe stuff that is stored in R. Variables are examples, but objects can also be more complicated entities such as functions, which are described later.</p>
       
       </subsection>
@@ -449,10 +375,14 @@ installed.packages()
       
       <p>Now since these values are saved in variables, to obtain a solution to our equation, we use the quadratic formula:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       (-coef_b + sqrt(coef_b^2 - 4*coef_a*coef_c))/(2*coef_a)
       (-coef_b - sqrt(coef_b^2 - 4*coef_a*coef_c))/(2*coef_a)
-      </input></sage>
+      </input></program>
+<pre>
+#&gt; [1] 0.618
+#&gt; [1] -1.62
+</pre>
       
       </subsection>
       
@@ -466,22 +396,27 @@ installed.packages()
       
       <p>Unlike <c>ls</c>, most functions require one or more <em>arguments</em>. Below is an example of how we assign an object to the argument of the function <c>log</c>. Remember that we earlier defined <c>coef_a</c> to be 1:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       log(8)
       log(coef_a) 
-      </input></sage>
+      </input></program>
+
+<pre>
+#&gt; [1] 2.08
+#&gt; [1] 0
+</pre>
       
       <p>You can find out what the function expects and what it does by reviewing the very useful manuals included in R. You can get help by using the <c>help</c> function like this:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       help("log")
-      </input></sage>
+      </input></program>
       
       <p>For most functions, we can also use this shorthand:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       ?log
-      </input></sage>
+      </input></program>
       
       <p>The help page will show you what arguments the function is expecting. For example, <c>log</c> needs <c>x</c> and <c>base</c> to run. However, some arguments are required and others are optional. You can determine which arguments are optional by noting in the help document that a default value is assigned with <c>=</c>. Defining these is optional. For example, the base of the function <c>log</c> defaults to <c>base = exp(1)</c> making <c>log</c> the natural log by default.</p>
       
@@ -525,27 +460,27 @@ installed.packages()
       
       <p>You can see the arithmetic operators by typing:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       help("+") 
-      </input></sage>
+      </input></program>
       
       <p>or</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       ?"+"
-      </input></sage>
+      </input></program>
       
       <p>and the relational operators by typing:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       help("&gt;") 
-      </input></sage>
+      </input></program>
       
       <p>or</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       ?"&gt;"
-      </input></sage>
+      </input></program>
       
       </subsection>
       
@@ -553,17 +488,15 @@ installed.packages()
       
       <p>There are several datasets that are included for users to practice and test out functions. You can see all the available datasets by typing:</p>
       
-      <sage language="r"><input>
-      #| eval: false
-      
+      <program language="r"><input>
       data()
-      </input></sage>
+      </input></program>
       
       <p>This shows you the object name for these datasets. These datasets are objects that can be used by simply typing the name. For example, if you type:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       co2
-      </input></sage>
+      </input></program>
       
       <p>R will show you Mauna Loa atmospheric CO2 concentration data.</p>
       
@@ -584,10 +517,10 @@ installed.packages()
       
       <p>A nice convention to follow is to use meaningful words that describe what is stored, use only lower case, and use underscores as a substitute for spaces. For the quadratic equations, we could use something like this for the two roots:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       r_1 &lt;- (-coef_b + sqrt(coef_b^2 - 4*coef_a*coef_c))/(2*coef_a)
       r_2 &lt;- (-coef_b - sqrt(coef_b^2 - 4*coef_a*coef_c))/(2*coef_a)
-      </input></sage>
+      </input></program>
       
       <p>For more advice, we highly recommend studying Hadley Wickham's <url href="http://adv-r.had.co.nz/Style.html">style guide</url>.</p>
       
@@ -659,18 +592,17 @@ installed.packages()
       
       <p>A large proportion of data analysis challenges start with data stored in a data frame. For example, we stored the data for our motivating example in a data frame. You can access this dataset by loading the <alert>dslabs</alert> library which provides the <c>murders</c> dataset:</p>
       
-      <sage language="r"><input>
-      #| cache: false
-      
-      if (!requireNamespace("dslabs", quietly = TRUE)) tryCatch(install.packages("dslabs", repos = "https://cloud.r-project.org"), error = function(e) invisible(NULL))
+      <program language="r"><input>
       library(dslabs)
-      </input></sage>
+      </input></program>
       
       <p>To see that this is in fact a data frame, we type:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       class(murders)
-      </input></sage>
+      </input></program>
+<pre>#&gt; [1] "data.frame"
+</pre>
       
       </subsection>
       
@@ -678,25 +610,33 @@ installed.packages()
       
       <p>The function <c>str</c> is useful for finding out more about the structure of an object:</p>
       
-      <sage language="r"><input>
-      # change str to make sure it stays within margins
-      str &lt;- function(x) utils::str(x, strict.width = 'wrap')
-      </input></sage>
-      
-      <sage language="r"><input>
+      <program language="r"><input>
       str(murders)
-      </input></sage>
-      
-      <sage language="r"><input>
-      # remove str we defined
-      rm(str)
-      </input></sage>
-      
+      </input></program>
+      <pre>
+#&gt; 'data.frame':    51 obs. of  5 variables:
+#&gt; $ state : chr "Alabama" "Alaska" "Arizona" "Arkansas" ...
+#&gt; $ abb : chr "AL" "AK" "AZ" "AR" ...
+#&gt; $ region : Factor w/ 4 levels "Northeast","South",..: 2 4 4 2 4 4 1 2 2
+#&gt;    2 ...
+#&gt; $ population: num 4779736 710231 6392017 2915918 37253956 ...
+#&gt; $ total : num 135 19 232 93 1257 ...
+</pre>
+
       <p>This tells us much more about the object. We see that the table has 51 rows (50 states plus DC) and five variables. We can show the first six lines using the function <c>head</c>:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       head(murders)
-      </input></sage>
+      </input></program>
+<pre>
+#&gt;        state abb region population total
+#&gt; 1    Alabama  AL  South    4779736   135
+#&gt; 2     Alaska  AK   West     710231    19
+#&gt; 3    Arizona  AZ   West    6392017   232
+#&gt; 4   Arkansas  AR  South    2915918    93
+#&gt; 5 California  CA   West   37253956  1257
+#&gt; 6   Colorado  CO   West    5029196    65
+</pre>
       
       <p>In this dataset, each state is considered an observation and five variables are reported for each state.</p>
       
@@ -708,15 +648,28 @@ installed.packages()
       
       <p>For our analysis, we will need to access the different variables represented by columns included in this data frame. To do this, we use the accessor operator <c>$</c> in the following way:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       murders$population
-      </input></sage>
+      </input></program>
+<pre>
+#&gt;  [1]  4779736   710231  6392017  2915918 37253956  5029196  3574097
+#&gt;  [8]   897934   601723 19687653  9920000  1360301  1567582 12830632
+#&gt; [15]  6483802  3046355  2853118  4339367  4533372  1328361  5773552
+#&gt; [22]  6547629  9883640  5303925  2967297  5988927   989415  1826341
+#&gt; [29]  2700551  1316470  8791894  2059179 19378102  9535483   672591
+#&gt; [36] 11536504  3751351  3831074 12702379  1052567  4625364   814180
+#&gt; [43]  6346105 25145561  2763885   625741  8001024  6724540  1852994
+#&gt; [50]  5686986   563626
+</pre>
       
       <p>But how did we know to use <c>population</c>? Previously, by applying the function <c>str</c> to the object <c>murders</c>, we revealed the names for each of the five variables stored in this table. We can quickly access the variable names using:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       names(murders)
-      </input></sage>
+      </input></program>
+<pre>
+#&gt; [1] "state"      "abb"        "region"     "population" "total"
+</pre>
       
       <p>It is important to know that the order of the entries in <c>murders$population</c> preserves the order of the rows in our data table. This will later permit us to manipulate one variable based on the results of another. For example, we will be able to order the state names by the number of murders.</p>
       
