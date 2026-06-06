@@ -1,11 +1,12 @@
     <chapter xml:id="introduction">
-<introduction>
+      <title>Introduction</title>
+        <section xml:id="introduction-intro">
       <title>Introduction</title>
       
       <p>
         The demand for skilled data science practitioners in industry, academia, and government is rapidly growing. This book introduces skills that can help you tackle real-world data analysis challenges. These include R programming, data wrangling with <term>dplyr</term>, data visualization with <term>ggplot2</term>, file organization with UNIX/Linux shell, version control with Git and GitHub, and reproducible document preparation with Quarto and <term>knitr</term>. The book is divided into four parts: <term>R</term>, <term>Data Visualization</term>, <term>Data Wrangling</term>, and <term>Productivity Tools</term>. Each part has several chapters meant to be presented as one lecture and includes dozens of exercises distributed across chapters.
       </p>
-      </introduction>
+      </section>
 
       <section xml:id="case-studies">
         <title>Case studies</title>
