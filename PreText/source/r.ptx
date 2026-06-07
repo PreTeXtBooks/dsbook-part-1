@@ -113,7 +113,7 @@ x + 10
             
             <figure xml:id="fig-rstudio-panes">
               <caption>RStudio panes</caption>
-              <image source="productivity/img/windows-screenshots/VirtualBox_Windows-7-Enterprise_22_03_2018_16_21_42.png" width="70%"/>
+              <image source="images/VirtualBox_Windows-7-Enterprise_22_03_2018_16_21_42.png" width="70%"/>
             </figure>
             
             <p>
@@ -122,7 +122,7 @@ x + 10
             
             <figure xml:id="fig-rstudio-script">
               <caption>RStudio with script pane</caption>
-              <image source="productivity/img/windows-screenshots/VirtualBox_Windows-7-Enterprise_22_03_2018_16_21_49.png" width="70%"/>
+              <image source="images/VirtualBox_Windows-7-Enterprise_22_03_2018_16_21_49.png" width="70%"/>
             </figure>
             
           </subsection>
@@ -140,7 +140,7 @@ x + 10
             
             <figure xml:id="fig-rstudio-cheatsheet">
               <caption>RStudio keyboard shortcuts cheat sheet</caption>
-              <image source="productivity/img/windows-screenshots/VirtualBox_Windows-7-Enterprise_22_03_2018_16_22_20.png" width="70%"/>
+              <image source="images/VirtualBox_Windows-7-Enterprise_22_03_2018_16_22_20.png" width="70%"/>
             </figure>
             
             <p>
@@ -166,7 +166,7 @@ x + 10
             
             <figure xml:id="fig-rstudio-save">
               <caption>Saving a script in RStudio</caption>
-              <image source="productivity/img/windows-screenshots/VirtualBox_Windows-7-Enterprise_22_03_2018_16_27_44.png" width="70%"/>
+              <image source="images/VirtualBox_Windows-7-Enterprise_22_03_2018_16_27_44.png" width="70%"/>
             </figure>
             
             <p>
@@ -175,7 +175,7 @@ x + 10
             
             <figure xml:id="fig-rstudio-autocomplete">
               <caption>RStudio auto-completion</caption>
-              <image source="productivity/img/windows-screenshots/VirtualBox_Windows-7-Enterprise_22_03_2018_16_29_47.png" width="70%"/>
+              <image source="images/VirtualBox_Windows-7-Enterprise_22_03_2018_16_29_47.png" width="70%"/>
             </figure>
             
             <p>
@@ -192,7 +192,7 @@ x + 10
             
             <figure xml:id="fig-rstudio-run">
               <caption>Running code in RStudio</caption>
-              <image source="productivity/img/windows-screenshots/VirtualBox_Windows-7-Enterprise_22_03_2018_16_45_18.png" width="70%"/>
+              <image source="images/VirtualBox_Windows-7-Enterprise_22_03_2018_16_45_18.png" width="70%"/>
             </figure>
             
             <p>
@@ -218,7 +218,7 @@ x + 10
             
             <figure xml:id="fig-rstudio-options">
               <caption>RStudio global options</caption>
-              <image source="productivity/img/windows-screenshots/VirtualBox_Windows-7-Enterprise_22_03_2018_16_56_08.png" width="40%"/>
+              <image source="images/VirtualBox_Windows-7-Enterprise_22_03_2018_16_56_08.png" width="40%"/>
             </figure>
             
           </subsection>
@@ -308,7 +308,6 @@ install.packages(c("tidyverse", "dslabs"))
       <p>But then you remember that the US is a large and diverse country with 50 very different states as well as the District of Columbia (DC).</p>
       
       <figure xml:id="fig-us-large-overall">
-        <caption></caption>
         <image source="images/us-large-overall.png" width="70%"/>
       </figure>
       
@@ -2934,7 +2933,7 @@ tibble(id = c(1, 2, 3), func = c(mean, median, sd))
             <pre>
 #&gt; # A tibble: 3 × 2
 #&gt;      id func  
-#&gt;   &lt;dbl&gt; <list>
+#&gt;   &lt;dbl&gt; &lt;list&gt;
 #&gt; 1     1 <fn>  
 #&gt; 2     2 <fn>  
 #&gt; 3     3 <fn>
