@@ -2388,7 +2388,7 @@ mutate(murders, across(where(is.numeric), log10))
               <input>
 mutate(murders, across(where(is.character), tolower))
               </input>
-            </sage>
+            </program>
             
             <note>
               <p>You are ready to do exercises 5-11.</p>
