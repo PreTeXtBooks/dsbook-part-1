@@ -38,8 +38,9 @@ jobs:
 
       - name: Cache Runestone services for offline fallback
         run: |
-          mkdir -p ~/.ptx/2.32.0/rs_cache
-          cat > ~/.ptx/2.32.0/rs_cache/rs_services.xml << 'EOF'
+          PRETEXT_VERSION=$(grep '^pretext==' pretext/requirements.txt | cut -d'=' -f3)
+          mkdir -p ~/.ptx/${PRETEXT_VERSION}/rs_cache
+          cat > ~/.ptx/${PRETEXT_VERSION}/rs_cache/rs_services.xml << 'EOF'
           <all>
             <js type="list">
             </js>
