@@ -1521,7 +1521,7 @@ original	sort	order	rank
       
       </subsection>
       
-      <subsection xml:id="hist"><title>`hist`</title>
+      <subsection xml:id="hist"><title><c>hist</c></title>
       
       <p>We will describe histograms as they relate to distributions in the Data Visualization part of the book. Here we will simply note that histograms are a powerful graphical summary of a list of numbers that gives you a general overview of the types of values you have. We can make a histogram of our murder rates by simply typing:</p>
       
@@ -1544,7 +1544,7 @@ original	sort	order	rank
 </pre>
       </subsection>
       
-      <subsection xml:id="boxplot"><title>`boxplot`</title>
+      <subsection xml:id="boxplot"><title><c>boxplot</c></title>
       
       <p>Boxplots will also be described in the Data Visualization part of the book. They provide a more terse summary than histograms, but they are easier to stack with other boxplots. For example, here we can use them to compare the different regions:</p>
       
@@ -1561,7 +1561,7 @@ original	sort	order	rank
       
       </subsection>
       
-      <subsection xml:id="image"><title>`image`</title>
+      <subsection xml:id="image"><title><c>image</c></title>
       
       <p>The image function displays the values in a matrix using color. Here is a quick example:</p>
       
