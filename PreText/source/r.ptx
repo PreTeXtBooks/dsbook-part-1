@@ -2934,9 +2934,9 @@ tibble(id = c(1, 2, 3), func = c(mean, median, sd))
 #&gt; # A tibble: 3 × 2
 #&gt;      id func  
 #&gt;   &lt;dbl&gt; &lt;list&gt;
-#&gt; 1     1 <fn>  
-#&gt; 2     2 <fn>  
-#&gt; 3     3 <fn>
+#&gt; 1     1 &lt;fn&gt;  
+#&gt; 2     2 &lt;fn&gt;  
+#&gt; 3     3 &lt;fn&gt;
 </pre>
 
             <p><alert>(3) Tibbles can be grouped</alert></p>
@@ -3486,7 +3486,7 @@ murders_dt[rate &lt;= 0.7]
             </program>
             <pre>
 #&gt;            state  rate
-#&gt;           <char> <num>
+#&gt;           &lt;char&gt; &lt;num&gt;
 #&gt; 1:        Hawaii 0.515
 #&gt; 2:          Iowa 0.689
 #&gt; 3: New Hampshire 0.380
@@ -3598,7 +3598,7 @@ heights_dt[, .(avg = mean(height), sd = sd(height)), by = sex]
             </program>
             <pre>
 #&gt;       sex   avg    sd
-#&gt;    <fctr> <num> <num>
+#&gt;    &lt;fctr&gt; &lt;num&gt; &lt;num&gt;
 #&gt; 1:   Male  69.3  3.61
 #&gt; 2: Female  64.9  3.76
 </pre>
