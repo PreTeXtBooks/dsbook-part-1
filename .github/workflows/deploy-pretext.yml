@@ -56,7 +56,8 @@ jobs:
           raise SystemExit("Could not determine PreTeXt version from pretext/requirements.txt")
           PY
           )
-          # Keep in sync with the documented fallback in pretext/README.md.
+          # Keep this version and XML schema aligned with the "Runestone Services Error"
+          # fallback snippet documented in pretext/README.md.
           RUNESTONE_VERSION=7.10.0
           mkdir -p ~/.ptx/${PRETEXT_VERSION}/rs_cache
           cat > ~/.ptx/${PRETEXT_VERSION}/rs_cache/rs_services.xml << EOF
