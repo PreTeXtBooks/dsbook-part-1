@@ -1497,28 +1497,25 @@ original	sort	order	rank
       
       <p>In a later chapter on ggplot2, we describe an add-on package that provides a powerful approach to producing plots in R. We then have an entire part on Data Visualization in which we provide many examples. Here we briefly describe some of the functions that are available in a basic R installation.</p>
       
-      <subsection xml:id="plot"><title>`plot`</title>
+      <subsection xml:id="plot"><title><c>plot</c></title>
       
       <p>The <c>plot</c> function can be used to make scatterplots. Here is a plot of total murders versus population.</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       x &lt;- murders$population / 10^6
       y &lt;- murders$total
       plot(x, y)
-      </input></sage>
-      
-      <sage language="r"><input>
-      rafalib::mypar()
-      x &lt;- murders$population / 10^6
-      y &lt;- murders$total
-      plot(x, y)
-      </input></sage>
-      
+      </input></program>
+
+          <figure xml:id="fig-plot-plot">
+            <image source="R/img/first-plot-1.png" width="70%"/>
+          </figure>
+
       <p>For a quick plot that avoids accessing variables twice, we can use the <c>with</c> function:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       with(murders, plot(population, total))
-      </input></sage>
+      </input></program>
       
       <p>The function <c>with</c> lets us use the <c>murders</c> column names in the <c>plot</c> function. It also works with any data frames and any function.</p>
       
@@ -1528,40 +1525,38 @@ original	sort	order	rank
       
       <p>We will describe histograms as they relate to distributions in the Data Visualization part of the book. Here we will simply note that histograms are a powerful graphical summary of a list of numbers that gives you a general overview of the types of values you have. We can make a histogram of our murder rates by simply typing:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       x &lt;- with(murders, total / population * 100000)
       hist(x)
-      </input></sage>
-      
-      <sage language="r"><input>
-      rafalib::mypar()
-      x &lt;- with(murders, total / population * 100000)
-      hist(x)
-      </input></sage>
+      </input></program>
+
+          <figure xml:id="fig-plot-hist">
+            <image source="R/img/r-base-hist-1.png" width="70%"/>
+          </figure>
       
       <p>We can see that there is a wide range of values with most of them between 2 and 3 and one very extreme case with a murder rate of more than 15:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       murders$state[which.max(x)]
-      </input></sage>
-      
+      </input></program>
+      <pre>
+#=&gt; [1] "District of Columbia"
+</pre>
       </subsection>
       
       <subsection xml:id="boxplot"><title>`boxplot`</title>
       
       <p>Boxplots will also be described in the Data Visualization part of the book. They provide a more terse summary than histograms, but they are easier to stack with other boxplots. For example, here we can use them to compare the different regions:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       murders$rate &lt;- with(murders, total / population * 100000)
       boxplot(rate~region, data = murders)
-      </input></sage>
-      
-      <sage language="r"><input>
-      rafalib::mypar()
-      murders$rate &lt;- with(murders, total / population * 100000)
-      boxplot(rate~region, data = murders)
-      </input></sage>
-      
+      </input></program>
+
+          <figure xml:id="fig-plot-boxplot">
+            <image source="R/img/r-base-boxplot-1.png" width="70%"/>
+          </figure>
+
       <p>We can see that the South has higher murder rates than the other three regions.</p>
       
       </subsection>
@@ -1570,16 +1565,14 @@ original	sort	order	rank
       
       <p>The image function displays the values in a matrix using color. Here is a quick example:</p>
       
-      <sage language="r"><input>
+      <program language="r"><input>
       x &lt;- matrix(1:120, 12, 10)
       image(x)
-      </input></sage>
-      
-      <sage language="r"><input>
-      rafalib::mypar()
-      x &lt;- matrix(1:120, 12, 10)
-      image(x)
-      </input></sage>
+      </input></program>
+
+          <figure xml:id="fig-plot-img">
+            <image source="R/img/image-first-example-1.png" width="70%"/>
+          </figure>
       
       <note>
       <p>You are now ready to do exercises 43-45.</p>
