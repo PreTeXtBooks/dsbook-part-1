@@ -37,7 +37,7 @@
           
           <figure xml:id="fig-r-console">
             <caption>The R console</caption>
-            <image source="R/img/R_console.png" width="70%"/>
+            <image source="images/R_console.png" width="70%"/>
           </figure>
           
           <p>
@@ -84,7 +84,7 @@ x + 10
 
           <figure xml:id="fig-rstudio">
             <caption>RStudio interface</caption>
-            <image source="R/img/rstudio.png" width="70%"/>
+            <image source="images/rstudio.png" width="70%"/>
           </figure>
           
           <p>
@@ -295,21 +295,21 @@ install.packages(c("tidyverse", "dslabs"))
       
       <figure xml:id="fig-us-gun-murders-g8">
         <caption>Homicide rates per 100,000 in G-8 countries</caption>
-        <image source="R/img/homocides_g8_countries_640x360_wmain.png" width="70%"/>
+        <image source="images/homocides_g8_countries_640x360_wmain.png" width="70%"/>
       </figure>
       
       <p>Or even worse, this version from <url href="https://everytownresearch.org">everytown.org</url><fn><url href="https://everytownresearch.org"/></fn>:</p>
 
       <figure xml:id="fig-gun-homocides-per-100000">
         <caption>Homicide rates per 100,000 residents</caption>
-        <image source="R/img/homocides-per-100000.png" width="70%"/>
+        <image source="images/homocides-per-100000.png" width="70%"/>
       </figure>
       
       <p>But then you remember that the US is a large and diverse country with 50 very different states as well as the District of Columbia (DC).</p>
       
       <figure xml:id="fig-us-large-overall">
         <caption></caption>
-        <image source="R/img/us-large-overall.png" width="70%"/>
+        <image source="images/us-large-overall.png" width="70%"/>
       </figure>
       
       <p>California, for example, has a larger population than Canada, and 20 US states have populations larger than that of Norway. In some respects, the variability across states in the US is akin to the variability across countries in Europe. Furthermore, although not included in the charts above, the murder rates in Lithuania, Ukraine, and Russia are higher than 4 per 100,000. So perhaps the news reports that worried you are too superficial. You have options of where to live and want to determine the safety of each particular state. We will gain some insights by examining data related to gun homicides in the US during 2010 using R.</p>
@@ -369,7 +369,7 @@ install.packages(c("tidyverse", "dslabs"))
       
       <p>In RStudio, the <em>Environment</em> tab shows the values:</p>
       
-      <figure><image source="R/img/rstudio-environment.png"/></figure>
+      <figure><image source="images/rstudio-environment.png"/></figure>
       
       <p>We should see <c>coef_a</c>, <c>coef_b</c>, and <c>coef_c</c>. If you try to recover the value of a variable that is not in your workspace, you receive an error. For example, if you type <c>x</c> you will receive the following message: <c>Error: object 'x' not found</c>.</p>
       
@@ -1508,7 +1508,7 @@ original	sort	order	rank
       </input></program>
 
           <figure xml:id="fig-plot-plot">
-            <image source="R/img/first-plot-1.png" width="70%"/>
+            <image source="images/first-plot-1.png" width="70%"/>
           </figure>
 
       <p>For a quick plot that avoids accessing variables twice, we can use the <c>with</c> function:</p>
@@ -1531,7 +1531,7 @@ original	sort	order	rank
       </input></program>
 
           <figure xml:id="fig-plot-hist">
-            <image source="R/img/r-base-hist-1.png" width="70%"/>
+            <image source="images/r-base-hist-1.png" width="70%"/>
           </figure>
       
       <p>We can see that there is a wide range of values with most of them between 2 and 3 and one very extreme case with a murder rate of more than 15:</p>
@@ -1554,7 +1554,7 @@ original	sort	order	rank
       </input></program>
 
           <figure xml:id="fig-plot-boxplot">
-            <image source="R/img/r-base-boxplot-1.png" width="70%"/>
+            <image source="images/r-base-boxplot-1.png" width="70%"/>
           </figure>
 
       <p>We can see that the South has higher murder rates than the other three regions.</p>
@@ -1571,7 +1571,7 @@ original	sort	order	rank
       </input></program>
 
           <figure xml:id="fig-plot-img">
-            <image source="R/img/image-first-example-1.png" width="70%"/>
+            <image source="images/image-first-example-1.png" width="70%"/>
           </figure>
       
       <note>
@@ -3751,7 +3751,7 @@ library(NHANES)
           <p>We have been using datasets already stored as R objects. In data analysis work we rarely have such luck and will have to import data into R from either a file, a database, or another source. Currently, one of the most common ways of storing and sharing data for analysis is through electronic spreadsheets. A spreadsheet stores data in rows and columns. It is basically a file version of a data frame. When saving such a table to a computer file, one needs a way to define when a new row or column ends and the other begins. This in turn defines the cells in which single values are stored. Here is an example of what a comma separated file looks like if we open it with a basic text editor:</p>
 
           <figure xml:id="img-csv-file">
-            <image source="R/img/img-csv-file.png" width="70%"/>
+            <image source="images/img-csv-file.png" width="70%"/>
           </figure>
 
           <p>In this chapter, we outline how to load data from a file into R. First, it's crucial to identify the file's location; thus, we touch on file paths and working directories. Next, we delve into file types (text or binary) and encodings (like ASCII and Unicode), both essential for data import. We then introduce popular functions for data importing, referred to as <em>parsers</em>. Lastly, we offer tips on how to store data in spreadsheets. Advanced topics like extracting data from websites or PDFs will be discussed in the book's Data Wrangling section.</p>
