@@ -3180,7 +3180,7 @@ between(x, a, b)
               <p>Load the <alert>dplyr</alert> package and the murders dataset.</p>
               <program language="r">
                 <input>
-if (!requireNamespace("dplyr", quietly = TRUE)) tryCatch(install.packages("dplyr", repos = "https://cloud.r-project.org"), error = function(e) invisible(NULL))
+
 library(dplyr)
 if (!requireNamespace("dslabs", quietly = TRUE)) tryCatch(install.packages("dslabs", repos = "https://cloud.r-project.org"), error = function(e) invisible(NULL))
 library(dslabs)
@@ -3314,24 +3314,26 @@ exp(mean(log(murders$population)))
           
           <sage language="r">
             <input>
-if (!requireNamespace("dplyr", quietly = TRUE)) tryCatch(install.packages("dplyr", repos = "https://cloud.r-project.org"), error = function(e) invisible(NULL))
-library(dplyr)
-if (!requireNamespace("dslabs", quietly = TRUE)) tryCatch(install.packages("dslabs", repos = "https://cloud.r-project.org"), error = function(e) invisible(NULL))
 library(dslabs)
-if (!requireNamespace("data.table", quietly = TRUE)) tryCatch(install.packages("data.table", repos = "https://cloud.r-project.org"), error = function(e) invisible(NULL))
+            </input>
+          </sage>
+          <sage language="r">
+            <input>
+library(dplyr)
 library(data.table)
             </input>
           </sage>
+          
           
           <p>We will provide example code showing the <alert>data.table</alert> approaches to <alert>dplyr</alert>'s <c>mutate</c>, <c>filter</c>, <c>select</c>, <c>group_by</c>, and <c>summarize</c>. As in that chapter, we will use the <c>murders</c> dataset:</p>
           
           <p>The first step when using <alert>data.table</alert> is to convert the data frame into a <c>data.table</c> object using the <c>as.data.table</c> function:</p>
           
-          <sage language="r">
+          <program language="r">
             <input>
 murders_dt &lt;- as.data.table(murders)
             </input>
-          </sage>
+          </program>
           
           <p>Without this initial step, most of the approaches shown below will not work.</p>
           
@@ -3340,27 +3342,27 @@ murders_dt &lt;- as.data.table(murders)
             
             <p>Selecting with <alert>data.table</alert> is done in a similar way to subsetting matrices. While with <alert>dplyr</alert> we write</p>
             
-            <sage language="r">
+            <program language="r">
               <input>
 select(murders, state, region)
               </input>
-            </sage>
+            </program>
             
             <p>in <alert>data.table</alert> we use</p>
             
-            <sage language="r">
+            <program language="r">
               <input>
 murders_dt[, c("state", "region")]
               </input>
-            </sage>
+            </program>
             
             <p>We can also use the <c>.()</c> <alert>data.table</alert> notation, which is a special syntax that tells data.table that variables inside the parentheses are column names, not objects in the R environment. So the above can also be written like this:</p>
             
-            <sage language="r">
+            <program language="r">
               <input>
 murders_dt[, .(state, region)]
               </input>
-            </sage>
+            </program>
             
           </subsection>
           
@@ -3369,29 +3371,29 @@ murders_dt[, .(state, region)]
             
             <p>We learned to use the <alert>dplyr</alert> <c>mutate</c> function with this example:</p>
             
-            <sage language="r">
+            <program language="r">
               <input>
 murders &lt;- mutate(murders, rate = total / population * 100000)
               </input>
-            </sage>
+            </program>
             
             <p><alert>data.table</alert> uses an approach that avoids a new assignment (update by reference). This can help with large datasets that take up most of your computer's memory. The <alert>data.table</alert> <c>:=</c> function permits us to do this:</p>
             
-            <sage language="r">
+            <program language="r">
               <input>
 murders_dt[, rate := total / population * 100000] # rate per 100,000
               </input>
-            </sage>
+            </program>
             
             <p>This adds a new column, <c>rate</c>, to the table. Notice that, as in <alert>dplyr</alert>, we used <c>total</c> and <c>population</c> without quotes.</p>
             
             <p>To define new multiple columns, we can use the <c>:=</c> function with multiple arguments:</p>
             
-            <sage language="r">
+            <program language="r">
               <input>
 murders_dt[, ":="(rate = total / population * 100000, rank = rank(population))]
               </input>
-            </sage>
+            </program>
             
           </subsection>
           
