@@ -3071,18 +3071,20 @@ s_n &lt;- map_df(n, compute_s_n)
             
             <p>The <c>case_when</c> function is useful for vectorizing conditional statements. It is similar to <c>ifelse</c> but can output any number of values, as opposed to just <c>TRUE</c> or <c>FALSE</c>. Here is an example splitting numbers into negative, positive, and 0:</p>
             
-            <sage language="r">
+            <program language="r">
               <input>
 x &lt;- c(-2, -1, 0, 1, 2)
 case_when(x &lt; 0 ~ "Negative", 
           x &gt; 0 ~ "Positive", 
           TRUE  ~ "Zero")
               </input>
-            </sage>
-            
+            </program>
+            <pre>
+#&gt; [1] "Negative" "Negative" "Zero"     "Positive" "Positive"
+</pre>
             <p>A common use for this function is to define categorical variables based on existing variables. For example, suppose we want to compare the murder rates in four groups of states: <em>New England</em>, <em>West Coast</em>, <em>South</em>, and <em>other</em>. For each state, we need to ask if it is in New England, if it is not we ask if it is in the West Coast, if not we ask if it is in the South, and if not we assign <em>other</em>. Here is how we use <c>case_when</c> to do this:</p>
             
-            <sage language="r">
+            <program language="r">
               <input>
 murders |&gt; 
   mutate(group = case_when(
@@ -3093,8 +3095,16 @@ murders |&gt;
   group_by(group) |&gt;
   summarize(rate = sum(total)/sum(population)*10^5)
               </input>
-            </sage>
-            
+            </program>
+<pre>
+#&gt; # A tibble: 4 × 2
+#&gt;   group        rate
+#&gt;   &lt;chr&gt;       &lt;dbl&gt;
+#&gt; 1 New England  1.72
+#&gt; 2 Other        2.71
+#&gt; 3 South        3.63
+#&gt; 4 West Coast   2.90
+</pre>            
           </subsection>
           
           <subsection xml:id="subsec-between">
@@ -3102,19 +3112,19 @@ murders |&gt;
             
             <p>A common operation in data analysis is to determine if a value falls inside an interval. We can check this using conditionals. For example, to check if the elements of a vector <c>x</c> are between <c>a</c> and <c>b</c> we can type</p>
             
-            <sage language="r">
+            <program language="r">
               <input>
 x &gt;= a &amp; x &lt;= b
               </input>
-            </sage>
+            </program>
             
             <p>However, this can become cumbersome, especially within the tidyverse approach. The <c>between</c> function performs the same operation.</p>
             
-            <sage language="r">
+            <program language="r">
               <input>
 between(x, a, b)
               </input>
-            </sage>
+            </program>
             
           </subsection>
           
@@ -3168,14 +3178,14 @@ between(x, a, b)
             
             <li>
               <p>Load the <alert>dplyr</alert> package and the murders dataset.</p>
-              <sage language="r">
+              <program language="r">
                 <input>
 if (!requireNamespace("dplyr", quietly = TRUE)) tryCatch(install.packages("dplyr", repos = "https://cloud.r-project.org"), error = function(e) invisible(NULL))
 library(dplyr)
 if (!requireNamespace("dslabs", quietly = TRUE)) tryCatch(install.packages("dslabs", repos = "https://cloud.r-project.org"), error = function(e) invisible(NULL))
 library(dslabs)
                 </input>
-              </sage>
+              </program>
               <p>Use the function <c>mutate</c> to add a murders column named <c>rate</c> with the per 100,000 murder rate. Make sure you redefine <c>murders</c> so we can keep using this variable.</p>
             </li>
             
@@ -3183,51 +3193,51 @@ library(dslabs)
             
             <li>
               <p>With <alert>dplyr</alert>, we can use <c>select</c> to show only certain columns. For example, with this code we would only show the states and population sizes:</p>
-              <sage language="r">
+              <program language="r">
                 <input>
 select(murders, state, population)
                 </input>
-              </sage>
+              </program>
               <p>Use <c>select</c> to show the state names and abbreviations in <c>murders</c>. Do not redefine <c>murders</c>, just show the results.</p>
             </li>
             
             <li>
               <p>The <alert>dplyr</alert> function <c>filter</c> is used to choose specific rows of the data frame to keep. Unlike <c>select</c> which is for columns, <c>filter</c> is for rows. For example, you can show just the New York row like this:</p>
-              <sage language="r">
+              <program language="r">
                 <input>
 filter(murders, state == "New York")
                 </input>
-              </sage>
+              </program>
               <p>Use <c>filter</c> to show the top 5 states with the highest murder rates. From here on, do not change the murders dataset, just show the result. Remember that you can filter based on the <c>rank</c> column.</p>
             </li>
             
             <li>
               <p>We can remove rows using the <c>!=</c> operator. For example, to remove Florida, we would do this:</p>
-              <sage language="r">
+              <program language="r">
                 <input>
 no_florida &lt;- filter(murders, state != "Florida")
                 </input>
-              </sage>
+              </program>
               <p>Create a new data frame called <c>no_south</c> that removes states from the South region. How many states are in this category? You can use the function <c>nrow</c> for this.</p>
             </li>
             
             <li>
               <p>We can also use <c>%in%</c> to filter with <alert>dplyr</alert>. You can therefore see the data from New York and Texas like this:</p>
-              <sage language="r">
+              <program language="r">
                 <input>
 filter(murders, state %in% c("New York", "Texas"))
                 </input>
-              </sage>
+              </program>
               <p>Create a new data frame called <c>murders_nw</c> with only the states from the Northeast and the West. How many states are in this category?</p>
             </li>
             
             <li>
               <p>Suppose you want to live in the Northeast or West <alert>and</alert> want the murder rate to be less than 1. We want to see the data for the states satisfying these options. Note that you can use logical operators like <c>&amp;</c> with <c>filter</c>. Here is an example in which we filter to keep only small states in the Northeast region.</p>
-              <sage language="r">
+              <program language="r">
                 <input>
 filter(murders, population &lt; 5000000 &amp; region == "Northeast")
                 </input>
-              </sage>
+              </program>
               <p>Make sure <c>murders</c> has been defined with <c>rate</c> and <c>rank</c> and still has all states. Create a table called <c>my_states</c> that contains rows for states satisfying both the conditions: it is in the Northeast or West and the murder rate is less than 1. Use <c>select</c> to show only the state name, the rate, and the rank.</p>
             </li>
             
@@ -3237,12 +3247,12 @@ filter(murders, population &lt; 5000000 &amp; region == "Northeast")
             
             <li>
               <p>For exercises 13-19, we will be using the data from the survey collected by the United States National Center for Health Statistics (NCHS). Load the <alert>NHANES</alert> package and data:</p>
-              <sage language="r">
+              <program language="r">
                 <input>
 if (!requireNamespace("NHANES", quietly = TRUE)) tryCatch(install.packages("NHANES", repos = "https://cloud.r-project.org"), error = function(e) invisible(NULL))
 library(NHANES)
                 </input>
-              </sage>
+              </program>
               <p>The <alert>NHANES</alert> data has many missing values. The <c>mean</c> and <c>sd</c> functions in R will return <c>NA</c> if any of the entries of the input vector is an <c>NA</c>. To ignore the <c>NA</c>s we can use the <c>na.rm = TRUE</c> argument. We will provide some basic facts about blood pressure. First let's select a group to set the standard. We will use 20-to-29-year-old females. <c>AgeDecade</c> is a categorical variable with these ages. Note that the category is coded like <c>" 20-29"</c>, with a space in front! What is the average and standard deviation of systolic blood pressure as saved in the <c>BPSysAve</c> variable? Save it to a variable called <c>ref</c>. Hint: Use <c>filter</c> and <c>summarize</c> and use the <c>na.rm = TRUE</c> argument when computing the average and standard deviation. You can also filter the NA values using <c>filter</c>.</p>
             </li>
             
@@ -3272,11 +3282,11 @@ library(NHANES)
             
             <li>
               <p>Write tidyverse code that is equivalent to this code:</p>
-              <sage language="r">
+              <program language="r">
                 <input>
 exp(mean(log(murders$population)))
                 </input>
-              </sage>
+              </program>
               <p>Write it using the pipe so that each function is called without arguments. Use the dot operator to access the population. Hint: The code should start with <c>murders |&gt;</c>.</p>
             </li>
             
@@ -3284,7 +3294,7 @@ exp(mean(log(murders$population)))
           </ol>
           
         </section>
-        
+
       </chapter>
 
       <chapter xml:id="ch-data-table">
